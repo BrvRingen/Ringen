@@ -86,7 +86,7 @@
     <value>Kommentar</value>
   </data>
   <data name="Referee" xml:space="preserve">
-    <value>Schiedsrichter</value>
+    <value>Kampfrichter</value>
   </data>
   <data name="Competition" xml:space="preserve">
     <value>Mannschaftskampf</value>
