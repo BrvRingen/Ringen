@@ -1,0 +1,188 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Windows.Forms" #>
+<#@ assembly name="envdte" #>
+<#@ assembly name="envdte80" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Xml"#>
+<#@ import namespace="System.Resources" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.ComponentModel.Design" #>
+
+<#+
+
+public string ConvertAllResxToEnum(string namespaceName = null, string defaultResource = "DictPluginMain")
+{
+	var result = new StringBuilder();
+	List<string> fileList = new List<string>();
+
+	if (namespaceName == null)
+    {
+		namespaceName = Host.ResolveParameterValue("Template1", "Template1", "projectDefaultNamespace");
+    }
+
+	// Namespace anlegen
+	result.AppendLine(string.Format("namespace {0}", namespaceName));
+	result.AppendLine("{");
+
+	// ResourcesEnum erstellen
+	result.AppendLine(string.Format("	public enum ResourcesEnum"));
+	result.AppendLine("	{");
+
+	var serviceProvider = (IServiceProvider)this.Host;
+	var dte = (EnvDTE.DTE) serviceProvider.GetService(typeof(EnvDTE.DTE));
+	var projectItem = dte.Solution.FindProjectItem(this.Host.TemplateFile);
+	var project = projectItem.ContainingProject;
+
+	foreach (string path in GetFilesWithExtension(project.ProjectItems, ".resx", "Dict"))
+    {
+		string dummy = Path.GetFileNameWithoutExtension(path);
+		
+		if(!fileList.Contains(dummy) && !dummy.Contains("."))
+		{
+			result.AppendLine("		" + namespaceName.Replace(".", "_") + "_" + dummy + ",");
+
+			fileList.Add(path);
+		}
+    }
+
+	result.AppendLine("	}");
+	result.AppendLine("");
+
+	// Translate extention generieren
+	result.Append(GenerateTranslateExtension(namespaceName.Replace(".", "_"), defaultResource));
+	result.AppendLine("");
+
+	// einzelne Enums erstellen
+	foreach(string file in fileList)
+	{
+		result.AppendLine(ConvertXamlToEnum(Path.GetFileNameWithoutExtension(file), file));
+	}
+
+	// Namespace abschliessen
+	result.AppendLine("}");
+
+	return result.ToString();
+}
+
+private List<string> GetFilesWithExtension(EnvDTE.ProjectItems items, string extension, string filenameStartsWith = null, bool ignoreFilesWithDots = true)
+{
+	List<string> result = new List<string>();
+	foreach (EnvDTE.ProjectItem item in items)
+    {
+		string path = item.Properties.Item("FullPath").Value.ToString();
+		List<string> innerResult = GetFilesWithExtension(item.ProjectItems, extension, filenameStartsWith, ignoreFilesWithDots);
+		if (innerResult.Count == 0) // it's a file?
+        {
+			string fileNameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(path);
+			string fileExtension = System.IO.Path.GetExtension(path);
+			if (fileExtension.Equals(extension, StringComparison.InvariantCultureIgnoreCase))
+            {
+				if (filenameStartsWith != null && !fileNameWithoutExtension.StartsWith(filenameStartsWith, StringComparison.InvariantCultureIgnoreCase)) continue;
+				if (ignoreFilesWithDots && fileNameWithoutExtension.Contains(".")) continue;
+				result.Add(path);
+            }
+        }
+		else
+        {
+			foreach (string innerPath in innerResult)
+            {
+				string fileNameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(innerPath);
+				string fileExtension = System.IO.Path.GetExtension(innerPath);
+				if (fileExtension.Equals(extension, StringComparison.InvariantCultureIgnoreCase))
+				{
+					if (filenameStartsWith != null && !fileNameWithoutExtension.StartsWith(filenameStartsWith, StringComparison.InvariantCultureIgnoreCase)) continue;
+					if (ignoreFilesWithDots && fileNameWithoutExtension.Contains(".")) continue;
+					result.Add(innerPath);
+				}
+            }
+        }
+    }
+	return result;
+}
+
+
+private string GenerateTranslateExtension(string enumReference, string defaultResource)
+{
+	var result = new StringBuilder();
+
+	result.AppendLine("	public class TranslateExtension : Ringen.Core.TranslationManager.TranslateExtension");
+	result.AppendLine("	{");
+	result.AppendLine("		#region constructors");
+	result.AppendLine("		/// <summary>");
+	result.AppendLine("		/// Initializes a new instance of the <see cref=\"TranslateExtension\"/> class.");
+	result.AppendLine("		/// </summary>");
+	result.AppendLine("		/// <param name=\"key\">The key.</param>");
+	result.Append    ("		public TranslateExtension(");
+	result.Append    (defaultResource);
+	result.AppendLine(" key)");
+	result.AppendLine("		{");
+	result.AppendLine("			Key = key.ToString();");
+	result.Append    ("			Resource = ResourcesEnum.");
+	result.Append    (enumReference);
+	result.Append    ("_");
+	result.Append    (defaultResource);
+	result.AppendLine(".ToString();");
+	result.AppendLine("		}");
+	result.AppendLine("		#endregion constructors");
+	result.AppendLine("	}");
+
+	return result.ToString();
+}
+
+public string ConvertXamlToEnum(string enumName, string pathXamlFile)
+{
+	var result = new StringBuilder();
+
+	result.AppendLine(string.Format("	public enum {0}", enumName));
+	result.AppendLine("	{");
+	ReadResxFile(result, pathXamlFile);
+	result.AppendLine("	}");
+
+	return result.ToString();
+}
+
+private void ReadResxFile(StringBuilder result, string path)
+{
+	try
+	{
+		using (var reader = new ResXResourceReader(path))
+		{
+			reader.UseResXDataNodes = true;
+			foreach(DictionaryEntry entry in reader)
+			{
+				string name = entry.Key as string;
+				var node = (ResXDataNode)entry.Value;
+				var value = node.GetValue((ITypeResolutionService) null);
+				string comment = node.Comment;
+				string summary = value as string;
+				if (!String.IsNullOrEmpty(comment)) summary += " - " + comment;
+				if(summary.Contains(Environment.NewLine))
+                {
+					result.AppendLine(string.Format("		/// <summary>"));
+					foreach (string line in summary.Split(Environment.NewLine.ToCharArray()))
+                    {
+						if (!String.IsNullOrEmpty(line))
+							result.AppendLine(string.Format("		/// {0}", line));
+                    }
+					result.AppendLine(string.Format("		/// </summary>"));
+                }
+				else
+                {
+					result.AppendLine(string.Format("		/// <summary>{0}</summary>", summary));
+                }
+				result.AppendLine(string.Format("		{0},", name.Replace(":", "_").Replace("+", "_plus_").Replace("=", "_equals_")));
+			}
+		}
+    }
+	catch (Exception ex)
+	{
+		result.Append(string.Format("		// {0:} {1}", ex.GetType(), ex.Message));
+	}
+}
+
+#>

@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{DBB0788C-264E-48FB-BDDB-68790FACC863}</ProjectGuid>
+    <RootNamespace>Ringen.Plugin.CsEditor</RootNamespace>
+    <AssemblyName>Ringen.Plugin.CsEditor</AssemblyName>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)ConfigurationPlugins.targets" />
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\WPFConverters.cs" />
+    <Compile Include="RegisterPluginCsEditor.cs" />
+    <Compile Include="Resources\LanguageFiles\_DictionaryToEnum.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_DictionaryToEnum.tt</DependentUpon>
+    </Compile>
+    <Compile Include="View\CsEditor.xaml.cs">
+      <DependentUpon>CsEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="View\CsEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Ringen.Core\Ringen.Core.csproj">
+      <Project>{78c12d2b-0701-48e5-937c-b8ea3972a9df}</Project>
+      <Name>Ringen.Core</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MvvmLightLibsStd10">
+      <Version>5.4.1.1</Version>
+      <IncludeAssets>compile</IncludeAssets>
+      <ExcludeAssets>contentFiles</ExcludeAssets>
+      <PrivateAssets>contentfiles; analyzers</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\LanguageFiles\_DictionaryToEnum.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>_DictionaryToEnum.generated.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\LanguageFiles\DictPluginMain.en-US.resx" />
+    <EmbeddedResource Include="Resources\LanguageFiles\DictPluginMain.resx" />
+    <EmbeddedResource Include="Resources\LanguageFiles\DictPluginMain.zh-CN.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+</Project>

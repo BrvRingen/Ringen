@@ -1,0 +1,5 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ include file="$(SolutionDir)\Ringen.Core\TranslationManager\DictionaryToEnum.ttinclude" #>
+<#@ output extension=".generated.cs" #>
+
+<#=ConvertAllResxToEnum(null, "DictMainForm")#>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutputPath>$(SolutionDir)bin\$(Configuration)\Plugins\$(AssemblyName)\</OutputPath>
+    <IntermediateOutputPath>$(SolutionDir)obj\$(Configuration)\Plugins\$(AssemblyName)</IntermediateOutputPath>
+    <BaseIntermediateOutputPath>$(SolutionDir)obj\$(Configuration)\Plugins\$(AssemblyName)\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+  <!--Target Name="ClearReferenceCopyLocalPaths" AfterTargets="ResolveAssemblyReferences">
+    <ItemGroup>
+      <ReferenceCopyLocalPaths Remove="@(ReferenceCopyLocalPaths)" />
+    </ItemGroup>
+  </Target-->
+  <Import Project="$(SolutionDir)ConfigurationBase.targets" />
+</Project>
