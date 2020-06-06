@@ -19,9 +19,9 @@ using Ringen.Core.UI;
 using GalaSoft.MvvmLight;
 using Ringen.Core.Services;
 using System.Windows.Input;
-using Xceed.Wpf.AvalonDock;
-using Xceed.Wpf.AvalonDock.Layout;
 using System.Collections.Specialized;
+using AvalonDock;
+using AvalonDock.Layout;
 
 namespace Ringen.ViewModel
 {

@@ -1,12 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using Ringen.Core.UI;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
-using System.Windows.Threading;
 
 namespace Ringen.Core.CS
 {
@@ -29,20 +24,21 @@ namespace Ringen.Core.CS
             }
         }
 
-        private DispatcherTimer myDispatcherTimer;
-        public DispatcherTimer MyDispatcherTimer
+        private Timer myTimer;
+        public Timer MyTimer
         {
             get
             {
-                if(myDispatcherTimer == null)
+                if(myTimer == null)
                 {
-                    myDispatcherTimer = new DispatcherTimer();
-                    myDispatcherTimer.Interval = TimeSpan.FromMilliseconds(1000);
-                    myDispatcherTimer.Tick += (object sender, EventArgs e) => {
+                    myTimer = new Timer();
+                    myTimer.Interval = 1000;
+                    myTimer.Elapsed += (object sender, ElapsedEventArgs e) =>
+                    {
                         ZeitRunde1++;
                     };
                 }
-                return myDispatcherTimer;
+                return myTimer;
             }
         }
 

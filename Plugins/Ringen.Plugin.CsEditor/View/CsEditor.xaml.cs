@@ -69,11 +69,11 @@ namespace Ringen.Plugin.CsEditor
 
         private void OnZeitRunde1Start()
         {
-            Bout.MyDispatcherTimer.Start();
+            Bout.MyTimer.Start();
         }
 
         private RelayCommand m_ZeitRunde1Stop;
-        public RelayCommand ZeitRunde1Stop => m_ZeitRunde1Stop ?? (m_ZeitRunde1Stop = new RelayCommand(() => { Bout.MyDispatcherTimer.Stop(); }));
+        public RelayCommand ZeitRunde1Stop => m_ZeitRunde1Stop ?? (m_ZeitRunde1Stop = new RelayCommand(() => { Bout.MyTimer.Stop(); }));
 
 
 

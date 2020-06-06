@@ -1,7 +1,7 @@
-﻿using System.Collections.Specialized;
+﻿using AvalonDock.Layout;
+using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Input;
-using Xceed.Wpf.AvalonDock.Layout;
 
 namespace Ringen.Core.UI.AvalonDock
 {
