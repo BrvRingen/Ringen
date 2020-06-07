@@ -14,7 +14,7 @@
     <TabItem:RingenTabItem.Resources>
         <local:NullToVisiblityConverter x:Key="NullToVisiblity" />
     </TabItem:RingenTabItem.Resources>
-    <StackPanel Orientation="Vertical">
+    <DockPanel Margin="2">
         <!--Competition-->
         <Grid Visibility="{Binding Competition, Converter={StaticResource NullToVisiblity}}">
             <Grid.RowDefinitions>
@@ -69,21 +69,151 @@
             <TextBlock VerticalAlignment="Center" Grid.Row="10" Grid.Column="1" Text="{Binding Competition.Referee}"/>
         </Grid>
         <!--Bout-->
-        <Grid Visibility="{Binding Bout, Converter={StaticResource NullToVisiblity}}">
+        <Grid Visibility="{Binding Bout, Converter={StaticResource NullToVisiblity}}" Margin="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="20" />
-                <RowDefinition Height="20" />
-                <RowDefinition Height="20" />
-                <RowDefinition Height="20" />
+                <RowDefinition Height="10*" />
+                <RowDefinition Height="8*" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="8*" />
+                <RowDefinition Height="10*" />
+                <RowDefinition Height="15*" />
+                <RowDefinition Height="8" />
+                <RowDefinition Height="25*" />
+                <RowDefinition Height="8" />
+                <RowDefinition Height="10*" />
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Background="AliceBlue" TextAlignment="Center" Text="{Binding Bout.Value}"/>
-
-            <TextBlock  Grid.Row="1" Grid.Column="0" Text="{Binding Bout.ZeitRunde1}" />
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="Red"   Grid.Column="0">
+                    <Viewbox StretchDirection="Both">
+                        <TextBlock Text="{Binding Bout.Competition.HomePoints}" />
+                    </Viewbox>
+                </Border>
+                <Viewbox StretchDirection="Both"  Grid.Column="1">
+                    <TextBlock Text="{Binding Bout.Table.Value}" />
+                </Viewbox>
+                <Border Background="Blue"   Grid.Column="2">
+                    <Viewbox StretchDirection="Both">
+                        <TextBlock Text="{Binding Bout.Competition.OpponentPoints}" />
+                    </Viewbox>
+                </Border>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="Red"   Grid.Column="0">
+                    <Viewbox StretchDirection="Both">
+                        <TextBlock Text="{Binding Bout.Competition.HomeTeamName}" />
+                    </Viewbox>
+                </Border>
+                <Border Background="Blue"   Grid.Column="1">
+                    <Viewbox StretchDirection="Both">
+                        <TextBlock Text="{Binding Bout.Competition.OpponentTeamName}" />
+                    </Viewbox>
+                </Border>
+            </Grid>
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="60"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="Red"   Grid.Column="0">
+                    <Viewbox StretchDirection="Both">
+                        <TextBlock Text="N. N." />
+                    </Viewbox>
+                </Border>
+                <Border Background="Red"   Grid.Column="2">
+                    <Viewbox StretchDirection="Both">
+                        <TextBlock Text="N. N." />
+                    </Viewbox>
+                </Border>
+                <Border Grid.Column="3">
+                    <Viewbox StretchDirection="Both">
+                        <TextBlock Text="{Binding Bout.WeightClass}" />
+                    </Viewbox>
+                </Border>
+                <Border Grid.Column="4">
+                    <Viewbox StretchDirection="Both">
+                        <TextBlock Text="{Binding Bout.WrestleStyle}" />
+                    </Viewbox>
+                </Border>
+                <Border Background="Blue" Grid.Column="5">
+                    <Viewbox StretchDirection="Both">
+                        <TextBlock Text="N. N." />
+                    </Viewbox>
+                </Border>
+                <Border Background="Blue" Grid.Column="7">
+                    <Viewbox StretchDirection="Both">
+                        <TextBlock Text="N. N." />
+                    </Viewbox>
+                </Border>
+            </Grid>
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="Red"   Grid.Column="0">
+                    <Viewbox StretchDirection="Both">
+                        <TextBlock Text="{Binding Bout.HomeWrestlerGivenname}" />
+                    </Viewbox>
+                </Border>
+                <Border Background="Blue"   Grid.Column="1">
+                    <Viewbox StretchDirection="Both">
+                        <TextBlock Text="{Binding Bout.OpponentWrestlerGivenname}" />
+                    </Viewbox>
+                </Border>
+            </Grid>
+            <Grid Grid.Row="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="Red"   Grid.Column="0">
+                    <Viewbox StretchDirection="Both">
+                        <TextBlock Text="{Binding Bout.HomeWrestlerName}" />
+                    </Viewbox>
+                </Border>
+                <Border Background="Blue"   Grid.Column="1">
+                    <Viewbox StretchDirection="Both">
+                        <TextBlock Text="{Binding Bout.OpponentWrestlerName}" />
+                    </Viewbox>
+                </Border>
+            </Grid>
+            <Grid Grid.Row="7">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="40*"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="Red" Grid.Column="0">
+                    <Viewbox StretchDirection="Both">
+                        <TextBlock Text="{Binding Bout.HomeWrestlerPoints}" />
+                    </Viewbox>
+                </Border>
+                <Border Grid.Column="1">
+                    <Viewbox StretchDirection="Both">
+                        <TextBlock Text="{Binding Bout.Time}" />
+                    </Viewbox>
+                </Border>
+                <Border Background="Blue" Grid.Column="2">
+                    <Viewbox StretchDirection="Both">
+                        <TextBlock Text="{Binding Bout.OpponentWrestlerPoints}" />
+                    </Viewbox>
+                </Border>
+            </Grid>
         </Grid>
-    </StackPanel>
+    </DockPanel>
 </TabItem:RingenTabItem>

@@ -15,9 +15,12 @@ namespace Ringen.Core.CS
     public class Table : ExtendedNotifyPropertyChangedUserControl, IExplorerItem
     {
         private JObject Data { get; set; }
-        public Table(JObject Competition)
+        public IExplorerItem Parent { get; }
+
+        public Table(JObject Data, IExplorerItem Parent)
         {
-            Data = Competition;
+            this.Data = Data;
+            this.Parent = Parent;
         }
 
         public string Value
@@ -70,7 +73,7 @@ namespace Ringen.Core.CS
                             var result = AssetResponse.Content.ReadAsStringAsync().Result;
                             foreach (var CompetitionData in (JArray)JsonConvert.DeserializeObject(result))
                             {
-                                competitions.Add(new Competition((JObject)CompetitionData));
+                                competitions.Add(new Competition((JObject)CompetitionData, this));
                             }
                         }
                     });

@@ -8,7 +8,7 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:local="clr-namespace:Ringen"
-                      xmlns:xcad="https://github.com/Dirkster99/AvalonDock"
+                      xmlns:ad="https://github.com/Dirkster99/AvalonDock"
                       xmlns:CoreAvalonDock="clr-namespace:Ringen.Core.UI.AvalonDock;assembly=Ringen.Core" 
                       DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
                       mc:Ignorable="d"
@@ -87,7 +87,7 @@
         </Ribbon>
 
         <!--  Main Window  -->
-        <xcad:DockingManager
+        <ad:DockingManager
             Grid.Row="1"
             ActiveContent="{Binding DataContext.TabControlSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
             AllowMixedOrientation="True"
@@ -101,57 +101,57 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
 
-            <xcad:DockingManager.DocumentHeaderTemplate>
+            <ad:DockingManager.DocumentHeaderTemplate>
                 <StaticResource ResourceKey="MainWindowDocumentHeaderTemplate" />
-            </xcad:DockingManager.DocumentHeaderTemplate>
+            </ad:DockingManager.DocumentHeaderTemplate>
 
-            <xcad:DockingManager.DocumentTitleTemplate>
+            <ad:DockingManager.DocumentTitleTemplate>
                 <StaticResource ResourceKey="MainWindowDocumentTitleTemplate" />
-            </xcad:DockingManager.DocumentTitleTemplate>
+            </ad:DockingManager.DocumentTitleTemplate>
 
-            <xcad:LayoutRoot x:Name="_layoutRoot">
+            <ad:LayoutRoot x:Name="_layoutRoot">
 
-                <xcad:LayoutPanel Orientation="Vertical">
-                    <xcad:LayoutPanel Orientation="Horizontal">
+                <ad:LayoutPanel Orientation="Vertical">
+                    <ad:LayoutPanel Orientation="Horizontal">
 
-                        <xcad:LayoutAnchorablePane DockWidth="400">
-                            <xcad:LayoutAnchorable
+                        <ad:LayoutAnchorablePane DockWidth="400">
+                            <ad:LayoutAnchorable
                                 x:Name="layoutNavigationHardware"
                                 Title="Explorer"
                                 AutoHideWidth="400"
                                 CanHide="False"
                                 ContentId="main_treeview">
                                 <StaticResource ResourceKey="Explorer" />
-                            </xcad:LayoutAnchorable>
-                        </xcad:LayoutAnchorablePane>
+                            </ad:LayoutAnchorable>
+                        </ad:LayoutAnchorablePane>
 
-                        <xcad:LayoutDocumentPaneGroup>
-                            <xcad:LayoutDocumentPane>
-                                <xcad:LayoutDocument ContentId="document1" Title="Document 1" CanClose="False">
+                        <ad:LayoutDocumentPaneGroup>
+                            <!--<ad:LayoutDocumentPane>
+                                <ad:LayoutDocument ContentId="document1" Title="Document 1" CanClose="False">
                                     <Button Content="Document 1 Content" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </xcad:LayoutDocument>
-                            </xcad:LayoutDocumentPane>
+                                </ad:LayoutDocument>
+                            </ad:LayoutDocumentPane>-->
                             <CoreAvalonDock:LayoutDocumentPaneExtended CollectionChangedCommand="{Binding DataContext.CMAvalonDockDocumentsCollectionChanged, Source={StaticResource ProxyElement}}"/>
-                        </xcad:LayoutDocumentPaneGroup>
+                        </ad:LayoutDocumentPaneGroup>
 
 
-                    </xcad:LayoutPanel>
+                    </ad:LayoutPanel>
 
-                    <xcad:LayoutAnchorablePane DockHeight="150">
-                        <xcad:LayoutAnchorable
+                    <ad:LayoutAnchorablePane DockHeight="150">
+                        <ad:LayoutAnchorable
                                 x:Name="logger"
                                 Title="Test"
                                 AutoHideWidth="250"
                                 CanHide="False"
                                 ContentId="main_treeview">
                             <!--<StaticResource ResourceKey="Main_TreeView" />-->
-                        </xcad:LayoutAnchorable>
-                    </xcad:LayoutAnchorablePane>
+                        </ad:LayoutAnchorable>
+                    </ad:LayoutAnchorablePane>
 
-                </xcad:LayoutPanel>
-            </xcad:LayoutRoot>
+                </ad:LayoutPanel>
+            </ad:LayoutRoot>
 
-        </xcad:DockingManager>
+        </ad:DockingManager>
         
     </Grid>
 </Controls:MetroWindow>

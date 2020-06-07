@@ -12,9 +12,12 @@ namespace Ringen.Core.CS
     public class Season : ExtendedNotifyPropertyChangedUserControl, IExplorerItem
     {
         private JObject Data { get; set; }
-        public Season(JObject Table)
+        public IExplorerItem Parent { get; }
+
+        public Season(JObject Data, IExplorerItem Parent)
         {
-            Data = Table;
+            this.Data = Data;
+            this.Parent = Parent;
         }
 
         public string Value
@@ -52,7 +55,7 @@ namespace Ringen.Core.CS
                             var result = AssetResponse.Content.ReadAsStringAsync().Result;
                             foreach (var TableData in (JArray)JsonConvert.DeserializeObject(result))
                             {
-                                tables.Add(new Table((JObject)TableData));
+                                tables.Add(new Table((JObject)TableData, this));
                             }
                         }
                     });

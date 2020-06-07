@@ -11,9 +11,12 @@ namespace Ringen.Core.CS
 {
     public class CS : ExtendedNotifyPropertyChangedUserControl, IExplorerItem
     {
+        public IExplorerItem Parent { get; }
+
         public CS()
         {
             Value = "Mannschaftskämpfe";
+            Parent = null;
         }
 
         private string value;
@@ -44,7 +47,7 @@ namespace Ringen.Core.CS
                             var result = AssetResponse.Content.ReadAsStringAsync().Result;
                             foreach (var SeasonData in (JArray)JsonConvert.DeserializeObject(result))
                             {
-                                seasons.Add(new Season((JObject)SeasonData));
+                                seasons.Add(new Season((JObject)SeasonData, this));
                             }
                         }
                     });

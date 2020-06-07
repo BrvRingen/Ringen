@@ -50,10 +50,12 @@ namespace Ringen.Core.CS
 	        $decision;
         */
         private JObject Data;
+        public IExplorerItem Parent { get; }
 
-        public Competition(JObject Data)
+        public Competition(JObject Data, IExplorerItem Parent)
         {
             this.Data = Data;
+            this.Parent = Parent;
         }
 
         public string Value
@@ -186,7 +188,7 @@ namespace Ringen.Core.CS
                             var result = AssetResponse.Content.ReadAsStringAsync().Result;
                             foreach (var BoutData in (JArray)JsonConvert.DeserializeObject(result))
                             {
-                                bouts.Add(new Bout((JObject)BoutData));
+                                bouts.Add(new Bout((JObject)BoutData, this));
                             }
                         }
                     });
