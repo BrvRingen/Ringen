@@ -28,12 +28,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_DictionaryToEnum.tt</DependentUpon>
     </Compile>
+    <Compile Include="View\Bout.xaml.cs">
+      <DependentUpon>Bout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Competition.xaml.cs">
+      <DependentUpon>Competition.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CsView.xaml.cs">
       <DependentUpon>CsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="View\Bout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Competition.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\CsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -46,10 +46,12 @@ namespace Ringen.Core.CS
         public int HomeWrestlerLicId { get { return Get<int>(Data["homeWrestlerLicId"]); } }
         public string HomeWrestlerName { get { return Get<string>(Data["homeWrestlerName"]); } }
         public string HomeWrestlerGivenname { get { return Get<string>(Data["homeWrestlerGivenname"]); } }
+        public string HomeWrestlerFullnname { get { return $"{Get<string>(Data["homeWrestlerGivenname"])} {Get<string>(Data["homeWrestlerName"])}"; } }
         public int OpponentWrestlerId { get { return Get<int>(Data["opponenteWrestlerId"]); } }
         public int OpponentWrestlerLicId { get { return Get<int>(Data["opponentWrestlerLicId"]); } }
         public string OpponentWrestlerName { get { return Get<string>(Data["opponentWrestlerName"]); } }
         public string OpponentWrestlerGivenname { get { return Get<string>(Data["opponentWrestlerGivenname"]); } }
+        public string OpponentWrestlerFullnname { get { return $"{Get<string>(Data["opponentWrestlerGivenname"])} {Get<string>(Data["opponentWrestlerName"])}"; } }
         public int HomeWrestlerPoints { get { return Get<int>(Data["homeWrestlerPoints"]); } }
         public int HomeWrestlerFlags { get { return Get<int>(Data["homeWrestlerFlags"]); } }
         public int OpponentWrestlerPoints { get { return Get<int>(Data["opponentWrestlerPoints"]); } }
@@ -66,7 +68,7 @@ namespace Ringen.Core.CS
 
 
 
-        public enum Results { TÜ, SS, PS }
+        public enum Results { TÜ, SS, PS, KL }
 
 
 

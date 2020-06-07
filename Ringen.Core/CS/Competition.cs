@@ -66,6 +66,14 @@ namespace Ringen.Core.CS
             }
         }
 
+        public Table Table
+        {
+            get
+            {
+                return (Table)Parent;
+            }
+        }
+
         public string SaisonId
         {
             get

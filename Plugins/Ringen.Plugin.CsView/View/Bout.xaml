@@ -1,0 +1,155 @@
+﻿<UserControl x:Class="Ringen.Plugin.CsView.Bout"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ringen.Plugin.CsView"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="8*" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="8*" />
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="8" />
+            <RowDefinition Height="25*" />
+            <RowDefinition Height="8" />
+            <RowDefinition Height="10*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="Red"   Grid.Column="0">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock Text="{Binding Bout.Competition.HomePoints}" />
+                </Viewbox>
+            </Border>
+            <Viewbox StretchDirection="Both"  Grid.Column="1">
+                <TextBlock Text="{Binding Bout.Table.Value}" />
+            </Viewbox>
+            <Border Background="Blue"   Grid.Column="2">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock Text="{Binding Bout.Competition.OpponentPoints}" />
+                </Viewbox>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="Red"   Grid.Column="0">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock Text="{Binding Bout.Competition.HomeTeamName}" />
+                </Viewbox>
+            </Border>
+            <Border Background="Blue"   Grid.Column="1">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock Text="{Binding Bout.Competition.OpponentTeamName}" />
+                </Viewbox>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="60"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="Red"   Grid.Column="0">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock Text="N. N." />
+                </Viewbox>
+            </Border>
+            <Border Background="Red"   Grid.Column="2">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock Text="N. N." />
+                </Viewbox>
+            </Border>
+            <Border Grid.Column="3">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock Text="{Binding Bout.WeightClass}" />
+                </Viewbox>
+            </Border>
+            <Border Grid.Column="4">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock Text="{Binding Bout.WrestleStyle}" />
+                </Viewbox>
+            </Border>
+            <Border Background="Blue" Grid.Column="5">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock Text="N. N." />
+                </Viewbox>
+            </Border>
+            <Border Background="Blue" Grid.Column="7">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock Text="N. N." />
+                </Viewbox>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="Red"   Grid.Column="0">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock Text="{Binding Bout.HomeWrestlerGivenname}" />
+                </Viewbox>
+            </Border>
+            <Border Background="Blue"   Grid.Column="1">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock Text="{Binding Bout.OpponentWrestlerGivenname}" />
+                </Viewbox>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="Red"   Grid.Column="0">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock Text="{Binding Bout.HomeWrestlerName}" />
+                </Viewbox>
+            </Border>
+            <Border Background="Blue"   Grid.Column="1">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock Text="{Binding Bout.OpponentWrestlerName}" />
+                </Viewbox>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="7">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="60*"/>
+                <ColumnDefinition Width="40*"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="Red" Grid.Column="0">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock Text="{Binding Bout.HomeWrestlerPoints}" />
+                </Viewbox>
+            </Border>
+            <Border Grid.Column="1">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock Text="{Binding Bout.Time}" />
+                </Viewbox>
+            </Border>
+            <Border Background="Blue" Grid.Column="2">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock Text="{Binding Bout.OpponentWrestlerPoints}" />
+                </Viewbox>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
