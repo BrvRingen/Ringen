@@ -14,7 +14,7 @@
                       mc:Ignorable="d"
                       WindowState="Maximized"
                       Loaded="Window_Loaded"
-                      Title="Ringen" Background="Azure">
+                      Title="Ringen">
     <Controls:MetroWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -72,9 +72,8 @@
         <!--  Menu  -->
         <Ribbon
             Grid.Row="0"
-            IsEnabled="{Binding LockedState}"
             ItemsSource="{Binding RibbonMenuItems}">
-
+            
             <!--  Application Menu (Down Arrow)  --><!--
             <Ribbon.ApplicationMenu>
                 <StaticResource ResourceKey="Main_RibbonApplicationMenu" />
@@ -83,7 +82,6 @@
             <Ribbon.HelpPaneContent>
                 <StaticResource ResourceKey="Main_RibbonHelpPane" />
             </Ribbon.HelpPaneContent>-->
-
         </Ribbon>
 
         <!--  Main Window  -->

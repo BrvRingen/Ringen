@@ -41,7 +41,7 @@ namespace Ringen.Core.CS
 
         public int Order { get { return Get<int>(Data["order"]); } }
         public string WeightClass { get { return Get<string>(Data["weightClass"]); } }
-        public string WrestleStyle { get { return Get<string>(Data["style"]); } }
+        public WrestleStyles WrestleStyle { get { return Get<WrestleStyles>(Data["style"]); } }
         public int HomeWrestlerId { get { return Get<int>(Data["homeWrestlerId"]); } }
         public int HomeWrestlerLicId { get { return Get<int>(Data["homeWrestlerLicId"]); } }
         public string HomeWrestlerName { get { return Get<string>(Data["homeWrestlerName"]); } }
@@ -67,9 +67,31 @@ namespace Ringen.Core.CS
 
 
 
-
+        public enum WrestleStyles { LL, GR }
         public enum Results { TÜ, SS, PS, KL }
 
+        private List<string> posPoints;
+
+        public List<string> PosPoints
+        {
+            get
+            {
+                if(posPoints == null)
+                {
+                    //Aktuelle Regeln nach 2017
+                    if (WrestleStyle == WrestleStyles.LL)
+                        posPoints = new List<string>() { "1", "2", "4", "5", "P", "0", "VZ", "A" };
+                    else
+                        posPoints = new List<string>() { "1", "2", "4", "5", "P", "0", "VZ"};
+                }
+
+                return posPoints;
+            }
+            set { posPoints = value; }
+        }
+
+
+        //Timers: Kampf, P Rot, P Blau, Pause, Verletzung Rot, Verletzung Blau, Aktivitätszeit Rot, Aktivitätszeit Blau
 
 
         private Timer myTimer;
@@ -119,8 +141,37 @@ namespace Ringen.Core.CS
             }
         }
 
+        private List<Point> points;
 
+        public List<Point> Points
+        {
+            get
+            {
+                if (points == null) points = new List<Point>();
+                return points;
+            }
+            set { points = value; }
+        }
 
         public List<bool> Children { get; set; }
+
+
+        public class Point
+        {
+            public Wrestler HomeOrOpponent { get; set; }
+            public string Value { get; set; }
+            public int Time { get; set; }
+
+            public enum Wrestler { Home, Opponent };
+
+            public Point(string Point, Wrestler HomeOrOpponent, int Time)
+            {
+                this.HomeOrOpponent = HomeOrOpponent;
+                this.Value = Point;
+                this.Time = Time;
+            }
+
+
+        }
     }
 }

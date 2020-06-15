@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace Ringen.Plugin.CsEditor
 {
@@ -19,6 +20,26 @@ namespace Ringen.Plugin.CsEditor
                 return Visibility.Collapsed;
             else
                 return Visibility.Visible;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return null;
+        }
+
+        #endregion
+    }
+
+    public class TeamToBrushConverter : IValueConverter
+    {
+        #region public functions
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value == "Home")
+                return Brushes.Red;
+            else
+                return Brushes.Blue;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

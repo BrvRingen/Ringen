@@ -20,6 +20,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Point.xaml.cs">
+      <DependentUpon>Point.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Classes\WPFConverters.cs" />
     <Compile Include="RegisterPluginCsEditor.cs" />
     <Compile Include="Resources\LanguageFiles\_DictionaryToEnum.generated.cs">
@@ -27,12 +30,30 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_DictionaryToEnum.tt</DependentUpon>
     </Compile>
+    <Compile Include="View\Bout.xaml.cs">
+      <DependentUpon>Bout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Competition.xaml.cs">
+      <DependentUpon>Competition.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CsEditor.xaml.cs">
       <DependentUpon>CsEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Classes\Point.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Bout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Competition.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\CsEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -46,6 +67,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="MahApps.Metro">
+      <Version>2.0.1</Version>
+      <IncludeAssets>compile</IncludeAssets>
+      <ExcludeAssets>contentFiles</ExcludeAssets>
+      <PrivateAssets>contentfiles; analyzers</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="MvvmLightLibsStd10">
       <Version>5.4.1.1</Version>
       <IncludeAssets>compile</IncludeAssets>

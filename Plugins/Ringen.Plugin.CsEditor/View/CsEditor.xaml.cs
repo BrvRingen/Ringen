@@ -53,15 +53,31 @@ namespace Ringen.Plugin.CsEditor
         public View()
         {
             InitializeComponent();
-            SetData();
+            UpdateUi();
 
-            Explorer.SelectedItemChanged += ((object sender, Explorer.SelectedItemChangedEventArgs e) => { SetData(); });
+            Explorer.SelectedItemChanged += ((object sender, Explorer.SelectedItemChangedEventArgs e) => { UpdateUi(); });
         }
 
-        private void SetData()
+        private void UpdateUi()
         {
-            Competition = Explorer.SelectedItem as Core.CS.Competition;
-            Bout = Explorer.SelectedItem as Core.CS.Bout;
+            Competition = null;
+            Bout = null;
+
+            if (Explorer.SelectedItem is Core.CS.Competition)
+                Competition = (Core.CS.Competition)Explorer.SelectedItem;
+            else if (Explorer.SelectedItem is Core.CS.Bout)
+            {
+                Bout = (Core.CS.Bout)Explorer.SelectedItem;
+
+                BoutView.PosPointsHome.Children.Clear();
+                BoutView.PosPointsOpponent.Children.Clear();
+                foreach (var PosPoint in Bout.PosPoints)
+                {
+                    BoutView.PosPointsHome.Children.Add(new Point(new Core.CS.Bout.Point(PosPoint, Core.CS.Bout.Point.Wrestler.Home, 0)));
+                    BoutView.PosPointsOpponent.Children.Add(new Point(new Core.CS.Bout.Point(PosPoint, Core.CS.Bout.Point.Wrestler.Opponent, 0)));
+                }
+
+            }
         }
 
         private RelayCommand m_ZeitRunde1Start;

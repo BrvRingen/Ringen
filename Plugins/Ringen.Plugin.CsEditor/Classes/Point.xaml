@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="Ringen.Plugin.CsEditor.Point"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ringen.Plugin.CsEditor"
+             mc:Ignorable="d"
+             Height="150"
+             Width="150"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             >
+    <UserControl.InputBindings>
+        <KeyBinding Key="F1" Command="{Binding CMHelp}" />
+
+    </UserControl.InputBindings>
+    <Grid>
+        <Button Background="{Binding TeamToBrushConverter}">
+            <Button.Content>
+                <StackPanel HorizontalAlignment="Center">
+                <Label FontSize="80" Content="{Binding Data.Value}"></Label>
+                    <Label FontSize="10" Content="ALT + test"></Label>
+                </StackPanel>
+            </Button.Content>
+            
+        </Button>
+    </Grid>
+</UserControl>
