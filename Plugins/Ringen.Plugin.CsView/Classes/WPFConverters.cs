@@ -28,4 +28,22 @@ namespace Ringen.Plugin.CsView
 
         #endregion
     }
+
+    [ValueConversion(typeof(int), typeof(string))]
+    public class IntToTimeConverter : IValueConverter
+    {
+        #region public functions
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return TimeSpan.FromSeconds((int)value).ToString("m':'ss");
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return null;
+        }
+
+        #endregion
+    }
 }

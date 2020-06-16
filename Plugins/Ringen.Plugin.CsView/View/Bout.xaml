@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:Ringen.Plugin.CsView"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <local:IntToTimeConverter x:Key="IntToTimeConverter"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10*" />
@@ -142,7 +145,7 @@
             </Border>
             <Border Grid.Column="1">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.Time}" />
+                    <TextBlock Text="{Binding Bout.Time, Converter={StaticResource IntToTimeConverter}}" />
                 </Viewbox>
             </Border>
             <Border Background="Blue" Grid.Column="2">
