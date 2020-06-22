@@ -11,7 +11,7 @@ using System.Web;
 
 namespace Ringen.Core.CS
 {
-    public class Competition : ExtendedNotifyPropertyChangedUserControl, IExplorerItem
+    public class Competition : ExtendedNotifyPropertyChanged, IExplorerItem
     {
         /*
         	$saisonId,
@@ -50,12 +50,12 @@ namespace Ringen.Core.CS
 	        $decision;
         */
         private JObject Data;
-        public IExplorerItem Parent { get; }
+        public IExplorerItem ExplorerParent { get; }
 
         public Competition(JObject Data, IExplorerItem Parent)
         {
             this.Data = Data;
-            this.Parent = Parent;
+            this.ExplorerParent = Parent;
         }
 
         public string Value
@@ -70,7 +70,7 @@ namespace Ringen.Core.CS
         {
             get
             {
-                return (Table)Parent;
+                return (Table)ExplorerParent;
             }
         }
 

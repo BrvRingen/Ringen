@@ -20,8 +20,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Point.xaml.cs">
-      <DependentUpon>Point.xaml</DependentUpon>
+    <Compile Include="Classes\BoutPoint.xaml.cs">
+      <DependentUpon>BoutPoint.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\BoutTime.xaml.cs">
+      <DependentUpon>BoutTime.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\WPFConverters.cs" />
     <Compile Include="RegisterPluginCsEditor.cs" />
@@ -30,31 +33,35 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_DictionaryToEnum.tt</DependentUpon>
     </Compile>
-    <Compile Include="View\Bout.xaml.cs">
-      <DependentUpon>Bout.xaml</DependentUpon>
+    <Compile Include="View\ViewBout.xaml.cs">
+      <DependentUpon>ViewBout.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Competition.xaml.cs">
-      <DependentUpon>Competition.xaml</DependentUpon>
+    <Compile Include="View\ViewCompetition.xaml.cs">
+      <DependentUpon>ViewCompetition.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CsEditor.xaml.cs">
-      <DependentUpon>CsEditor.xaml</DependentUpon>
+    <Compile Include="View\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Classes\Point.xaml">
+    <Page Include="Classes\BoutPoint.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Bout.xaml">
+    <Page Include="Classes\BoutTime.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ViewBout.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Competition.xaml">
+    <Page Include="View\ViewCompetition.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\CsEditor.xaml">
+    <Page Include="View\View.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

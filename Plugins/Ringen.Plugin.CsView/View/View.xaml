@@ -9,15 +9,11 @@
     mc:Ignorable="d"
     d:DesignHeight="1000"
     d:DesignWidth="1600"
-    Margin="10"
-    DataContext="{Binding RelativeSource={RelativeSource Self}}">
-    <TabItem:RingenTabItem.Resources>
-        <local:NullToVisiblityConverter x:Key="NullToVisiblity" />
-    </TabItem:RingenTabItem.Resources>
+    Margin="10">
     <DockPanel Margin="2">
         <!--Competition-->
-        <local:Competition Visibility="{Binding Competition, Converter={StaticResource NullToVisiblity}}"/>
+        <local:ViewCompetition/>
         <!--Bout-->
-        <local:Bout Visibility="{Binding Bout, Converter={StaticResource NullToVisiblity}}"/>
+        <local:ViewBout/>
     </DockPanel>
 </TabItem:RingenTabItem>

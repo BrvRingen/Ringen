@@ -1,15 +1,19 @@
-﻿<UserControl x:Class="Ringen.Plugin.CsView.Bout"
+﻿<CoreUi:ExtendedNotifyPropertyChangedUserControl x:Class="Ringen.Plugin.CsView.ViewBout"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:CoreUi="clr-namespace:Ringen.Core.UI;assembly=Ringen.Core"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ringen.Plugin.CsView"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
+             d:DesignHeight="450" d:DesignWidth="800"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <CoreUi:ExtendedNotifyPropertyChangedUserControl.Resources>
+        <local:NullToVisiblityConverter x:Key="NullToVisiblity" />
         <local:IntToTimeConverter x:Key="IntToTimeConverter"/>
-    </UserControl.Resources>
-    <Grid>
+        <local:TimeRunningToVisiblityConverter x:Key="TimeRunningToVisiblity" />
+    </CoreUi:ExtendedNotifyPropertyChangedUserControl.Resources>
+    <Grid Visibility="{Binding Bout, Converter={StaticResource NullToVisiblity}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="10*" />
             <RowDefinition Height="8*" />
@@ -145,7 +149,7 @@
             </Border>
             <Border Grid.Column="1">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.Time, Converter={StaticResource IntToTimeConverter}}" />
+                    <TextBlock Text="{Binding Bout.Settings.Times[Bout].Time, Converter={StaticResource IntToTimeConverter}}" />
                 </Viewbox>
             </Border>
             <Border Background="Blue" Grid.Column="2">
@@ -154,5 +158,22 @@
                 </Viewbox>
             </Border>
         </Grid>
+
+        <Grid Grid.Row="6" Grid.RowSpan="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="Red"   Grid.Column="0" Visibility="{Binding Bout.Settings.Times[HomeInjury].Mode, Converter={StaticResource TimeRunningToVisiblity}}">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock Text="{Binding Bout.Settings.Times[HomeInjury].Time, Converter={StaticResource IntToTimeConverter}}" />
+                </Viewbox>
+            </Border>
+            <Border Background="Blue" Grid.Column="1" Visibility="{Binding Bout.Settings.Times[OpponentInjury].Mode, Converter={StaticResource TimeRunningToVisiblity}}">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock Text="{Binding Bout.Settings.Times[OpponentInjury].Time, Converter={StaticResource IntToTimeConverter}}" />
+                </Viewbox>
+            </Border>
+        </Grid>
     </Grid>
-</UserControl>
+</CoreUi:ExtendedNotifyPropertyChangedUserControl>

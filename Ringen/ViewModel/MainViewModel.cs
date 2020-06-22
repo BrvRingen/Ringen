@@ -227,29 +227,6 @@ namespace Ringen.ViewModel
                     Set(ref m_TabControlSelectedItem, tempPlugin);
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TabControlSelectedItem"));
                 }
-                    return;
-
-                //// Status vom "alten" Tab anpassen
-                //if (m_TabControlSelectedItem != null && m_TabControlSelectedItem != tempPlugin)
-                //{
-                //    LayoutDocument tempDoc = m_TabControlSelectedItem.Container as LayoutDocument;
-
-                //    if (tempDoc != null)
-                //    {
-                //        if (tempDoc.IsFloating)
-                //            OnPluginStatusChanged(m_TabControlSelectedItem.GetType().Assembly.GetName().Name, PluginStatus.Active);
-                //        else
-                //            OnPluginStatusChanged(m_TabControlSelectedItem.GetType().Assembly.GetName().Name, PluginStatus.Hidden);
-                //    }
-                //}
-
-                Set(ref m_TabControlSelectedItem, tempPlugin);
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TabControlSelectedItem"));
-                //ProcessTabChange();
-
-                //// Status nur anpassen, wenn es nicht bereits passt!
-                //if (m_TabControlSelectedItem?.PluginCurrentStatus != PluginStatus.Active)
-                //    OnPluginStatusChanged(m_TabControlSelectedItem.GetType().Assembly.GetName().Name, PluginStatus.Active);
             }
         }
 
@@ -277,7 +254,6 @@ namespace Ringen.ViewModel
                 return new RelayCommand(() =>
                 {
                     //OpenPluginWithDoubleClick();
-                    var i = 1;
                 });
             }
         }

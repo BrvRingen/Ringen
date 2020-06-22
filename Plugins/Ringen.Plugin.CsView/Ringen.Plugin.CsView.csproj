@@ -8,7 +8,6 @@
   <Import Project="$(SolutionDir)ConfigurationPlugins.targets" />
   <ItemGroup>
     <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml" />
@@ -28,27 +27,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_DictionaryToEnum.tt</DependentUpon>
     </Compile>
-    <Compile Include="View\Bout.xaml.cs">
-      <DependentUpon>Bout.xaml</DependentUpon>
+    <Compile Include="View\ViewBout.xaml.cs">
+      <DependentUpon>ViewBout.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Competition.xaml.cs">
-      <DependentUpon>Competition.xaml</DependentUpon>
+    <Compile Include="View\ViewCompetition.xaml.cs">
+      <DependentUpon>ViewCompetition.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CsView.xaml.cs">
-      <DependentUpon>CsView.xaml</DependentUpon>
+    <Compile Include="View\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="View\Bout.xaml">
+    <Page Include="View\ViewBout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Competition.xaml">
+    <Page Include="View\ViewCompetition.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\CsView.xaml">
+    <Page Include="View\View.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

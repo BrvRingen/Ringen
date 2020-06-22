@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace Ringen.Core.CS
 {
-    public class CS : ExtendedNotifyPropertyChangedUserControl, IExplorerItem
+    public class CS : ExtendedNotifyPropertyChanged, IExplorerItem
     {
-        public IExplorerItem Parent { get; }
+        public IExplorerItem ExplorerParent { get; }
 
         public CS()
         {
             Value = "Mannschaftskämpfe";
-            Parent = null;
+            ExplorerParent = null;
         }
 
         private string value;

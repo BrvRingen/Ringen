@@ -19,20 +19,20 @@ namespace Ringen.Plugin.CsEditor
     /// <summary>
     /// Interaktionslogik für Point.xaml
     /// </summary>
-    public partial class Point : UserControl
+    public partial class BoutPoint : UserControl
     {
-        private Core.CS.Bout.Point data;
+        private Core.CS.BoutPoint data;
 
-        public Core.CS.Bout.Point Data
+        public Core.CS.BoutPoint Data
         {
             get { return data; }
             set { data = value; }
         }
 
-        public Point(Core.CS.Bout.Point Point)
+        public BoutPoint(Core.CS.BoutPoint BoutPoint)
         {
-            Data = Point;
-            this.Background = Data.HomeOrOpponent == Core.CS.Bout.Point.Wrestler.Home ? Brushes.Red : Brushes.Blue;
+            Data = BoutPoint;
+            this.Background = Data.HomeOrOpponent == Core.CS.BoutPoint.Wrestler.Home ? Brushes.Red : Brushes.Blue;
 
             InitializeComponent();
         }

@@ -10,6 +10,6 @@ namespace Ringen.Core
     public interface IExplorerItem
     {
         string Value { get; }
-        IExplorerItem Parent { get; }
+        IExplorerItem ExplorerParent { get; }
     }
 }

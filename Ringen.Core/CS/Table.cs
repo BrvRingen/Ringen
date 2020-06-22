@@ -12,15 +12,15 @@ using System.Threading.Tasks;
 
 namespace Ringen.Core.CS
 {
-    public class Table : ExtendedNotifyPropertyChangedUserControl, IExplorerItem
+    public class Table : ExtendedNotifyPropertyChanged, IExplorerItem
     {
         private JObject Data { get; set; }
-        public IExplorerItem Parent { get; }
+        public IExplorerItem ExplorerParent { get; }
 
         public Table(JObject Data, IExplorerItem Parent)
         {
             this.Data = Data;
-            this.Parent = Parent;
+            this.ExplorerParent = Parent;
         }
 
         public string Value

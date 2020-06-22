@@ -10,7 +10,7 @@ using System.Windows.Controls;
 
 namespace Ringen.Core.UI
 {
-    public abstract class ExtendedNotifyPropertyChangedUserControl : UserControl, INotifyPropertyChanged
+    public abstract class ExtendedNotifyPropertyChanged : INotifyPropertyChanged
     {
         #region declarations
 
@@ -18,7 +18,28 @@ namespace Ringen.Core.UI
 
         #endregion
 
+
         #region public functions
+
+        /// <summary>
+        /// Returns the value of the parsed XmlAttribute.
+        /// </summary>
+        /// <typeparam name="T">Type of the returned value.</typeparam>
+        /// <param name="element">The XmlElement.</param>
+        /// <param name="attribute">The attribute.</param>
+        /// <returns>Converted value</returns>
+        protected static T Get<T>(T element)
+        {
+            if (element == null)
+                return default;
+
+            string tempVal = element.ToString();
+
+            if (!string.IsNullOrWhiteSpace(tempVal))
+                return (T)TypeDescriptor.GetConverter(typeof(T)).ConvertFromString(null, CultureInfo.InvariantCulture, tempVal);
+            else
+                return default;
+        }
 
         /// <summary>
         /// Returns the value of the parsed XmlAttribute.
@@ -71,7 +92,6 @@ namespace Ringen.Core.UI
 
         public void OnPropertyChanged([CallerMemberName] string _property = "") //, bool _doNotValidate = false
         {
-            //validate the property name in debug builds
 //#if DEBUG && !_doNotValidate
 //                VerifyProperty(Assembly.GetCallingAssembly()..GetType(), _property);
 //#endif

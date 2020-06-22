@@ -1,0 +1,56 @@
+﻿<CoreUi:ExtendedNotifyPropertyChangedUserControl x:Class="Ringen.Plugin.CsEditor.ViewBout"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:CoreUi="clr-namespace:Ringen.Core.UI;assembly=Ringen.Core"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ringen.Plugin.CsEditor"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <CoreUi:ExtendedNotifyPropertyChangedUserControl.Resources>
+        <local:NullToVisiblityConverter x:Key="NullToVisiblity" />
+    </CoreUi:ExtendedNotifyPropertyChangedUserControl.Resources>
+
+    <Grid Visibility="{Binding Bout, Converter={StaticResource NullToVisiblity}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Background="AliceBlue" TextAlignment="Center" Text="{Binding Bout.Value}"/>
+
+        <!--<WrapPanel Grid.Row="2" Grid.Column="0">
+            <TextBlock Text="{Binding Path=Bout.Settings.Times[Bout].Time}" />
+            <Button Command="{Binding Start}" CommandParameter="Bout" Width="150" Height="150">Start</Button>
+            <Button Command="{Binding Stop}"  CommandParameter="Bout" Width="150" Height="150">Stop</Button>
+        </WrapPanel>-->
+        <Grid  Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <local:BoutTime Data="{Binding Bout.Settings.Times[HomeInjury]}" Title="Verletzungszeit Heim" Grid.Column="0" HorizontalAlignment="Center"/>
+            <local:BoutTime Data="{Binding Bout.Settings.Times[Bout]}" Title="Kampf" Grid.Column="1" HorizontalAlignment="Center"/>
+            <local:BoutTime Data="{Binding Bout.Settings.Times[OpponentInjury]}" Title="Verletzungszeit Gast" Grid.Column="2" HorizontalAlignment="Center"/>
+        </Grid>
+        <!--<WrapPanel Grid.Row="2" Grid.Column="2">
+            <TextBlock Text="{Binding Path=Bout.Settings.Times[HomeInjury].Time}" />
+            <Button Command="{Binding Start}" CommandParameter="HomeInjury" Width="150" Height="150">Start</Button>
+            <Button Command="{Binding Stop}"  CommandParameter="HomeInjury" Width="150" Height="150">Stop</Button>
+        </WrapPanel>-->
+
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="50*" />
+            </Grid.ColumnDefinitions>
+            <WrapPanel Grid.Column="0" x:Name="PosPointsHome" Orientation="Horizontal" />
+            <WrapPanel Grid.Column="2" x:Name="PosPointsOpponent" Orientation="Horizontal" />
+        </Grid>
+    </Grid>
+</CoreUi:ExtendedNotifyPropertyChangedUserControl>

@@ -5,16 +5,12 @@ using System.Timers;
 
 namespace Ringen.Core.CS
 {
-    public class Bout : ExtendedNotifyPropertyChangedUserControl, IExplorerItem
+    public class Bout : ExtendedNotifyPropertyChanged, IExplorerItem
     {
-        private JObject Data;
-        public IExplorerItem Parent { get; }
+        #region properties
 
-        public Bout(JObject Data, IExplorerItem Parent)
-        {
-            this.Data = Data;
-            this.Parent = Parent;
-        }
+        private readonly JObject Data;
+        public IExplorerItem ExplorerParent { get; }
 
         public string Value
         {
@@ -28,20 +24,32 @@ namespace Ringen.Core.CS
         {
             get
             {
-                return (Competition)Parent;
+                return (Competition)ExplorerParent;
             }
         }
         public Table Table
         {
             get
             {
-                return (Table)Parent.Parent;
+                return (Table)ExplorerParent.ExplorerParent;
             }
+        }
+
+        private BoutSettings settings;
+
+        public BoutSettings Settings
+        {
+            get
+            {
+                if (settings == null) settings = new BoutSettings(this);
+                return settings;
+            }
+            set { settings = value; }
         }
 
         public int Order { get { return Get<int>(Data["order"]); } }
         public string WeightClass { get { return Get<string>(Data["weightClass"]); } }
-        public WrestleStyles WrestleStyle { get { return Get<WrestleStyles>(Data["style"]); } }
+        public BoutSettings.WrestleStyles WrestleStyle { get { return Get<BoutSettings.WrestleStyles>(Data["style"]); } }
         public int HomeWrestlerId { get { return Get<int>(Data["homeWrestlerId"]); } }
         public int HomeWrestlerLicId { get { return Get<int>(Data["homeWrestlerLicId"]); } }
         public string HomeWrestlerName { get { return Get<string>(Data["homeWrestlerName"]); } }
@@ -56,7 +64,7 @@ namespace Ringen.Core.CS
         public int HomeWrestlerFlags { get { return Get<int>(Data["homeWrestlerFlags"]); } }
         public int OpponentWrestlerPoints { get { return Get<int>(Data["opponentWrestlerPoints"]); } }
         public int OpponentWrestlerFlags { get { return Get<int>(Data["opponentWrestlerFlags"]); } }
-        public Results Result { get { return Get<Results>(Data["result"]); } }
+        public BoutSettings.Results Result { get { return Get<BoutSettings.Results>(Data["result"]); } }
         public string Round1 { get { return Get<string>(Data["round1"]); } }
         public string Round2 { get { return Get<string>(Data["round2"]); } }
         public string Round3 { get { return Get<string>(Data["round3"]); } }
@@ -67,6 +75,57 @@ namespace Ringen.Core.CS
 
 
 
+        private List<BoutPoint> points;
+
+        public List<BoutPoint> Points
+        {
+            get
+            {
+                if (points == null) points = new List<BoutPoint>();
+                return points;
+            }
+            set { points = value; }
+        }
+
+        public List<bool> Children { get; set; }
+
+        #endregion
+
+        #region constructors
+        public Bout(JObject Data, IExplorerItem Parent)
+        {
+            this.Data = Data;
+            this.ExplorerParent = Parent;
+        }
+
+        #endregion
+
+        #region classes
+
+
+
+
+        #endregion
+    }
+
+    public class BoutPoint
+    {
+        public Wrestler HomeOrOpponent { get; set; }
+        public string Value { get; set; }
+        public int Time { get; set; }
+
+        public enum Wrestler { Home, Opponent };
+
+        public BoutPoint(string Point, Wrestler HomeOrOpponent, int Time)
+        {
+            this.HomeOrOpponent = HomeOrOpponent;
+            this.Value = Point;
+            this.Time = Time;
+        }
+    }
+
+    public class BoutSettings
+    {
         public enum WrestleStyles { LL, GR }
         public enum Results { TÜ, SS, PS, KL }
 
@@ -74,56 +133,97 @@ namespace Ringen.Core.CS
 
         public List<string> PosPoints
         {
-            get
-            {
-                if(posPoints == null)
-                {
-                    //Aktuelle Regeln nach 2017
-                    if (WrestleStyle == WrestleStyles.LL)
-                        posPoints = new List<string>() { "1", "2", "4", "5", "P", "0", "VZ", "A" };
-                    else
-                        posPoints = new List<string>() { "1", "2", "4", "5", "P", "0", "VZ"};
-                }
-
-                return posPoints;
-            }
+            get { return posPoints; }
             set { posPoints = value; }
         }
 
-
-        //Timers: Kampf, P Rot, P Blau, Pause, Verletzung Rot, Verletzung Blau, Aktivitätszeit Rot, Aktivitätszeit Blau
-
-
-        private Timer myTimer;
-        public Timer MyTimer
+        public Dictionary<string, BoutTime> times;
+        public Dictionary<string, BoutTime> Times
         {
             get
             {
-                if(myTimer == null)
+                if (times == null)
                 {
-                    myTimer = new Timer();
-                    myTimer.Interval = 1000;
-                    myTimer.Elapsed += (object sender, ElapsedEventArgs e) =>
+                    times = new Dictionary<string, BoutTime>
                     {
-                        ZeitRunde1++;
-                        Time++;
+                        { "Bout", new BoutTime(360, new List<int>() { 180 }) },
+                        { "Break", new BoutTime(30) },
+                        { "HomeInjury", new BoutTime(120) },
+                        { "OpponentInjury", new BoutTime(120) }//,
+                        //{ "HomeActivity", new BoutTime(30) },
+                        //{ "OpponentActivity", new BoutTime(30) },
+                        //{ "HomeP", new BoutTime() },
+                        //{ "OpponentP", new BoutTime() }
                     };
                 }
-                return myTimer;
+                return times;
             }
         }
 
-        private int zeitRunde1 = 0;
-        public int ZeitRunde1
+        public BoutSettings(Bout Bout)
+        {
+            //Aktuelle Regeln nach 2017
+            if (Bout.WrestleStyle == WrestleStyles.LL)
+                posPoints = new List<string>() { "1", "2", "4", "5", "P", "0", "VZ", "A" };
+            else
+                posPoints = new List<string>() { "1", "2", "4", "5", "P", "0", "VZ" };
+
+
+        }
+    }
+
+    public class BoutTime : ExtendedNotifyPropertyChanged
+    {
+        public enum Modes { Running, Paused, Finished }
+
+        private Modes m_Mode;
+
+        public Modes Mode
+        {
+            get { return Get(m_Mode); }
+            set { Set(ref m_Mode, value); }
+        }
+
+
+        public int Max { get; set; }
+        public List<int> Pauses { get; set; }
+
+        public BoutTime(int Max, List<int> Pauses = null)
+        {
+            Mode = Modes.Paused;
+            this.Max = Max;
+            this.Pauses = Pauses;
+        }
+
+        public void Start()
+        {
+            Timer.Start();
+            Mode = Modes.Running;
+        }
+        public void Stop()
+        {
+            Timer.Stop();
+            Mode = Modes.Paused;
+        }
+
+        private Timer timer;
+        private Timer Timer
         {
             get
             {
-                return zeitRunde1;
-            }
-            set
-            {
-                zeitRunde1 = value;
-                base.OnPropertyChanged();
+                if (timer == null)
+                {
+                    Mode = Modes.Paused;
+                    timer = new Timer
+                    {
+                        Interval = 1000
+                    };
+                    timer.Elapsed += (object sender, ElapsedEventArgs e) =>
+                    {
+                        Time++;
+                    };
+                }
+                return timer;
             }
         }
 
@@ -137,41 +237,20 @@ namespace Ringen.Core.CS
             set
             {
                 time = value;
+
+                if (Pauses != null && Pauses.Contains(Time))
+                {
+                    Timer.Stop();
+                    Mode = Modes.Paused;
+                }
+                if (Time == Max)
+                {
+                    Timer.Stop();
+                    Mode = Modes.Finished;
+                }
+
                 base.OnPropertyChanged();
             }
-        }
-
-        private List<Point> points;
-
-        public List<Point> Points
-        {
-            get
-            {
-                if (points == null) points = new List<Point>();
-                return points;
-            }
-            set { points = value; }
-        }
-
-        public List<bool> Children { get; set; }
-
-
-        public class Point
-        {
-            public Wrestler HomeOrOpponent { get; set; }
-            public string Value { get; set; }
-            public int Time { get; set; }
-
-            public enum Wrestler { Home, Opponent };
-
-            public Point(string Point, Wrestler HomeOrOpponent, int Time)
-            {
-                this.HomeOrOpponent = HomeOrOpponent;
-                this.Value = Point;
-                this.Time = Time;
-            }
-
-
         }
     }
 }

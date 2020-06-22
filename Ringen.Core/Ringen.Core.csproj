@@ -66,6 +66,7 @@
     <Compile Include="TranslationManager\TranslationExtension.cs" />
     <Compile Include="TranslationManager\TransManager.cs" />
     <Compile Include="UI\AvalonDock\LayoutDocumentPaneExtended.cs" />
+    <Compile Include="UI\ExtendedNotifyPropertyChanged.cs" />
     <Compile Include="UI\ExtendedNotifyPropertyChangedUserControl.cs" />
     <Compile Include="UI\IButton.cs" />
     <Compile Include="UI\IRingenTabItem.cs" />
