@@ -2,6 +2,7 @@
 using Ringen.Core.UI;
 using System.Collections.Generic;
 using System.Timers;
+using Ringen.Core.Messaging;
 
 namespace Ringen.Core.CS
 {
@@ -146,14 +147,14 @@ namespace Ringen.Core.CS
                 {
                     times = new Dictionary<string, BoutTime>
                     {
-                        { "Bout", new BoutTime(360, new List<int>() { 180 }) },
-                        { "Break", new BoutTime(30) },
-                        { "HomeInjury", new BoutTime(120) },
-                        { "OpponentInjury", new BoutTime(120) }//,
-                        //{ "HomeActivity", new BoutTime(30) },
-                        //{ "OpponentActivity", new BoutTime(30) },
-                        //{ "HomeP", new BoutTime() },
-                        //{ "OpponentP", new BoutTime() }
+                        { BoutTime.Types.Bout.ToString(), new BoutTime(this, BoutTime.Types.Bout, 360, new List<int>() { 180 }) },
+                        { BoutTime.Types.Break.ToString(), new BoutTime(this, BoutTime.Types.Break, 30) },
+                        { BoutTime.Types.HomeInjury.ToString(), new BoutTime(this, BoutTime.Types.HomeInjury, 120) },
+                        { BoutTime.Types.OpponentInjury.ToString(), new BoutTime(this, BoutTime.Types.OpponentInjury, 120) }//,
+                        //{ BoutTime.Types.HomeActivity.ToString(), new BoutTime(30) },
+                        //{ BoutTime.Types.OpponentActivity.ToString(), new BoutTime(30) },
+                        //{ BoutTime.Types.HomeP.ToString(), new BoutTime() },
+                        //{ BoutTime.Types.OpponentP.ToString(), new BoutTime() }
                     };
                 }
                 return times;
@@ -184,12 +185,25 @@ namespace Ringen.Core.CS
             set { Set(ref m_Mode, value); }
         }
 
+        public enum Types { Bout, Break, HomeInjury, OpponentInjury, HomeActivity, OpponentActivity, HomeP, OpponentP }
+
+        private Types m_Type;
+
+        public Types Type
+        {
+            get { return Get(m_Type); }
+            set { Set(ref m_Type, value); }
+        }
+
+        private BoutSettings BoutSettings;
 
         public int Max { get; set; }
         public List<int> Pauses { get; set; }
 
-        public BoutTime(int Max, List<int> Pauses = null)
+        public BoutTime(BoutSettings BoutSettings, Types Type, int Max, List<int> Pauses = null)
         {
+            this.BoutSettings = BoutSettings;
+            this.Type = Type;
             Mode = Modes.Paused;
             this.Max = Max;
             this.Pauses = Pauses;
@@ -197,11 +211,15 @@ namespace Ringen.Core.CS
 
         public void Start()
         {
+            LoggerMessage.Send(new LogEntry(LogEntryType.Message, $"Timer '{Type.ToString()}' wurde gestartet."));
             Timer.Start();
             Mode = Modes.Running;
+
+            if (Type == Types.HomeInjury || Type == Types.OpponentInjury) BoutSettings.Times[Types.Bout.ToString()].Stop();
         }
         public void Stop()
         {
+            LoggerMessage.Send(new LogEntry(LogEntryType.Message, $"Timer '{Type.ToString()}' wurde gestoppt."));
             Timer.Stop();
             Mode = Modes.Paused;
         }
@@ -242,6 +260,8 @@ namespace Ringen.Core.CS
                 {
                     Timer.Stop();
                     Mode = Modes.Paused;
+
+                    if (Type == Types.Bout) BoutSettings.Times[Types.Break.ToString()].Start();
                 }
                 if (Time == Max)
                 {

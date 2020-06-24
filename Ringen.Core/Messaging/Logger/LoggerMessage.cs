@@ -39,8 +39,6 @@ namespace Ringen.Core.Messaging
     {
         Debug,
         Error,
-        Error_Validation,
-        Error_OnOffline,
         Warning,
         Message,
         Success

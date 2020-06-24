@@ -64,7 +64,7 @@ namespace Ringen.Core.CS
                 if (competitions == null)
                 {
                     competitions = new List<Competition>();
-                    Helpers.Async.RunSync(async () =>
+                    Async.RunSync(async () =>
                     {
                         var AssetResponse = await REST.Client().GetAsync($"/BrvApi/v1/cs/?saisonId={SaisonId}&ligaId={HttpUtility.UrlEncode(LigaId, Encoding.GetEncoding("iso-8859-1"))}&tableId={HttpUtility.UrlEncode(TableId, Encoding.GetEncoding("iso-8859-1"))}");
 

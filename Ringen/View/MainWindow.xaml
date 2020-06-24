@@ -138,10 +138,11 @@
                     <ad:LayoutAnchorablePane DockHeight="150">
                         <ad:LayoutAnchorable
                                 x:Name="logger"
-                                Title="Test"
+                                Title="Logger"
                                 AutoHideWidth="250"
-                                CanHide="False"
+                                CanHide="True"
                                 ContentId="main_treeview">
+                            <DataGrid ItemsSource="{Binding LogData}"></DataGrid>
                             <!--<StaticResource ResourceKey="Main_TreeView" />-->
                         </ad:LayoutAnchorable>
                     </ad:LayoutAnchorablePane>

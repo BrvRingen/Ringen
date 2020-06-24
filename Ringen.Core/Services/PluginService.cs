@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Reflection;
 using System.Linq;
+using Ringen.Core.Messaging;
 
 namespace Ringen.Core.Services
 {
@@ -126,15 +127,15 @@ namespace Ringen.Core.Services
                 return null;
 
             object plugin;
-            try
-            {
+            //try
+            //{
                 plugin = Activator.CreateInstance(pluginAssemblyAttribute.EntryPoint);
-            }
-            catch (Exception ex)
-            {
-                //Messages.LogEntry.SendException(nameof(PluginService), ex);
-                return null;
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    LoggerMessage.Send(new LogEntry(LogEntryType.Error, ex.ToString()));
+            //    return null;
+            //}
 
             if (!(plugin is IPlugabble plugabble))
             {
@@ -150,15 +151,15 @@ namespace Ringen.Core.Services
 
         private static Assembly LoadAssemblyFromFileStream(FileInfo fileInfo)
         {
-            try
-            {
+            //try
+            //{
                 return Assembly.Load(File.ReadAllBytes(fileInfo.FullName));
-            }
-            catch (Exception ex)
-            {
-                //Messages.LogEntry.SendException(nameof(PluginService), ex);
-                return null;
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    LoggerMessage.Send(new LogEntry(LogEntryType.Error, ex.ToString()));
+            //    return null;
+            //}
         }
         #endregion private methods
     }

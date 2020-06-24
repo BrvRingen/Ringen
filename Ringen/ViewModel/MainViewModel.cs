@@ -31,6 +31,9 @@ namespace Ringen.ViewModel
         LogToFile logToFile;
         public new event PropertyChangedEventHandler PropertyChanged;
 
+        private readonly HashSet<LogEntry> m_DataHashSet = new HashSet<LogEntry>();
+        private static readonly object m_LockObj = new object();
+
         private ObservableCollection<LogEntry> logData;
 
         public ObservableCollection<LogEntry> LogData
@@ -78,10 +81,37 @@ namespace Ringen.ViewModel
             string tempLogFile = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\\{FileVersionInfo.GetVersionInfo(Assembly.GetEntryAssembly().Location).CompanyName}\\{Assembly.GetEntryAssembly().GetName().Name}\\Log.log";
             //string tempLogFile = @"C:\temp\xx\Log.log";
             logToFile = new LogToFile(tempLogFile, 1000);
-            Messenger.Default.Register<ExitCodeMessage>(this, ProcessExitCodeMessage);
+            Messenger.Default.Register(this, (ExitCodeMessage obj) => { Startup.ExitCode = obj.ExitCode; });
             Messenger.Default.Register<LoggerMessage>(this, LoggerMessageRecieved);
         }
 
+
+        private void LoggerMessageRecieved(LoggerMessage obj)
+        {
+
+            RunInUI.Run(() =>
+            {
+                lock (m_LockObj)
+                {
+                    var logEntry = obj.LogEntry;
+
+                    if (logEntry == null || !m_DataHashSet.Add(logEntry))
+                    {
+#if DEBUG
+                        if (System.Diagnostics.Debugger.IsAttached)
+                            System.Diagnostics.Debugger.Break();
+                        // oder logentry ist null -> der DataGrid von Xceed mag keine nulls
+                        // oder das selbe Objekt (logentry) wollte auf die Liste kommen -> DataGrid mag es auch nicht
+#endif
+                        return;
+                    }
+
+                    LogData.Add(logEntry);
+                }
+            });
+
+
+        }
 
         #endregion
 
@@ -135,18 +165,7 @@ namespace Ringen.ViewModel
         #endregion
 
         #region Message Handlers
-        private void ProcessExitCodeMessage(ExitCodeMessage obj)
-        {
-            Startup.ExitCode = obj.ExitCode;
-        }
 
-        private void LoggerMessageRecieved(LoggerMessage obj)
-        {
-            if (Dispatcher.CurrentDispatcher.CheckAccess())
-                LogData.Add(obj.LogEntry);
-            else
-                Application.Current.Dispatcher.BeginInvoke((Action)(() => { LogData.Add(obj.LogEntry); }));
-        }
         #endregion
 
 
@@ -186,7 +205,7 @@ namespace Ringen.ViewModel
                 return new RelayCommand<DocumentClosedEventArgs>(new Action<DocumentClosedEventArgs>((DocumentClosedEventArgs _tabItem) =>
                 {
                     //if (_tabItem?.Document.Content as IRingenTabItem != null)
-                        OpenedTabs.Remove((IRingenTabItem)((LayoutDocument)_tabItem?.Document).Content);
+                    OpenedTabs.Remove((IRingenTabItem)((LayoutDocument)_tabItem?.Document).Content);
 
                 }), true);
             }

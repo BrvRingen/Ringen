@@ -38,7 +38,7 @@ namespace Ringen.Core.CS
                 if (seasons == null)
                 {
                     seasons = new List<Season>();
-                    Helpers.Async.RunSync(async () =>
+                    Async.RunSync(async () =>
                     {
                         var AssetResponse = await REST.Client().GetAsync($"/BrvApi/v1/cs/");
 
