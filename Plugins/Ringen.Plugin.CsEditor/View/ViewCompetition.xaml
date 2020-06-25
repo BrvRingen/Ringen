@@ -25,6 +25,7 @@
             <RowDefinition MinHeight="80" />
             <RowDefinition Height="30" />
             <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" MinWidth="200"/>
@@ -66,5 +67,6 @@
         <TextBlock VerticalAlignment="Center" Grid.Row="10" Grid.Column="1" Text="{Binding Competition.Referee}"/>
 
         <Button Grid.Row="11" Grid.Column="1" Command="{Binding SendCompetitionToBrv}" Content="An BRV senden" />
+        <Button Grid.Row="12" Grid.Column="1" Command="{Binding CreateProtocol}" Content="Protokoll erstellen" />
     </Grid>
 </CoreUi:ExtendedNotifyPropertyChangedUserControl>

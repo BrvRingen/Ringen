@@ -29,6 +29,7 @@
     <Compile Include="Classes\BoutTime.xaml.cs">
       <DependentUpon>BoutTime.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Protocol.cs" />
     <Compile Include="Classes\WPFConverters.cs" />
     <Compile Include="RegisterPluginCsEditor.cs" />
     <Compile Include="Resources\LanguageFiles\_DictionaryToEnum.generated.cs">

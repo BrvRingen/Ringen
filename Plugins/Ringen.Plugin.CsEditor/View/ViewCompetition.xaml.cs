@@ -72,5 +72,10 @@ namespace Ringen.Plugin.CsEditor
             }
 
         }));
+
+        private RelayCommand m_CreateProtocol;
+        public RelayCommand CreateProtocol => m_CreateProtocol ?? (m_CreateProtocol = new RelayCommand(async () => {
+            await Protocol.OnCreateProtocolAsync(this.Competition);}));
+
     }
 }
