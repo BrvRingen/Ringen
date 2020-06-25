@@ -45,20 +45,7 @@ namespace Ringen.Plugin.CsEditor
 
         public void UpdateUi()
         {
-            if (Explorer.SelectedItem is Core.CS.Bout)
-            {
-                Bout = (Core.CS.Bout)Explorer.SelectedItem;
-
-                PosPointsHome.Children.Clear();
-                PosPointsOpponent.Children.Clear();
-                foreach (var PosPoint in Bout.Settings.PosPoints)
-                {
-                    PosPointsHome.Children.Add(new BoutPoint(new Core.CS.BoutPoint(PosPoint, Core.CS.BoutPoint.Wrestler.Home, 0)));
-                    PosPointsOpponent.Children.Add(new BoutPoint(new Core.CS.BoutPoint(PosPoint, Core.CS.BoutPoint.Wrestler.Opponent, 0)));
-                }
-            }
-            else
-                Bout = null;
+            Bout = Explorer.SelectedItem as Core.CS.Bout;
         }
 
 

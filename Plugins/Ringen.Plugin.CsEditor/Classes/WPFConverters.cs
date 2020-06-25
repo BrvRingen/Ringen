@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
+using static Ringen.Core.CS.BoutPoint;
 
 namespace Ringen.Plugin.CsEditor
 {
@@ -36,7 +37,7 @@ namespace Ringen.Plugin.CsEditor
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((string)value == "Home")
+            if ((Wrestler)value == Wrestler.Home)
                 return Brushes.Red;
             else
                 return Brushes.Blue;

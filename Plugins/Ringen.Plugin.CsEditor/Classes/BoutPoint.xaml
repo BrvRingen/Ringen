@@ -8,21 +8,23 @@
              mc:Ignorable="d"
              Height="150"
              Width="150"
-             DataContext="{Binding RelativeSource={RelativeSource Self}}"
              >
-    <UserControl.InputBindings>
+    <UserControl.Resources>
+        <local:TeamToBrushConverter x:Key="TeamToBrush" />
+    </UserControl.Resources>
+        <UserControl.InputBindings>
         <KeyBinding Key="F1" Command="{Binding CMHelp}" />
 
     </UserControl.InputBindings>
-    <Grid>
-        <Button Background="{Binding TeamToBrushConverter}">
+    <Grid DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+        <Button Background="{Binding Data.HomeOrOpponent, Converter={StaticResource TeamToBrush}}">
             <Button.Content>
                 <StackPanel HorizontalAlignment="Center">
-                <Label FontSize="80" Content="{Binding Data.Value}"></Label>
+                    <Label FontSize="80" Content="{Binding Data.Value}"></Label>
                     <Label FontSize="10" Content="ALT + test"></Label>
                 </StackPanel>
             </Button.Content>
-            
+
         </Button>
     </Grid>
 </UserControl>

@@ -21,19 +21,16 @@ namespace Ringen.Plugin.CsEditor
     /// </summary>
     public partial class BoutPoint : UserControl
     {
-        private Core.CS.BoutPoint data;
+        public static DependencyProperty DataProperty = DependencyProperty.Register(nameof(Data), typeof(Core.CS.BoutPoint), typeof(BoutPoint), new PropertyMetadata());
 
         public Core.CS.BoutPoint Data
         {
-            get { return data; }
-            set { data = value; }
+            get { return (Core.CS.BoutPoint)GetValue(DataProperty); }
+            set { SetValue(DataProperty, value); }
         }
 
-        public BoutPoint(Core.CS.BoutPoint BoutPoint)
+        public BoutPoint()
         {
-            Data = BoutPoint;
-            this.Background = Data.HomeOrOpponent == Core.CS.BoutPoint.Wrestler.Home ? Brushes.Red : Brushes.Blue;
-
             InitializeComponent();
         }
     }

@@ -49,8 +49,34 @@
                 <ColumnDefinition Width="10" />
                 <ColumnDefinition Width="50*" />
             </Grid.ColumnDefinitions>
-            <WrapPanel Grid.Column="0" x:Name="PosPointsHome" Orientation="Horizontal" />
-            <WrapPanel Grid.Column="2" x:Name="PosPointsOpponent" Orientation="Horizontal" />
+            <ItemsControl ItemsSource="{Binding Bout.Settings.PosPointsHome, Mode=OneWay}" Grid.Column="0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:BoutPoint Data="{Binding}"></local:BoutPoint>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <ItemsControl ItemsSource="{Binding Bout.Settings.PosPointsOpponent, Mode=OneWay}" Grid.Column="2">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:BoutPoint Data="{Binding}"></local:BoutPoint>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!--<WrapPanel Grid.Column="0" x:Name="PosPointsHome" Orientation="Horizontal" />-->
+            <!--<WrapPanel Grid.Column="2" x:Name="PosPointsOpponent" Orientation="Horizontal" />-->
         </Grid>
     </Grid>
 </CoreUi:ExtendedNotifyPropertyChangedUserControl>

@@ -111,13 +111,13 @@ namespace Ringen.Core.CS
 
     public class BoutPoint
     {
-        public Wrestler HomeOrOpponent { get; set; }
+        public Wrestler? HomeOrOpponent { get; set; }
         public string Value { get; set; }
-        public int Time { get; set; }
+        public int? Time { get; set; }
 
         public enum Wrestler { Home, Opponent };
 
-        public BoutPoint(string Point, Wrestler HomeOrOpponent, int Time)
+        public BoutPoint(string Point, Wrestler? HomeOrOpponent = null, int? Time = null)
         {
             this.HomeOrOpponent = HomeOrOpponent;
             this.Value = Point;
@@ -136,6 +136,32 @@ namespace Ringen.Core.CS
         {
             get { return posPoints; }
             set { posPoints = value; }
+        }
+        public List<BoutPoint> PosPointsHome
+        {
+            get
+            {
+                var tmp = new List<BoutPoint>();
+                foreach (var posPoint in posPoints)
+                {
+                    tmp.Add(new BoutPoint(posPoint, BoutPoint.Wrestler.Home));
+                }
+
+                return tmp;
+            }
+        }
+        public List<BoutPoint> PosPointsOpponent
+        {
+            get
+            {
+                var tmp = new List<BoutPoint>();
+                foreach (var posPoint in posPoints)
+                {
+                    tmp.Add(new BoutPoint(posPoint, BoutPoint.Wrestler.Opponent));
+                }
+
+                return tmp;
+            }
         }
 
         public Dictionary<string, BoutTime> times;
