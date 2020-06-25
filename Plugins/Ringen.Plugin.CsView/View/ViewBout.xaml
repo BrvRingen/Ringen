@@ -158,7 +158,21 @@
                 </Viewbox>
             </Border>
         </Grid>
+        <!-- Points -->
+        <ItemsControl Grid.Row="9" ItemsSource="{Binding Bout.Points}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <local:BoutPoint Data="{Binding}"></local:BoutPoint>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 
+        <!-- Break -->
         <Grid Grid.Row="7" Visibility="{Binding Bout.Settings.Times[Break].Mode, Converter={StaticResource TimeRunningToVisiblity}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40*"/>
@@ -172,6 +186,7 @@
             </Border>
         </Grid>
 
+        <!-- Insury -->
         <Grid Grid.Row="6" Grid.RowSpan="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50*"/>

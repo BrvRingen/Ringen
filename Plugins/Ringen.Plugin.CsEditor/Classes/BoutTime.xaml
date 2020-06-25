@@ -7,17 +7,17 @@
              mc:Ignorable="d">
     <Grid DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Margin="5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="150"/>
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Path=Title}"  FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Button Grid.Row="1" Grid.Column="0" Command="{Binding Start}" Width="150" Height="150">Start</Button>
-        <Button Grid.Row="1" Grid.Column="1" Command="{Binding Stop}" Width="150" Height="150">Stop</Button>
-        <TextBox Grid.Row="2" Grid.ColumnSpan="2" Margin="60,5,60,5" FontSize="30" Text="{Binding Path=Data.Time}" />
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Path=Title}"  FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Button Grid.Row="1" Grid.Column="0" Command="{Binding Start}" Width="120" Height="120">Start</Button>
+        <Button Grid.Row="1" Grid.Column="1" Command="{Binding Stop}" Width="120" Height="120">Stop</Button>
+        <TextBox Grid.Row="2" Grid.ColumnSpan="2" Margin="60,5,60,5" FontSize="20" Text="{Binding Path=Data.Time}" />
     </Grid>
 </UserControl>

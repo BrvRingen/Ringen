@@ -21,9 +21,9 @@ namespace Ringen.Plugin.CsEditor
     /// <summary>
     /// Interaktionslogik für Point.xaml
     /// </summary>
-    public partial class BoutPoint : UserControl
+    public partial class BoutPointButton : UserControl
     {
-        public static DependencyProperty DataProperty = DependencyProperty.Register(nameof(Data), typeof(Core.CS.BoutPoint), typeof(BoutPoint), new PropertyMetadata());
+        public static DependencyProperty DataProperty = DependencyProperty.Register(nameof(Data), typeof(Core.CS.BoutPoint), typeof(BoutPointButton), new PropertyMetadata());
 
         public Core.CS.BoutPoint Data
         {
@@ -31,17 +31,17 @@ namespace Ringen.Plugin.CsEditor
             set { SetValue(DataProperty, value); }
         }
 
-        public BoutPoint()
+        public BoutPointButton()
         {
             InitializeComponent();
         }
 
 
-        private RelayCommand m_Delete;
-        public RelayCommand Delete => m_Delete ?? (m_Delete = new RelayCommand(() =>
+        private RelayCommand m_AddToPoints;
+        public RelayCommand AddToPoints => m_AddToPoints ?? (m_AddToPoints = new RelayCommand(() =>
         {
-            Data.Bout.Points.Remove(Data);
-            LoggerMessage.Send(new LogEntry(LogEntryType.Message, "Point deleted to Points"));
+            Data.Bout.Points.Add(new Core.CS.BoutPoint(Data.Value, Data.Bout, Data.HomeOrOpponent));
+            LoggerMessage.Send(new LogEntry(LogEntryType.Message, "Point added to Points"));
         }
         ));
 

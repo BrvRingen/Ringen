@@ -19,14 +19,14 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="20" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+
+        <!-- Headline -->
         <TextBlock Grid.Row="0" Background="AliceBlue" TextAlignment="Center" Text="{Binding Bout.Value}"/>
 
-        <!--<WrapPanel Grid.Row="2" Grid.Column="0">
-            <TextBlock Text="{Binding Path=Bout.Settings.Times[Bout].Time}" />
-            <Button Command="{Binding Start}" CommandParameter="Bout" Width="150" Height="150">Start</Button>
-            <Button Command="{Binding Stop}"  CommandParameter="Bout" Width="150" Height="150">Stop</Button>
-        </WrapPanel>-->
+        <!-- Times-->
         <Grid  Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -37,19 +37,15 @@
             <local:BoutTime Data="{Binding Bout.Settings.Times[Bout]}" Title="Kampf" Grid.Column="1" HorizontalAlignment="Center"/>
             <local:BoutTime Data="{Binding Bout.Settings.Times[OpponentInjury]}" Title="Verletzungszeit Gast" Grid.Column="2" HorizontalAlignment="Center"/>
         </Grid>
-        <!--<WrapPanel Grid.Row="2" Grid.Column="2">
-            <TextBlock Text="{Binding Path=Bout.Settings.Times[HomeInjury].Time}" />
-            <Button Command="{Binding Start}" CommandParameter="HomeInjury" Width="150" Height="150">Start</Button>
-            <Button Command="{Binding Stop}"  CommandParameter="HomeInjury" Width="150" Height="150">Stop</Button>
-        </WrapPanel>-->
 
+        <!-- PosPoints -->
         <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50*" />
                 <ColumnDefinition Width="10" />
                 <ColumnDefinition Width="50*" />
             </Grid.ColumnDefinitions>
-            <ItemsControl ItemsSource="{Binding Bout.Settings.PosPointsHome, Mode=OneWay}" Grid.Column="0">
+            <ItemsControl ItemsSource="{Binding Bout.Settings.PosPointsHome}" Grid.Column="0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel />
@@ -57,12 +53,12 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <local:BoutPoint Data="{Binding}"></local:BoutPoint>
+                        <local:BoutPointButton Data="{Binding}"></local:BoutPointButton>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-            <ItemsControl ItemsSource="{Binding Bout.Settings.PosPointsOpponent, Mode=OneWay}" Grid.Column="2">
+            <ItemsControl ItemsSource="{Binding Bout.Settings.PosPointsOpponent}" Grid.Column="2">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel />
@@ -70,13 +66,25 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <local:BoutPoint Data="{Binding}"></local:BoutPoint>
+                        <local:BoutPointButton Data="{Binding}"></local:BoutPointButton>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-
-            <!--<WrapPanel Grid.Column="0" x:Name="PosPointsHome" Orientation="Horizontal" />-->
-            <!--<WrapPanel Grid.Column="2" x:Name="PosPointsOpponent" Orientation="Horizontal" />-->
         </Grid>
+
+        <!-- Points -->
+        <ItemsControl Grid.Row="6" ItemsSource="{Binding Bout.Points}" Grid.Column="0">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <local:BoutPoint Data="{Binding}"></local:BoutPoint>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
     </Grid>
 </CoreUi:ExtendedNotifyPropertyChangedUserControl>

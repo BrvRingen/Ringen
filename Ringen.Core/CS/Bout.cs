@@ -3,6 +3,7 @@ using Ringen.Core.UI;
 using System.Collections.Generic;
 using System.Timers;
 using Ringen.Core.Messaging;
+using System.Collections.ObjectModel;
 
 namespace Ringen.Core.CS
 {
@@ -76,13 +77,13 @@ namespace Ringen.Core.CS
 
 
 
-        private List<BoutPoint> points;
+        private ObservableCollection<BoutPoint> points;
 
-        public List<BoutPoint> Points
+        public ObservableCollection<BoutPoint> Points
         {
             get
             {
-                if (points == null) points = new List<BoutPoint>();
+                if (points == null) points = new ObservableCollection<BoutPoint>();
                 return points;
             }
             set { points = value; }
@@ -111,22 +112,25 @@ namespace Ringen.Core.CS
 
     public class BoutPoint
     {
+        public Bout Bout { get; set; }
         public Wrestler? HomeOrOpponent { get; set; }
         public string Value { get; set; }
         public int? Time { get; set; }
 
         public enum Wrestler { Home, Opponent };
 
-        public BoutPoint(string Point, Wrestler? HomeOrOpponent = null, int? Time = null)
+        public BoutPoint(string Value, Bout Bout, Wrestler? HomeOrOpponent = null)
         {
+            this.Bout = Bout;
             this.HomeOrOpponent = HomeOrOpponent;
-            this.Value = Point;
-            this.Time = Time;
+            this.Value = Value;
+            Time = Bout.Settings.Times[BoutTime.Types.Bout.ToString()].Time;
         }
     }
 
     public class BoutSettings
     {
+        public Bout Bout { get; set; }
         public enum WrestleStyles { LL, GR }
         public enum Results { TÜ, SS, PS, KL }
 
@@ -144,7 +148,7 @@ namespace Ringen.Core.CS
                 var tmp = new List<BoutPoint>();
                 foreach (var posPoint in posPoints)
                 {
-                    tmp.Add(new BoutPoint(posPoint, BoutPoint.Wrestler.Home));
+                    tmp.Add(new BoutPoint(posPoint, Bout, BoutPoint.Wrestler.Home));
                 }
 
                 return tmp;
@@ -157,7 +161,7 @@ namespace Ringen.Core.CS
                 var tmp = new List<BoutPoint>();
                 foreach (var posPoint in posPoints)
                 {
-                    tmp.Add(new BoutPoint(posPoint, BoutPoint.Wrestler.Opponent));
+                    tmp.Add(new BoutPoint(posPoint, Bout, BoutPoint.Wrestler.Opponent));
                 }
 
                 return tmp;
@@ -189,6 +193,7 @@ namespace Ringen.Core.CS
 
         public BoutSettings(Bout Bout)
         {
+            this.Bout = Bout;
             //Aktuelle Regeln nach 2017
             if (Bout.WrestleStyle == WrestleStyles.LL)
                 posPoints = new List<string>() { "1", "2", "4", "5", "P", "0", "VZ", "A" };

@@ -16,7 +16,7 @@ using GalaSoft.MvvmLight.Command;
 using Ringen.Core;
 using Ringen.Core.Messaging;
 
-namespace Ringen.Plugin.CsEditor
+namespace Ringen.Plugin.CsView
 {
     /// <summary>
     /// Interaktionslogik für Point.xaml
@@ -35,15 +35,6 @@ namespace Ringen.Plugin.CsEditor
         {
             InitializeComponent();
         }
-
-
-        private RelayCommand m_Delete;
-        public RelayCommand Delete => m_Delete ?? (m_Delete = new RelayCommand(() =>
-        {
-            Data.Bout.Points.Remove(Data);
-            LoggerMessage.Send(new LogEntry(LogEntryType.Message, "Point deleted to Points"));
-        }
-        ));
 
     }
 }
