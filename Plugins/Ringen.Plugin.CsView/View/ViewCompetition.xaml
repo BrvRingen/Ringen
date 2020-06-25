@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             xmlns:local="clr-namespace:Ringen.Plugin.CsView"
+             xmlns:local="clr-namespace:Ringen.Plugin.CsView"                                               
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              DataContext="{Binding RelativeSource={RelativeSource Self}}">
@@ -33,7 +33,7 @@
             <Viewbox StretchDirection="Both"  Grid.Column="1">
                 <TextBlock Text="{Binding Table.Value}" />
             </Viewbox>
-            <Border Background="Blue"   Grid.Column="2">
+            <Border Background="LightSkyBlue"   Grid.Column="2">
                 <Viewbox StretchDirection="Both">
                     <TextBlock Text="{Binding Competition.OpponentPoints}" />
                 </Viewbox>
@@ -49,19 +49,51 @@
                     <TextBlock Text="{Binding Competition.HomeTeamName}" />
                 </Viewbox>
             </Border>
-            <Border Background="Blue"   Grid.Column="1">
+            <Border Background="LightSkyBlue"   Grid.Column="1">
                 <Viewbox StretchDirection="Both">
                     <TextBlock Text="{Binding Competition.OpponentTeamName}" />
                 </Viewbox>
             </Border>
         </Grid>
-        <DataGrid  Grid.Row="3" ItemsSource="{Binding Competition.Children}" AutoGenerateColumns="False" HeadersVisibility="None" RowHeight="100">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding HomeWrestlerFullnname}" Width="40*" />
-                <DataGridTextColumn Binding="{Binding HomeWrestlerPoints}" Width="10*" />
-                <DataGridTextColumn Binding="{Binding OpponentWrestlerPoints}" Width="10*"/>
-                <DataGridTextColumn Binding="{Binding OpponentWrestlerFullnname}" Width="40*"/>
-            </DataGrid.Columns>
-        </DataGrid>
+
+        <ItemsControl ItemsSource="{Binding Competition.Children}"  Grid.Row="3" Margin="0">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="1"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="45*"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="45*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Background="Red"   Grid.Column="0">
+                            <Viewbox StretchDirection="Both">
+                                <TextBlock Text="{Binding HomeWrestlerFullnname}" />
+                            </Viewbox>
+                        </Border>
+                        <Border Background="Red"   Grid.Column="1">
+                            <Viewbox StretchDirection="Both">
+                                <TextBlock Text="{Binding HomeWrestlerPoints}" />
+                            </Viewbox>
+                        </Border>
+                        <Border Background="LightSkyBlue"   Grid.Column="2">
+                            <Viewbox StretchDirection="Both">
+                                <TextBlock Text="{Binding OpponentWrestlerPoints}" />
+                            </Viewbox>
+                        </Border>
+                        <Border Background="LightSkyBlue"   Grid.Column="3">
+                            <Viewbox StretchDirection="Both">
+                                <TextBlock Text="{Binding OpponentWrestlerFullnname}" />
+                            </Viewbox>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </CoreUi:ExtendedNotifyPropertyChangedUserControl>

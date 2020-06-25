@@ -13,7 +13,7 @@
         <local:IntToTimeConverter x:Key="IntToTimeConverter"/>
         <local:TimeRunningToVisiblityConverter x:Key="TimeRunningToVisiblity" />
     </CoreUi:ExtendedNotifyPropertyChangedUserControl.Resources>
-    <Grid Visibility="{Binding Bout, Converter={StaticResource NullToVisiblity}}">
+    <Grid Visibility="{Binding Bout, Converter={StaticResource NullToVisiblity}}" >
         <Grid.RowDefinitions>
             <RowDefinition Height="10*" />
             <RowDefinition Height="8*" />

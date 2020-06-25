@@ -8,12 +8,11 @@
     xmlns:TabItem="clr-namespace:Ringen.Core.UI;assembly=Ringen.Core"
     mc:Ignorable="d"
     d:DesignHeight="1000"
-    d:DesignWidth="1600"
-    Margin="10">
-    <DockPanel Margin="2">
+    d:DesignWidth="1600">
+    <DockPanel>
         <!--Competition-->
-        <local:ViewCompetition/>
+        <local:ViewCompetition DockPanel.Dock="Bottom"/>
         <!--Bout-->
-        <local:ViewBout/>
+        <local:ViewBout />
     </DockPanel>
 </TabItem:RingenTabItem>
