@@ -189,7 +189,7 @@ namespace Ringen.Core.CS
                     bouts = new List<Bout>();
                     Async.RunSync(async () =>
                     {
-                        var AssetResponse = await REST.Client().GetAsync($"/BrvApi/v1/cs/?saisonId={SaisonId}&competitionId={CompetitionId}");
+                        var AssetResponse = await REST.Client().GetAsync($"/Api/v1/cs/?saisonId={SaisonId}&competitionId={CompetitionId}");
 
                         if (AssetResponse.IsSuccessStatusCode)
                         {
@@ -200,6 +200,69 @@ namespace Ringen.Core.CS
                             }
                         }
                     });
+                    if (bouts.Count() == 0)
+                    {
+                        var BoutsForCompetition = new List<(string WeightClass, string Style)>();
+
+                        if (Table.Value.Contains("(S)"))
+                        {
+                            BoutsForCompetition.Add(("29", "LL"));
+                            BoutsForCompetition.Add(("33", "GR"));
+                            BoutsForCompetition.Add(("36", "LL"));
+                            BoutsForCompetition.Add(("41", "GR"));
+                            BoutsForCompetition.Add(("46", "LL"));
+                            BoutsForCompetition.Add(("50", "GR"));
+                            BoutsForCompetition.Add(("60", "LL"));
+                            BoutsForCompetition.Add(("76", "GR"));
+
+                            BoutsForCompetition.Add(("29", "GR"));
+                            BoutsForCompetition.Add(("33", "LL"));
+                            BoutsForCompetition.Add(("36", "GR"));
+                            BoutsForCompetition.Add(("41", "LL"));
+                            BoutsForCompetition.Add(("46", "GR"));
+                            BoutsForCompetition.Add(("50", "LL"));
+                            BoutsForCompetition.Add(("60", "GR"));
+                            BoutsForCompetition.Add(("76", "LL"));
+                        }
+                        else if (Table.Value.Contains("Landesliga"))
+                        {
+                            BoutsForCompetition.Add(("57", "LL"));
+                            BoutsForCompetition.Add(("61", "GR"));
+                            BoutsForCompetition.Add(("66", "LL"));
+                            BoutsForCompetition.Add(("75", "GR"));
+                            BoutsForCompetition.Add(("86", "LL"));
+                            BoutsForCompetition.Add(("98", "GR"));
+                            BoutsForCompetition.Add(("130", "LL"));
+
+                            BoutsForCompetition.Add(("57", "GR"));
+                            BoutsForCompetition.Add(("61", "LL"));
+                            BoutsForCompetition.Add(("66", "GR"));
+                            BoutsForCompetition.Add(("75", "LL"));
+                            BoutsForCompetition.Add(("86", "GR"));
+                            BoutsForCompetition.Add(("98", "LL"));
+                            BoutsForCompetition.Add(("130", "GR"));
+                        }
+                        else
+                        {
+                            BoutsForCompetition.Add(("57", "LL"));
+                            BoutsForCompetition.Add(("61", "GR"));
+                            BoutsForCompetition.Add(("66", "LL"));
+                            BoutsForCompetition.Add(("71", "GR"));
+                            BoutsForCompetition.Add(("75 A", "LL"));
+                            BoutsForCompetition.Add(("75 B", "GR"));
+                            BoutsForCompetition.Add(("80", "LL"));
+                            BoutsForCompetition.Add(("86", "GR"));
+                            BoutsForCompetition.Add(("98", "LL"));
+                            BoutsForCompetition.Add(("130", "GR"));
+                        }
+
+                        var i = 1;
+                        foreach (var BoutForCompetition in BoutsForCompetition)
+                        {
+                            bouts.Add(new Bout(i++, BoutForCompetition.WeightClass, BoutForCompetition.Style, this));
+                        }
+                    }
+
                 }
 
                 return bouts;
@@ -211,7 +274,7 @@ namespace Ringen.Core.CS
         {
             var sUpdate = JsonConvert.SerializeObject(Data);
 
-            var UpdateResponse = await REST.Client().PutAsync($"/BrvApi/v1/cs/?saisonId={SaisonId}&competitionId={CompetitionId}", new StringContent(sUpdate, Encoding.UTF8, "application/json"));
+            var UpdateResponse = await REST.Client().PutAsync($"/Api/v1/cs/?saisonId={SaisonId}&competitionId={CompetitionId}", new StringContent(sUpdate, Encoding.UTF8, "application/json"));
 
             if (UpdateResponse.IsSuccessStatusCode)
             {

@@ -48,7 +48,7 @@ namespace Ringen.Core.CS
                     tables = new List<Table>();
                     Async.RunSync(async () =>
                     {
-                        var AssetResponse = await REST.Client().GetAsync($"/BrvApi/v1/cs/?saisonId={SaisonId}");
+                        var AssetResponse = await REST.Client().GetAsync($"/Api/v1/cs/?saisonId={SaisonId}");
 
                         if (AssetResponse.IsSuccessStatusCode)
                         {

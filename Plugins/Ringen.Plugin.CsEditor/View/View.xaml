@@ -12,12 +12,13 @@
     HorizontalContentAlignment="Left"
     VerticalContentAlignment="Top"
     d:DesignHeight="1000"
-    d:DesignWidth="1600"
-    Margin="10">
-    <StackPanel Orientation="Vertical">
-        <!--Competition-->
-        <local:ViewCompetition/>
-        <!--Bout-->
-        <local:ViewBout/>
-    </StackPanel>
+    d:DesignWidth="1600">
+    <ScrollViewer VerticalScrollBarVisibility="Visible">
+        <StackPanel Orientation="Vertical">
+            <!--Competition-->
+            <local:ViewCompetition/>
+            <!--Bout-->
+            <local:ViewBout/>
+        </StackPanel>
+    </ScrollViewer>
 </TabItem:RingenTabItem>

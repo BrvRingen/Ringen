@@ -25,7 +25,7 @@ namespace Ringen.Core.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://www.SpVgg-Freising.de")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.brv-ringen.de")]
         public string RestServer {
             get {
                 return ((string)(this["RestServer"]));

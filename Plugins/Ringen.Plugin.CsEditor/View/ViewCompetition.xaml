@@ -11,7 +11,7 @@
     <CoreUi:ExtendedNotifyPropertyChangedUserControl.Resources>
         <local:NullToVisiblityConverter x:Key="NullToVisiblity" />
     </CoreUi:ExtendedNotifyPropertyChangedUserControl.Resources>
-    <Grid Visibility="{Binding Competition, Converter={StaticResource NullToVisiblity}}">
+    <Grid Visibility="{Binding Competition, Converter={StaticResource NullToVisiblity}}" Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
             <RowDefinition Height="30" />
@@ -26,11 +26,12 @@
             <RowDefinition Height="30" />
             <RowDefinition Height="30" />
             <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" MinWidth="200"/>
             <ColumnDefinition Width="Auto"  MinWidth="600"/>
-            <ColumnDefinition Width="*" MinWidth="100" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="3" Background="AliceBlue" Text="{local:Translate Competition}"/>
 
@@ -68,5 +69,20 @@
 
         <Button Grid.Row="11" Grid.Column="1" Command="{Binding SendCompetitionToBrv}" Content="An BRV senden" />
         <Button Grid.Row="12" Grid.Column="1" Command="{Binding CreateProtocol}" Content="Protokoll erstellen" />
+        
+        <DataGrid  Grid.Row="13" Grid.ColumnSpan="3" ItemsSource="{Binding Competition.Children}" AutoGenerateColumns="False" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Klasse" Binding="{Binding WeightClass, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Stilart" Binding="{Binding WrestleStyle}"  IsReadOnly="True"/>
+                <DataGridTextColumn Header="Pass" Binding="{Binding HomeWrestlerId, UpdateSourceTrigger=Explicit}" />
+                <DataGridTextColumn Binding="{Binding HomeWrestlerName}" />
+                <DataGridTextColumn Binding="{Binding HomeWrestlerGivenname}" />
+                <DataGridTextColumn Binding="{Binding HomeWrestlerStatus}" />
+                <DataGridTextColumn Binding="{Binding OpponentWrestlerId, UpdateSourceTrigger=Explicit}" />
+                <DataGridTextColumn Binding="{Binding OpponentWrestlerName}" />
+                <DataGridTextColumn Binding="{Binding OpponentWrestlerGivenname}" />
+                <DataGridTextColumn Binding="{Binding OpponentWrestlerStatus}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </CoreUi:ExtendedNotifyPropertyChangedUserControl>

@@ -40,7 +40,7 @@ namespace Ringen.Core.CS
                     seasons = new List<Season>();
                     Async.RunSync(async () =>
                     {
-                        var AssetResponse = await REST.Client().GetAsync($"/BrvApi/v1/cs/");
+                        var AssetResponse = await REST.Client().GetAsync($"/Api/v1/cs/");
 
                         if (AssetResponse.IsSuccessStatusCode)
                         {

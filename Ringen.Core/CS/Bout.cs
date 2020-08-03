@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using System.Timers;
 using Ringen.Core.Messaging;
 using System.Collections.ObjectModel;
+using Newtonsoft.Json;
+using System.Reflection;
+using System.Collections;
+using System;
+using System.IO;
 
 namespace Ringen.Core.CS
 {
@@ -11,7 +16,7 @@ namespace Ringen.Core.CS
     {
         #region properties
 
-        private readonly JObject Data;
+        private JObject Data;
         public IExplorerItem ExplorerParent { get; }
 
         public string Value
@@ -52,28 +57,65 @@ namespace Ringen.Core.CS
         public int Order { get { return Get<int>(Data["order"]); } }
         public string WeightClass { get { return Get<string>(Data["weightClass"]); } }
         public BoutSettings.WrestleStyles WrestleStyle { get { return Get<BoutSettings.WrestleStyles>(Data["style"]); } }
-        public int HomeWrestlerId { get { return Get<int>(Data["homeWrestlerId"]); } }
+        public int HomeWrestlerId
+        {
+            get
+            {
+                return Get<int>(Data["homeWrestlerId"]);
+            }
+            set
+            {
+                Set(ref Data, "homeWrestlerId", value);
+
+                Async.RunSync(async () =>
+                {
+                    var AssetResponse = await REST.Client().GetAsync($"/Api/v1/cs/?startausweisNr={value.ToString()}&saisonId={Competition.SaisonId}&competitionId={Competition.CompetitionId}");
+
+                    if (AssetResponse.IsSuccessStatusCode)
+                    {
+                        var Wrestler = (JObject)JsonConvert.DeserializeObject(AssetResponse.Content.ReadAsStringAsync().Result);
+                        HomeWrestlerName = Wrestler["name"].ToString();
+                        HomeWrestlerGivenname = Wrestler["givenname"].ToString();
+                        HomeWrestlerStatus = Wrestler["status"].ToString();
+                        //birthday
+                    }
+
+                });
+            }
+        }
         public int HomeWrestlerLicId { get { return Get<int>(Data["homeWrestlerLicId"]); } }
-        public string HomeWrestlerName { get { return Get<string>(Data["homeWrestlerName"]); } }
-        public string HomeWrestlerGivenname { get { return Get<string>(Data["homeWrestlerGivenname"]); } }
+        public string HomeWrestlerName {
+            get { return Get<string>(Data["homeWrestlerName"]); }
+            set { Set(ref Data, "homeWrestlerName", value); base.OnPropertyChanged("Value"); base.OnPropertyChanged("HomeWrestlerFullnname"); }
+        }
+        public string HomeWrestlerGivenname
+        {
+            get { return Get<string>(Data["homeWrestlerGivenname"]); }
+            set { Set(ref Data, "homeWrestlerGivenname", value); base.OnPropertyChanged("Value"); base.OnPropertyChanged("HomeWrestlerFullnname"); }
+        }
+        public string HomeWrestlerStatus
+        {
+            get { return Get<string>(Data["homeWrestlerStatus"]); }
+            set { Set(ref Data, "homeWrestlerStatus", value); }
+        }
         public string HomeWrestlerFullnname { get { return $"{Get<string>(Data["homeWrestlerGivenname"])} {Get<string>(Data["homeWrestlerName"])}"; } }
+        public int HomeWrestlerPoints { get { return Get<int>(Data["homeWrestlerPoints"]); } }
+        public int HomeWrestlerFlags { get { return Get<int>(Data["homeWrestlerFlags"]); } }
+
         public int OpponentWrestlerId { get { return Get<int>(Data["opponenteWrestlerId"]); } }
         public int OpponentWrestlerLicId { get { return Get<int>(Data["opponentWrestlerLicId"]); } }
         public string OpponentWrestlerName { get { return Get<string>(Data["opponentWrestlerName"]); } }
         public string OpponentWrestlerGivenname { get { return Get<string>(Data["opponentWrestlerGivenname"]); } }
         public string OpponentWrestlerFullnname { get { return $"{Get<string>(Data["opponentWrestlerGivenname"])} {Get<string>(Data["opponentWrestlerName"])}"; } }
-        public int HomeWrestlerPoints { get { return Get<int>(Data["homeWrestlerPoints"]); } }
-        public int HomeWrestlerFlags { get { return Get<int>(Data["homeWrestlerFlags"]); } }
         public int OpponentWrestlerPoints { get { return Get<int>(Data["opponentWrestlerPoints"]); } }
         public int OpponentWrestlerFlags { get { return Get<int>(Data["opponentWrestlerFlags"]); } }
+        public string OpponentWrestlerStatus { get { return Get<string>(Data["opponentWrestlerStatus"]); } }
         public BoutSettings.Results Result { get { return Get<BoutSettings.Results>(Data["result"]); } }
         public string Round1 { get { return Get<string>(Data["round1"]); } }
         public string Round2 { get { return Get<string>(Data["round2"]); } }
         public string Round3 { get { return Get<string>(Data["round3"]); } }
         public string Round4 { get { return Get<string>(Data["round4"]); } }
         public string Round5 { get { return Get<string>(Data["round5"]); } }
-        public string HomeWrestlerStatus { get { return Get<string>(Data["homeWrestlerStatus"]); } }
-        public string OpponentWrestlerStatus { get { return Get<string>(Data["opponentWrestlerStatus"]); } }
 
 
 
@@ -99,6 +141,49 @@ namespace Ringen.Core.CS
             this.Data = Data;
             this.ExplorerParent = Parent;
         }
+
+        public Bout(int Order, string WeightClass, string Style, IExplorerItem Parent)
+        {
+            this.Data = (JObject)DefaultBout.DeepClone();
+            Data["order"] = Order;
+            Data["weightClass"] = WeightClass;
+            Data["style"] = Style;
+            this.ExplorerParent = Parent;
+        }
+
+        #endregion
+
+        #region internal functionas
+
+        private JObject defaultBout;
+        private JObject DefaultBout
+        {
+            get
+            {
+                if (defaultBout == null)
+                {
+                    var myAssembly = Assembly.GetExecutingAssembly();
+                    System.IO.Stream tempStream = myAssembly.GetManifestResourceStream(myAssembly.GetName().Name + ".g.resources");
+                    System.Resources.ResourceReader tempReader = new System.Resources.ResourceReader(tempStream);
+
+                    foreach (DictionaryEntry resource in tempReader)
+                    {
+                        if (resource.Key.ToString().Contains(@"cs/defaultbout.json"))
+                        {
+                            var tempPath = new Uri("/" + myAssembly.GetName().Name + ";component/" + resource.Key.ToString(), UriKind.Relative);
+
+                            using (var sr = new StreamReader(System.Windows.Application.GetResourceStream(tempPath).Stream))
+                            {
+                                defaultBout = JObject.Parse(sr.ReadToEnd());
+                            }
+                            break;
+                        }
+                    }
+                }
+                return defaultBout;
+            }
+        }
+
 
         #endregion
 
