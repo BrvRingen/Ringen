@@ -1,0 +1,108 @@
+﻿<UserControl x:Class="Ringen.View.HomeWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ringen"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
+             xmlns:cmd="http://www.galasoft.ch/mvvmlight"
+             xmlns:CoreAvalonDock="clr-namespace:Ringen.Core.UI.AvalonDock;assembly=Ringen.Core" 
+             xmlns:ad="https://github.com/Dirkster99/AvalonDock"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Ringen;component/View/HomeWindowDocumentHeaderTemplate.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Ringen;component/View/HomeWindowDocumentTitleTemplate.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Ringen;component/Styles/Styles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Ringen;component/View/Explorer.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <FrameworkElement x:Key="ProxyElement" DataContext="{Binding MainViewModel, Source={StaticResource Locator}}" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <!--<RowDefinition Height="Auto" />-->
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <!--  Main Window  -->
+        <ad:DockingManager
+            Grid.Column="1"
+            Grid.Row="0"
+            ActiveContent="{Binding DataContext.TabControlSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+            AllowMixedOrientation="True"
+            BorderBrush="Black"
+            BorderThickness="1"
+            DocumentsSource="{Binding OpenedTabs}">
+
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="DocumentClosed">
+                    <cmd:EventToCommand Command="{Binding DataContext.CmTabControlTabClosing, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" PassEventArgsToCommand="True" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
+            <ad:DockingManager.DocumentHeaderTemplate>
+                <StaticResource ResourceKey="HomeWindowDocumentHeaderTemplate" />
+            </ad:DockingManager.DocumentHeaderTemplate>
+
+            <ad:DockingManager.DocumentTitleTemplate>
+                <StaticResource ResourceKey="HomeWindowDocumentTitleTemplate" />
+            </ad:DockingManager.DocumentTitleTemplate>
+
+            <ad:LayoutRoot x:Name="_layoutRoot">
+
+                <ad:LayoutPanel Orientation="Vertical">
+                    <ad:LayoutPanel Orientation="Horizontal">
+
+                        <ad:LayoutAnchorablePane DockWidth="400">
+                            <ad:LayoutAnchorable
+                                x:Name="layoutNavigationHardware"
+                                Title="Explorer"
+                                AutoHideWidth="400"
+                                CanHide="False"
+                                ContentId="main_treeview">
+                                <StaticResource ResourceKey="Explorer" />
+                            </ad:LayoutAnchorable>
+                        </ad:LayoutAnchorablePane>
+
+                        <ad:LayoutDocumentPaneGroup>
+                            <!--<ad:LayoutDocumentPane>
+                                <ad:LayoutDocument ContentId="document1" Title="Document 1" CanClose="False">
+                                    <Button Content="Document 1 Content" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </ad:LayoutDocument>
+                            </ad:LayoutDocumentPane>-->
+                            <CoreAvalonDock:LayoutDocumentPaneExtended CollectionChangedCommand="{Binding DataContext.CMAvalonDockDocumentsCollectionChanged, Source={StaticResource ProxyElement}}"/>
+                        </ad:LayoutDocumentPaneGroup>
+
+
+                    </ad:LayoutPanel>
+
+                    <ad:LayoutAnchorablePane DockHeight="150">
+                        <ad:LayoutAnchorable
+                                x:Name="logger"
+                                Title="Logger"
+                                AutoHideWidth="250"
+                                CanHide="True"
+                                ContentId="main_treeview">
+                            <DataGrid ItemsSource="{Binding LogData}"></DataGrid>
+                            <!--<StaticResource ResourceKey="Main_TreeView" />-->
+                        </ad:LayoutAnchorable>
+                    </ad:LayoutAnchorablePane>
+
+                </ad:LayoutPanel>
+            </ad:LayoutRoot>
+
+        </ad:DockingManager>
+    </Grid>
+</UserControl>

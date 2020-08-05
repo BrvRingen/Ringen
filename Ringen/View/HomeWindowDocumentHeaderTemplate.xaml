@@ -10,7 +10,7 @@
         Color="Green" />
 
 
-    <DataTemplate x:Key="MainWindowDocumentHeaderTemplate">
+    <DataTemplate x:Key="HomeWindowDocumentHeaderTemplate">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="180" />

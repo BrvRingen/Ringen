@@ -17,5 +17,12 @@ namespace Ringen.View
         {
             Core.Services.Service.Plugin.OnHostLoaded();
         }
+
+        private void HamburgerMenuControl_OnItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.HamburgerMenuControl.Content = e.ClickedItem;
+            this.HamburgerMenuControl.IsPaneOpen = false;
+        }
+
     }
 }

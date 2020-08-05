@@ -6,7 +6,7 @@
     xmlns:wpf="clr-namespace:TheArtOfDev.HtmlRenderer.WPF;assembly=HtmlRenderer.WPF"
     xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock">
 
-    <DataTemplate x:Key="MainWindowDocumentTitleTemplate">
+    <DataTemplate x:Key="HomeWindowDocumentTitleTemplate">
         <TextBlock
             Grid.Column="0"
             VerticalAlignment="Center"
