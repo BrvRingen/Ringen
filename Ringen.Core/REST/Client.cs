@@ -14,23 +14,20 @@ namespace Ringen.Core
         private static string tmpUsername;
         private static string tmpPassword;
 
-        public static HttpClient Client(string Username = "", string Password = "")
+        public static HttpClient Client()
         {
-            if(!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
+            var Username = Services.Service.Login.UserName;
+            var Password = PasswordHelper.ToInsecureString(Services.Service.Login.Password);
+
+            if (tmpUsername != Username || tmpPassword != Password)
             {
-                if (tmpUsername != Username || tmpPassword != Password)
-                {
-                    client = null;
-                    tmpUsername = Username;
-                    tmpPassword = Password;
-                }
+                client = null;
+                tmpUsername = Username;
+                tmpPassword = Password;
             }
 
             if (client == null)
             {
-                Username = "test";
-                Password = "test";
-
                 client = new HttpClient();
                 client.BaseAddress = new Uri(Properties.Settings.Default.RestServer);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes(string.Format("{0}:{1}", Username, Password))));

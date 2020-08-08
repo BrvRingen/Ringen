@@ -6,13 +6,9 @@ namespace Ringen.Core.Services
     public static class Service
     {
         #region properties
-        //public static IFrameNavigationService FrameNavigation => ServiceBasic.GetService<IFrameNavigationService>();
-        //public static ITranslationService Translation => ServiceBasic.GetService<ITranslationService>();
-        //public static IDialogService Dialog => ServiceBasic.GetService<IDialogService>();
-        //public static ILoggerService Logger => ServiceBasic.GetService<ILoggerService>();
-        //public static IConsoleService Console => ServiceBasic.GetService<IConsoleService>();
         public static IPluginService Plugin => ServiceBasic.GetService<IPluginService>();
         public static IRingenService Ringen => ServiceBasic.GetService<IRingenService>();
+        public static ILoginService Login => ServiceBasic.GetService<ILoginService>();
 
         private static bool? m_IsInDesignMode;
         public static bool IsInDesignMode
@@ -71,12 +67,8 @@ namespace Ringen.Core.Services
             if (IsInDesignMode || IsInUnitTestMode)
                 return;
 
-            //ServiceBasic.Register(typeof(IFrameNavigationService), typeof(FrameNavigationService));
-            //ServiceBasic.Register(typeof(ILoggerService), typeof(LoggerService));
-            //ServiceBasic.Register(typeof(IConsoleService), typeof(ConsoleService));
             ServiceBasic.Register(typeof(IPluginService), typeof(PluginService));
-            //ServiceBasic.Register(typeof(IWcfServer), typeof(Wcf.WcfServer));
-            //ServiceBasic.Register(typeof(IRunInUIService), typeof(RunInUIService));
+            ServiceBasic.Register(typeof(ILoginService), typeof(LoginService));
         }
         #endregion constructors
 

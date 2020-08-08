@@ -132,23 +132,23 @@
                 <Controls:HamburgerMenuItemCollection>
                     <Controls:HamburgerMenuGlyphItem Glyph=""
                                                      Label="Login">
-                        <!--<Controls:HamburgerMenuGlyphItem.Tag>
-                            <views:PrivateView />
-                        </Controls:HamburgerMenuGlyphItem.Tag>-->
+                        <Controls:HamburgerMenuGlyphItem.Tag>
+                            <View:LoginWindow />
+                        </Controls:HamburgerMenuGlyphItem.Tag>
                     </Controls:HamburgerMenuGlyphItem>
 
                     <Controls:HamburgerMenuGlyphItem Glyph=""
                                                      Label="Settings">
-                        <!--<Controls:HamburgerMenuGlyphItem.Tag>
-                            <views:SettingsView />
-                        </Controls:HamburgerMenuGlyphItem.Tag>-->
+                        <Controls:HamburgerMenuGlyphItem.Tag>
+                            <View:SettingsWindow />
+                        </Controls:HamburgerMenuGlyphItem.Tag>
                     </Controls:HamburgerMenuGlyphItem>
 
                     <Controls:HamburgerMenuGlyphItem Glyph=""
                                                      Label="About">
-                        <!--<Controls:HamburgerMenuGlyphItem.Tag>
-                            <views:AboutView />
-                        </Controls:HamburgerMenuGlyphItem.Tag>-->
+                        <Controls:HamburgerMenuGlyphItem.Tag>
+                            <View:HelpWindow />
+                        </Controls:HamburgerMenuGlyphItem.Tag>
                     </Controls:HamburgerMenuGlyphItem>
                 </Controls:HamburgerMenuItemCollection>
             </Controls:HamburgerMenu.OptionsItemsSource>

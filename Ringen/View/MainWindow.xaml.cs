@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using GalaSoft.MvvmLight.Command;
+using MahApps.Metro.Controls;
 using System.Windows;
 
 namespace Ringen.View

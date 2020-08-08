@@ -27,7 +27,8 @@ namespace Ringen.ViewModel
 {
     public class MainViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        #region declarations
+
+        #region properties
         LogToFile logToFile;
         public new event PropertyChangedEventHandler PropertyChanged;
 
@@ -65,7 +66,64 @@ namespace Ringen.ViewModel
             }
         }
 
+        public Dictionary<string, string> Languages
+        {
+            get
+            {
+                var Languages = new Dictionary<string, string>();
+                Languages.Add("German", "de-DE");
+                Languages.Add("English", "en-US");
+                return Languages;
+            }
+        }
+
+        public string SelectedLanguage
+        {
+            get
+            {
+                return Properties.Settings.Default.Language;
+            }
+            set
+            {
+                if (value == null)
+                    return;
+
+                if (Properties.Settings.Default.Language != value)
+                {
+                    Properties.Settings.Default.Language = value;
+                    Properties.Settings.Default.Save();
+
+                    OnLanguageChanged();
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedLanguage"));
+                }
+            }
+        }
+
+        private IRingenTabItem m_TabControlSelectedItem;
+        public object TabControlSelectedItem
+        {
+            get
+            {
+                return m_TabControlSelectedItem;
+            }
+            set
+            {
+                //var tempPlugin = value is IRingenTabItem;
+                if (!(value is IRingenTabItem tempPlugin))
+                {
+                    Set(ref m_TabControlSelectedItem, null);
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TabControlSelectedItem"));
+                }
+                else
+                {
+                    Set(ref m_TabControlSelectedItem, tempPlugin);
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TabControlSelectedItem"));
+                }
+            }
+        }
+
         #endregion
+
         #region constructor
 
         /// <summary>
@@ -117,64 +175,12 @@ namespace Ringen.ViewModel
 
         #region commands
 
-
         private RelayCommand m_CloseNotificationIcon;
         public RelayCommand CloseNotificationIcon => m_CloseNotificationIcon ?? (m_CloseNotificationIcon = new RelayCommand(OnCloseNotificationIcon));
 
         private void OnCloseNotificationIcon()
         {
             Application.Current.Shutdown();
-        }
-
-        #endregion
-
-        #region properties
-        public Dictionary<string, string> Languages
-        {
-            get
-            {
-                var Languages = new Dictionary<string, string>();
-                Languages.Add("German", "de-DE");
-                Languages.Add("English", "en-US");
-                return Languages;
-            }
-        }
-
-        public string SelectedLanguage
-        {
-            get
-            {
-                return Properties.Settings.Default.Language;
-            }
-            set
-            {
-                if (value == null)
-                    return;
-
-                if (Properties.Settings.Default.Language != value)
-                {
-                    Properties.Settings.Default.Language = value;
-                    Properties.Settings.Default.Save();
-
-                    OnLanguageChanged();
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedLanguage"));
-                }
-            }
-        }
-
-        #endregion
-
-        #region Message Handlers
-
-        #endregion
-
-
-        /// <summary>
-        /// Language Changed Event auslösen
-        /// </summary>
-        public void OnLanguageChanged()
-        {
-            TransManager.Instance.CurrentLanguage = new CultureInfo(Properties.Settings.Default.Language);
         }
 
         public RelayCommand<MouseEventArgs> CmExplorerDoubleClick
@@ -213,48 +219,6 @@ namespace Ringen.ViewModel
 
         private RelayCommand<NotifyCollectionChangedEventArgs> m_CMAvalonDockDocumentsCollectionChanged;
         public RelayCommand<NotifyCollectionChangedEventArgs> CMAvalonDockDocumentsCollectionChanged => m_CMAvalonDockDocumentsCollectionChanged ?? (m_CMAvalonDockDocumentsCollectionChanged = new RelayCommand<NotifyCollectionChangedEventArgs>(OnCMAvalonDockDocumentsCollectionChanged));
-        private void OnCMAvalonDockDocumentsCollectionChanged(NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null && e.NewItems.Count == 1)
-            {
-                LayoutDocument tempDoc = e.NewItems[0] as LayoutDocument;
-
-                if (tempDoc?.Content is IRingenTabItem tempPlugin && tempPlugin != null)
-                {
-                    tempPlugin.Container = tempDoc;
-                }
-            }
-        }
-
-        private IRingenTabItem m_TabControlSelectedItem;
-        public object TabControlSelectedItem
-        {
-            get
-            {
-                return m_TabControlSelectedItem;
-            }
-            set
-            {
-                //var tempPlugin = value is IRingenTabItem;
-                if (!(value is IRingenTabItem tempPlugin))
-                {
-                    Set(ref m_TabControlSelectedItem, null);
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TabControlSelectedItem"));
-                }
-                else
-                {
-                    Set(ref m_TabControlSelectedItem, tempPlugin);
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TabControlSelectedItem"));
-                }
-            }
-        }
-
-
-
-
-
-
-
 
         public RelayCommand<RoutedPropertyChangedEventArgs<object>> CmExplorerSelectedItemChanged
         {
@@ -276,13 +240,60 @@ namespace Ringen.ViewModel
                 });
             }
         }
+
+        #endregion
+
+        #region Message Handlers
+
+        #endregion
+
+        #region events
+
+        /// <summary>
+        /// Language Changed Event auslösen
+        /// </summary>
+        public void OnLanguageChanged()
+        {
+            TransManager.Instance.CurrentLanguage = new CultureInfo(Properties.Settings.Default.Language);
+        }
+
+        private void OnCMAvalonDockDocumentsCollectionChanged(NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null && e.NewItems.Count == 1)
+            {
+                LayoutDocument tempDoc = e.NewItems[0] as LayoutDocument;
+
+                if (tempDoc?.Content is IRingenTabItem tempPlugin && tempPlugin != null)
+                {
+                    tempPlugin.Container = tempDoc;
+                }
+            }
+        }
+
+        #endregion
+
+
+        public string UserName
+        {
+            get {
+                return Core.Services.Service.Login.UserName;
+            }
+            set {
+                Core.Services.Service.Login.UserName = value;
+            }
+        }
+
+        public SecureString Password
+        {
+            get
+            {
+                return Core.Services.Service.Login.Password;
+            }
+            set
+            {
+                Core.Services.Service.Login.Password = value;
+            }
+        }
+
     }
-
-
-
-
-
-
-
-
 }
