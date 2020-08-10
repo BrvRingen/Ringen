@@ -31,7 +31,15 @@
     </Compile>
     <Compile Include="Classes\Protocol.cs" />
     <Compile Include="Classes\WPFConverters.cs" />
+    <Compile Include="Reporting\CustomStyles.cs" />
+    <Compile Include="Reporting\ReportPdf.cs" />
     <Compile Include="RegisterPluginCsEditor.cs" />
+    <Compile Include="Reporting\IReport.cs" />
+    <Compile Include="Resources\LanguageFiles\DictPluginMain.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DictPluginMain.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\LanguageFiles\_DictionaryToEnum.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -82,6 +90,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Enums.NET">
+      <Version>3.0.3</Version>
+    </PackageReference>
     <PackageReference Include="MahApps.Metro">
       <Version>2.0.1</Version>
       <IncludeAssets>compile</IncludeAssets>
@@ -94,6 +105,9 @@
       <ExcludeAssets>contentFiles</ExcludeAssets>
       <PrivateAssets>contentfiles; analyzers</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="PDFsharp-MigraDoc-WPF">
+      <Version>1.50.5147</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\LanguageFiles\_DictionaryToEnum.tt">
@@ -103,10 +117,14 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\LanguageFiles\DictPluginMain.en-US.resx" />
-    <EmbeddedResource Include="Resources\LanguageFiles\DictPluginMain.resx" />
+    <EmbeddedResource Include="Resources\LanguageFiles\DictPluginMain.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DictPluginMain.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\LanguageFiles\DictPluginMain.zh-CN.resx" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
 </Project>

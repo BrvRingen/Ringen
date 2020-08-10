@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using System.Reflection;
 using System.Collections;
 using System;
+using System.ComponentModel;
 using System.IO;
 
 namespace Ringen.Core.CS
@@ -102,7 +103,7 @@ namespace Ringen.Core.CS
         public int HomeWrestlerPoints { get { return Get<int>(Data["homeWrestlerPoints"]); } }
         public int HomeWrestlerFlags { get { return Get<int>(Data["homeWrestlerFlags"]); } }
 
-        public int OpponentWrestlerId { get { return Get<int>(Data["opponenteWrestlerId"]); } }
+        public int OpponentWrestlerId { get { return Get<int>(Data["opponentWrestlerId"]); } }
         public int OpponentWrestlerLicId { get { return Get<int>(Data["opponentWrestlerLicId"]); } }
         public string OpponentWrestlerName { get { return Get<string>(Data["opponentWrestlerName"]); } }
         public string OpponentWrestlerGivenname { get { return Get<string>(Data["opponentWrestlerGivenname"]); } }
@@ -216,7 +217,15 @@ namespace Ringen.Core.CS
     public class BoutSettings
     {
         public Bout Bout { get; set; }
-        public enum WrestleStyles { LL, GR }
+
+        public enum WrestleStyles
+        {
+            [Description("Freistil")]
+            LL, 
+
+            [Description("Gr.-röm.")]
+            GR
+        }
         public enum Results { TÜ, SS, PS, KL }
 
         private List<string> posPoints;

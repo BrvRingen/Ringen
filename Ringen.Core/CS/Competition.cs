@@ -66,6 +66,22 @@ namespace Ringen.Core.CS
             }
         }
 
+        public string LigaId
+        {
+            get
+            {
+                return Data["ligaId"].ToString();
+            }
+        }
+
+        public string TableId
+        {
+            get
+            {
+                return Data["tableId"].ToString();
+            }
+        }
+
         public Table Table
         {
             get
@@ -203,7 +219,7 @@ namespace Ringen.Core.CS
                     if (bouts.Count() == 0)
                     {
                         var BoutsForCompetition = new List<(string WeightClass, string Style)>();
-
+                        //TODO: Aktuell werden die Kämpfe noch nicht übergeben. Übergabe durch BRV notwendig.
                         if (Table.Value.Contains("(S)"))
                         {
                             BoutsForCompetition.Add(("29", "LL"));
