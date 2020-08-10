@@ -66,6 +66,22 @@ namespace Ringen.Core.CS
             }
         }
 
+        public string LigaId
+        {
+            get
+            {
+                return Data["ligaId"].ToString();
+            }
+        }
+
+        public string TableId
+        {
+            get
+            {
+                return Data["tableId"].ToString();
+            }
+        }
+
         public Table Table
         {
             get
@@ -189,7 +205,8 @@ namespace Ringen.Core.CS
                     bouts = new List<Bout>();
                     Async.RunSync(async () =>
                     {
-                        var AssetResponse = await REST.Client().GetAsync($"/Api/v1/cs/?saisonId={SaisonId}&competitionId={CompetitionId}");
+                        //TODO: Rückgäng auf REST.Client() machen
+                        var AssetResponse = await PrivateREST.Client().GetAsync($"/Api/v1/cs/?saisonId={SaisonId}&competitionId={CompetitionId}");
 
                         if (AssetResponse.IsSuccessStatusCode)
                         {
