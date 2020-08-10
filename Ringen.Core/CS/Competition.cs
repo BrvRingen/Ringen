@@ -205,8 +205,7 @@ namespace Ringen.Core.CS
                     bouts = new List<Bout>();
                     Async.RunSync(async () =>
                     {
-                        //TODO: Rückgäng auf REST.Client() machen
-                        var AssetResponse = await PrivateREST.Client().GetAsync($"/Api/v1/cs/?saisonId={SaisonId}&competitionId={CompetitionId}");
+                        var AssetResponse = await REST.Client().GetAsync($"/Api/v1/cs/?saisonId={SaisonId}&competitionId={CompetitionId}");
 
                         if (AssetResponse.IsSuccessStatusCode)
                         {
@@ -220,7 +219,7 @@ namespace Ringen.Core.CS
                     if (bouts.Count() == 0)
                     {
                         var BoutsForCompetition = new List<(string WeightClass, string Style)>();
-
+                        //TODO: Aktuell werden die Kämpfe noch nicht übergeben. Übergabe durch BRV notwendig.
                         if (Table.Value.Contains("(S)"))
                         {
                             BoutsForCompetition.Add(("29", "LL"));
