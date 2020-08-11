@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ringen"
+             xmlns:core="clr-namespace:Ringen.Core;assembly=Ringen.Core"
              DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -17,7 +18,11 @@
             <FrameworkElement x:Key="ProxyElement" DataContext="{Binding MainViewModel, Source={StaticResource Locator}}" />
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
-        <Label>Help</Label>
-    </Grid>
+    <Border HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="2" BorderBrush="Gray" Padding="10">
+        <StackPanel>
+            <Label FontSize="15" HorizontalAlignment="Center">Die Hilfe wurde geöffnet.</Label>
+            <Label FontSize="15" HorizontalAlignment="Center">Die Hilfe ist auch in folgendem Verzeichnis zu finden:</Label>
+            <Button FontSize="15" HorizontalAlignment="Center" Command="{Binding RcOpenHelp}">C:\Program Files\Ringen\Ringen\Resources\Help\de-DE\RingenHelp.pdf</Button>
+        </StackPanel>
+    </Border>
 </UserControl>

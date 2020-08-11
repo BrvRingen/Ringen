@@ -178,6 +178,16 @@ namespace Ringen.ViewModel
         private RelayCommand m_CloseNotificationIcon;
         public RelayCommand CloseNotificationIcon => m_CloseNotificationIcon ?? (m_CloseNotificationIcon = new RelayCommand(OnCloseNotificationIcon));
 
+
+        private RelayCommand m_RcOpenHelp;
+        public RelayCommand RcOpenHelp => m_RcOpenHelp ?? (m_RcOpenHelp = new RelayCommand(OnRcOpenHelp));
+
+        private void OnRcOpenHelp()
+        {
+            Process.Start(@"Resources\Help\de-DE\RingenHelp.pdf");
+        }
+
+
         private void OnCloseNotificationIcon()
         {
             Application.Current.Shutdown();

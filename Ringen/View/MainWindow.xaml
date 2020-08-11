@@ -145,7 +145,7 @@
                     </Controls:HamburgerMenuGlyphItem>
 
                     <Controls:HamburgerMenuGlyphItem Glyph=""
-                                                     Label="About">
+                                                     Label="About" Command="{Binding RcOpenHelp}">
                         <Controls:HamburgerMenuGlyphItem.Tag>
                             <View:HelpWindow />
                         </Controls:HamburgerMenuGlyphItem.Tag>

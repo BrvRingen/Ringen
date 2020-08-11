@@ -75,17 +75,21 @@ namespace Ringen.Core.CS
                     if (AssetResponse.IsSuccessStatusCode)
                     {
                         var Wrestler = (JObject)JsonConvert.DeserializeObject(AssetResponse.Content.ReadAsStringAsync().Result);
-                        HomeWrestlerName = Wrestler["name"].ToString();
-                        HomeWrestlerGivenname = Wrestler["givenname"].ToString();
-                        HomeWrestlerStatus = Wrestler["status"].ToString();
-                        //birthday
+                        if (Wrestler != null)
+                        {
+                            HomeWrestlerName = Wrestler["name"].ToString();
+                            HomeWrestlerGivenname = Wrestler["givenname"].ToString();
+                            HomeWrestlerStatus = Wrestler["status"].ToString();
+                            //birthday
+                        }
                     }
 
                 });
             }
         }
         public int HomeWrestlerLicId { get { return Get<int>(Data["homeWrestlerLicId"]); } }
-        public string HomeWrestlerName {
+        public string HomeWrestlerName
+        {
             get { return Get<string>(Data["homeWrestlerName"]); }
             set { Set(ref Data, "homeWrestlerName", value); base.OnPropertyChanged("Value"); base.OnPropertyChanged("HomeWrestlerFullnname"); }
         }
@@ -103,14 +107,54 @@ namespace Ringen.Core.CS
         public int HomeWrestlerPoints { get { return Get<int>(Data["homeWrestlerPoints"]); } }
         public int HomeWrestlerFlags { get { return Get<int>(Data["homeWrestlerFlags"]); } }
 
-        public int OpponentWrestlerId { get { return Get<int>(Data["opponentWrestlerId"]); } }
+        public int OpponentWrestlerId
+        {
+            get
+            {
+                return Get<int>(Data["opponentWrestlerId"]);
+            }
+            set
+            {
+                Set(ref Data, "opponentWrestlerId", value);
+
+                Async.RunSync(async () =>
+                {
+                    var AssetResponse = await REST.Client().GetAsync($"/Api/v1/cs/?startausweisNr={value.ToString()}&saisonId={Competition.SaisonId}&competitionId={Competition.CompetitionId}");
+
+                    if (AssetResponse.IsSuccessStatusCode)
+                    {
+                        var Wrestler = (JObject)JsonConvert.DeserializeObject(AssetResponse.Content.ReadAsStringAsync().Result);
+                        if (Wrestler != null)
+                        {
+                            OpponentWrestlerName = Wrestler["name"].ToString();
+                            OpponentWrestlerGivenname = Wrestler["givenname"].ToString();
+                            OpponentWrestlerStatus = Wrestler["status"].ToString();
+                            //birthday
+                        }
+                    }
+
+                });
+            }
+        }
         public int OpponentWrestlerLicId { get { return Get<int>(Data["opponentWrestlerLicId"]); } }
-        public string OpponentWrestlerName { get { return Get<string>(Data["opponentWrestlerName"]); } }
-        public string OpponentWrestlerGivenname { get { return Get<string>(Data["opponentWrestlerGivenname"]); } }
+        public string OpponentWrestlerName
+        {
+            get { return Get<string>(Data["opponentWrestlerName"]); }
+            set { Set(ref Data, "opponentWrestlerName", value); base.OnPropertyChanged("Value"); base.OnPropertyChanged("OpponentWrestlerFullnname"); }
+        }
+        public string OpponentWrestlerGivenname
+        {
+            get { return Get<string>(Data["opponentWrestlerGivenname"]); }
+            set { Set(ref Data, "opponentWrestlerGivenname", value); base.OnPropertyChanged("Value"); base.OnPropertyChanged("OpponentWrestlerFullnname"); }
+        }
+        public string OpponentWrestlerStatus
+        {
+            get { return Get<string>(Data["opponentWrestlerStatus"]); }
+            set { Set(ref Data, "opponentWrestlerStatus", value); }
+        }
         public string OpponentWrestlerFullnname { get { return $"{Get<string>(Data["opponentWrestlerGivenname"])} {Get<string>(Data["opponentWrestlerName"])}"; } }
         public int OpponentWrestlerPoints { get { return Get<int>(Data["opponentWrestlerPoints"]); } }
         public int OpponentWrestlerFlags { get { return Get<int>(Data["opponentWrestlerFlags"]); } }
-        public string OpponentWrestlerStatus { get { return Get<string>(Data["opponentWrestlerStatus"]); } }
         public BoutSettings.Results Result { get { return Get<BoutSettings.Results>(Data["result"]); } }
         public string Round1 { get { return Get<string>(Data["round1"]); } }
         public string Round2 { get { return Get<string>(Data["round2"]); } }
@@ -221,7 +265,7 @@ namespace Ringen.Core.CS
         public enum WrestleStyles
         {
             [Description("Freistil")]
-            LL, 
+            LL,
 
             [Description("Gr.-röm.")]
             GR
