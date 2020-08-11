@@ -6,6 +6,8 @@ namespace Ringen.Plugin.CsEditor.Reporting
     {
         public const string TABLEINFO = "TableInfo";
         public const string TABLE = "Table";
+        public const string WERTUNG_ROT = "WertungRot";
+        public const string WERTUNG_BLAU = "WertungBlau";
 
         internal static void Definiere(Document document, int standardFontSize)
         {
@@ -29,6 +31,17 @@ namespace Ringen.Plugin.CsEditor.Reporting
             style = document.Styles.AddStyle(TABLEINFO, "Normal");
             style.Font.Name = "Arial";
             style.Font.Size = standardFontSize;
+
+            style = document.Styles.AddStyle(WERTUNG_ROT, "Normal");
+            style.Font.Color = Colors.Red;
+            style.Font.Bold = true;
+            style.Font.Underline = Underline.Dotted;
+
+            style = document.Styles.AddStyle(WERTUNG_BLAU, "Normal");
+            style.Font.Color = Colors.Blue;
+            style.Font.Bold = true;
+            style.Font.Italic = true;
+
         }
     }
 }

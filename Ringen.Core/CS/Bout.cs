@@ -210,7 +210,7 @@ namespace Ringen.Core.CS
             this.Bout = Bout;
             this.HomeOrOpponent = HomeOrOpponent;
             this.Value = Value;
-            Time = Bout.Settings.Times[BoutTime.Types.Bout.ToString()].Time;
+            Time = Bout?.Settings.Times[BoutTime.Types.Bout.ToString()].Time;
         }
     }
 

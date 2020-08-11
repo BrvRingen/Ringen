@@ -219,4 +219,7 @@ Verspäteter Start und die Pause müssen nicht mehr eingetragen werden. Diese we
   <data name="WrestlingStyle" xml:space="preserve">
     <value>Stilart</value>
   </data>
+  <data name="PdfProtocolSinglePoints" xml:space="preserve">
+    <value>Wertungen</value>
+  </data>
 </root>

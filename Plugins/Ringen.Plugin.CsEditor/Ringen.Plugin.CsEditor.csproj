@@ -32,6 +32,8 @@
     <Compile Include="Classes\Protocol.cs" />
     <Compile Include="Classes\WPFConverters.cs" />
     <Compile Include="Reporting\CustomStyles.cs" />
+    <Compile Include="Reporting\ErgebnislisteKampfrichtertischPdf.cs" />
+    <Compile Include="Reporting\ReportFarbigPdf.cs" />
     <Compile Include="Reporting\ReportPdf.cs" />
     <Compile Include="RegisterPluginCsEditor.cs" />
     <Compile Include="Reporting\IReport.cs" />

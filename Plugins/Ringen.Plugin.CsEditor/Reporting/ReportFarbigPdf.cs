@@ -12,7 +12,7 @@ using Table = MigraDoc.DocumentObjectModel.Tables.Table;
 
 namespace Ringen.Plugin.CsEditor.Reporting
 {
-    public class ReportPdf : IReport
+    public class ReportFarbigPdf : IReport
     {
         private int _fontSizeTitel = 22;
         private int _fontSizeSehrKlein = 6;
@@ -81,7 +81,7 @@ namespace Ringen.Plugin.CsEditor.Reporting
         {
             //TODO: Mannschaftsführer Heim woher?
             //TODO: Mannschaftsführer Gast woher?
-            section.Footers.Primary.Add(FooterUnterschriften( competition.Referee, "???", "???"));
+            section.Footers.Primary.Add(FooterUnterschriften( competition.Referee, "", ""));
             section.Footers.Primary.Add(FooterHinweisZeile());
         }
 
@@ -166,11 +166,11 @@ namespace Ringen.Plugin.CsEditor.Reporting
             string sieger = Resources.LanguageFiles.DictPluginMain.Undetermined;
             if (homePoints > opponentPoints)
             {
-                sieger = $"{Resources.LanguageFiles.DictPluginMain.HomeTeamNameShort} {homeTeamName}";
+                sieger = $"{homeTeamName}";
             }
             else if(homePoints < opponentPoints)
             {
-                sieger = $"{Resources.LanguageFiles.DictPluginMain.OpponentTeamNameShort} {opponentTeamName}";
+                sieger = $"{opponentTeamName}";
             }
             else if (homePoints == opponentPoints)
             {
@@ -203,6 +203,14 @@ namespace Ringen.Plugin.CsEditor.Reporting
             spalte.AddFormattedText(string.Format(Resources.LanguageFiles.DictPluginMain.PdfProtocolWinnerLine, sieger, homePoints, opponentPoints), TextFormat.Underline);
             spalte.Format.Font.Size = _fontSizeGross;
             spalte.Format.Font.Bold = true;
+            if (homePoints > opponentPoints)
+            {
+                spalte.Format.Font.Color = Colors.Red;
+            }
+            else if (opponentPoints > homePoints)
+            {
+                spalte.Format.Font.Color = Colors.Blue;
+            }
 
             spalte = zeile.Cells[1].AddParagraph();
             //spalte.Format.Borders.Visible = true;
@@ -227,12 +235,22 @@ namespace Ringen.Plugin.CsEditor.Reporting
             zeile.Cells[6].Format.Font.Size = _fontSizeNormal;
             zeile.Cells[6].Borders.Visible = true;
             zeile.Cells[6].Borders.Top.Width = 1.5;
-
+            zeile.Cells[6].Borders.Color = Colors.Red;
+            if (homePoints > opponentPoints)
+            {
+                zeile.Cells[6].Format.Font.Color = Colors.Red;
+            }
+            
             zeile.Cells[11].AddParagraph($"{opponentPoints}");
             zeile.Cells[11].Format.Font.Bold = true;
             zeile.Cells[11].Format.Font.Size = _fontSizeNormal;
             zeile.Cells[11].Borders.Visible = true;
             zeile.Cells[11].Borders.Top.Width = 1.5;
+            zeile.Cells[11].Borders.Color = Colors.Blue;
+            if (opponentPoints > homePoints)
+            {
+                zeile.Cells[11].Format.Font.Color = Colors.Blue;
+            }
         }
 
         private Paragraph AddAbstandNachOben(string abstand)
@@ -271,17 +289,28 @@ namespace Ringen.Plugin.CsEditor.Reporting
             AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.WrestlingStyle);
             AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.WeightClass, 1);
 
-            AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.ActualWeightShort);
-            AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.WrestlerName);
-            AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.WrestlerId);
-            AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.WrestlerStatus);
-            AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.TeamPointsShort, 2);
+            var spalteRot = AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.ActualWeightShort);
+            spalteRot.Shading.Color = Colors.Red;
+            spalteRot = AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.WrestlerName);
+            spalteRot.Shading.Color = Colors.Red;
+            spalteRot = AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.WrestlerId);
+            spalteRot.Shading.Color = Colors.Red;
+            spalteRot = AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.WrestlerStatus);
+            spalteRot.Shading.Color = Colors.Red;
+            spalteRot = AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.TeamPointsShort, 2);
+            spalteRot.Shading.Color = Colors.Red;
 
-            AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.ActualWeightShort);
-            AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.WrestlerName);
-            AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.WrestlerId);
-            AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.WrestlerStatus);
-            AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.TeamPointsShort, 1);
+            var spalteBlau = AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.ActualWeightShort);
+            spalteBlau.Shading.Color = Colors.Blue;
+
+            spalteBlau = AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.WrestlerName);
+            spalteBlau.Shading.Color = Colors.Blue;
+            spalteBlau = AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.WrestlerId);
+            spalteBlau.Shading.Color = Colors.Blue;
+            spalteBlau = AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.WrestlerStatus);
+            spalteBlau.Shading.Color = Colors.Blue;
+            spalteBlau = AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.TeamPointsShort, 1);
+            spalteBlau.Shading.Color = Colors.Blue;
 
             AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.VictoryType);
             AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.PdfProtocolSinglePoints);
@@ -441,8 +470,10 @@ namespace Ringen.Plugin.CsEditor.Reporting
             ft.Font.Size = _fontSizeNormal;
 
             spalte = zeile.Cells[2].AddParagraph();
-            ft = spalte.AddFormattedText("Rückkampf", TextFormat.Bold);//TODO: Rückrunde oder Vorrunde woher?
+            ft = spalte.AddFormattedText("", TextFormat.Bold);//TODO: Rückrunde oder Vorrunde woher?
+            //ft = spalte.AddFormattedText("Rückkampf", TextFormat.Bold);//TODO: Rückrunde oder Vorrunde woher?
             ft.Font.Size = _fontSizeGross;
+
             spalte.AddLineBreak();
             ft = spalte.AddFormattedText($"{Resources.LanguageFiles.DictPluginMain.BoutDate}:");
             ft.Font.Size = _fontSizeKlein;
@@ -493,33 +524,50 @@ namespace Ringen.Plugin.CsEditor.Reporting
         private void InhaltKampfzeile(Row zeile, Bout kampf)
         {
             AddKampfSpalte(zeile, ((BoutSettings.WrestleStyles) kampf.WrestleStyle).AsString(EnumFormat.Description));
+            var weightClass =AddKampfSpalte(zeile, kampf.WeightClass);
+            weightClass.Borders.Right.Width = 1;
+            weightClass.Borders.Right.Color = Colors.Red;
 
-            AddKampfSpalte(zeile, kampf.WeightClass, 1);
-
-            AddKampfSpalte(zeile, "??"); //TODO: Tatsächliches Gewicht woher?
-            var homeWrestlerSpalte = AddKampfSpalte(zeile,
-                string.IsNullOrEmpty(kampf.HomeWrestlerFullnname.Trim()) ? "--" : kampf.HomeWrestlerFullnname.Trim());
+            AddKampfSpalte(zeile, "??").Borders.Color = Colors.Red; //TODO: Tatsächliches Gewicht woher?
+            var homeWrestlerSpalte = AddKampfSpalte(zeile, string.IsNullOrEmpty(kampf.HomeWrestlerFullnname.Trim()) ? "--" : kampf.HomeWrestlerFullnname.Trim());
+            homeWrestlerSpalte.Borders.Color = Colors.Red;
             if (kampf.HomeWrestlerPoints > kampf.OpponentWrestlerPoints)
             {
                 homeWrestlerSpalte.Format.Font.Bold = true;
+                homeWrestlerSpalte.Format.Font.Color = Colors.Red;
             }
 
-            AddKampfSpalte(zeile, kampf.HomeWrestlerId > 0 ? kampf.HomeWrestlerId.ToString() : "--");
-            AddKampfSpalte(zeile, kampf.HomeWrestlerStatus ?? string.Empty);
-            AddKampfSpalte(zeile, kampf.HomeWrestlerPoints > 0 ? kampf.HomeWrestlerPoints.ToString() : "0", 2);
-
-
-            AddKampfSpalte(zeile, "??"); //TODO: Tatsächliches Gewicht woher?
+            AddKampfSpalte(zeile, kampf.HomeWrestlerId > 0 ? kampf.HomeWrestlerId.ToString() : "--").Borders.Color = Colors.Red;
+            AddKampfSpalte(zeile, kampf.HomeWrestlerStatus ?? string.Empty).Borders.Color = Colors.Red;
+            var heimPunkte = AddKampfSpalte(zeile, kampf.HomeWrestlerPoints > 0 ? kampf.HomeWrestlerPoints.ToString() : "0", 2);
+            heimPunkte.Borders.Color = Colors.Red;
+            if (kampf.HomeWrestlerPoints > kampf.OpponentWrestlerPoints)
+            {
+                heimPunkte.Format.Font.Color = Colors.Red;
+            }
+            
+            AddKampfSpalte(zeile, "??").Borders.Color = Colors.Blue; //TODO: Tatsächliches Gewicht woher?
             var opponentWrestlerSpalte = AddKampfSpalte(zeile,
                 string.IsNullOrEmpty(kampf.OpponentWrestlerFullnname.Trim()) ? "--" : kampf.OpponentWrestlerFullnname.Trim());
+            opponentWrestlerSpalte.Borders.Color = Colors.Blue;
             if (kampf.OpponentWrestlerPoints > kampf.HomeWrestlerPoints)
             {
                 opponentWrestlerSpalte.Format.Font.Bold = true;
+                opponentWrestlerSpalte.Format.Font.Color = Colors.Blue;
             }
 
-            AddKampfSpalte(zeile, kampf.OpponentWrestlerId > 0 ? kampf.OpponentWrestlerId.ToString() : "--");
-            AddKampfSpalte(zeile, kampf.OpponentWrestlerStatus ?? string.Empty);
-            AddKampfSpalte(zeile, kampf.OpponentWrestlerPoints > 0 ? kampf.OpponentWrestlerPoints.ToString() : "0", 1);
+            AddKampfSpalte(zeile, kampf.OpponentWrestlerId > 0 ? kampf.OpponentWrestlerId.ToString() : "--").Borders.Color = Colors.Blue;
+            AddKampfSpalte(zeile, kampf.OpponentWrestlerStatus ?? string.Empty).Borders.Color = Colors.Blue;
+            
+            var gastPunkte = AddKampfSpalte(zeile, kampf.OpponentWrestlerPoints > 0 ? kampf.OpponentWrestlerPoints.ToString() : "0");
+            gastPunkte.Borders.Color = Colors.Blue;
+            gastPunkte.Borders.Right.Width = 1;
+            gastPunkte.Borders.Right.Color = Colors.Blue;
+
+            if (kampf.OpponentWrestlerPoints > kampf.HomeWrestlerPoints)
+            {
+                gastPunkte.Format.Font.Color = Colors.Blue;
+            }
 
             var kampfzeit = TimeSpan.FromSeconds(kampf.Settings.Times[Ringen.Core.CS.BoutTime.Types.Bout.ToString()].Time).ToString("m':'ss");
             AddKampfSpalte(zeile, string.Format(Resources.LanguageFiles.DictPluginMain.PdfProtocolResult, kampf.Result, kampfzeit));
@@ -565,8 +613,7 @@ namespace Ringen.Plugin.CsEditor.Reporting
         private int kampfSpaltenCounter = 0;
         private Cell AddKampfSpalte(Row zeile, string inhalt, int borderRightWidth = 0)
         {
-            var spalte = zeile.Cells[kampfSpaltenCounter]; 
-            spalte.Borders.Color = Colors.Black;
+            var spalte = zeile.Cells[kampfSpaltenCounter];
 
             spalte.AddParagraph(inhalt);
 

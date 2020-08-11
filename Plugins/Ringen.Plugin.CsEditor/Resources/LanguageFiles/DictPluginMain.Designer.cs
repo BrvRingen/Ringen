@@ -225,6 +225,15 @@ namespace Ringen.Plugin.CsEditor.Resources.LanguageFiles {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Wertungen ähnelt.
+        /// </summary>
+        public static string PdfProtocolSinglePoints {
+            get {
+                return ResourceManager.GetString("PdfProtocolSinglePoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Protokoll {0} {1}: {2} vs. {3} vom {4} ähnelt.
         /// </summary>
         public static string PdfProtocolTitle {
