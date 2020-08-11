@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <Product Id="D38A7600-106B-4394-B0B8-DAA1A35F8BDE" Name="Ringen" Language="1033" Version="$(var.BuildVersion)" Manufacturer="BRV Ringen" Codepage="1252" UpgradeCode="F92E3C7E-FB87-47F1-A35E-E93705ED7834">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of Ringen is already installed." />
+
+    <!-- alle Dateien in die .msi packen, kein .cab erstellen -->
+    <MediaTemplate EmbedCab="yes"/>
+
+    <Feature Id="ProductFeature" Title="Ringen" Level="1">
+      <!-- CCM Hauptprogramm -->
+      <ComponentGroupRef Id="GENERATED_BY_HEAT"/>
+
+      <!-- Shortcut Icon-->
+      <ComponentRef Id="ApplicationShortcut"/>
+    </Feature>
+
+    <!-- Shortcut Icon -->
+    <Icon Id="Icon.ico" SourceFile="Icon.ico" />
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut" Guid="CDD888A6-5C0B-43B4-AAA0-76AC9D63005F">
+        <Shortcut Id="ApplicationStartMenuShortcut"
+                  Name="Ringen"
+                  Description="Programm für Mannschaftskämpfe im Ringen."
+                  Icon="Icon.ico"
+                  Target="[INSTALLFOLDER]Ringen.exe"
+                  WorkingDirectory="INSTALLFOLDER"/>
+        <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\BRVRingen\Packages\Ringen" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+  </Product>
+
+  <Fragment>
+    <!-- default config -->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+
+      <!-- Program Files -->
+      <Directory Id="ProgramFiles64Folder">
+        <Directory Id="DIR_Ringen" Name="Ringen">
+          <!-- SAS Installationsordner -->
+          <Directory Id="INSTALLFOLDER" Name="Ringen" />
+        </Directory>
+      </Directory>
+
+      <!-- ProgramMenu Shortcut Ordner -->
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="Ringen"/>
+      </Directory>
+
+    </Directory>
+  </Fragment>
+</Wix>

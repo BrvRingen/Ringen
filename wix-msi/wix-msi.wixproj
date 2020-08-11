@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+    <ProductVersion>3.10</ProductVersion>
+    <ProjectGuid>{a78fa637-04a9-4094-b931-6f551a8af2b6}</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>Ringen</OutputName>
+    <OutputType>Package</OutputType>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <Name>wix-msi</Name>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>
+    </DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Product.wxs" />
+    <Compile Include="bin\$(Configuration)\FILES.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\" />
+    <Folder Include="bin\Debug\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUtilExtension">
+      <Name>WixUtilExtension</Name>
+      <HintPath>WixUtilExtension</HintPath>
+    </WixExtension>
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" />
+  <!-- http://stackoverflow.com/questions/2605907/wix-heatdirectory-task-setting-the-preprocessorvariable -->
+  <Target Name="AfterClean">
+    <Message Text="### CLEAN $(TargetName) : $(TargetDir)" />
+    <Delete Files="$(TargetDir)" />
+    <RemoveDir Directories="$(TargetDir)" />
+  </Target>
+  <Target Name="BeforeBuild">
+    <Message Text="### START CREATION OF MSI $(TargetName) " />
+    <Message Text="### Copy files for inclusion into MSI" />
+    <ItemGroup>
+      <Files Include="..\bin\$(Configuration)\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(Files)" DestinationFiles="@(Files->'$(OutputPath)\Ringen\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <!-- Get Version of Ringen -->
+    <GetAssemblyIdentity AssemblyFiles="$(OutputPath)\Ringen\Ringen.exe">
+      <Output TaskParameter="Assemblies" ItemName="AssemblyVersion" />
+    </GetAssemblyIdentity>
+    <PropertyGroup>
+      <DefineConstants>OutputPath=$(OutputPath);Path=$(OutputPath)\Ringen;BuildVersion=%(AssemblyVersion.Version)</DefineConstants>
+    </PropertyGroup>
+    <Message Text="### Version of Ringen will be %(AssemblyVersion.Version)" />
+    <Message Text="### COLLECT MSI FILES for Ringen " />
+    <HeatDirectory ToolPath="$(WixToolPath)" OutputFile="bin\$(Configuration)\FILES.wxs" Directory="$(OutputPath)\Ringen" PreprocessorVariable="var.Path" DirectoryRefId="INSTALLFOLDER" ComponentGroupName="GENERATED_BY_HEAT" AutogenerateGuids="true" SuppressCom="true" SuppressRegistry="true" SuppressRootDirectory="true" />
+  </Target>
+  <Target Name="AfterBuild">
+    <Copy SourceFiles="$(TargetDir)\$(OutputName).msi" DestinationFiles="$(TargetDir)\$(OutputName)_%(AssemblyVersion.Version)_SNAPSHOT.msi" Condition="$(Configuration)=='Debug'" />
+    <Copy SourceFiles="$(TargetDir)\$(OutputName).msi" DestinationFiles="$(TargetDir)\$(OutputName)_%(AssemblyVersion.Version)_RELEASE.msi" Condition="$(Configuration)=='Release'" />
+    <Delete Files="$(TargetDir)\$(OutputName).msi" />
+    <Message Text="### MSI CREATION FINISHED" />
+  </Target>
+</Project>
