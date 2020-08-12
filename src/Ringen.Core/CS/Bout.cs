@@ -20,6 +20,30 @@ namespace Ringen.Core.CS
         private JObject Data;
         public IExplorerItem ExplorerParent { get; }
 
+        //TODO: Kampf-Nr berechnen
+        private int[] _kampfNrFaktor = new[] {0, 1, 2, 3, 1, -2, -5};
+        public int KampfNr
+        {
+            get
+            {
+                var anzahlKaempfe = Competition.Children.Count;
+
+                //TODO: Berechne Kampfnummer
+                if (Competition.IstDoppelRunde())
+                {
+                    var anzahlKaempfeJeRunde = anzahlKaempfe / 2;
+
+                    return Order + _kampfNrFaktor[Order > anzahlKaempfeJeRunde ? Order-1-anzahlKaempfeJeRunde : Order-1];
+                }
+                else
+                {
+                    return Order + _kampfNrFaktor[Order - 1];
+                }
+            }
+        }
+
+        
+
         public string Value
         {
             get

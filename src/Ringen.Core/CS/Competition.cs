@@ -69,6 +69,19 @@ namespace Ringen.Core.CS
             }
         }
 
+        public bool IstDoppelRunde()
+        {
+            var ersteGewichtsklasse = Children.First()?.WeightClass;
+            var anzahlSelbeGewichtsklassen = Children.Count(li => li.WeightClass.Equals(ersteGewichtsklasse, StringComparison.OrdinalIgnoreCase));
+
+            if (anzahlSelbeGewichtsklassen > 1)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public string LigaId
         {
             get

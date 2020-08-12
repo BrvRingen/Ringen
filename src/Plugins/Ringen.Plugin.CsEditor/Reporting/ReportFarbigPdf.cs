@@ -8,6 +8,7 @@ using MigraDoc.DocumentObjectModel.Shapes;
 using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.Rendering;
 using Ringen.Core.CS;
+using Ringen.Plugin.CsEditor.Helper;
 using Ringen.Plugin.CsEditor.Reporting.Konfig;
 using Ringen.Shared.Models;
 using Table = MigraDoc.DocumentObjectModel.Tables.Table;
@@ -62,8 +63,8 @@ namespace Ringen.Plugin.CsEditor.Reporting
 
         private void ErgaenzeInhalt(Section section, Competition competition, CompetitionInfos zusatzInfos)
         {
-            section.Add(AddAbstandNachOben("0.8cm"));
-            section.Add(ErgaenzeKampftabelle(competition));
+            section.Add(PdfHelper.AddAbstandNachOben("0.8cm"));
+            section.Add(Kampftabelle(competition));
             section.Add(Bemerkungen(competition, zusatzInfos));
         }
 
@@ -96,7 +97,7 @@ namespace Ringen.Plugin.CsEditor.Reporting
         {
             Paragraph footer = new Paragraph();
             footer.AddFormattedText(string.Format(Resources.LanguageFiles.DictPluginMain.PdfProtocolFooterHint, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString()).Replace("\\n", Environment.NewLine));
-            footer.Format.Font.Size = CustomStyles.fontSizeSehrKlein;
+            footer.Format.Font.Size = CustomStyles.fontSizeExtremKlein;
             footer.Format.Alignment = ParagraphAlignment.Center;
             footer.Format.SpaceBefore = "0.5cm";
 
@@ -334,20 +335,9 @@ namespace Ringen.Plugin.CsEditor.Reporting
             }
         }
 
-        private Paragraph AddAbstandNachOben(string abstand)
+        private Table Kampftabelle(Competition competition)
         {
-            Paragraph p = new Paragraph();
-            p.Format.LineSpacingRule = LineSpacingRule.Exactly;
-            p.Format.LineSpacing = "0mm";
-            p.Format.SpaceBefore = abstand;
-
-            return p;
-        }
-
-        private Table ErgaenzeKampftabelle(Competition competition)
-        {
-            Table table = new Table();
-            SetUpKampftabelle(table);
+            Table table = SetUpKampftabelle();
 
             Row zeileMannschaften = table.AddRow();
             MannschaftenUeberschrift(zeileMannschaften, competition);
@@ -367,6 +357,7 @@ namespace Ringen.Plugin.CsEditor.Reporting
         {
             SetUpKopfzeile(kopfzeile);
 
+            AddKopfSpalte(kopfzeile, "Nr."); //TODO: In Dict auslagern
             AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.WrestlingStyle);
             AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.WeightClass, 1);
 
@@ -428,8 +419,10 @@ namespace Ringen.Plugin.CsEditor.Reporting
             kopfzeile.Shading.Color = Colors.Black;
         }
 
-        private void SetUpKampftabelle(Table table)
+        private Table SetUpKampftabelle()
         {
+            Table table = new Table();
+
             table.Style = CustomStyles.TABLE;
             table.Borders.Color = Colors.Black;
             table.Borders.Width = 0.25;
@@ -440,6 +433,7 @@ namespace Ringen.Plugin.CsEditor.Reporting
             // Before you can add a row, you must define the columns
             double a4LandscapeBreite = (29.7 - 2 * _randLinksRechts);
 
+            double breite_KampfNr = 0.7;
             double breite_Stilart = 1.5;
             double breite_Gewichtsklasse = 1.0;
             double breite_IstGewicht = 1.1;
@@ -447,13 +441,15 @@ namespace Ringen.Plugin.CsEditor.Reporting
             double breite_Status = 1.2;
             double breite_Punkte = 1.0;
             double breite_Siegart = 2.8;
-            double breite_Wertungen = 3.5;
+            double breite_Wertungen = 3.2;
 
-            double nochUebrig = a4LandscapeBreite - breite_Stilart - breite_Gewichtsklasse - 2 * breite_IstGewicht -
+            double nochUebrig = a4LandscapeBreite - breite_KampfNr - breite_Stilart - breite_Gewichtsklasse - 2 * breite_IstGewicht -
                                 2 * breite_PassNr - 2 * breite_Status - 2 * breite_Punkte - breite_Siegart - breite_Wertungen;
             double breite_Name = nochUebrig / 2;
 
-            Column column = table.AddColumn($"{breite_Stilart}cm");
+            Column column = table.AddColumn($"{breite_KampfNr}cm");
+            column.Format.Alignment = ParagraphAlignment.Right;
+            column = table.AddColumn($"{breite_Stilart}cm");
             column.Format.Alignment = ParagraphAlignment.Left;
             column = table.AddColumn($"{breite_Gewichtsklasse}cm");
             column.Format.Alignment = ParagraphAlignment.Right;
@@ -495,6 +491,8 @@ namespace Ringen.Plugin.CsEditor.Reporting
 
             column = table.AddColumn($"{breite_Wertungen}cm");
             column.Format.Alignment = ParagraphAlignment.Left;
+
+            return table;
         }
 
         private Paragraph Ueberschrift()
@@ -570,10 +568,10 @@ namespace Ringen.Plugin.CsEditor.Reporting
             return table;
         }
 
-        private int kopfSpaltenCounter = 0;
+        private int _kopfSpaltenCounter = 0;
         private Cell AddKopfSpalte(Row zeile, string bezeichnung, int borderRightWidth = 0)
         {
-            Cell spalte = zeile.Cells[kopfSpaltenCounter];
+            Cell spalte = zeile.Cells[_kopfSpaltenCounter];
             spalte.AddParagraph(bezeichnung);
             spalte.Format.Font.Bold = true;
             spalte.Format.Alignment = ParagraphAlignment.Left;
@@ -584,7 +582,7 @@ namespace Ringen.Plugin.CsEditor.Reporting
                 spalte.Borders.Right.Width = borderRightWidth;
             }
 
-            kopfSpaltenCounter++;
+            _kopfSpaltenCounter++;
 
             return spalte;
         }
@@ -603,14 +601,16 @@ namespace Ringen.Plugin.CsEditor.Reporting
                     zeile.Shading.Color = Colors.LightGray;
                 }
                 cnt++;
-                kampfSpaltenCounter = 0;
+                _kampfSpaltenCounter = 0;
             }
         }
 
         private void InhaltKampfzeile(Row zeile, Bout kampf)
         {
+            AddKampfSpalte(zeile, $"{kampf.KampfNr}");
+
             AddKampfSpalte(zeile, ((BoutSettings.WrestleStyles) kampf.WrestleStyle).AsString(EnumFormat.Description));
-            var weightClass =AddKampfSpalte(zeile, kampf.WeightClass);
+            var weightClass = AddKampfSpalte(zeile, kampf.WeightClass);
             weightClass.Borders.Right.Width = 1;
             weightClass.Borders.Right.Color = Colors.Red;
 
@@ -657,8 +657,8 @@ namespace Ringen.Plugin.CsEditor.Reporting
             var kampfzeit = TimeSpan.FromSeconds(kampf.Settings.Times[Ringen.Core.CS.BoutTime.Types.Bout.ToString()].Time).ToString("m':'ss");
             AddKampfSpalte(zeile, string.Format(Resources.LanguageFiles.DictPluginMain.PdfProtocolResult, kampf.Result, kampfzeit));
 
-            var spalte = zeile.Cells[kampfSpaltenCounter];
-            kampfSpaltenCounter++;
+            var spalte = zeile.Cells[_kampfSpaltenCounter];
+            _kampfSpaltenCounter++;
             spalte.Borders.Color = Colors.Black;
 
 
@@ -684,10 +684,10 @@ namespace Ringen.Plugin.CsEditor.Reporting
 
         }
 
-        private int kampfSpaltenCounter = 0;
+        private int _kampfSpaltenCounter = 0;
         private Cell AddKampfSpalte(Row zeile, string inhalt, int borderRightWidth = 0)
         {
-            var spalte = zeile.Cells[kampfSpaltenCounter];
+            var spalte = zeile.Cells[_kampfSpaltenCounter];
 
             spalte.AddParagraph(inhalt);
 
@@ -697,7 +697,7 @@ namespace Ringen.Plugin.CsEditor.Reporting
                 spalte.Borders.Right.Color = Colors.DarkGray;
             }
 
-            kampfSpaltenCounter++;
+            _kampfSpaltenCounter++;
             return spalte;
         }
     }

@@ -97,7 +97,7 @@ namespace Ringen.Plugin.CsEditor.Reporting
         {
             Paragraph footer = new Paragraph();
             footer.AddText(string.Format(Resources.LanguageFiles.DictPluginMain.PdfProtocolFooterHint, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString()));
-            footer.Format.Font.Size = CustomStyles.fontSizeSehrKlein;
+            footer.Format.Font.Size = CustomStyles.fontSizeExtremKlein;
             footer.Format.Alignment = ParagraphAlignment.Center;
             footer.Format.SpaceBefore = "0.5cm";
 

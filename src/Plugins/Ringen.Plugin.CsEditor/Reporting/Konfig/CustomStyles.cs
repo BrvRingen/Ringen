@@ -6,15 +6,20 @@ namespace Ringen.Plugin.CsEditor.Reporting.Konfig
     {
         public const string TABLEINFO = "TableInfo";
         public const string TABLE = "Table";
+        public const string TABLEKLEIN = "TableKlein";
         public const string WERTUNG_ROT = "WertungRot";
         public const string WERTUNG_BLAU = "WertungBlau";
         public const string BEMERKUNG = "Bemerkung";
 
         public const int fontSizeTitel = 22;
-        public const int fontSizeSehrKlein = 6;
+        public const int fontSizeExtremKlein = 6;
+        public const int fontSizeSehrKlein = 8;
         public const int fontSizeKlein = 10;
         public const int fontSizeNormal = 12;
         public const int fontSizeGross = 16;
+
+        public const string fontUeberschriften = "Arial";
+        public const string fontText = "Times New Roman";
 
         internal static void Definiere(Document document)
         {
@@ -23,7 +28,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.Konfig
             // Because all styles are derived from Normal, the next line changes the 
             // font of the whole document. Or, more exactly, it changes the font of
             // all styles and paragraphs that do not redefine the font.
-            style.Font.Name = "Arial";
+            style.Font.Name = fontText;
 
             style = document.Styles[StyleNames.Header];
             style.ParagraphFormat.AddTabStop("16cm", TabAlignment.Right);
@@ -32,11 +37,15 @@ namespace Ringen.Plugin.CsEditor.Reporting.Konfig
             style.ParagraphFormat.AddTabStop("4cm", TabAlignment.Center);
 
             style = document.Styles.AddStyle(TABLE, "Normal");
-            style.Font.Name = "Times New Roman";
+            style.Font.Name = fontText;
             style.Font.Size = fontSizeKlein;
 
+            style = document.Styles.AddStyle(TABLEKLEIN, "Normal");
+            style.Font.Name = fontText;
+            style.Font.Size = fontSizeSehrKlein;
+
             style = document.Styles.AddStyle(TABLEINFO, "Normal");
-            style.Font.Name = "Arial";
+            style.Font.Name = fontUeberschriften;
             style.Font.Size = fontSizeNormal;
 
             style = document.Styles.AddStyle(WERTUNG_ROT, "Normal");
