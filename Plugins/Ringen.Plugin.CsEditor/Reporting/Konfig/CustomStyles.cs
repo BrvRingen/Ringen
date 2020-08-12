@@ -1,6 +1,6 @@
 ﻿using MigraDoc.DocumentObjectModel;
 
-namespace Ringen.Plugin.CsEditor.Reporting
+namespace Ringen.Plugin.CsEditor.Reporting.Konfig
 {
     class CustomStyles
     {
@@ -8,8 +8,15 @@ namespace Ringen.Plugin.CsEditor.Reporting
         public const string TABLE = "Table";
         public const string WERTUNG_ROT = "WertungRot";
         public const string WERTUNG_BLAU = "WertungBlau";
+        public const string BEMERKUNG = "Bemerkung";
 
-        internal static void Definiere(Document document, int standardFontSize)
+        public const int fontSizeTitel = 22;
+        public const int fontSizeSehrKlein = 6;
+        public const int fontSizeKlein = 10;
+        public const int fontSizeNormal = 12;
+        public const int fontSizeGross = 16;
+
+        internal static void Definiere(Document document)
         {
             Style style = document.Styles["Normal"];
 
@@ -26,22 +33,24 @@ namespace Ringen.Plugin.CsEditor.Reporting
 
             style = document.Styles.AddStyle(TABLE, "Normal");
             style.Font.Name = "Times New Roman";
-            style.Font.Size = standardFontSize;
+            style.Font.Size = fontSizeKlein;
 
             style = document.Styles.AddStyle(TABLEINFO, "Normal");
             style.Font.Name = "Arial";
-            style.Font.Size = standardFontSize;
+            style.Font.Size = fontSizeNormal;
 
             style = document.Styles.AddStyle(WERTUNG_ROT, "Normal");
             style.Font.Color = Colors.Red;
             style.Font.Bold = true;
-            style.Font.Underline = Underline.Dotted;
+            style.Font.Underline = Underline.Single;
 
             style = document.Styles.AddStyle(WERTUNG_BLAU, "Normal");
             style.Font.Color = Colors.Blue;
             style.Font.Bold = true;
             style.Font.Italic = true;
 
+            style = document.Styles.AddStyle(BEMERKUNG, "Normal");
+            style.Font.Size = fontSizeKlein;
         }
     }
 }

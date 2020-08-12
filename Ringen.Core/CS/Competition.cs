@@ -58,6 +58,9 @@ namespace Ringen.Core.CS
             this.ExplorerParent = Parent;
         }
 
+        /// <summary>
+        /// z. B. RCA Bayreuth - ASV Hof II
+        /// </summary>
         public string Value
         {
             get
@@ -90,6 +93,20 @@ namespace Ringen.Core.CS
             }
         }
 
+        /// <summary>
+        /// z. B. 19:00:00
+        /// </summary>
+        public TimeSpan ScaleTime
+        {
+            get
+            {
+                return TimeSpan.Parse(Data["scaleTime"].ToString());
+            }
+        }
+
+        /// <summary>
+        /// z. B. 2019
+        /// </summary>
         public string SaisonId
         {
             get
@@ -98,6 +115,9 @@ namespace Ringen.Core.CS
             }
         }
 
+        /// <summary>
+        /// z. B. 092100g
+        /// </summary>
         public string CompetitionId
         {
             get
@@ -106,6 +126,9 @@ namespace Ringen.Core.CS
             }
         }
 
+        /// <summary>
+        /// z. B. RCA Bayreuth
+        /// </summary>
         public string HomeTeamName
         {
             get
@@ -114,6 +137,9 @@ namespace Ringen.Core.CS
             }
         }
 
+        /// <summary>
+        /// z. B. ASV Hof II
+        /// </summary>
         public string OpponentTeamName
         {
             get
@@ -122,6 +148,9 @@ namespace Ringen.Core.CS
             }
         }
 
+        /// <summary>
+        /// z. B. 12
+        /// </summary>
         public string HomePoints
         {
             get
@@ -130,6 +159,9 @@ namespace Ringen.Core.CS
             }
         }
 
+        /// <summary>
+        /// z. B. 44
+        /// </summary>
         public string OpponentPoints
         {
             get
@@ -138,6 +170,10 @@ namespace Ringen.Core.CS
             }
         }
 
+        /// <summary>
+        /// Kampfdatum
+        /// z. B. 2019-12-07
+        /// </summary>
         public string BoutDate
         {
             get
@@ -146,6 +182,15 @@ namespace Ringen.Core.CS
             }
         }
 
+        public DateTime BoutDateDateTime
+        {
+            get { return DateTime.Parse(BoutDate); }
+        }
+
+        /// <summary>
+        /// Zuschaueranzahl
+        /// z. B. 16
+        /// </summary>
         public int Audience
         {
             get
@@ -158,6 +203,10 @@ namespace Ringen.Core.CS
             }
         }
 
+        /// <summary>
+        /// Kampfstätte
+        /// z. B. Altstadtschule Bayreuth, Fantasierstr. 11, 95445 Bayreuth
+        /// </summary>
         public string Location
         {
             get
@@ -166,6 +215,10 @@ namespace Ringen.Core.CS
             }
         }
 
+        /// <summary>
+        /// Benutzername von BRV-Webseite, welcher das Protokoll eingereicht hat.
+        /// bayreuth
+        /// </summary>
         public string EditorName
         {
             get
@@ -174,6 +227,10 @@ namespace Ringen.Core.CS
             }
         }
 
+        /// <summary>
+        /// Protokoll-Kommentar (von Schiedsrichter)
+        /// z. B. Bayreuth 57 u. 130 g+f unbesetzt<br>Hof 66 g+f unbesetzt<br>keine Pause<br>
+        /// </summary>
         public string EditorComment
         {
             get
@@ -186,6 +243,10 @@ namespace Ringen.Core.CS
             }
         }
 
+        /// <summary>
+        /// Schiedsrichter
+        /// z. B. Jürgen Fischer
+        /// </summary>
         public string Referee
         {
             get

@@ -79,7 +79,16 @@ namespace Ringen.Plugin.CsEditor.Resources.LanguageFiles {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Datum ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Wettkampf ähnelt.
+        /// </summary>
+        public static string Bout {
+            get {
+                return ResourceManager.GetString("Bout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Wettkampfdatum ähnelt.
         /// </summary>
         public static string BoutDate {
             get {
@@ -198,7 +207,16 @@ namespace Ringen.Plugin.CsEditor.Resources.LanguageFiles {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Protokoll erstellt am {0} {1} Uhr ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Organisation ähnelt.
+        /// </summary>
+        public static string Organization {
+            get {
+                return ResourceManager.GetString("Organization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Protokoll erstellt am {0} {1} Uhr.\nEs handelt sich um ein vorläufiges Ergebnis. Der Ligenleiter wird das Ergebnis prüfen und behält sich nachträgliche Korrekturen durch Regelverstöße vor. ähnelt.
         /// </summary>
         public static string PdfProtocolFooterHint {
             get {

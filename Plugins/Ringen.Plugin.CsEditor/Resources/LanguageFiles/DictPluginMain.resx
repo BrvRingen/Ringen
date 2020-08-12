@@ -130,7 +130,7 @@
     <value>Punkte Gast</value>
   </data>
   <data name="BoutDate" xml:space="preserve">
-    <value>Datum</value>
+    <value>Wettkampfdatum</value>
   </data>
   <data name="Audience" xml:space="preserve">
     <value>Anzahl Zuschauer</value>
@@ -172,7 +172,7 @@ Verspäteter Start und die Pause müssen nicht mehr eingetragen werden. Diese we
     <value>Gast</value>
   </data>
   <data name="PdfProtocolFooterHint" xml:space="preserve">
-    <value>Protokoll erstellt am {0} {1} Uhr</value>
+    <value>Protokoll erstellt am {0} {1} Uhr.\nEs handelt sich um ein vorläufiges Ergebnis. Der Ligenleiter wird das Ergebnis prüfen und behält sich nachträgliche Korrekturen durch Regelverstöße vor.</value>
     <comment>0 = Datum, 1 = Uhrzeit</comment>
   </data>
   <data name="PdfProtocolHeadline" xml:space="preserve">
@@ -221,5 +221,11 @@ Verspäteter Start und die Pause müssen nicht mehr eingetragen werden. Diese we
   </data>
   <data name="PdfProtocolSinglePoints" xml:space="preserve">
     <value>Wertungen</value>
+  </data>
+  <data name="Organization" xml:space="preserve">
+    <value>Organisation</value>
+  </data>
+  <data name="Bout" xml:space="preserve">
+    <value>Wettkampf</value>
   </data>
 </root>

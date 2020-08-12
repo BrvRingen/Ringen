@@ -31,8 +31,8 @@
     </Compile>
     <Compile Include="Classes\Protocol.cs" />
     <Compile Include="Classes\WPFConverters.cs" />
-    <Compile Include="Reporting\CustomStyles.cs" />
-    <Compile Include="Reporting\ErgebnislisteKampfrichtertischPdf.cs" />
+    <Compile Include="Reporting\Konfig\CustomStyles.cs" />
+    <Compile Include="Reporting\ReportErgebnislisteKampfrichtertischPdf.cs" />
     <Compile Include="Reporting\ReportFarbigPdf.cs" />
     <Compile Include="Reporting\ReportPdf.cs" />
     <Compile Include="RegisterPluginCsEditor.cs" />
@@ -89,6 +89,10 @@
       <Project>{78c12d2b-0701-48e5-937c-b8ea3972a9df}</Project>
       <Name>Ringen.Core</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ringen.Shared\Ringen.Shared.csproj">
+      <Project>{f4bdd0b5-8268-4e68-be6a-ead3485ad2b1}</Project>
+      <Name>Ringen.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

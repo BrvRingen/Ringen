@@ -28,6 +28,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B7FBD6A5
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ringen.Plugin.CsEditor.Tests", "Tests\Ringen.Plugin.CsEditor.Tests\Ringen.Plugin.CsEditor.Tests.csproj", "{9781A993-E950-4C0D-AEE9-FE74F485ABC6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ringen.Shared", "Ringen.Shared\Ringen.Shared.csproj", "{F4BDD0B5-8268-4E68-BE6A-EAD3485AD2B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +82,14 @@ Global
 		{9781A993-E950-4C0D-AEE9-FE74F485ABC6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9781A993-E950-4C0D-AEE9-FE74F485ABC6}.Release|x64.ActiveCfg = Release|Any CPU
 		{9781A993-E950-4C0D-AEE9-FE74F485ABC6}.Release|x64.Build.0 = Release|Any CPU
+		{F4BDD0B5-8268-4E68-BE6A-EAD3485AD2B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4BDD0B5-8268-4E68-BE6A-EAD3485AD2B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4BDD0B5-8268-4E68-BE6A-EAD3485AD2B1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F4BDD0B5-8268-4E68-BE6A-EAD3485AD2B1}.Debug|x64.Build.0 = Debug|Any CPU
+		{F4BDD0B5-8268-4E68-BE6A-EAD3485AD2B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4BDD0B5-8268-4E68-BE6A-EAD3485AD2B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4BDD0B5-8268-4E68-BE6A-EAD3485AD2B1}.Release|x64.ActiveCfg = Release|Any CPU
+		{F4BDD0B5-8268-4E68-BE6A-EAD3485AD2B1}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,6 +99,7 @@ Global
 		{DBB0788C-264E-48FB-BDDB-68790FACC863} = {BADB2D69-3F45-4189-B692-0641352353E7}
 		{E27D7F4A-2978-4F3C-B499-6D4A43B7AF1F} = {BADB2D69-3F45-4189-B692-0641352353E7}
 		{9781A993-E950-4C0D-AEE9-FE74F485ABC6} = {B7FBD6A5-DCF9-494B-9134-54CCD7CECB54}
+		{F4BDD0B5-8268-4E68-BE6A-EAD3485AD2B1} = {CEA3744D-2A0A-4323-A912-718A79A76CA4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {126F21D1-89B4-41A8-A658-369C6DDDCDA3}

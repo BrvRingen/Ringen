@@ -29,6 +29,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CS\Bout.cs" />
+    <Compile Include="CS\BoutPoint.cs" />
+    <Compile Include="CS\BoutSettings.cs" />
+    <Compile Include="CS\BoutTime.cs" />
     <Compile Include="CS\Competition.cs" />
     <Compile Include="CS\Table.cs" />
     <Compile Include="CS\CS.cs" />

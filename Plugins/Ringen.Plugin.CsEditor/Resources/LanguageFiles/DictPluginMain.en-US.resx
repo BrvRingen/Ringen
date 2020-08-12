@@ -219,4 +219,10 @@ Delayed start and the break no longer have to be entered. These are taken from t
   <data name="WrestlingStyle" xml:space="preserve">
     <value>Style</value>
   </data>
+  <data name="Organization" xml:space="preserve">
+    <value>Organization</value>
+  </data>
+  <data name="Bout" xml:space="preserve">
+    <value>Bout</value>
+  </data>
 </root>

@@ -8,22 +8,19 @@ using MigraDoc.DocumentObjectModel.Shapes;
 using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.Rendering;
 using Ringen.Core.CS;
+using Ringen.Plugin.CsEditor.Reporting.Konfig;
+using Ringen.Shared.Models;
 using Table = MigraDoc.DocumentObjectModel.Tables.Table;
 
 namespace Ringen.Plugin.CsEditor.Reporting
 {
     public class ReportPdf : IReport
     {
-        private int _fontSizeTitel = 22;
-        private int _fontSizeSehrKlein = 6;
-        private int _fontSizeKlein = 10;
-        private int _fontSizeNormal = 12;
-        private int _fontSizeGross = 16;
-        private double _randLinksRechts = 1.2;
+        private const double _randLinksRechts = 1.2;
 
-        public void Export(string pfad, Competition daten)
+        public void Export(string pfad, Competition daten, CompetitionInfos zusatzInfos)
         {
-            ExportPdf(pfad, ErstelleBericht(daten));
+            ExportPdf(pfad, ErstelleBericht(daten, zusatzInfos));
         }
 
         private void ExportPdf(string path, Document report)
@@ -34,7 +31,7 @@ namespace Ringen.Plugin.CsEditor.Reporting
             pdfRenderer.PdfDocument.Save(path);
         }
 
-        public Document ErstelleBericht(Competition competition)
+        public Document ErstelleBericht(Competition competition, CompetitionInfos zusatzInfos)
         {
             Document document = new Document
             {
@@ -44,21 +41,21 @@ namespace Ringen.Plugin.CsEditor.Reporting
                 }
             };
 
-            CustomStyles.Definiere(document, _fontSizeKlein);
+            CustomStyles.Definiere(document);
 
-            document.Add(ErstelleHauptSektion(competition, document.DefaultPageSetup));
+            document.Add(ErstelleHauptSektion(competition, zusatzInfos, document.DefaultPageSetup));
 
             return document;
         }
 
-        private Section ErstelleHauptSektion(Competition competition, PageSetup defaultPageSetup)
+        private Section ErstelleHauptSektion(Competition competition, CompetitionInfos zusatzInfos, PageSetup defaultPageSetup)
         {
             var section = new Section();
             SetUpPage(section, defaultPageSetup);
             
-            ErgaenzeHeader(section, competition);
+            ErgaenzeHeader(section, competition, zusatzInfos);
             ErgaenzeInhalt(section, competition);
-            ErgaenzeFooter(section, competition);
+            ErgaenzeFooter(section, competition, zusatzInfos.MannschaftsfuehrerHeim, zusatzInfos.MannschaftsfuehrerGast);
 
             return section;
         }
@@ -71,17 +68,15 @@ namespace Ringen.Plugin.CsEditor.Reporting
                 competition.OpponentTeamName, Convert.ToInt32(competition.OpponentPoints), competition.EditorComment));
         }
 
-        private void ErgaenzeHeader(Section section, Competition competition)
+        private void ErgaenzeHeader(Section section, Competition competition, CompetitionInfos zusatzInfos)
         {
             section.Headers.Primary.Add(Ueberschrift());
-            section.Add(KampfInfos(competition));
+            section.Add(KampfInfos(competition, zusatzInfos));
         }
 
-        private void ErgaenzeFooter(Section section, Competition competition)
+        private void ErgaenzeFooter(Section section, Competition competition, string trainerHeim, string trainerGast)
         {
-            //TODO: Mannschaftsführer Heim woher?
-            //TODO: Mannschaftsführer Gast woher?
-            section.Footers.Primary.Add(FooterUnterschriften( competition.Referee, "???", "???"));
+            section.Footers.Primary.Add(FooterUnterschriften( competition.Referee, trainerHeim, trainerGast));
             section.Footers.Primary.Add(FooterHinweisZeile());
         }
 
@@ -102,7 +97,7 @@ namespace Ringen.Plugin.CsEditor.Reporting
         {
             Paragraph footer = new Paragraph();
             footer.AddText(string.Format(Resources.LanguageFiles.DictPluginMain.PdfProtocolFooterHint, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString()));
-            footer.Format.Font.Size = _fontSizeSehrKlein;
+            footer.Format.Font.Size = CustomStyles.fontSizeSehrKlein;
             footer.Format.Alignment = ParagraphAlignment.Center;
             footer.Format.SpaceBefore = "0.5cm";
 
@@ -201,7 +196,7 @@ namespace Ringen.Plugin.CsEditor.Reporting
 
             spalte = zeile.Cells[0].AddParagraph();
             spalte.AddFormattedText(string.Format(Resources.LanguageFiles.DictPluginMain.PdfProtocolWinnerLine, sieger, homePoints, opponentPoints), TextFormat.Underline);
-            spalte.Format.Font.Size = _fontSizeGross;
+            spalte.Format.Font.Size = CustomStyles.fontSizeGross;
             spalte.Format.Font.Bold = true;
 
             spalte = zeile.Cells[1].AddParagraph();
@@ -219,18 +214,17 @@ namespace Ringen.Plugin.CsEditor.Reporting
 
         private void GesamtErgebnis(Row zeile, int homePoints, int opponentPoints)
         {
-            //TODO: Refactor
             zeile.Borders.Visible = false;
             
             zeile.Cells[6].AddParagraph($"{homePoints}");
             zeile.Cells[6].Format.Font.Bold = true;
-            zeile.Cells[6].Format.Font.Size = _fontSizeNormal;
+            zeile.Cells[6].Format.Font.Size = CustomStyles.fontSizeNormal;
             zeile.Cells[6].Borders.Visible = true;
             zeile.Cells[6].Borders.Top.Width = 1.5;
 
             zeile.Cells[11].AddParagraph($"{opponentPoints}");
             zeile.Cells[11].Format.Font.Bold = true;
-            zeile.Cells[11].Format.Font.Size = _fontSizeNormal;
+            zeile.Cells[11].Format.Font.Size = CustomStyles.fontSizeNormal;
             zeile.Cells[11].Borders.Visible = true;
             zeile.Cells[11].Borders.Top.Width = 1.5;
         }
@@ -294,7 +288,7 @@ namespace Ringen.Plugin.CsEditor.Reporting
 
             mannschaften.Cells[2].AddParagraph(competition.HomeTeamName);
             mannschaften.Cells[2].Format.Font.Bold = true;
-            mannschaften.Cells[2].Format.Font.Size = _fontSizeGross;
+            mannschaften.Cells[2].Format.Font.Size = CustomStyles.fontSizeGross;
             mannschaften.Cells[2].Format.Alignment = ParagraphAlignment.Left;
             mannschaften.Cells[2].VerticalAlignment = VerticalAlignment.Center;
             mannschaften.Cells[2].MergeRight = 4;
@@ -302,7 +296,7 @@ namespace Ringen.Plugin.CsEditor.Reporting
 
             mannschaften.Cells[7].AddParagraph(competition.OpponentTeamName);
             mannschaften.Cells[7].Format.Font.Bold = true;
-            mannschaften.Cells[7].Format.Font.Size = _fontSizeGross;
+            mannschaften.Cells[7].Format.Font.Size = CustomStyles.fontSizeGross;
             mannschaften.Cells[7].Format.Alignment = ParagraphAlignment.Left;
             mannschaften.Cells[7].VerticalAlignment = VerticalAlignment.Center;
             mannschaften.Cells[7].MergeRight = 4;
@@ -391,14 +385,14 @@ namespace Ringen.Plugin.CsEditor.Reporting
         {
             Paragraph header = new Paragraph();
             header.AddFormattedText(Resources.LanguageFiles.DictPluginMain.PdfProtocolHeadline, TextFormat.Underline);
-            header.Format.Font.Size = _fontSizeTitel;
+            header.Format.Font.Size = CustomStyles.fontSizeTitel;
             header.Format.Alignment = ParagraphAlignment.Left;
             header.Format.Font.Bold = true;
 
             return header;
         }
 
-        private Table KampfInfos(Competition competition)
+        private Table KampfInfos(Competition competition, CompetitionInfos zusatzInfos)
         {
             var table = new Table();
             table.Style = CustomStyles.TABLEINFO;
@@ -420,35 +414,35 @@ namespace Ringen.Plugin.CsEditor.Reporting
 
             var spalte = zeile.Cells[0].AddParagraph();
             var ft = spalte.AddFormattedText($"{competition.LigaId} {competition.TableId}", TextFormat.Bold);
-            ft.Font.Size = _fontSizeGross;
+            ft.Font.Size = CustomStyles.fontSizeGross;
             spalte.AddLineBreak();
 
             ft = spalte.AddFormattedText($"{Resources.LanguageFiles.DictPluginMain.Location}:");
-            ft.Font.Size = _fontSizeKlein;
+            ft.Font.Size = CustomStyles.fontSizeKlein;
             spalte.AddLineBreak();
-            ft = spalte.AddFormattedText($"{competition.Location.Split(' ').Last()}"); //TODO: Ort woher?
-            ft.Font.Size = _fontSizeNormal;
+            ft = spalte.AddFormattedText($"{competition.Location.Split(' ').Last()}");
+            ft.Font.Size = CustomStyles.fontSizeNormal;
 
             spalte = zeile.Cells[1].AddParagraph();
-            ft = spalte.AddFormattedText($"Verbandskampf", TextFormat.Bold); //TODO: Verbandskampf woher? Männer / Schüler?
-            ft.Font.Size = _fontSizeGross;
+            ft = spalte.AddFormattedText($"{zusatzInfos.Kampfart}", TextFormat.Bold);
+            ft.Font.Size = CustomStyles.fontSizeGross;
             spalte.AddLineBreak();
 
             ft = spalte.AddFormattedText($"{Resources.LanguageFiles.DictPluginMain.LocationAddress}:");
-            ft.Font.Size = _fontSizeKlein;
+            ft.Font.Size = CustomStyles.fontSizeKlein;
             spalte.AddLineBreak();
             ft = spalte.AddFormattedText($"{competition.Location}");
-            ft.Font.Size = _fontSizeNormal;
+            ft.Font.Size = CustomStyles.fontSizeNormal;
 
             spalte = zeile.Cells[2].AddParagraph();
-            ft = spalte.AddFormattedText("Rückkampf", TextFormat.Bold);//TODO: Rückrunde oder Vorrunde woher?
-            ft.Font.Size = _fontSizeGross;
+            ft = spalte.AddFormattedText($"{zusatzInfos.VorKampfRueckKampf}", TextFormat.Bold);
+            ft.Font.Size = CustomStyles.fontSizeGross;
             spalte.AddLineBreak();
             ft = spalte.AddFormattedText($"{Resources.LanguageFiles.DictPluginMain.BoutDate}:");
-            ft.Font.Size = _fontSizeKlein;
+            ft.Font.Size = CustomStyles.fontSizeKlein;
             spalte.AddLineBreak();
             ft = spalte.AddFormattedText($"{DateTime.Parse(competition.BoutDate).ToShortDateString()}");
-            ft.Font.Size = _fontSizeNormal;
+            ft.Font.Size = CustomStyles.fontSizeNormal;
 
             return table;
         }
@@ -496,7 +490,7 @@ namespace Ringen.Plugin.CsEditor.Reporting
 
             AddKampfSpalte(zeile, kampf.WeightClass, 1);
 
-            AddKampfSpalte(zeile, "??"); //TODO: Tatsächliches Gewicht woher?
+            AddKampfSpalte(zeile, kampf.HomeWrestlerWeight.ToString("0.0"));
             var homeWrestlerSpalte = AddKampfSpalte(zeile,
                 string.IsNullOrEmpty(kampf.HomeWrestlerFullnname.Trim()) ? "--" : kampf.HomeWrestlerFullnname.Trim());
             if (kampf.HomeWrestlerPoints > kampf.OpponentWrestlerPoints)
@@ -509,7 +503,7 @@ namespace Ringen.Plugin.CsEditor.Reporting
             AddKampfSpalte(zeile, kampf.HomeWrestlerPoints > 0 ? kampf.HomeWrestlerPoints.ToString() : "0", 2);
 
 
-            AddKampfSpalte(zeile, "??"); //TODO: Tatsächliches Gewicht woher?
+            AddKampfSpalte(zeile, kampf.OpponentWrestlerWeight.ToString("0.0"));
             var opponentWrestlerSpalte = AddKampfSpalte(zeile,
                 string.IsNullOrEmpty(kampf.OpponentWrestlerFullnname.Trim()) ? "--" : kampf.OpponentWrestlerFullnname.Trim());
             if (kampf.OpponentWrestlerPoints > kampf.HomeWrestlerPoints)
@@ -524,25 +518,13 @@ namespace Ringen.Plugin.CsEditor.Reporting
             var kampfzeit = TimeSpan.FromSeconds(kampf.Settings.Times[Ringen.Core.CS.BoutTime.Types.Bout.ToString()].Time).ToString("m':'ss");
             AddKampfSpalte(zeile, string.Format(Resources.LanguageFiles.DictPluginMain.PdfProtocolResult, kampf.Result, kampfzeit));
 
-            List<Core.CS.BoutPoint> punkte = new List<Core.CS.BoutPoint>()
-            {
-                new Core.CS.BoutPoint("1", null, Core.CS.BoutPoint.Wrestler.Home),
-                new Core.CS.BoutPoint("3", null, Core.CS.BoutPoint.Wrestler.Home),
-                new Core.CS.BoutPoint("1", null, Core.CS.BoutPoint.Wrestler.Opponent),
-                new Core.CS.BoutPoint("5", null, Core.CS.BoutPoint.Wrestler.Home),
-                new Core.CS.BoutPoint("1", null, Core.CS.BoutPoint.Wrestler.Opponent),
-                new Core.CS.BoutPoint("2", null, Core.CS.BoutPoint.Wrestler.Home),
-                new Core.CS.BoutPoint("1", null, Core.CS.BoutPoint.Wrestler.Home),
-            };
-            
             var spalte = zeile.Cells[kampfSpaltenCounter];
             kampfSpaltenCounter++;
             spalte.Borders.Color = Colors.Black;
 
-
             Paragraph punkteParagraph = spalte.AddParagraph();
             
-            foreach (var punkt in punkte)
+            foreach (var punkt in kampf.Points)
             {
                 var font = new Font();
                 var ft = punkteParagraph.AddFormattedText(punkt.Value, font);
