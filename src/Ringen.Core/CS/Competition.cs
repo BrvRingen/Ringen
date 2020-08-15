@@ -58,6 +58,37 @@ namespace Ringen.Core.CS
             this.ExplorerParent = Parent;
         }
 
+        public int[] GetKampffolge()
+        {
+            List<int> temp = new List<int>();
+            foreach (var bout in Children)
+            {
+                temp.Add(bout.Order);
+            }
+
+            List<int> result = new List<int>();
+            bool first = true;
+            while (temp.Any())
+            {
+                if (first)
+                {
+                    var elem = temp.First();
+                    result.Add(elem);
+                    temp.Remove(elem);
+                    first = false;
+                }
+                else
+                {
+                    var elem = temp.Last();
+                    result.Add(elem);
+                    temp.Remove(elem);
+                    first = true;
+                }
+            }
+
+            return result.ToArray();
+        }
+
         /// <summary>
         /// z. B. RCA Bayreuth - ASV Hof II
         /// </summary>

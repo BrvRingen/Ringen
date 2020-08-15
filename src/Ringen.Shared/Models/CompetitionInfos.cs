@@ -11,7 +11,7 @@ namespace Ringen.Shared.Models
         /// <summary>
         /// Verbandskampf | Freunschaftskampf
         /// </summary>
-        public string Kampfart { get; set; } = string.Empty;
+        public string Kampfart { get; set; } = "Verbandskampf";
 
         /// <summary>
         /// Vorkampf | Rückkampf

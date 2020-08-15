@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ringen.Shared.Models;
 
 namespace Ringen.Plugin.CsEditor
 {
@@ -25,15 +26,27 @@ namespace Ringen.Plugin.CsEditor
     /// </summary>
     public partial class ViewCompetition : ExtendedNotifyPropertyChangedUserControl
     {
-        private Core.CS.Competition competition;
+        private Core.CS.Competition _competition;
 
         public Core.CS.Competition Competition
         {
-            get { return competition; }
+            get { return _competition; }
             set
             {
-                competition = value;
-                OnPropertyChanged("Competition");
+                _competition = value;
+                OnPropertyChanged(nameof(ViewCompetition.Competition));
+            }
+        }
+
+        private CompetitionInfos _competitionInfos;
+
+        public CompetitionInfos CompetitionInfos
+        {
+            get { return _competitionInfos; }
+            set
+            {
+                _competitionInfos = value;
+                OnPropertyChanged(nameof(ViewCompetition.CompetitionInfos));
             }
         }
 
@@ -47,6 +60,9 @@ namespace Ringen.Plugin.CsEditor
         public void UpdateUi()
         {
             Competition = Explorer.SelectedItem as Core.CS.Competition;
+            CompetitionInfos = new CompetitionInfos();
+            CompetitionInfos.Ordner.Add("Test Ordner 1");
+            CompetitionInfos.Ordner.Add("Test Ordner 2");
         }
 
         private RelayCommand m_SendCompetitionToBrv;
@@ -77,5 +93,21 @@ namespace Ringen.Plugin.CsEditor
         public RelayCommand CreateProtocol => m_CreateProtocol ?? (m_CreateProtocol = new RelayCommand(async () => {
             await Protocol.OnCreateProtocolAsync(this.Competition);}));
 
+        private RelayCommand m_CreateAllList;
+        public RelayCommand CreateAllList => m_CreateAllList ?? (m_CreateAllList = new RelayCommand(async () => {
+            await Protocol.OnCreateCreateAllListAsync(this.Competition);
+        }));
+
+        private RelayCommand m_CreateBoutResultList;
+        public RelayCommand CreateBoutResultList => m_CreateBoutResultList ?? (m_CreateBoutResultList = new RelayCommand(async () => {
+            await Protocol.OnCreateBoutResultListAsync(this.Competition);
+        }));
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            CompetitionInfos.Ordner.Add(txtNeuerOdner.Text);
+            OrdnerListBox.Items.Refresh();
+            txtNeuerOdner.Text = "";
+        }
     }
 }
