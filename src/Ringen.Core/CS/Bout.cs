@@ -10,6 +10,8 @@ using System.Collections;
 using System;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Ringen.Core.CS
 {
@@ -20,29 +22,13 @@ namespace Ringen.Core.CS
         private JObject Data;
         public IExplorerItem ExplorerParent { get; }
 
-        //TODO: Kampf-Nr berechnen
-        private int[] _kampfNrFaktor = new[] {0, 1, 2, 3, 1, -2, -5};
         public int KampfNr
         {
             get
             {
-                var anzahlKaempfe = Competition.Children.Count;
-
-                //TODO: Berechne Kampfnummer
-                if (Competition.IstDoppelRunde())
-                {
-                    var anzahlKaempfeJeRunde = anzahlKaempfe / 2;
-
-                    return Order + _kampfNrFaktor[Order > anzahlKaempfeJeRunde ? Order-1-anzahlKaempfeJeRunde : Order-1];
-                }
-                else
-                {
-                    return Order + _kampfNrFaktor[Order - 1];
-                }
+                return Array.IndexOf(Competition.GetKampffolge(), Order) + 1;
             }
         }
-
-        
 
         public string Value
         {
@@ -122,7 +108,9 @@ namespace Ringen.Core.CS
                     return 0;
                 }
 
-                double klasse = Convert.ToDouble(WeightClass);
+                string cleanWeightClass = Regex.Replace(WeightClass, "[A-Za-z ]", "");
+
+                double klasse = Convert.ToDouble(cleanWeightClass);
                 var random = new Random();
                 double zufallAbzug = (random.NextDouble() * random.Next(1,5));
 
@@ -140,7 +128,13 @@ namespace Ringen.Core.CS
                     return 0;
                 }
 
-                return Convert.ToDouble(WeightClass) - (new Random().NextDouble() * new Random().Next(1, 5));
+                string cleanWeightClass = Regex.Replace(WeightClass, "[A-Za-z ]", "");
+
+                double klasse = Convert.ToDouble(cleanWeightClass);
+                var random = new Random();
+                double zufallAbzug = (random.NextDouble() * random.Next(1, 5));
+
+                return klasse - zufallAbzug;
             }
         }
 

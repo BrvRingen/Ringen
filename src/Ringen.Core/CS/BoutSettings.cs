@@ -20,7 +20,7 @@ namespace Ringen.Core.CS
             [Description("Gr.-röm.")]
             GR
         }
-        public enum Results { TÜ, SS, PS, KL }
+        public enum Results { TÜ, SS, PS, KL, ÜG }
 
         private List<string> posPoints;
 

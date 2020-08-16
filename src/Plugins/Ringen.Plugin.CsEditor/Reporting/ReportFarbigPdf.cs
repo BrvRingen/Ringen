@@ -323,15 +323,15 @@ namespace Ringen.Plugin.CsEditor.Reporting
                 zeile.Cells[6].Format.Font.Color = Colors.Red;
             }
             
-            zeile.Cells[11].AddParagraph($"{opponentPoints}");
-            zeile.Cells[11].Format.Font.Bold = true;
-            zeile.Cells[11].Format.Font.Size = CustomStyles.fontSizeGross;
-            zeile.Cells[11].Borders.Visible = true;
-            zeile.Cells[11].Borders.Top.Width = 1.5;
-            zeile.Cells[11].Borders.Color = Colors.Blue;
+            zeile.Cells[12].AddParagraph($"{opponentPoints}");
+            zeile.Cells[12].Format.Font.Bold = true;
+            zeile.Cells[12].Format.Font.Size = CustomStyles.fontSizeGross;
+            zeile.Cells[12].Borders.Visible = true;
+            zeile.Cells[12].Borders.Top.Width = 1.5;
+            zeile.Cells[12].Borders.Color = Colors.Blue;
             if (opponentPoints > homePoints)
             {
-                zeile.Cells[11].Format.Font.Color = Colors.Blue;
+                zeile.Cells[12].Format.Font.Color = Colors.Blue;
             }
         }
 

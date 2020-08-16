@@ -27,6 +27,11 @@
             <RowDefinition Height="*" />
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" MinWidth="200"/>
@@ -61,13 +66,62 @@
         <TextBlock VerticalAlignment="Center" Grid.Row="8" Grid.Column="1" Text="{Binding Competition.EditorName}"/>
 
         <TextBlock VerticalAlignment="Center" Grid.Row="9" Grid.Column="0" Text="{local:Translate EditorComment}" />
-        <TextBox VerticalAlignment="Center" TextWrapping="Wrap" AcceptsReturn="True" Grid.Row="9" Grid.Column="1" Text="{Binding Competition.EditorComment}"/>
+        <TextBox MinHeight="50" VerticalAlignment="Center" Grid.Row="9" Grid.Column="1" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Competition.EditorComment}"/>
         <TextBlock VerticalAlignment="Center" Grid.Row="9" Grid.Column="2" Margin="5" Text="{local:Translate EditorCommentHint}" MaxHeight="200" />
 
         <TextBlock VerticalAlignment="Center" Grid.Row="10" Grid.Column="0" Text="{local:Translate Referee}" />
         <TextBlock VerticalAlignment="Center" Grid.Row="10" Grid.Column="1" Text="{Binding Competition.Referee}"/>
+
+        <TextBlock VerticalAlignment="Center" Grid.Row="11" Grid.Column="0" Text="Kampf" />
+        <StackPanel Orientation="Horizontal" Grid.Row="11" Grid.Column="1">
+            <TextBlock VerticalAlignment="Center" Text="Kampfart" Margin="0,0,10,0" FontWeight="Bold" MinWidth="90" />
+            <TextBox VerticalAlignment="Center" MinWidth="200" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding CompetitionInfos.Kampfart}"/>
+
+            <TextBlock VerticalAlignment="Center" Text="Vor-/Rückkampf" Margin="10,0,10,0" FontWeight="Bold" MinWidth="95" />
+            <TextBox VerticalAlignment="Center" MinWidth="200" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding CompetitionInfos.VorKampfRueckKampf}"/>
+        </StackPanel>
+
+        <TextBlock VerticalAlignment="Center" Grid.Row="12" Grid.Column="0" Text="Wettkampftisch" />
+        <StackPanel Orientation="Horizontal" Grid.Row="12" Grid.Column="1">
+            <TextBlock VerticalAlignment="Center" Text="Protokollführer" Margin="0,0,10,0" FontWeight="Bold" MinWidth="90" />
+            <TextBox VerticalAlignment="Center" MinWidth="200" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding CompetitionInfos.Protokollfuehrer}"/>
+
+            <TextBlock VerticalAlignment="Center" Text="Punktzettel" Margin="10,0,10,0" FontWeight="Bold" MinWidth="95"  />
+            <TextBox VerticalAlignment="Center" MinWidth="200" TextWrapping="Wrap" AcceptsReturn="True"  Text="{Binding CompetitionInfos.ErgebnislistenSchreiber}"/>
+        </StackPanel>
+
+        <TextBlock VerticalAlignment="Center" Grid.Row="13" Grid.Column="0" Text="Mannschaftsführer" />
+        <StackPanel Orientation="Horizontal" Grid.Row="13" Grid.Column="1">
+            <TextBlock VerticalAlignment="Center" Text="Heim" Margin="0,0,10,0" FontWeight="Bold" MinWidth="90" />
+            <TextBox VerticalAlignment="Center" TextWrapping="Wrap" AcceptsReturn="True" MinWidth="200" Text="{Binding CompetitionInfos.MannschaftsfuehrerHeim}"/>
+            <TextBlock VerticalAlignment="Center" Text="Gast"  Margin="10,0,10,0" FontWeight="Bold" MinWidth="95"  />
+            <TextBox VerticalAlignment="Center" TextWrapping="Wrap" AcceptsReturn="True" MinWidth="200" Text="{Binding CompetitionInfos.MannschaftsfuehrerGast}"/>
+        </StackPanel>
+
+        <TextBlock VerticalAlignment="Center" Grid.Row="14" Grid.Column="0" Text="Ordner" />
+        <StackPanel Grid.Row="14" Grid.Column="1" >
+            
+            <ListBox Name="OrdnerListBox" ItemsSource="{Binding CompetitionInfos.Ordner}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="0,0,0,0" Text="{Binding}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center" Text="Neuer Ordner:" Margin="3,0,10,0" FontWeight="Bold"/>
+                <TextBox VerticalAlignment="Center" MinWidth="200" Text="" Name="txtNeuerOdner"/>
+                <Button Click="ButtonBase_OnClick">Ordner hinzufügen</Button>
+            </StackPanel>
+            
+        </StackPanel>
+
+
         
-        <DataGrid Grid.Row="11" Grid.ColumnSpan="3" ItemsSource="{Binding Competition.Children}" AutoGenerateColumns="False" SelectionMode="Single">
+        <DataGrid Grid.Row="15" Grid.ColumnSpan="3" Margin="0,20,0,0" ItemsSource="{Binding Competition.Children}" AutoGenerateColumns="False" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Klasse" Binding="{Binding WeightClass, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Stilart" Binding="{Binding WrestleStyle}"  IsReadOnly="True"/>
@@ -82,7 +136,21 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Grid.Row="12" Grid.Column="1" Command="{Binding SendCompetitionToBrv}" Content="An BRV senden" />
-        <Button Grid.Row="13" Grid.Column="1" Command="{Binding CreateProtocol}" Content="Protokoll erstellen" />
+        <Button Grid.Row="16" Grid.Column="1" Command="{Binding SendCompetitionToBrv}" Content="An BRV senden" />
+
+        <Grid  Grid.Row="17" Grid.Column="1"  HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MaxWidth="200" Width="*" />
+                <ColumnDefinition Width="0.01*" />
+                <ColumnDefinition MaxWidth="200" Width="*" />
+                <ColumnDefinition Width="0.01*" />
+                <ColumnDefinition MaxWidth="200" Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button>b1</Button>
+            <Button Grid.Column="0" HorizontalAlignment="Stretch" Command="{Binding CreateAllList}" Content="Alles" ToolTip="Generiert eine PDF-Datei auf dem Desktop" />
+            <Button Grid.Column="2" HorizontalAlignment="Stretch"  Command="{Binding CreateBoutResultList}" Content="Punktzettel erstellen" ToolTip="Generiert eine PDF-Datei auf dem Desktop" />
+            <Button Grid.Column="4" HorizontalAlignment="Stretch"  Command="{Binding CreateProtocol}" Content="Protokoll erstellen" ToolTip="Generiert eine PDF-Datei auf dem Desktop" />
+        </Grid>
+
     </Grid>
 </CoreUi:ExtendedNotifyPropertyChangedUserControl>
