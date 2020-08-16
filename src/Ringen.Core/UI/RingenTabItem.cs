@@ -22,5 +22,15 @@ namespace Ringen.Core.UI
                 m_Container = value;
             }
         }
+
+        private string m_RingenTabItemHeaderName;
+        public string RingenTabItemHeaderName
+        {
+            get { return m_RingenTabItemHeaderName; }
+            set
+            {
+                m_RingenTabItemHeaderName = value;
+            }
+        }
     }
 }

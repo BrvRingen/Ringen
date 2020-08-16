@@ -122,6 +122,30 @@ namespace Ringen.ViewModel
             }
         }
 
+        public string UserName
+        {
+            get
+            {
+                return Service.Login.UserName;
+            }
+            set
+            {
+                Service.Login.UserName = value;
+            }
+        }
+
+        public SecureString Password
+        {
+            get
+            {
+                return Service.Login.Password;
+            }
+            set
+            {
+                Service.Login.Password = value;
+            }
+        }
+
         #endregion
 
         #region constructor
@@ -281,29 +305,6 @@ namespace Ringen.ViewModel
         }
 
         #endregion
-
-
-        public string UserName
-        {
-            get {
-                return Core.Services.Service.Login.UserName;
-            }
-            set {
-                Core.Services.Service.Login.UserName = value;
-            }
-        }
-
-        public SecureString Password
-        {
-            get
-            {
-                return Core.Services.Service.Login.Password;
-            }
-            set
-            {
-                Core.Services.Service.Login.Password = value;
-            }
-        }
 
     }
 }

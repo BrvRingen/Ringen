@@ -12,6 +12,7 @@
     HorizontalContentAlignment="Left"
     VerticalContentAlignment="Top"
     d:DesignHeight="1000"
+    RingenTabItemHeaderName = "Editor"
     d:DesignWidth="1600">
     <ScrollViewer VerticalScrollBarVisibility="Visible">
         <StackPanel Orientation="Vertical">

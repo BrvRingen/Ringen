@@ -1,7 +1,10 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Ringen">
 
+    <local:PluginToHeaderConverter x:Key="PluginToHeader" />
+    
     <DropShadowEffect
         x:Key="GlowEffect"
         BlurRadius="10"
@@ -19,7 +22,12 @@
             <TextBlock
                 Grid.Column="0"
                 VerticalAlignment="Center"
-                TextTrimming="CharacterEllipsis" Text="test">
+                TextTrimming="CharacterEllipsis">
+                <TextBlock.Text>
+                    <MultiBinding Converter="{StaticResource PluginToHeader}">
+                        <Binding />
+                    </MultiBinding>
+                </TextBlock.Text>
             </TextBlock>
         </Grid>
     </DataTemplate>

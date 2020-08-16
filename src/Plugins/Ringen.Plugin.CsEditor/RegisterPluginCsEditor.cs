@@ -16,7 +16,7 @@ namespace Ringen.Plugin.CsEditor
     {
         #region properties
         public static Type Type { get; private set; }
-        public override string Name { get; } = "test";
+        public override string Name { get; } = "Editor";
         public override string StartPageKey { get; } = nameof(View);
 
         public override bool CanLoad => true;
