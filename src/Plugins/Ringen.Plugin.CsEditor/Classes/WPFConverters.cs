@@ -40,7 +40,7 @@ namespace Ringen.Plugin.CsEditor
             if ((Wrestler)value == Wrestler.Home)
                 return Brushes.Red;
             else
-                return Brushes.Blue;
+                return Brushes.LightSkyBlue;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
