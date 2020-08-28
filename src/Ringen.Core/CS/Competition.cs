@@ -311,7 +311,7 @@ namespace Ringen.Core.CS
                     Async.RunSync(async () =>
                     {
                         var AssetResponse = await REST.Client().GetAsync($"/Api/v1/cs/?saisonId={SaisonId}&competitionId={CompetitionId}");
-
+                        
                         if (AssetResponse.IsSuccessStatusCode)
                         {
                             var result = AssetResponse.Content.ReadAsStringAsync().Result;

@@ -41,7 +41,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_DictionaryToEnum.tt</DependentUpon>
     </Compile>
-    <Compile Include="Service\RingenService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Styles\HintTextBox.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -189,5 +188,8 @@
     <PackageReference Include="PDFsharp-MigraDoc-WPF">
       <Version>1.50.5147</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Service\" />
   </ItemGroup>
 </Project>
