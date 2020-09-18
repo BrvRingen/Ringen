@@ -6,6 +6,7 @@ using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.Rendering;
 using Ringen.Core.CS;
 using Ringen.Plugin.CsEditor.Helper;
+using Ringen.Plugin.CsEditor.Reporting.BerichtErsteller;
 using Ringen.Plugin.CsEditor.Reporting.Konfig;
 using Ringen.Shared.Models;
 using Table = MigraDoc.DocumentObjectModel.Tables.Table;
@@ -15,35 +16,33 @@ namespace Ringen.Plugin.CsEditor.Reporting
     public class ReportSprecher : IReport
     {
         private const double _randLinksRechts = 0.8;
+        private ExportPdf exportPdf= new ExportPdf();
+        private DefaultElemente defaultElemente = new DefaultElemente();
+        private KampfInformationen kampfInformationen = new KampfInformationen();
+
 
         public void Export(string pfad, Competition daten, CompetitionInfos zusatzInfos)
         {
-            ExportPdf(pfad, ErstelleBericht(daten, zusatzInfos));
+            Document report = ErstelleBericht(daten, zusatzInfos);
+            exportPdf.Export(pfad, report);
         }
 
-        private void ExportPdf(string path, Document report)
-        {
-            var pdfRenderer = new PdfDocumentRenderer();
-            pdfRenderer.Document = report;
-            pdfRenderer.RenderDocument();
-            pdfRenderer.PdfDocument.Save(path);
-        }
 
         public Document ErstelleBericht(Competition competition, CompetitionInfos zusatzInfos)
         {
-            Document document = new Document();
-            CustomStyles.Definiere(document);
-            document.Add(ErstelleHauptSektion(competition, zusatzInfos, document.DefaultPageSetup));
+            string title = "";
+            //TODO kläre warum ein Dokument einen Titel hat und diese nicht, was ist der default wert?
+            Document document = defaultElemente.GetDocument(title);
+            Section hauptSection = defaultElemente.GetHauptSection(_randLinksRechts);
+            ErstelleHauptSektion(hauptSection, competition, zusatzInfos);
+            document.Add(hauptSection);
 
             return document;
         }
 
 
-        private Section ErstelleHauptSektion(Competition competition, CompetitionInfos zusatzInfos, PageSetup defaultPageSetup)
+        private Section ErstelleHauptSektion(Section section, Competition competition, CompetitionInfos zusatzInfos)
         {
-            var section = new Section();
-            SetUpPage(section, defaultPageSetup);
-
             ErgaenzeHeader(section, competition, zusatzInfos);
             ErgaenzeInhalt(section, competition, zusatzInfos);
             ErgaenzeFooter(section, competition, zusatzInfos.MannschaftsfuehrerHeim, zusatzInfos.MannschaftsfuehrerGast);
@@ -58,22 +57,10 @@ namespace Ringen.Plugin.CsEditor.Reporting
         
         private void ErgaenzeHeader(Section section, Competition competition, CompetitionInfos zusatzInfos)
         {
-            section.Headers.Primary.Add(Ueberschrift());
-            section.Headers.Primary.Add(KampfInfos(competition, zusatzInfos));
+            section.Headers.Primary.Add(defaultElemente.GetUeberschrift("Sprecher Informationen"));
+            section.Add(kampfInformationen.generate(competition, zusatzInfos, _randLinksRechts));
 
             section.Headers.Primary.Add(PdfHelper.AddAbstandNachOben("0.1cm"));
-        }
-
-        private Paragraph Ueberschrift()
-        {
-            Paragraph header = new Paragraph();
-            header.AddFormattedText("Sprecher Informationen", TextFormat.Underline);
-            header.Format.Font.Size = CustomStyles.fontSizeGross;
-            header.Format.Alignment = ParagraphAlignment.Left;
-            header.Format.Font.Bold = true;
-            header.Format.Font.Name = CustomStyles.fontUeberschriften;
-
-            return header;
         }
         
         private Table KampfInfos(Competition competition, CompetitionInfos zusatzInfos)
@@ -116,19 +103,6 @@ namespace Ringen.Plugin.CsEditor.Reporting
         {
         }
         
-        private void SetUpPage(Section section, PageSetup defaultPageSetup)
-        {
-            section.PageSetup = defaultPageSetup.Clone();
-
-            section.PageSetup.PageFormat = PageFormat.A4;
-            section.PageSetup.Orientation = Orientation.Landscape;
-            section.PageSetup.LeftMargin = $"{_randLinksRechts}cm";
-            section.PageSetup.RightMargin = $"{_randLinksRechts}cm";
-            section.PageSetup.HeaderDistance = "1.2cm";
-            section.PageSetup.FooterDistance = "0.5cm";
-        }
-
-
         private Table Kampftabelle(Competition competition)
         {
             Table table = SetUpKampftabelle();
@@ -141,7 +115,6 @@ namespace Ringen.Plugin.CsEditor.Reporting
 
         private void Kampfzeilen(Table table, List<Bout> kaempfe)
         {
-            int cnt = 0;
             foreach (var kampf in kaempfe.OrderBy(li => li.KampfNr))
             {
                 Row zeile = table.AddRow();
@@ -209,9 +182,6 @@ namespace Ringen.Plugin.CsEditor.Reporting
             table.Borders.Right.Width = 0.25;
             table.Rows.LeftIndent = 0;
             table.Rows.VerticalAlignment = VerticalAlignment.Center;
-
-            // Before you can add a row, you must define the columns
-            double a4LandscapeBreite = (29.7 - 2 * _randLinksRechts);
 
             double breite_KampfNr = 1.2;
             double breite_Gewichtsklasse = 1;

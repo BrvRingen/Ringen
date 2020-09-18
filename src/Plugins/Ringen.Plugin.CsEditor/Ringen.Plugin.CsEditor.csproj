@@ -32,6 +32,16 @@
     <Compile Include="Classes\Protocol.cs" />
     <Compile Include="Classes\WPFConverters.cs" />
     <Compile Include="Helper\PdfHelper.cs" />
+    <Compile Include="Reporting\BaseReport\BaseReportCreator.cs" />
+    <Compile Include="Reporting\BerichtErsteller\BerichtTitel.cs" />
+    <Compile Include="Reporting\BerichtErsteller\DefaultElemente.cs" />
+    <Compile Include="Reporting\BerichtErsteller\HinweißVorläufigesErgebnis.cs" />
+    <Compile Include="Reporting\BerichtErsteller\KampfBemerkungen.cs" />
+    <Compile Include="Reporting\BerichtErsteller\KampfInformationen.cs" />
+    <Compile Include="Reporting\BerichtErsteller\KampfTabelle.cs" />
+    <Compile Include="Reporting\BerichtErsteller\KampfTabelleKampfrichter.cs" />
+    <Compile Include="Reporting\BerichtErsteller\UnterschriftKampfrichter.cs" />
+    <Compile Include="Reporting\Pdf\ExportPdf.cs" />
     <Compile Include="Reporting\Konfig\CustomStyles.cs" />
     <Compile Include="Reporting\ReportSprecher.cs" />
     <Compile Include="Reporting\ReportErgebnislisteKampfrichtertischPdf.cs" />
