@@ -12,6 +12,7 @@
         <local:NullToVisiblityConverter x:Key="NullToVisiblity" />
         <local:IntToTimeConverter x:Key="IntToTimeConverter"/>
         <local:TimeRunningToVisiblityConverter x:Key="TimeRunningToVisiblity" />
+        <local:PointsSumConverter x:Key="PointsSumConverter" />
     </CoreUi:ExtendedNotifyPropertyChangedUserControl.Resources>
     <Grid Visibility="{Binding Bout, Converter={StaticResource NullToVisiblity}}" >
         <Grid.RowDefinitions>
@@ -75,12 +76,12 @@
             </Grid.ColumnDefinitions>
             <Border Background="Red"   Grid.Column="0">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="N. N." />
+                    <TextBlock Text="{Binding Bout.HomeWrestlerPoints}" />
                 </Viewbox>
             </Border>
             <Border Background="Red"   Grid.Column="2">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="N. N." />
+                    <TextBlock Text="{Binding Bout.HomeWrestlerWeight}" />
                 </Viewbox>
             </Border>
             <Border Grid.Column="3">
@@ -95,12 +96,12 @@
             </Border>
             <Border Background="LightSkyBlue" Grid.Column="5">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="N. N." />
+                    <TextBlock Text="{Binding Bout.OpponentWrestlerWeight}" />
                 </Viewbox>
             </Border>
             <Border Background="LightSkyBlue" Grid.Column="7">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="N. N." />
+                    <TextBlock Text="{Binding Bout.OpponentWrestlerPoints}" />
                 </Viewbox>
             </Border>
         </Grid>
@@ -144,7 +145,7 @@
             </Grid.ColumnDefinitions>
             <Border Background="Red" Grid.Column="0">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.HomeWrestlerPoints}" />
+                    <TextBlock Text="{Binding Bout.Points, Converter={StaticResource PointsSumConverter}, ConverterParameter='Home'}" />
                 </Viewbox>
             </Border>
             <Border Grid.Column="1">
@@ -154,7 +155,7 @@
             </Border>
             <Border Background="LightSkyBlue" Grid.Column="2">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.OpponentWrestlerPoints}" />
+                    <TextBlock Text="{Binding Bout.Points, Converter={StaticResource PointsSumConverter}, ConverterParameter='Opponent'}" />
                 </Viewbox>
             </Border>
         </Grid>

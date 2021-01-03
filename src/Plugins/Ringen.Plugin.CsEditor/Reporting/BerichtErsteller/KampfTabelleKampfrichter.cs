@@ -61,12 +61,12 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             AddKampfSpalte(zeile, kampf.KampfNr.ToString());
             AddKampfSpalte(zeile, kampf.WeightClass);
 
-            var homeWrestlerSpalte = AddKampfSpalte(zeile, kampf.IsNoHomeWrestler() ? "--" : kampf.HomeWrestlerFullnname.Trim());
+            var homeWrestlerSpalte = AddKampfSpalte(zeile, kampf.IsNoHomeWrestler() ? "--" : kampf.HomeWrestlerFullname.Trim());
             homeWrestlerSpalte.Borders.Color = Colors.Red;
             homeWrestlerSpalte.Format.Font.Bold = true;
             homeWrestlerSpalte.Format.Font.Color = Colors.Red;
 
-            var opponentWrestlerSpalte = AddKampfSpalte(zeile, kampf.IsNoOpponentWrestler() ? "--" : kampf.OpponentWrestlerFullnname.Trim());
+            var opponentWrestlerSpalte = AddKampfSpalte(zeile, kampf.IsNoOpponentWrestler() ? "--" : kampf.OpponentWrestlerFullname.Trim());
             opponentWrestlerSpalte.Borders.Color = Colors.Blue;
             opponentWrestlerSpalte.Format.Font.Bold = true;
             opponentWrestlerSpalte.Format.Font.Color = Colors.Blue;

@@ -62,30 +62,6 @@ namespace Ringen.Plugin.CsEditor
                 VorKampfRueckKampf = "Rückkampf"
             };
 
-            //TODO Löschen, sobald wirklich Punkte hinterlegt sind
-            Random rnd = new Random();
-            int cnt = 0;
-            foreach (Bout bout in competition.Children)
-            {
-                for (int i = 0; i < rnd.Next(1, 10); i++)
-                {
-                    var ringer = (rnd.Next(1, 3) == 1 ? Core.CS.BoutPoint.Wrestler.Home : Core.CS.BoutPoint.Wrestler.Opponent);
-
-                    var zeit = new DateTime(
-                        competition.BoutDateDateTime.Year,
-                        competition.BoutDateDateTime.Month,
-                        competition.BoutDateDateTime.Day,
-                        competition.ScaleTime.Hours,
-                        competition.ScaleTime.Minutes + cnt + i + 4,
-                        rnd.Next(1, 59)
-                    );
-
-                    bout.Points.Add(new Core.CS.BoutPoint(rnd.Next(1, 5).ToString(), null, ringer, zeit));
-                }
-
-                cnt++;
-            }
-
             return zusatzInfos;
         }
 

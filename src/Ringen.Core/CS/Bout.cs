@@ -112,7 +112,7 @@ namespace Ringen.Core.CS
 
                 double klasse = Convert.ToDouble(cleanWeightClass);
                 var random = new Random();
-                double zufallAbzug = (random.NextDouble() * random.Next(1,5));
+                double zufallAbzug = (random.NextDouble() * random.Next(1, 5));
 
                 return klasse - zufallAbzug;
             }
@@ -140,31 +140,31 @@ namespace Ringen.Core.CS
 
         public bool IsNoOpponentWrestler()
         {
-            return string.IsNullOrEmpty(OpponentWrestlerFullnname.Trim());
+            return string.IsNullOrEmpty(OpponentWrestlerFullname.Trim());
         }
 
         public bool IsNoHomeWrestler()
         {
-            return string.IsNullOrEmpty(HomeWrestlerFullnname.Trim());
+            return string.IsNullOrEmpty(HomeWrestlerFullname.Trim());
         }
 
         public int HomeWrestlerLicId { get { return Get<int>(Data["homeWrestlerLicId"]); } }
         public string HomeWrestlerName
         {
             get { return Get<string>(Data["homeWrestlerName"]); }
-            set { Set(ref Data, "homeWrestlerName", value); base.OnPropertyChanged("Value"); base.OnPropertyChanged("HomeWrestlerFullnname"); }
+            set { Set(ref Data, "homeWrestlerName", value); base.OnPropertyChanged("Value"); base.OnPropertyChanged("HomeWrestlerFullname"); }
         }
         public string HomeWrestlerGivenname
         {
             get { return Get<string>(Data["homeWrestlerGivenname"]); }
-            set { Set(ref Data, "homeWrestlerGivenname", value); base.OnPropertyChanged("Value"); base.OnPropertyChanged("HomeWrestlerFullnname"); }
+            set { Set(ref Data, "homeWrestlerGivenname", value); base.OnPropertyChanged("Value"); base.OnPropertyChanged("HomeWrestlerFullname"); }
         }
         public string HomeWrestlerStatus
         {
             get { return Get<string>(Data["homeWrestlerStatus"]); }
             set { Set(ref Data, "homeWrestlerStatus", value); }
         }
-        public string HomeWrestlerFullnname { get { return $"{Get<string>(Data["homeWrestlerGivenname"])} {Get<string>(Data["homeWrestlerName"])}"; } }
+        public string HomeWrestlerFullname { get { return $"{Get<string>(Data["homeWrestlerGivenname"])} {Get<string>(Data["homeWrestlerName"])}"; } }
         public int HomeWrestlerPoints { get { return Get<int>(Data["homeWrestlerPoints"]); } }
         public int HomeWrestlerFlags { get { return Get<int>(Data["homeWrestlerFlags"]); } }
 
@@ -201,19 +201,19 @@ namespace Ringen.Core.CS
         public string OpponentWrestlerName
         {
             get { return Get<string>(Data["opponentWrestlerName"]); }
-            set { Set(ref Data, "opponentWrestlerName", value); base.OnPropertyChanged("Value"); base.OnPropertyChanged("OpponentWrestlerFullnname"); }
+            set { Set(ref Data, "opponentWrestlerName", value); base.OnPropertyChanged("Value"); base.OnPropertyChanged("OpponentWrestlerFullname"); }
         }
         public string OpponentWrestlerGivenname
         {
             get { return Get<string>(Data["opponentWrestlerGivenname"]); }
-            set { Set(ref Data, "opponentWrestlerGivenname", value); base.OnPropertyChanged("Value"); base.OnPropertyChanged("OpponentWrestlerFullnname"); }
+            set { Set(ref Data, "opponentWrestlerGivenname", value); base.OnPropertyChanged("Value"); base.OnPropertyChanged("OpponentWrestlerFullname"); }
         }
         public string OpponentWrestlerStatus
         {
             get { return Get<string>(Data["opponentWrestlerStatus"]); }
             set { Set(ref Data, "opponentWrestlerStatus", value); }
         }
-        public string OpponentWrestlerFullnname { get { return $"{Get<string>(Data["opponentWrestlerGivenname"])} {Get<string>(Data["opponentWrestlerName"])}"; } }
+        public string OpponentWrestlerFullname { get { return $"{Get<string>(Data["opponentWrestlerGivenname"])} {Get<string>(Data["opponentWrestlerName"])}"; } }
         public int OpponentWrestlerPoints { get { return Get<int>(Data["opponentWrestlerPoints"]); } }
         public int OpponentWrestlerFlags { get { return Get<int>(Data["opponentWrestlerFlags"]); } }
         public BoutSettings.Results Result { get { return Get<BoutSettings.Results>(Data["result"]); } }
@@ -231,7 +231,11 @@ namespace Ringen.Core.CS
         {
             get
             {
-                if (points == null) points = new ObservableCollection<BoutPoint>();
+                if (points == null) 
+                {
+                    UpdateDetails();
+                    points.CollectionChanged += (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) => { base.OnPropertyChanged("Points");  };
+                }
                 return points;
             }
             set { points = value; }
@@ -259,7 +263,7 @@ namespace Ringen.Core.CS
 
         #endregion
 
-        #region internal functionas
+        #region internal functions
 
         private JObject defaultBout;
         private JObject DefaultBout
@@ -290,6 +294,35 @@ namespace Ringen.Core.CS
             }
         }
 
+        private void UpdateDetails()
+        {
+            points = new ObservableCollection<BoutPoint>();
+
+            Async.RunSync(async () =>
+            {
+                var AssetResponse = await PrivateREST.Client().GetAsync($"/BrvApi/v1/cs/?saisonId={Competition.SaisonId}&competitionId={Competition.CompetitionId}&order={Order}");
+
+                if (AssetResponse.IsSuccessStatusCode)
+                {
+                    var result = AssetResponse.Content.ReadAsStringAsync().Result;
+                    foreach (var BoutAnnotation in (JArray)JsonConvert.DeserializeObject(result))
+                    {
+                        if (BoutAnnotation["type"].ToString() == "points")
+                        {
+                            foreach (var Point in BoutAnnotation["value"].ToString().Split(','))
+                            {
+                                var tmpPoint = new Regex(@"(?<value>.*)(?<Wrestler>[r|b])(?<Time>\d*)").Match(Point);
+                                points.Add(new BoutPoint(tmpPoint.Groups["value"].Value, this, tmpPoint.Groups["Wrestler"].Value == "r" ? BoutPoint.Wrestler.Home : BoutPoint.Wrestler.Opponent, int.Parse(tmpPoint.Groups["Time"].Value)));
+                            }
+                        }
+                        else if (BoutAnnotation["type"].ToString() == "duration")
+                        {
+                            Settings.Times[BoutTime.Types.Bout.ToString()].Time = int.Parse(BoutAnnotation["value"].ToString());
+                        }
+                    }
+                }
+            });
+        }
 
         #endregion
     }

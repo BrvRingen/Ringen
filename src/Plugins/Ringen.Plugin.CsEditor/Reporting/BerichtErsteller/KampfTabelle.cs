@@ -231,7 +231,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             weightClass.Borders.Right.Color = colorRed;
 
             AddKampfSpalte(zeile, kampf.IsNoHomeWrestler() ? "--" : kampf.HomeWrestlerWeight.ToString("0.0")).Borders.Color = colorRed;
-            var homeWrestlerSpalte = AddKampfSpalte(zeile, kampf.IsNoHomeWrestler() ? "--" : kampf.HomeWrestlerFullnname.Trim());
+            var homeWrestlerSpalte = AddKampfSpalte(zeile, kampf.IsNoHomeWrestler() ? "--" : kampf.HomeWrestlerFullname.Trim());
             homeWrestlerSpalte.Borders.Color = colorRed;
             if (kampf.HomeWrestlerPoints > kampf.OpponentWrestlerPoints)
             {
@@ -249,7 +249,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             }
 
             AddKampfSpalte(zeile, kampf.IsNoOpponentWrestler() ? "--" : kampf.OpponentWrestlerWeight.ToString("0.0")).Borders.Color = colorBlue;
-            var opponentWrestlerSpalte = AddKampfSpalte(zeile, kampf.IsNoOpponentWrestler() ? "--" : kampf.OpponentWrestlerFullnname.Trim());
+            var opponentWrestlerSpalte = AddKampfSpalte(zeile, kampf.IsNoOpponentWrestler() ? "--" : kampf.OpponentWrestlerFullname.Trim());
             opponentWrestlerSpalte.Borders.Color = colorBlue;
             if (kampf.OpponentWrestlerPoints > kampf.HomeWrestlerPoints)
             {

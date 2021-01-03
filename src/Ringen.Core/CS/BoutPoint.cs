@@ -25,6 +25,24 @@ namespace Ringen.Core.CS
             Zeit = zeit;
         }
 
+        /// <summary>
+        /// Constructor für Abruf aus Homepage.
+        /// 
+        /// TODO: Übergabe der Zeit eines Punktes aus REST.
+        /// </summary>
+        /// <param name="Value"></param>
+        /// <param name="Bout"></param>
+        /// <param name="HomeOrOpponent"></param>
+        /// <param name="Time"></param>
+        public BoutPoint(string Value, Bout Bout, Wrestler? HomeOrOpponent, int Time)
+        {
+            this.Bout = Bout;
+            this.HomeOrOpponent = HomeOrOpponent;
+            this.Value = Value;
+            this.Time = Time;
+            Zeit = null;
+        }
+
         public BoutPoint(string value, Bout bout, Wrestler? homeOrOpponent = null) : this(value, bout, homeOrOpponent, DateTime.Now)
         {
         }

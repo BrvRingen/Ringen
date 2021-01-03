@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -88,4 +89,22 @@ namespace Ringen.Plugin.CsView
 
         #endregion
     }
+
+    public class PointsSumConverter : IValueConverter
+    {
+        #region public functions
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (value as ObservableCollection<Core.CS.BoutPoint>).Select(x => (x.HomeOrOpponent == (Wrestler)Enum.Parse(typeof(Wrestler), parameter.ToString()) && int.TryParse(x.Value, out int Point) ? Point : 0)).Sum();
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return null;
+        }
+
+        #endregion
+    }
+
 }
