@@ -311,7 +311,7 @@ namespace Ringen.Core.CS
                         {
                             foreach (var Point in BoutAnnotation["value"].ToString().Split(','))
                             {
-                                var tmpPoint = new Regex(@"(?<value>.*)(?<Wrestler>[r|b])(?<Time>\d*)").Match(Point);
+                                var tmpPoint = new Regex(@"(?<value>.*)(?<Wrestler>[R|B])(?<Time>\d*)").Match(Point.ToUpper());
                                 points.Add(new BoutPoint(tmpPoint.Groups["value"].Value, this, tmpPoint.Groups["Wrestler"].Value == "r" ? BoutPoint.Wrestler.Home : BoutPoint.Wrestler.Opponent, int.Parse(tmpPoint.Groups["Time"].Value)));
                             }
                         }

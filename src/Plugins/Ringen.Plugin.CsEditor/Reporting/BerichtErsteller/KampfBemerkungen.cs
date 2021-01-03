@@ -2,6 +2,7 @@
 using MigraDoc.DocumentObjectModel.Shapes;
 using MigraDoc.DocumentObjectModel.Tables;
 using Ringen.Core.CS;
+using Ringen.Core.Messaging;
 using Ringen.Plugin.CsEditor.Reporting.Konfig;
 using Ringen.Shared.Models;
 using System;
@@ -102,8 +103,18 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             paragraph.AddFormattedText($"{competition.ScaleTime:hh':'mm} Uhr");
             paragraph.AddLineBreak();
 
-            DateTime ersterKampf = competition.Children.Min(li => li.Points.Min(na => na.Zeit.Value));
-            DateTime letzterKampf = competition.Children.Max(li => li.Points.Max(na => na.Zeit.Value));
+            DateTime ersterKampf = DateTime.Now;
+            DateTime letzterKampf = DateTime.Now;
+            try
+            {
+                ersterKampf = competition.Children.Min(li => li.Points.Min(na => na.Zeit.Value));
+                letzterKampf = competition.Children.Max(li => li.Points.Max(na => na.Zeit.Value));
+            }
+            catch (Exception)
+            {
+                //TODO: Kampfzeiten konnten nicht ermittelt werden, weil na.Zeit == null war.
+                LoggerMessage.Send(new LogEntry(LogEntryType.Error, "Kampfzeiten konnten nicht ermittelt werden"));
+            }
 
             paragraph.AddFormattedText("Erster Kampf: ", TextFormat.Bold);
             paragraph.AddTab();
