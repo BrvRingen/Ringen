@@ -300,7 +300,7 @@ namespace Ringen.Core.CS
 
             Async.RunSync(async () =>
             {
-                var AssetResponse = await PrivateREST.Client().GetAsync($"/BrvApi/v1/cs/?saisonId={Competition.SaisonId}&competitionId={Competition.CompetitionId}&order={Order}");
+                var AssetResponse = await REST.Client().GetAsync($"/Api/v1/cs/?saisonId={Competition.SaisonId}&competitionId={Competition.CompetitionId}&order={Order}");
 
                 if (AssetResponse.IsSuccessStatusCode)
                 {
