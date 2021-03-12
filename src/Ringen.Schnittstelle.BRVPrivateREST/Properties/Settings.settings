@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Ringen.Schnittstelle.BRVPrivateREST.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="PrivateRestServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://www.SpVgg-Freising.de</Value>
+    </Setting>
+    <Setting Name="RestServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://www.brv-ringen.de</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

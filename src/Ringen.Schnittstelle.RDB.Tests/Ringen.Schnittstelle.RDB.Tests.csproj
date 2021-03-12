@@ -4,14 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F4BDD0B5-8268-4E68-BE6A-EAD3485AD2B1}</ProjectGuid>
+    <ProjectGuid>{72E2CC39-DA9A-4BC2-9856-0E1564A89DB2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ringen.Shared</RootNamespace>
-    <AssemblyName>Ringen.Shared</AssemblyName>
+    <RootNamespace>Ringen.Schnittstelle.RDB.Tests</RootNamespace>
+    <AssemblyName>Ringen.Schnittstelle.RDB.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,15 +44,48 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GlobaleVariablen.cs" />
-    <Compile Include="Models\CompetitionInfos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ErgebnisdienstTests.cs" />
+    <Compile Include="StartUp.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ringen.DependencyInjection\Ringen.DependencyInjection.csproj">
+      <Project>{b7f4860d-f7a8-4aae-ae34-9166ab9e8f7a}</Project>
+      <Name>Ringen.DependencyInjection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ringen.Schnittstelle.RDB\Ringen.Schnittstelle.RDB.csproj">
+      <Project>{f0356f4f-572c-4e16-8c75-b3972b1f89b8}</Project>
+      <Name>Ringen.Schnittstelle.RDB</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ringen.Schnittstellen.Contracts\Ringen.Schnittstellen.Contracts.csproj">
-      <Project>{17D6DADE-EBE8-4B4A-9EDA-014395CF42A5}</Project>
+      <Project>{17d6dade-ebe8-4b4a-9eda-014395cf42a5}</Project>
       <Name>Ringen.Schnittstellen.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Ringen.Shared\Ringen.Shared.csproj">
+      <Project>{f4bdd0b5-8268-4e68-be6a-ead3485ad2b1}</Project>
+      <Name>Ringen.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ringen.Tests.Shared\Ringen.Tests.Shared.csproj">
+      <Project>{01440d20-4c41-4c0c-ad73-fa1c08139693}</Project>
+      <Name>Ringen.Tests.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions">
+      <Version>5.10.3</Version>
+    </PackageReference>
+    <PackageReference Include="NUnit">
+      <Version>3.13.1</Version>
+    </PackageReference>
+    <PackageReference Include="NUnit3TestAdapter">
+      <Version>3.17.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

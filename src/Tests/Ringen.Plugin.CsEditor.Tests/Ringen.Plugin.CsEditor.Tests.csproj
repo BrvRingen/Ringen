@@ -70,6 +70,10 @@
       <Project>{f4bdd0b5-8268-4e68-be6a-ead3485ad2b1}</Project>
       <Name>Ringen.Shared</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Ringen.Tests.Shared\Ringen.Tests.Shared.csproj">
+      <Project>{01440d20-4c41-4c0c-ad73-fa1c08139693}</Project>
+      <Name>Ringen.Tests.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json">

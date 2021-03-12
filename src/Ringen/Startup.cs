@@ -12,8 +12,6 @@ namespace Ringen
 {
     public class Startup
     {
-
-
         private static int exitCode;
 
         [STAThread]
@@ -69,9 +67,9 @@ namespace Ringen
             }
 
 
-                (new App()).Run();
+            (new App()).Run();
 
-                return ExitCode;
+            return ExitCode;
         }
 
         public static int ExitCode
