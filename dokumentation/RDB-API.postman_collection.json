@@ -1,0 +1,493 @@
+{
+	"info": {
+		"_postman_id": "11dd59d2-fd09-4eff-8e7d-385d0e795cef",
+		"name": "RDB-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Hilfe",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://test.rdb.ringen-nrw.de/index.php?sv=json&tk=jr:cs&op=help",
+					"protocol": "http",
+					"host": [
+						"test",
+						"rdb",
+						"ringen-nrw",
+						"de"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "sv",
+							"value": "json"
+						},
+						{
+							"key": "tk",
+							"value": "jr:cs"
+						},
+						{
+							"key": "op",
+							"value": "help"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listSaison: Saison-Liste",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://test.rdb.ringen-nrw.de/index.php?sv=json&tk=jr:cs&op=listSaison",
+					"protocol": "http",
+					"host": [
+						"test",
+						"rdb",
+						"ringen-nrw",
+						"de"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "sv",
+							"value": "json"
+						},
+						{
+							"key": "tk",
+							"value": "jr:cs"
+						},
+						{
+							"key": "op",
+							"value": "listSaison"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getSaison: Saison 2019",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://test.rdb.ringen-nrw.de/index.php?sv=json&tk=jr:cs&op=getSaison&sid=2019",
+					"protocol": "http",
+					"host": [
+						"test",
+						"rdb",
+						"ringen-nrw",
+						"de"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "sv",
+							"value": "json"
+						},
+						{
+							"key": "tk",
+							"value": "jr:cs"
+						},
+						{
+							"key": "op",
+							"value": "getSaison"
+						},
+						{
+							"key": "sid",
+							"value": "2019"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getSaisonOverview: Saison Overview 2019",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://test.rdb.ringen-nrw.de/index.php?sv=json&tk=jr:cs&op=getSaisonOverview&sid=2019",
+					"protocol": "http",
+					"host": [
+						"test",
+						"rdb",
+						"ringen-nrw",
+						"de"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "sv",
+							"value": "json"
+						},
+						{
+							"key": "tk",
+							"value": "jr:cs"
+						},
+						{
+							"key": "op",
+							"value": "getSaisonOverview"
+						},
+						{
+							"key": "sid",
+							"value": "2019"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listLiga: Liga 2019",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://test.rdb.ringen-nrw.de/index.php?sv=json&tk=jr:cs&op=listLiga&sid=2019",
+					"protocol": "http",
+					"host": [
+						"test",
+						"rdb",
+						"ringen-nrw",
+						"de"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "sv",
+							"value": "json"
+						},
+						{
+							"key": "tk",
+							"value": "jr:cs"
+						},
+						{
+							"key": "op",
+							"value": "listLiga"
+						},
+						{
+							"key": "sid",
+							"value": "2019"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTable: Tabelle 2019 Oberliga Westfalen",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://test.rdb.ringen-nrw.de/index.php?sv=json&tk=jr:cs&op=getTable&sid=2019&ligaId=Oberliga&rid=Westfalen",
+					"protocol": "http",
+					"host": [
+						"test",
+						"rdb",
+						"ringen-nrw",
+						"de"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "sv",
+							"value": "json"
+						},
+						{
+							"key": "tk",
+							"value": "jr:cs"
+						},
+						{
+							"key": "op",
+							"value": "getTable"
+						},
+						{
+							"key": "sid",
+							"value": "2019"
+						},
+						{
+							"key": "ligaId",
+							"value": "Oberliga"
+						},
+						{
+							"key": "rid",
+							"value": "Westfalen"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listCompetition: CompetitionListe 2019 Oberliga Westfalen",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://test.rdb.ringen-nrw.de/index.php?sv=json&tk=jr:cs&op=listCompetition&sid=2019&ligaId=Oberliga&rid=Westfalen",
+					"protocol": "http",
+					"host": [
+						"test",
+						"rdb",
+						"ringen-nrw",
+						"de"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "sv",
+							"value": "json"
+						},
+						{
+							"key": "tk",
+							"value": "jr:cs"
+						},
+						{
+							"key": "op",
+							"value": "listCompetition"
+						},
+						{
+							"key": "sid",
+							"value": "2019"
+						},
+						{
+							"key": "ligaId",
+							"value": "Oberliga"
+						},
+						{
+							"key": "rid",
+							"value": "Westfalen"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCompetition: Competition 011008a 2019 Oberliga Westfalen",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://test.rdb.ringen-nrw.de/index.php?sv=json&tk=jr:cs&op=getCompetition&sid=2019&cid=011008a",
+					"protocol": "http",
+					"host": [
+						"test",
+						"rdb",
+						"ringen-nrw",
+						"de"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "sv",
+							"value": "json"
+						},
+						{
+							"key": "tk",
+							"value": "jr:cs"
+						},
+						{
+							"key": "op",
+							"value": "getCompetition"
+						},
+						{
+							"key": "sid",
+							"value": "2019"
+						},
+						{
+							"key": "cid",
+							"value": "011008a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCompetitionScheme",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://test.rdb.ringen-nrw.de/index.php?sv=json&tk=jr:cs&op=getCompetitionScheme&sid=2019&cid=011008a",
+					"protocol": "http",
+					"host": [
+						"test",
+						"rdb",
+						"ringen-nrw",
+						"de"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "sv",
+							"value": "json"
+						},
+						{
+							"key": "tk",
+							"value": "jr:cs"
+						},
+						{
+							"key": "op",
+							"value": "getCompetitionScheme"
+						},
+						{
+							"key": "sid",
+							"value": "2019"
+						},
+						{
+							"key": "cid",
+							"value": "011008a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listOrgBoutday: Kampftage Saison 2019",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://test.rdb.ringen-nrw.de/index.php?sv=json&tk=jr:cs&op=listOrgBoutday&sid=2019",
+					"protocol": "http",
+					"host": [
+						"test",
+						"rdb",
+						"ringen-nrw",
+						"de"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "sv",
+							"value": "json"
+						},
+						{
+							"key": "tk",
+							"value": "jr:cs"
+						},
+						{
+							"key": "op",
+							"value": "listOrgBoutday"
+						},
+						{
+							"key": "sid",
+							"value": "2019"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listBoutday",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://test.rdb.ringen-nrw.de/index.php?sv=json&tk=jr:cs&op=listBoutday&sid=2019",
+					"protocol": "http",
+					"host": [
+						"test",
+						"rdb",
+						"ringen-nrw",
+						"de"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "sv",
+							"value": "json"
+						},
+						{
+							"key": "tk",
+							"value": "jr:cs"
+						},
+						{
+							"key": "op",
+							"value": "listBoutday"
+						},
+						{
+							"key": "sid",
+							"value": "2019"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getSaisonWrestler",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://test.rdb.ringen-nrw.de/index.php?sv=json&tk=jr:cs&op=listOrgBoutday&sid=2019",
+					"protocol": "http",
+					"host": [
+						"test",
+						"rdb",
+						"ringen-nrw",
+						"de"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "sv",
+							"value": "json"
+						},
+						{
+							"key": "tk",
+							"value": "jr:cs"
+						},
+						{
+							"key": "op",
+							"value": "listOrgBoutday"
+						},
+						{
+							"key": "sid",
+							"value": "2019"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
