@@ -38,16 +38,15 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.ErgebnisdienstTests
         }
 
         [Test]
-        [TestCase("2019", "011008a")]
-        public void GetMannschaftskampf_erwarte_korrekte_Daten(string saisonId, string wettkampfId)
+        public void Abgeschlossene_Saison_erwarte_korrekte_Daten()
         {
-            Tuple<Mannschaftskampf, List<Einzelkampf>> wettkampf = _ergebnisdienst.GetMannschaftskampf(saisonId, wettkampfId);
+            Tuple<Mannschaftskampf, List<Einzelkampf>> wettkampf = _ergebnisdienst.GetMannschaftskampf("2019", "011008a");
 
             wettkampf.Should().NotBeNull();
             wettkampf.Item1.Should().NotBeNull();
             wettkampf.Item2.Should().NotBeNull();
 
-            wettkampf.Item1.CompetitionId.Should().Be(wettkampfId);
+            wettkampf.Item1.CompetitionId.Should().Be("011008a");
             wettkampf.Item1.HeimMannschaft.Should().Be("TV Essen-Dellwig");
             wettkampf.Item1.GastMannschaft.Should().Be("TSG Herdecke");
             wettkampf.Item1.Wettkampfstaette.Should().Be("Gertrud-Bäumer-Realschule, Grünstraße 54, 45326 Essen");
@@ -63,7 +62,33 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.ErgebnisdienstTests
             wettkampf.Item1.Sieger.Should().Be(HeimGast.Heim);
         }
 
+        [Test]
+        public void Offene_Saison_erwarte_korrekte_Daten()
+        {
+            Tuple<Mannschaftskampf, List<Einzelkampf>> wettkampf = _ergebnisdienst.GetMannschaftskampf("2020", "047012b");
+
+            wettkampf.Should().NotBeNull();
+            wettkampf.Item1.Should().NotBeNull();
+            wettkampf.Item2.Count.Should().Be(0); //Keine Einzelkämpfe, da Kampf noch nicht stattgefunden
+
+            wettkampf.Item1.CompetitionId.Should().Be("047012b");
+            wettkampf.Item1.HeimMannschaft.Should().Be("AC Mülheim am Rhein II");
+            wettkampf.Item1.GastMannschaft.Should().Be("KSK Konkordia Neuss II");
+            wettkampf.Item1.Wettkampfstaette.Should().Be("Sporthalle, Bergischer Ring 40, 51063 Köln");
+            wettkampf.Item1.Schiedsrichter.Should().Be("");
+            wettkampf.Item1.IstErgebnisGeprueft.Should().BeFalse();
+            wettkampf.Item1.Kampfdatum.Should().Be(new DateTime(2020, 9, 5));
+            wettkampf.Item1.GeplanterKampfbeginn.Should().Be(new TimeSpan(19, 0, 0));
+            wettkampf.Item1.EchterKampfbeginn.Should().Be(new TimeSpan(0, 0, 0));
+            wettkampf.Item1.EchtesKampfende.Should().Be(new TimeSpan(0, 0, 0));
+            wettkampf.Item1.AnzahlZuschauer.Should().Be(0);
+            wettkampf.Item1.HeimPunkte.Should().Be(0);
+            wettkampf.Item1.GastPunkte.Should().Be(0);
+            wettkampf.Item1.Sieger.Should().Be(HeimGast.Unbekannt);
+        }
+
+
         //TODO: GetWettkampf_wennPunkteUndValidatedPunkteUnterschiedlich_erwarte_korrekte_Daten
-        //TODO: GetWettkampf_wennNochKeinErgebnis_erwarte_korrekte_Daten
+
     }
 }

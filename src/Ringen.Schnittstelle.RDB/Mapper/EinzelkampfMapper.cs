@@ -57,7 +57,6 @@ namespace Ringen.Schnittstelle.RDB.Mapper
                 Kommentar = apiModel.Annotations.FirstOrDefault(li => li.Type.Equals("comment", StringComparison.OrdinalIgnoreCase)).Value
             };
 
-            //TODO: Mapping Points
             var punkteString = apiModel.Annotations.FirstOrDefault(li => li.Type.Equals("points", StringComparison.OrdinalIgnoreCase)).Value;
 
             var griffbewertungspunkte = new List<Griffbewertungspunkt>();

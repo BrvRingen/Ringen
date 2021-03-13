@@ -21,7 +21,7 @@ namespace Ringen.Schnittstelle.RDB.Mapper
                 GastMannschaft = apiModel.OpponentTeamName,
                 Wettkampfstaette = apiModel.Location,
                 Kommentar = apiModel.EditorComment,
-                Schiedsrichter = $"{apiModel.RefereeName}, {apiModel.RefereeGivenname}",
+                Schiedsrichter = $"{apiModel.RefereeName}{(!string.IsNullOrEmpty(apiModel.RefereeGivenname) ? $", {apiModel.RefereeGivenname}" : string.Empty)}",
                 IstErgebnisGeprueft = !string.IsNullOrEmpty(apiModel.ControlledAt) && !string.IsNullOrEmpty(apiModel.ControlledBy)
             };
             
