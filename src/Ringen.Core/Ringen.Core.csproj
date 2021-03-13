@@ -39,7 +39,6 @@
     <Compile Include="Explorer.cs" />
     <Compile Include="Helpers\AsyncHelpers.cs" />
     <Compile Include="Helpers\PasswordBoxHelper.cs" />
-    <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Helpers\RunInUI.cs" />
     <Compile Include="IExplorerItem.cs" />
     <Compile Include="Messaging\ExitCode\ExitCodeMessage.cs" />
@@ -108,5 +107,10 @@
     </None>
     <None Include="TranslationManager\DictionaryToEnum.ttinclude" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Ringen.Shared\Ringen.Shared.csproj">
+      <Project>{f4bdd0b5-8268-4e68-be6a-ead3485ad2b1}</Project>
+      <Name>Ringen.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

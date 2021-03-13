@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
 using Ringen.Schnittstelle.RDB.Factories;
@@ -86,9 +84,5 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.ErgebnisdienstTests
             wettkampf.Item1.GastPunkte.Should().Be(0);
             wettkampf.Item1.Sieger.Should().Be(HeimGast.Unbekannt);
         }
-
-
-        //TODO: GetWettkampf_wennPunkteUndValidatedPunkteUnterschiedlich_erwarte_korrekte_Daten
-
     }
 }

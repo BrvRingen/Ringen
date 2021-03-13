@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ringen.Schnittstellen.Contracts.Models
+﻿namespace Ringen.Schnittstellen.Contracts.Models
 {
     public class Ringer
     {

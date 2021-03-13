@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Ringen.Schnittstelle.RDB.ApiModels;
 using Ringen.Schnittstellen.Contracts.Exceptions;
 using Ringen.Schnittstellen.Contracts.Models;
@@ -27,7 +23,6 @@ namespace Ringen.Schnittstelle.RDB.Mapper
             
             try
             {
-                //TODO: Wie sehen die Werte bei einem noch offenen Kampf aus?
                 result.Kampfdatum = DateTime.Parse(apiModel.BoutDate);
                 result.GeplanterKampfbeginn = TimeSpan.Parse(apiModel.ScaleTime);
                 

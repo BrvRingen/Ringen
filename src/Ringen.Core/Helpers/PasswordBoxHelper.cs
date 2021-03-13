@@ -2,6 +2,7 @@
 using System.Security;
 using System.Windows;
 using System.Windows.Controls;
+using Ringen.Shared.Helpers;
 
 namespace Ringen.Core
 {

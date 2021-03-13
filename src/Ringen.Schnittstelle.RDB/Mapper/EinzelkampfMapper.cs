@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Ringen.Schnittstelle.RDB.ApiModels;
 using Ringen.Schnittstellen.Contracts.Models;

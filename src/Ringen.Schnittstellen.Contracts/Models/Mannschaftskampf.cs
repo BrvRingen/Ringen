@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Ringen.Schnittstellen.Contracts.Models.Enums;
 
 namespace Ringen.Schnittstellen.Contracts.Models

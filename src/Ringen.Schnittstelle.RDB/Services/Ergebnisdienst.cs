@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Newtonsoft.Json.Linq;
 using Ringen.Schnittstelle.RDB.ApiModels;
 using Ringen.Schnittstelle.RDB.Mapper;

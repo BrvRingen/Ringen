@@ -52,6 +52,8 @@
     <Compile Include="ApiModels\SaisonApiModel.cs" />
     <Compile Include="ApiModels\LigaApiModel.cs" />
     <Compile Include="ApiModels\WrestlerApiModel.cs" />
+    <Compile Include="ConfigSections\ConfigurationElemente\RdbServerConfigurationElement.cs" />
+    <Compile Include="ConfigSections\RdbConfigSection.cs" />
     <Compile Include="DependencyInjection\RDBDiModule.cs" />
     <Compile Include="Factories\RdbServiceErsteller.cs" />
     <Compile Include="Mapper\EinzelkampfMapper.cs" />
@@ -100,8 +102,6 @@
       <Name>Ringen.Shared</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ConfigSections\ConfigurationElemente\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

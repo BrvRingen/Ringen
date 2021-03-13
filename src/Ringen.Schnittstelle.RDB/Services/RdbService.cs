@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Flurl;
 using Http.Library.Services;
 using Newtonsoft.Json.Linq;
-using NLog.Fluent;
 using Ringen.Schnittstelle.RDB.Models;
 
 namespace Ringen.Schnittstelle.RDB.Services

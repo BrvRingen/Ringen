@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security;
 
-namespace Ringen.Core
+namespace Ringen.Shared.Helpers
 {
     public static class PasswordHelper
     {
