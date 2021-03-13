@@ -21,7 +21,6 @@ namespace Ringen.Core.Messaging
     /// </summary>
     public abstract class MessageBase
     {
-        #region properties
         /// <summary>
         /// Gets or sets the message's sender.
         /// </summary>
@@ -33,9 +32,7 @@ namespace Ringen.Core.Messaging
         /// this is only an indication, amd may be null.
         /// </summary>
         public object Target { get; protected set; }
-        #endregion properties
 
-        #region constructors
         /// <summary>
         /// Initializes a new instance of the MessageBase class.
         /// </summary>
@@ -64,9 +61,7 @@ namespace Ringen.Core.Messaging
         {
             Target = target;
         }
-        #endregion constructors
 
-        #region methods
         public static void Register<TMessage>(object recipient, System.Action<TMessage> action, bool keepTargetAlive = false)
         {
             GalaSoft.MvvmLight.Messaging.Messenger.Default.Register(recipient, action, keepTargetAlive);
@@ -76,13 +71,10 @@ namespace Ringen.Core.Messaging
         {
             GalaSoft.MvvmLight.Messaging.Messenger.Default.Unregister(recipient);
         }
-        #endregion methods
 
-        #region private methods
         public static void Send<TMessage>(TMessage message)
         {
             GalaSoft.MvvmLight.Messaging.Messenger.Default.Send(message);
         }
-        #endregion private methods
     }
 }

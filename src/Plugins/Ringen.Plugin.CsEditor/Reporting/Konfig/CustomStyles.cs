@@ -21,6 +21,8 @@ namespace Ringen.Plugin.CsEditor.Reporting.Konfig
         public const string fontUeberschriften = "Arial";
         public const string fontText = "Times New Roman";
 
+        public static readonly Color ROT = Color.FromRgb(230, 0, 0);
+        public static readonly Color BLAU = Color.FromRgb(0, 0, 140);
         internal static void Definiere(Document document)
         {
             Style style = document.Styles["Normal"];
@@ -49,12 +51,12 @@ namespace Ringen.Plugin.CsEditor.Reporting.Konfig
             style.Font.Size = fontSizeNormal;
 
             style = document.Styles.AddStyle(WERTUNG_ROT, "Normal");
-            style.Font.Color = Colors.Red;
+            style.Font.Color = ROT;
             style.Font.Bold = true;
             style.Font.Underline = Underline.Single;
 
             style = document.Styles.AddStyle(WERTUNG_BLAU, "Normal");
-            style.Font.Color = Colors.Blue;
+            style.Font.Color = BLAU;
             style.Font.Bold = true;
             style.Font.Italic = true;
 

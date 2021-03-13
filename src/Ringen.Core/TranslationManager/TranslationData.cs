@@ -6,12 +6,8 @@ namespace Ringen.Core.TranslationManager
 {
     public class TranslationData : IWeakEventListener, INotifyPropertyChanged
     {
-        #region Private Members
-
         private string _resource;
         private string _key;
-
-        #endregion
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TranslationData"/> class.
@@ -42,8 +38,6 @@ namespace Ringen.Core.TranslationManager
             }
         }
 
-        #region IWeakEventListener Members
-
         public bool ReceiveWeakEvent(Type managerType, object sender, EventArgs e)
         {
             if (managerType == typeof(LanguageChangedEventManager))
@@ -59,12 +53,6 @@ namespace Ringen.Core.TranslationManager
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Value"));
         }
 
-        #endregion
-
-        #region INotifyPropertyChanged Members
-
         public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion
     }
 }

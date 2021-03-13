@@ -8,15 +8,11 @@ namespace Ringen.Core.PluginSystem
 {
     public sealed class PluginAssemblyAttribute : Attribute
     {
-        #region properties
         public Type EntryPoint { get; }
-        #endregion properties
 
-        #region constructors
         public PluginAssemblyAttribute(Type entryPoint)
         {
             EntryPoint = entryPoint;
         }
-        #endregion constructors
     }
 }

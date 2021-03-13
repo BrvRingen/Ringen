@@ -65,12 +65,12 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             if (homePoints > opponentPoints)
             {
                 sieger = $"{homeTeamName}";
-                colorText = Colors.Red;
+                colorText = CustomStyles.ROT;
             }
             else if (homePoints < opponentPoints)
             {
                 sieger = $"{opponentTeamName}";
-                colorText = Colors.Blue;
+                colorText = CustomStyles.BLAU;
             }
             else if (homePoints == opponentPoints)
             {

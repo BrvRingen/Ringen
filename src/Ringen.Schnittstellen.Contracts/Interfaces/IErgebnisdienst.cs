@@ -27,13 +27,5 @@ namespace Ringen.Schnittstellen.Contracts.Interfaces
         List<Mannschaftskampf> GetMannschaftskaempfe(string saisonId, string ligaId, string tableId);
 
         Tuple<Liga, List<Tabellenplatzierung>> GetLigaMitPlatzierung(string saisonId, string ligaId, string tableId);
-
-        List<Liga> GetLigen(string saisonId);
-
-        Tuple<Saison, Leistungsklasse> GetSaison(string saisonId);
-
-        List<Saison> GetSaisons();
-
-        List<Mannschaft> GetMannschaften(string saisonId, string ligaId, string tableId);
     }
 }

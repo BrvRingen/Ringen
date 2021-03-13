@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using Ringen.Schnittstelle.RDB.ApiModels;
 using Ringen.Schnittstellen.Contracts.Models;
 using Ringen.Schnittstellen.Contracts.Models.Enums;
@@ -12,6 +13,32 @@ namespace Ringen.Schnittstelle.RDB.Mapper
 {
     internal class EinzelkampfMapper
     {
+        public List<Einzelkampf> Map(JToken[] kaempfeJArray)
+        {
+            return kaempfeJArray.Select(kampfJToken => Map(kampfJToken)).ToList();
+        }
+
+        public Einzelkampf Map(JToken kampfJToken)
+        {
+            var apiModel = kampfJToken.ToObject<BoutApiModel>();
+            var annotationApiModelListe = kampfJToken["annotation"]["1"].Select(li => li.FirstOrDefault().ToObject<AnnotationApiModel>()).ToList();
+            apiModel.Annotations = annotationApiModelListe.ToList();
+
+            return Map(apiModel);
+        }
+
+        public EinzelkampfSchema Map(BoutSchemaApiModel apiModel)
+        {
+            var result = new EinzelkampfSchema
+            {
+                KampfNr = int.Parse(apiModel.Order),
+                Gewichtsklasse = apiModel.WeightClass,
+                Stilart = ErmittleStilart(apiModel.Style)
+            };
+
+            return result;
+        }
+
         public Einzelkampf Map(BoutApiModel apiModel)
         {
             Einzelkampf result = new Einzelkampf

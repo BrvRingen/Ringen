@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="ApiModels\AnnotationApiModel.cs" />
     <Compile Include="ApiModels\BoutApiModel.cs" />
+    <Compile Include="ApiModels\BoutdayApiModel.cs" />
+    <Compile Include="ApiModels\BoutSchemaApiModel.cs" />
     <Compile Include="ApiModels\CompetitionApiModel.cs" />
     <Compile Include="ApiModels\SystemApiModel.cs" />
     <Compile Include="ApiModels\TeamApiModel.cs" />
@@ -53,6 +55,7 @@
     <Compile Include="DependencyInjection\RDBDiModule.cs" />
     <Compile Include="Factories\RdbServiceErsteller.cs" />
     <Compile Include="Mapper\EinzelkampfMapper.cs" />
+    <Compile Include="Mapper\KampftagMapper.cs" />
     <Compile Include="Mapper\LeistungsklasseMapper.cs" />
     <Compile Include="Mapper\MannschaftMapper.cs" />
     <Compile Include="Mapper\RingerMapper.cs" />
@@ -64,6 +67,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Ergebnisdienst.cs" />
     <Compile Include="Services\RdbService.cs" />
+    <Compile Include="Services\SaisonInformationen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="RDB-Info.md" />

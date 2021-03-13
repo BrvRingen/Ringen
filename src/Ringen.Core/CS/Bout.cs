@@ -17,8 +17,6 @@ namespace Ringen.Core.CS
 {
     public class Bout : ExtendedNotifyPropertyChanged, IExplorerItem
     {
-        #region properties
-
         private JObject Data;
         public IExplorerItem ExplorerParent { get; }
 
@@ -243,9 +241,6 @@ namespace Ringen.Core.CS
 
         public List<bool> Children { get; set; }
 
-        #endregion
-
-        #region constructors
         public Bout(JObject Data, IExplorerItem Parent)
         {
             this.Data = Data;
@@ -260,10 +255,6 @@ namespace Ringen.Core.CS
             Data["style"] = Style;
             this.ExplorerParent = Parent;
         }
-
-        #endregion
-
-        #region internal functions
 
         private JObject defaultBout;
         private JObject DefaultBout
@@ -323,7 +314,5 @@ namespace Ringen.Core.CS
                 }
             });
         }
-
-        #endregion
     }
 }

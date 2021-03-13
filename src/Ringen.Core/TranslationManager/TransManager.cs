@@ -9,24 +9,14 @@ namespace Ringen.Core.TranslationManager
 {
     public class TransManager
     {
-        #region declarations
-
         private static TransManager _translationManager;
 
         public event EventHandler LanguageChanged;
-
-        #endregion
-
-        #region constructor
 
         public TransManager()
         {
             TranslationProvider = new ResxTranslationProvider();
         }
-
-        #endregion
-
-        #region properties
 
         public CultureInfo CurrentLanguage
         {
@@ -65,18 +55,10 @@ namespace Ringen.Core.TranslationManager
 
         public ITranslationProvider TranslationProvider { get; set; }
 
-        #endregion
-
-        #region events
-
         private void OnLanguageChanged()
         {
             LanguageChanged?.Invoke(this, EventArgs.Empty);
         }
-
-        #endregion
-
-        #region public functions
 
         public void AddTranslationResource(object _resource, string _baseName, Assembly _assembly)
         {
@@ -101,9 +83,6 @@ namespace Ringen.Core.TranslationManager
             return string.Format("!{0}!", key);
         }
 
-        #endregion
-
-        #region static functions
         public static string TranslateString(string resource, string key, CultureInfo culture = null) { return Instance.Translate(resource, key, culture).ToString().Replace(@"\n", Environment.NewLine); }
         public static string TranslateString(Enum key, CultureInfo culture = null) { return Instance.Translate(key.GetType().FullName.Replace(".", "_"), key, culture).ToString().Replace(@"\n", Environment.NewLine); }
 
@@ -121,7 +100,5 @@ namespace Ringen.Core.TranslationManager
 
         public static string TranslateString(string resource, string key, CultureInfo culture = null, params object[] args) { return string.Format(Instance.Translate(resource, key, culture).ToString(), args).Replace(@"\n", Environment.NewLine); }
         public static string TranslateString(Enum key, CultureInfo culture = null, params object[] args) { return string.Format(Instance.Translate(key.GetType().FullName.Replace(".", "_"), key, culture).ToString(), args).Replace(@"\n", Environment.NewLine); }
-
-        #endregion
     }
 }

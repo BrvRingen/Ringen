@@ -5,7 +5,6 @@ namespace Ringen.Core.Services
 {
     public static class Service
     {
-        #region properties
         public static IPluginService Plugin => ServiceBasic.GetService<IPluginService>();
         public static IRingenService Ringen => ServiceBasic.GetService<IRingenService>();
         public static ILoginService Login => ServiceBasic.GetService<ILoginService>();
@@ -59,9 +58,7 @@ namespace Ringen.Core.Services
 #endif
             }
         }
-        #endregion properties
 
-        #region constructors
         static Service()
         {
             if (IsInDesignMode || IsInUnitTestMode)
@@ -70,7 +67,5 @@ namespace Ringen.Core.Services
             ServiceBasic.Register(typeof(IPluginService), typeof(PluginService));
             ServiceBasic.Register(typeof(ILoginService), typeof(LoginService));
         }
-        #endregion constructors
-
     }
 }

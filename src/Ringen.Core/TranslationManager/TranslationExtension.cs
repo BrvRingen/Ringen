@@ -14,14 +14,8 @@ namespace Ringen.Core.TranslationManager
     {
         private static List<string> designModeLoaded = new List<string>();
 
-        #region Private Members
-
         private string _resource;
         private string _key;
-
-        #endregion
-
-        #region Construction
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TranslateExtension"/> class.
@@ -40,8 +34,6 @@ namespace Ringen.Core.TranslationManager
             this._resource = resource;
             this._key = key;
         }
-
-        #endregion
 
         [ConstructorArgument("Resource")]
         public string Resource

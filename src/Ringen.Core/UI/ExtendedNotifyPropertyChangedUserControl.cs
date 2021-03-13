@@ -12,13 +12,7 @@ namespace Ringen.Core.UI
 {
     public abstract class ExtendedNotifyPropertyChangedUserControl : UserControl, INotifyPropertyChanged
     {
-        #region declarations
-
         public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion
-
-        #region public functions
 
         /// <summary>
         /// Returns the value of the parsed XmlAttribute.
@@ -79,9 +73,6 @@ namespace Ringen.Core.UI
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(_property));
         }
 
-        #endregion
-
-        #region internal functions
         /*
         /// <summary>
         /// Verifies whether the current class provides a property with a given
@@ -108,6 +99,5 @@ namespace Ringen.Core.UI
             }
         }
         */
-        #endregion
     }
 }

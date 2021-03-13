@@ -133,10 +133,10 @@ namespace Ringen.Plugin.CsEditor.Reporting
             AddKopfSpalte(kopfzeile, "Kampf-Nr.");
             AddKopfSpalte(kopfzeile, "Bis kg");
             var spalteRot = AddKopfSpalte(kopfzeile, "Name Rot");
-            spalteRot.Shading.Color = Colors.Red;
+            spalteRot.Shading.Color = CustomStyles.ROT;
 
             var spalteBlau = AddKopfSpalte(kopfzeile, "Name Blau");
-            spalteBlau.Shading.Color = Colors.Blue;
+            spalteBlau.Shading.Color = CustomStyles.BLAU;
         }
 
         private void InhaltKampfzeile(Row zeile, Bout kampf)
@@ -145,14 +145,14 @@ namespace Ringen.Plugin.CsEditor.Reporting
             AddKampfSpalte(zeile, kampf.WeightClass);
 
             var homeWrestlerSpalte = AddKampfSpalte(zeile, kampf.IsNoHomeWrestler() ? "--" : kampf.HomeWrestlerFullname.Trim());
-            homeWrestlerSpalte.Borders.Color = Colors.Red;
+            homeWrestlerSpalte.Borders.Color = CustomStyles.ROT;
             homeWrestlerSpalte.Format.Font.Bold = true;
-            homeWrestlerSpalte.Format.Font.Color = Colors.Red;
+            homeWrestlerSpalte.Format.Font.Color = CustomStyles.ROT;
 
             var opponentWrestlerSpalte = AddKampfSpalte(zeile, kampf.IsNoOpponentWrestler() ? "--" : kampf.OpponentWrestlerFullname.Trim());
-            opponentWrestlerSpalte.Borders.Color = Colors.Blue;
+            opponentWrestlerSpalte.Borders.Color = CustomStyles.BLAU;
             opponentWrestlerSpalte.Format.Font.Bold = true;
-            opponentWrestlerSpalte.Format.Font.Color = Colors.Blue;
+            opponentWrestlerSpalte.Format.Font.Color = CustomStyles.BLAU;
         }
         
         private int _kampfSpaltenCounter = 0;

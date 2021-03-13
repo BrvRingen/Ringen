@@ -10,13 +10,7 @@ namespace Ringen.Core.TranslationManager
     /// </summary>
     public class ResxTranslationProvider : ITranslationProvider
     {
-        #region Private Members
-
         private Dictionary<string, ResourceManager> _resourceManager;
-
-        #endregion
-
-        #region Construction
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ResxTranslationProvider"/> class.
@@ -27,10 +21,6 @@ namespace Ringen.Core.TranslationManager
         {
             _resourceManager = new Dictionary<string, ResourceManager>();
         }
-
-        #endregion
-
-        #region ITranslationProvider Members
 
         /// <summary>
         /// See <see cref="ITranslationProvider.Translate" />
@@ -48,10 +38,6 @@ namespace Ringen.Core.TranslationManager
                 return _resourceManager[resource].GetString(key, culture);
         }
 
-        #endregion
-
-        #region ITranslationProvider Members
-
         /// <summary>
         /// See <see cref="ITranslationProvider.AvailableLanguages" />
         /// </summary>
@@ -64,8 +50,6 @@ namespace Ringen.Core.TranslationManager
                 yield return new CultureInfo("zh-CN");
             }
         }
-
-        #endregion
 
         public void AddTranslationResource(string _resource, string _baseName, Assembly _assembly)
         {

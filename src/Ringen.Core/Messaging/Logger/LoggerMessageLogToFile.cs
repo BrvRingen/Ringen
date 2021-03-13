@@ -7,13 +7,7 @@ namespace Ringen.Core.Messaging
 {
     public class LogToFile : MessageBase
     {
-        #region declarations
-
         private StreamWriter sw;
-
-        #endregion
-
-        #region constructors
 
         public LogToFile(string _outputFile, int _maxLength)
         {
@@ -39,8 +33,6 @@ namespace Ringen.Core.Messaging
             // Messaging
             Messenger.Default.Register<LoggerMessage>(this, LoggerMessageRecieved);
         }
-
-        #endregion
 
         private void LoggerMessageRecieved(LoggerMessage obj)
         {

@@ -5,22 +5,12 @@ namespace Ringen.Core.Messaging
 {
     public class ResponseMessageBase<T> : MessageBase
     {
-        #region declarations
-
         public Action<T> Callback { get; }
-
-        #endregion
-
-        #region constructors
 
         public ResponseMessageBase(Action<T> _callback)
         {
             Callback = _callback;
         }
-
-        #endregion
-
-        #region public functions
 
         public object Execute(params object[] _params)
         {
@@ -29,7 +19,5 @@ namespace Ringen.Core.Messaging
 
             return false;
         }
-
-        #endregion
     }
 }

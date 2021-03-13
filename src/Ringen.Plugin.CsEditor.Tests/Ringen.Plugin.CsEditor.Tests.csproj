@@ -58,19 +58,19 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Plugins\Ringen.Plugin.CsEditor\Ringen.Plugin.CsEditor.csproj">
+    <ProjectReference Include="..\Plugins\Ringen.Plugin.CsEditor\Ringen.Plugin.CsEditor.csproj">
       <Project>{dbb0788c-264e-48fb-bddb-68790facc863}</Project>
       <Name>Ringen.Plugin.CsEditor</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Ringen.Core\Ringen.Core.csproj">
+    <ProjectReference Include="..\Ringen.Core\Ringen.Core.csproj">
       <Project>{78c12d2b-0701-48e5-937c-b8ea3972a9df}</Project>
       <Name>Ringen.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Ringen.Shared\Ringen.Shared.csproj">
+    <ProjectReference Include="..\Ringen.Shared\Ringen.Shared.csproj">
       <Project>{f4bdd0b5-8268-4e68-be6a-ead3485ad2b1}</Project>
       <Name>Ringen.Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Ringen.Tests.Shared\Ringen.Tests.Shared.csproj">
+    <ProjectReference Include="..\Ringen.Tests.Shared\Ringen.Tests.Shared.csproj">
       <Project>{01440d20-4c41-4c0c-ad73-fa1c08139693}</Project>
       <Name>Ringen.Tests.Shared</Name>
     </ProjectReference>

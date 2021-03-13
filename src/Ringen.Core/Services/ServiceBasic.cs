@@ -9,11 +9,8 @@ namespace Ringen.Core.Services
 {
     public static class ServiceBasic
     {
-        #region fields
         private static readonly Dictionary<Type, object> m_InstancedServices = new Dictionary<Type, object>();
-        #endregion fields
 
-        #region methods
         public static void Register(Type @interface, Type @class)
         {
             //public void Register<TInterface, TClass>(bool createInstanceImmediately)
@@ -68,6 +65,5 @@ namespace Ringen.Core.Services
 
             return SimpleIoc.Default.GetService(serviceInterface);
         }
-        #endregion methods
     }
 }

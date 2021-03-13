@@ -45,10 +45,10 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             AddKopfSpalte(kopfzeile, "Kampf-Nr.");
             AddKopfSpalte(kopfzeile, "Bis kg");
             var spalteRot = AddKopfSpalte(kopfzeile, "Name Rot");
-            spalteRot.Shading.Color = Colors.Red;
+            spalteRot.Shading.Color = CustomStyles.ROT;
 
             var spalteBlau = AddKopfSpalte(kopfzeile, "Name Blau");
-            spalteBlau.Shading.Color = Colors.Blue;
+            spalteBlau.Shading.Color = CustomStyles.BLAU;
 
             AddKopfSpalte(kopfzeile, "Wertungen");
             AddKopfSpalte(kopfzeile, "Sieger");
@@ -62,14 +62,14 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             AddKampfSpalte(zeile, kampf.WeightClass);
 
             var homeWrestlerSpalte = AddKampfSpalte(zeile, kampf.IsNoHomeWrestler() ? "--" : kampf.HomeWrestlerFullname.Trim());
-            homeWrestlerSpalte.Borders.Color = Colors.Red;
+            homeWrestlerSpalte.Borders.Color = CustomStyles.ROT;
             homeWrestlerSpalte.Format.Font.Bold = true;
-            homeWrestlerSpalte.Format.Font.Color = Colors.Red;
+            homeWrestlerSpalte.Format.Font.Color = CustomStyles.ROT;
 
             var opponentWrestlerSpalte = AddKampfSpalte(zeile, kampf.IsNoOpponentWrestler() ? "--" : kampf.OpponentWrestlerFullname.Trim());
-            opponentWrestlerSpalte.Borders.Color = Colors.Blue;
+            opponentWrestlerSpalte.Borders.Color = CustomStyles.BLAU;
             opponentWrestlerSpalte.Format.Font.Bold = true;
-            opponentWrestlerSpalte.Format.Font.Color = Colors.Blue;
+            opponentWrestlerSpalte.Format.Font.Color = CustomStyles.BLAU;
 
             var spalte = zeile.Cells[_kampfSpaltenCounter];
             spalte.Add(WertungenRunden());
@@ -173,13 +173,13 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
 
             kopfSpalte = kopfzeile.Cells[1];
             kopfSpalte.Format.Alignment = ParagraphAlignment.Center;
-            kopfSpalte.Shading.Color = Colors.Red;
+            kopfSpalte.Shading.Color = CustomStyles.ROT;
             kopfSpalte.Format.Font.Color = Colors.White;
             kopfSpalte.AddParagraph($"ROT");
 
             kopfSpalte = kopfzeile.Cells[2];
             kopfSpalte.Format.Alignment = ParagraphAlignment.Center;
-            kopfSpalte.Shading.Color = Colors.Blue;
+            kopfSpalte.Shading.Color = CustomStyles.BLAU;
             kopfSpalte.Format.Font.Color = Colors.White;
             kopfSpalte.AddParagraph($"BLAU");
 
@@ -204,13 +204,13 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
                     spalteLeer.Shading.Color = Colors.Gray;
 
                     Cell spaltePauseRot = zeilePause.Cells[1];
-                    spaltePauseRot.Shading.Color = Colors.Red;
+                    spaltePauseRot.Shading.Color = CustomStyles.ROT;
                     spaltePauseRot.Format.Font.Color = Colors.White;
                     spaltePauseRot.AddParagraph($"30 Sekunden Pause");
 
 
                     Cell spaltePauseBlau = zeilePause.Cells[2];
-                    spaltePauseBlau.Shading.Color = Colors.Blue;
+                    spaltePauseBlau.Shading.Color = CustomStyles.BLAU;
                     spaltePauseBlau.Format.Font.Color = Colors.White;
                     spaltePauseBlau.AddParagraph($"30 Sekunden Pause");
                 }

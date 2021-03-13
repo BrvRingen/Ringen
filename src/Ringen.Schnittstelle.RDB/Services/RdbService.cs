@@ -24,8 +24,8 @@ namespace Ringen.Schnittstelle.RDB.Services
         public JObject Get(string operation, List<KeyValuePair<string, string>> queryParameter = null)
         {
             string url = _settings.BaseUrl
-                .SetQueryParam("sv", "json") //Joomla "view" parameter mit "com_rdb". Bei test System ist das der Service (sv) Parameter.  
-                .SetQueryParam("tk", "jr:cs") //tk ~ task
+                .SetQueryParam("sv", "json") //TODO: Konfigurierbar machen, da Joomla "view" parameter mit "com_rdb". Bei test System ist das der Service (sv) Parameter.  
+                .SetQueryParam("tk", "jr:cs") //tk = task | jr:cs = Json-Reader Service
                 .SetQueryParam("op", operation); //op ~ operation 
 
             if (queryParameter != null)

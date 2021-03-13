@@ -21,8 +21,8 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             Color colorBlue = Colors.Black;
             if (useColor)
             {
-                colorRed = Colors.Red;
-                colorBlue = Colors.Blue;
+                colorRed = CustomStyles.ROT;
+                colorBlue = CustomStyles.BLAU;
             }
 
             Table table = SetUpKampftabelle(randLinksRechts);

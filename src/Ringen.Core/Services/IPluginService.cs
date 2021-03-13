@@ -6,12 +6,9 @@ namespace Ringen.Core.Services
 {
     public interface IPluginService
     {
-        #region properties
         IReadOnlyList<IButton> RegisteredButtons { get; }
         IReadOnlyList<IButton> RegisteredMenuButtons { get; }
-        #endregion properties
 
-        #region methods
         void OpenMainPage(Type plugin);
         void RegisterButton(IButton button);
         void RegisterMenuButton(IButton button);
@@ -19,6 +16,5 @@ namespace Ringen.Core.Services
         void Close(Type plugin);
         void InitializeSystem();
         void OnHostLoaded();
-        #endregion methods
     }
 }

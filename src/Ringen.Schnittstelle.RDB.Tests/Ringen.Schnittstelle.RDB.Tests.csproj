@@ -44,8 +44,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigSectionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ErgebnisdienstTests.cs" />
+    <Compile Include="ServiceTests\ErgebnisdienstTests\GetEinzelkampf.cs" />
+    <Compile Include="ServiceTests\ErgebnisdienstTests\GetLigaMitPlatzierung.cs" />
+    <Compile Include="ServiceTests\ErgebnisdienstTests\GetMannschaftskampf.cs" />
+    <Compile Include="ServiceTests\ErgebnisdienstTests\GetRinger.cs" />
+    <Compile Include="ServiceTests\SaisonInformationenTests\GetKampftage.cs" />
+    <Compile Include="ServiceTests\SaisonInformationenTests\GetLigen.cs" />
+    <Compile Include="ServiceTests\SaisonInformationenTests\GetMannschaften.cs" />
+    <Compile Include="ServiceTests\SaisonInformationenTests\GetMannschaftskampfSchema.cs" />
+    <Compile Include="ServiceTests\SaisonInformationenTests\GetSaison.cs" />
     <Compile Include="StartUp.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -87,5 +96,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

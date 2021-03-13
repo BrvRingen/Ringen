@@ -12,19 +12,14 @@ namespace Ringen.Core.Services
 {
     public sealed class PluginService : IPluginService
     {
-        #region fields
         private readonly Dictionary<Type, IPlugabble> m_RegisteredPlugins = new Dictionary<Type, IPlugabble>();
         //private IFrameNavigationService m_FrameNavigationService;
-        #endregion fields
 
-        #region properties
         IReadOnlyList<IButton> IPluginService.RegisteredButtons => RegisteredButtons;
         public ObservableCollection<IButton> RegisteredButtons { get; } = new ObservableCollection<IButton>();
         IReadOnlyList<IButton> IPluginService.RegisteredMenuButtons => RegisteredMenuButtons;
         public ObservableCollection<IButton> RegisteredMenuButtons { get; } = new ObservableCollection<IButton>();
-        #endregion properties
 
-        #region methods
         public void Close(Type plugin)
         {
             if (!TryGetPlugin(plugin, out _))
@@ -74,9 +69,7 @@ namespace Ringen.Core.Services
                 plugin.OnHostLoaded();
             }
         }
-        #endregion methods
 
-        #region private methods
         private bool TryGetPlugin(Type plugin, out IPlugabble plugabble)
         {
             if (!m_RegisteredPlugins.TryGetValue(plugin, out plugabble))
@@ -161,6 +154,5 @@ namespace Ringen.Core.Services
             //    return null;
             //}
         }
-        #endregion private methods
     }
 }

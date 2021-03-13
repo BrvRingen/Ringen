@@ -8,32 +8,18 @@ namespace Ringen.Core.Messaging
 {
     public class LoggerMessage : MessageBase
     {
-        #region declarations
-
         public LogEntry LogEntry { get; }
-
-        #endregion
-
-        #region constructors
 
         private LoggerMessage(LogEntry _logEntry)
         {
             LogEntry = _logEntry;
         }
 
-        #endregion
-
-        #region constructors
-
         public static void Send(LogEntry _logEntry)
         {
             Messenger.Default.Send(new LoggerMessage(_logEntry));
         }
-
-        #endregion
-
     }
-    #region classes
 
     public enum LogEntryType
     {
@@ -46,7 +32,6 @@ namespace Ringen.Core.Messaging
 
     public class LogEntry
     {
-        #region declarations
         public LogEntryType Type { get; } = LogEntryType.Message;
         public DateTime Time { get; }
 
@@ -59,11 +44,6 @@ namespace Ringen.Core.Messaging
         }
 
 
-
-        #endregion
-
-        #region constructors
-
         public LogEntry(LogEntryType _type, string _text)
         {
             Type = _type;
@@ -71,26 +51,9 @@ namespace Ringen.Core.Messaging
             Time = DateTime.Now;
         }
 
-        #endregion
-
-        #region properties
-
-        #endregion
-
-        #region protected functions
-
-
-        #endregion
-
-        #region public functions
-
         public override string ToString()
         {
             return $"{Time} -> {Type} -> {Message}";
         }
-
-        #endregion
     }
-
-    #endregion
 }

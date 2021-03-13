@@ -13,8 +13,9 @@ namespace Ringen.Schnittstelle.RDB.DependencyInjection
     {
         public override void Load()
         {
-            ErgebnisdienstSystem system = GlobaleVariablen.AktivesSystem;
+            ErgebnisdienstSystem system = GlobaleVariablen.AktivesSystem; //TODO: Aus Konfig auslesen
 
+            //TODO: In Konfig auslagern
             RdbServiceErsteller.Init(new RdbSystemSettings("http://test.rdb.ringen-nrw.de/index.php", new NetworkCredential("", "")));
 
             Bind<RdbService>().ToMethod(x => RdbServiceErsteller.ErstelleService())
@@ -22,6 +23,10 @@ namespace Ringen.Schnittstelle.RDB.DependencyInjection
                 .InSingletonScope();
 
             Bind<IErgebnisdienst>().To<Ergebnisdienst>()
+                .When(_ => system.Equals(ErgebnisdienstSystem.RDB))
+                .InSingletonScope();
+
+            Bind<ISaisonInformationen>().To<SaisonInformationen>()
                 .When(_ => system.Equals(ErgebnisdienstSystem.RDB))
                 .InSingletonScope();
         }

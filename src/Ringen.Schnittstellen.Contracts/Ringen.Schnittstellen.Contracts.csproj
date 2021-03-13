@@ -44,13 +44,16 @@
     <Compile Include="Exceptions\ApiMappingException.cs" />
     <Compile Include="Exceptions\ApiNichtGefundenException.cs" />
     <Compile Include="Interfaces\IErgebnisdienst.cs" />
+    <Compile Include="Interfaces\ISaisonInformationen.cs" />
     <Compile Include="Models\Enums\GriffbewertungsTypEnum.cs" />
     <Compile Include="Models\Enums\SiegartEnum.cs" />
     <Compile Include="Models\Enums\StilartEnum.cs" />
+    <Compile Include="Models\Kampftag.cs" />
     <Compile Include="Models\Leistungsklasse.cs" />
     <Compile Include="Models\Einzelkampf.cs" />
     <Compile Include="Models\Enums\ErgebnisdienstSystemEnum.cs" />
     <Compile Include="Models\Mannschaft.cs" />
+    <Compile Include="Models\EinzelkampfSchema.cs" />
     <Compile Include="Models\Mannschaftspunktewertung.cs" />
     <Compile Include="Models\Ringer.cs" />
     <Compile Include="Models\Enums\RingerTypEnum.cs" />

@@ -14,8 +14,6 @@ namespace Ringen.Core.Services
 {
     public sealed class LoginService : ILoginService, INotifyPropertyChanged
     {
-        #region properties
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         private string m_UserName;
@@ -54,11 +52,5 @@ namespace Ringen.Core.Services
             }
 
         }
-
-        #endregion
-
-        #region public functions
-
-        #endregion
     }
 }

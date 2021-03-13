@@ -5,20 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
-using Ringen.DependencyInjection;
 using Ringen.Schnittstelle.RDB.Factories;
 using Ringen.Schnittstelle.RDB.Services;
 using Ringen.Schnittstellen.Contracts.Interfaces;
 using Ringen.Schnittstellen.Contracts.Models;
 using Ringen.Schnittstellen.Contracts.Models.Enums;
 
-namespace Ringen.Schnittstelle.RDB.Tests.Services
+namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.ErgebnisdienstTests
 {
     [TestFixture]
-    public class ErgebnisdienstTests
+    public class GetMannschaftskampf
     {
         private IErgebnisdienst _ergebnisdienst;
-        
+
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
@@ -26,19 +25,9 @@ namespace Ringen.Schnittstelle.RDB.Tests.Services
             _ergebnisdienst = new Ergebnisdienst(rdbService);
         }
 
-        [Test]
-        public void GetSaison_erwarte_Erfolg()
-        {
-            var saisonListe = _ergebnisdienst.GetSaisons();
-
-            saisonListe.Should().NotBeNull();
-            saisonListe.Count.Should().BeGreaterThan(0);
-
-            saisonListe.FirstOrDefault(li => li.SaisonId.Equals("2020")).Should().NotBeNull();
-        }
 
         [Test]
-        public void GetWettkaempfe_erwarte_Erfolg()
+        public void GetMannschaftskaempfe_erwarte_Erfolg()
         {
             var wettkampfListe = _ergebnisdienst.GetMannschaftskaempfe("2019", "Oberliga", "Westfalen");
 
@@ -50,7 +39,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.Services
 
         [Test]
         [TestCase("2019", "011008a")]
-        public void GetWettkampf_erwarte_korrekte_Daten(string saisonId, string wettkampfId)
+        public void GetMannschaftskampf_erwarte_korrekte_Daten(string saisonId, string wettkampfId)
         {
             Tuple<Mannschaftskampf, List<Einzelkampf>> wettkampf = _ergebnisdienst.GetMannschaftskampf(saisonId, wettkampfId);
 
@@ -64,8 +53,8 @@ namespace Ringen.Schnittstelle.RDB.Tests.Services
             wettkampf.Item1.Schiedsrichter.Should().Be("Manz, Uwe");
             wettkampf.Item1.IstErgebnisGeprueft.Should().BeTrue();
             wettkampf.Item1.Kampfdatum.Should().Be(new DateTime(2019, 8, 31));
-            wettkampf.Item1.GeplanterKampfbeginn.Should().Be(new TimeSpan(19,0,0));
-            wettkampf.Item1.EchterKampfbeginn.Should().Be(new TimeSpan(0,0,0));
+            wettkampf.Item1.GeplanterKampfbeginn.Should().Be(new TimeSpan(19, 0, 0));
+            wettkampf.Item1.EchterKampfbeginn.Should().Be(new TimeSpan(0, 0, 0));
             wettkampf.Item1.EchtesKampfende.Should().Be(new TimeSpan(0, 0, 0));
             wettkampf.Item1.AnzahlZuschauer.Should().Be(50);
             wettkampf.Item1.HeimPunkte.Should().Be(25);
