@@ -14,8 +14,22 @@ namespace Ringen.Schnittstellen.Contracts.Models
 
         public GriffbewertungsTyp Typ { get; set; }
 
-        public string Value { get; set; }
-
         public TimeSpan Zeit { get; set; }
+
+        public int Punktzahl { get; set; }
+
+
+        public Griffbewertungspunkt()
+        {
+            
+        }
+
+        public Griffbewertungspunkt(HeimGast? fuer, GriffbewertungsTyp typ, TimeSpan zeit, int punktzahl=0)
+        {
+            Fuer = fuer;
+            Typ = typ;
+            Zeit = zeit;
+            Punktzahl = punktzahl;
+        }
     }
 }

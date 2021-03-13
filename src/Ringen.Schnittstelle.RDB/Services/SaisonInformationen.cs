@@ -63,12 +63,21 @@ namespace Ringen.Schnittstelle.RDB.Services
                 {
                     new KeyValuePair<string, string>("sid", saisonId)
                 });
-            IEnumerable<LigaApiModel> apiModelListe = response["ligaList"].Select(elem => elem.FirstOrDefault().ToObject<LigaApiModel>());
+            
+            List<LigaApiModel> apiModelListe = new List<LigaApiModel>();
+            foreach (var liga in response["ligaList"].ToArray())
+            {                
+                foreach (var tabelle in liga.ToArray())
+                {
+                    var temp = tabelle.Select(elem => elem.FirstOrDefault().ToObject<LigaApiModel>()).ToList();
+                    apiModelListe.AddRange(temp);
+                }
+            }
 
             return apiModelListe.Select(apiModel => mapper.Map(apiModel)).ToList();
         }
 
-        public Tuple<Saison, Leistungsklasse> GetSaison(string saisonId)
+        public Tuple<Saison, List<Leistungsklasse>> GetSaison(string saisonId)
         {
             SaisonMapper saisonMapper = new SaisonMapper();
             LeistungsklasseMapper leistungsklasseMapper = new LeistungsklasseMapper();
@@ -80,9 +89,9 @@ namespace Ringen.Schnittstelle.RDB.Services
                 });
 
             SaisonApiModel saisonApiModel = response["saison"].ToObject<SaisonApiModel>();
-            SystemApiModel systemApiModel = response["saison"]["_system"].ToObject<SystemApiModel>();
+            IEnumerable<SystemApiModel> systemApiModelListe = response["saison"]["_system"].Select(elem => elem.FirstOrDefault().ToObject<SystemApiModel>());
 
-            return new Tuple<Saison, Leistungsklasse>(saisonMapper.Map(saisonApiModel), leistungsklasseMapper.Map(systemApiModel));
+            return new Tuple<Saison, List<Leistungsklasse>>(saisonMapper.Map(saisonApiModel), leistungsklasseMapper.Map(systemApiModelListe));
         }
 
         public List<Saison> GetSaisons()

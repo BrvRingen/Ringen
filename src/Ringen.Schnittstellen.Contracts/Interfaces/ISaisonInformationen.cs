@@ -11,7 +11,7 @@ namespace Ringen.Schnittstellen.Contracts.Interfaces
     {
         List<Liga> GetLigen(string saisonId);
 
-        Tuple<Saison, Leistungsklasse> GetSaison(string saisonId);
+        Tuple<Saison, List<Leistungsklasse>> GetSaison(string saisonId);
 
         List<Saison> GetSaisons();
 

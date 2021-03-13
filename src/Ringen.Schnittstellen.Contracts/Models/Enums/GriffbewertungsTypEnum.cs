@@ -9,8 +9,7 @@ namespace Ringen.Schnittstellen.Contracts.Models.Enums
     public enum GriffbewertungsTyp
     {
         Punkt,
-        Pause,
-        Verletzungszeit,
+        Verwarnung,
         Aktivitaetszeit,
         Passiv
     }

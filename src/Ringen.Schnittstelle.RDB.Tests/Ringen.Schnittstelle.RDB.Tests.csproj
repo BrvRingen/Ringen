@@ -46,15 +46,15 @@
   <ItemGroup>
     <Compile Include="ConfigSectionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceTests\ErgebnisdienstTests\GetEinzelkampf.cs" />
-    <Compile Include="ServiceTests\ErgebnisdienstTests\GetLigaMitPlatzierung.cs" />
-    <Compile Include="ServiceTests\ErgebnisdienstTests\GetMannschaftskampf.cs" />
-    <Compile Include="ServiceTests\ErgebnisdienstTests\GetRinger.cs" />
-    <Compile Include="ServiceTests\SaisonInformationenTests\GetKampftage.cs" />
-    <Compile Include="ServiceTests\SaisonInformationenTests\GetLigen.cs" />
-    <Compile Include="ServiceTests\SaisonInformationenTests\GetMannschaften.cs" />
-    <Compile Include="ServiceTests\SaisonInformationenTests\GetMannschaftskampfSchema.cs" />
-    <Compile Include="ServiceTests\SaisonInformationenTests\GetSaison.cs" />
+    <Compile Include="ServiceTests\ErgebnisdienstTests\GetEinzelkampfTests.cs" />
+    <Compile Include="ServiceTests\ErgebnisdienstTests\GetLigaMitPlatzierungTests.cs" />
+    <Compile Include="ServiceTests\ErgebnisdienstTests\GetMannschaftskampfTests.cs" />
+    <Compile Include="ServiceTests\ErgebnisdienstTests\GetRingerTests.cs" />
+    <Compile Include="ServiceTests\SaisonInformationenTests\GetKampftageTests.cs" />
+    <Compile Include="ServiceTests\SaisonInformationenTests\GetLigenTests.cs" />
+    <Compile Include="ServiceTests\SaisonInformationenTests\GetMannschaftenTests.cs" />
+    <Compile Include="ServiceTests\SaisonInformationenTests\GetMannschaftskampfSchemaTests.cs" />
+    <Compile Include="ServiceTests\SaisonInformationenTests\GetSaisonTests.cs" />
     <Compile Include="StartUp.cs" />
   </ItemGroup>
   <ItemGroup>

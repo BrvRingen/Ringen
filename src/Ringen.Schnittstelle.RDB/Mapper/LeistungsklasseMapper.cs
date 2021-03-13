@@ -20,5 +20,10 @@ namespace Ringen.Schnittstelle.RDB.Mapper
 
             return result;
         }
+
+        public List<Leistungsklasse> Map(IEnumerable<SystemApiModel> apiModelListe)
+        {
+            return apiModelListe.Select(apiModel => Map(apiModel)).ToList();
+        }
     }
 }

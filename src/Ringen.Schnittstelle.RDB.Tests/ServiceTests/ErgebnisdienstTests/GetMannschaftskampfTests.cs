@@ -14,14 +14,14 @@ using Ringen.Schnittstellen.Contracts.Models.Enums;
 namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.ErgebnisdienstTests
 {
     [TestFixture]
-    public class GetMannschaftskampf
+    public class GetMannschaftskampfTests
     {
         private IErgebnisdienst _ergebnisdienst;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            var rdbService = RdbServiceErsteller.ErstelleService();
+            RdbService rdbService = RdbServiceErsteller.ErstelleService();
             _ergebnisdienst = new Ergebnisdienst(rdbService);
         }
 
@@ -29,7 +29,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.ErgebnisdienstTests
         [Test]
         public void GetMannschaftskaempfe_erwarte_Erfolg()
         {
-            var wettkampfListe = _ergebnisdienst.GetMannschaftskaempfe("2019", "Oberliga", "Westfalen");
+            List<Mannschaftskampf> wettkampfListe = _ergebnisdienst.GetMannschaftskaempfe("2019", "Oberliga", "Westfalen");
 
             wettkampfListe.Should().NotBeNull();
             wettkampfListe.Count.Should().BeGreaterThan(0);
@@ -46,6 +46,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.ErgebnisdienstTests
             wettkampf.Should().NotBeNull();
             wettkampf.Item1.Should().NotBeNull();
             wettkampf.Item2.Should().NotBeNull();
+
             wettkampf.Item1.CompetitionId.Should().Be(wettkampfId);
             wettkampf.Item1.HeimMannschaft.Should().Be("TV Essen-Dellwig");
             wettkampf.Item1.GastMannschaft.Should().Be("TSG Herdecke");

@@ -48,8 +48,8 @@ namespace Ringen.Schnittstelle.RDB.Mapper
                 Stilart = ErmittleStilart(apiModel.Style),
                 HeimRinger = new Ringer(apiModel.HomeWrestlerGivenname, apiModel.HomeWrestlerName, apiModel.HomeWrestlerStatus, apiModel.HomeWrestlerPassCode, apiModel.HomeWrestlerSaisonLicenceId),
                 GastRinger = new Ringer(apiModel.OpponentWrestlerGivenname, apiModel.OpponentWrestlerName, apiModel.OpponentWrestlerStatus, apiModel.OpponentWrestlerPassCode, apiModel.OpponentWrestlerSaisonLicenceId),
-                HeimSummeWertungspunkt = int.Parse(apiModel.HomeWrestlerPoints),
-                GastSummeWertungspunkt = int.Parse(apiModel.OpponentWrestlerPoints),
+                HeimMannschaftswertung = int.Parse(apiModel.HomeWrestlerPoints),
+                GastMannschaftswertung = int.Parse(apiModel.OpponentWrestlerPoints),
                 RundenErgebnisse = ErmittleRundenErgebnisse(apiModel),
                 Siegart = ErmittleSiegart(apiModel.Result),
                 Kampfdauer = TimeSpan.FromSeconds(Convert.ToDouble(apiModel.Annotations.FirstOrDefault(li => li.Type.Equals("duration", StringComparison.OrdinalIgnoreCase)).Value)),
@@ -60,9 +60,50 @@ namespace Ringen.Schnittstelle.RDB.Mapper
             //TODO: Mapping Points
             var punkteString = apiModel.Annotations.FirstOrDefault(li => li.Type.Equals("points", StringComparison.OrdinalIgnoreCase)).Value;
 
-            //var tmpPoint = new Regex(@"(?<value>.*)(?<Wrestler>[R|B])(?<Time>\d*)").Match(Point.ToUpper());
-            //points.Add(new BoutPoint(tmpPoint.Groups["value"].Value, this, tmpPoint.Groups["Wrestler"].Value == "r" ? BoutPoint.Wrestler.Home : BoutPoint.Wrestler.Opponent, int.Parse(tmpPoint.Groups["Time"].Value)));
-            //Settings.Times[BoutTime.Types.Bout.ToString()].Time = int.Parse(BoutAnnotation["value"].ToString());
+            var griffbewertungspunkte = new List<Griffbewertungspunkt>();
+            foreach (var punktString in punkteString.Split(','))
+            {
+                var temp = new Regex(@"(?<value>.*)(?<Wrestler>[R|B])(?<Time>\d*)").Match(punktString.ToUpper());
+
+                var punkt = new Griffbewertungspunkt
+                {
+                    Fuer = temp.Groups["Wrestler"].Value == "R" ? HeimGast.Heim : HeimGast.Gast,
+                    Typ = GriffbewertungsTyp.Punkt,
+                    Zeit = TimeSpan.FromSeconds(int.Parse(temp.Groups["Time"].Value)),
+                    Punktzahl = 0
+                };
+
+                switch (temp.Groups["value"].Value)
+                {
+                    case "P":
+                        punkt.Typ = GriffbewertungsTyp.Passiv;
+                        punkt.Punktzahl = 0;
+                        break;
+
+                    case "A":
+                        punkt.Typ = GriffbewertungsTyp.Aktivitaetszeit;
+                        punkt.Punktzahl = 0;
+                        break;
+
+                    case "V":
+                        punkt.Typ = GriffbewertungsTyp.Verwarnung;
+                        punkt.Punktzahl = 0;
+                        break;
+
+                    default:
+                        int punktzahl = 0;
+                        if (!int.TryParse(temp.Groups["value"].Value, out punktzahl))
+                        {
+                            throw new ArgumentException($"Griffbewertungs-Typ für {temp?.Groups["value"]?.Value} konnte nicht ermittelt werden");
+                        }
+                        punkt.Typ = GriffbewertungsTyp.Punkt;
+                        punkt.Punktzahl = punktzahl;
+                        break;
+                }
+
+                griffbewertungspunkte.Add(punkt);
+            }
+            result.Wertungspunkte = griffbewertungspunkte;
 
             return result;
         }

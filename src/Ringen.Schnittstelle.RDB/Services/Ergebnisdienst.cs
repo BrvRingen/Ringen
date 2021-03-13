@@ -5,6 +5,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Newtonsoft.Json.Linq;
 using Ringen.Schnittstelle.RDB.ApiModels;
 using Ringen.Schnittstelle.RDB.Mapper;
+using Ringen.Schnittstellen.Contracts.Exceptions;
 using Ringen.Schnittstellen.Contracts.Interfaces;
 using Ringen.Schnittstellen.Contracts.Models;
 
@@ -49,8 +50,13 @@ namespace Ringen.Schnittstelle.RDB.Services
                     new KeyValuePair<string, string>("cid", wettkampfId),
                 });
 
-            var kaempfeJArray = response["competition"]["_boutList"].ToArray();
-            var kampfJToken = kaempfeJArray.FirstOrDefault(li => li["order"].Equals(kampfNr.ToString()));
+            JToken[] kaempfeJArray = response["competition"]["_boutList"].ToArray();
+            if (kaempfeJArray == null || kaempfeJArray.Length <= 0)
+            {
+                throw new ApiNichtGefundenException($"Es sind keine Kämpfe für Saison {saisonId} und Wettkampf {wettkampfId} ({response["competition"]["homeTeamName"]} vs. {response["competition"]["opponentTeamName"]} am {response["competition"]["boutDate"]}) vorhanden.");
+            }
+
+            JToken kampfJToken = kaempfeJArray.FirstOrDefault(li => li["order"].Value<string>().Equals(kampfNr.ToString()));
 
             return mapper.Map(kampfJToken);
         }
@@ -111,7 +117,7 @@ namespace Ringen.Schnittstelle.RDB.Services
                     new KeyValuePair<string, string>("rid", tableId),
                 });
             LigaApiModel ligaApiModel = response["table"].ToObject<LigaApiModel>();
-            IEnumerable<PlaceApiModel> platzierungApiModelListe = response["table"]["_place"].Select(elem => elem.FirstOrDefault().ToObject<PlaceApiModel>());
+            IEnumerable<PlaceApiModel> platzierungApiModelListe = response["table"]["_place"].ToObject<IEnumerable<PlaceApiModel>>();
 
             return new Tuple<Liga, List<Tabellenplatzierung>>(ligaMapper.Map(ligaApiModel), tabellenplatzierungMapper.Map(platzierungApiModelListe));
         }

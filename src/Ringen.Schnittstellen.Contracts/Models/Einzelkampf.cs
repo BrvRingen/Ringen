@@ -19,9 +19,9 @@ namespace Ringen.Schnittstellen.Contracts.Models
 
         public Ringer GastRinger { get; set; }
 
-        public int HeimSummeWertungspunkt { get; set; }
+        public int HeimMannschaftswertung { get; set; }
 
-        public int GastSummeWertungspunkt { get; set; }
+        public int GastMannschaftswertung { get; set; }
         
         public List<KeyValuePair<int, string>> RundenErgebnisse { get; set; } = new List<KeyValuePair<int, string>>();
 
