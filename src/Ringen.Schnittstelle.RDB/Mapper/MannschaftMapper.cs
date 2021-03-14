@@ -19,8 +19,26 @@ namespace Ringen.Schnittstelle.RDB.Mapper
 
             return result;
         }
-        
+
+        public Mannschaft Map(ClubApiModel apiModel)
+        {
+            var result = new Mannschaft
+            {
+                TeamId = apiModel.Id,
+                Kurzname = apiModel.Shortname,
+                Vereinsnummer = apiModel.ClubCode,
+                Langname = apiModel.Name
+            };
+
+            return result;
+        }
+
         public List<Mannschaft> Map(IEnumerable<TeamApiModel> apiModelListe)
+        {
+            return apiModelListe.Select(apiModel => Map(apiModel)).ToList();
+        }
+
+        public List<Mannschaft> Map(IEnumerable<ClubApiModel> apiModelListe)
         {
             return apiModelListe.Select(apiModel => Map(apiModel)).ToList();
         }

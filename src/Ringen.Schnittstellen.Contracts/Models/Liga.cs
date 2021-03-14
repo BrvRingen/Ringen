@@ -1,4 +1,6 @@
-﻿namespace Ringen.Schnittstellen.Contracts.Models
+﻿using Ringen.Schnittstellen.Contracts.Models.Enums;
+
+namespace Ringen.Schnittstellen.Contracts.Models
 {
     /// <summary>
     /// Table
@@ -10,5 +12,7 @@
         public string TabellenId { get; set; }
 
         public string Bezeichnung { get; set; }
+
+        public Austragungsmodus Austragungsmodus { get; set; }
     }
 }

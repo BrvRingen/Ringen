@@ -5,7 +5,7 @@ namespace Ringen.Shared.Helpers
 {
     public static class PasswordHelper
     {
-        static byte[] entropy = System.Text.Encoding.Unicode.GetBytes("freudeamfahren");
+        static byte[] entropy = System.Text.Encoding.Unicode.GetBytes("#5!b.i#ivd9pdSc*zSgJ8Sv2w#o:CrM@Fgy");
 
         public static string EncryptString(System.Security.SecureString input)
         {

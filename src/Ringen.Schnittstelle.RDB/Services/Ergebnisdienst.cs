@@ -19,29 +19,12 @@ namespace Ringen.Schnittstelle.RDB.Services
             _rdbService = rdbService;
         }
 
-        public Ringer GetRinger(string startausweisNr, string saisonId)
-        {
-            RingerMapper mapper = new RingerMapper();
-
-            JObject response = _rdbService.Get(
-                "getSaisonWrestler",
-                new List<KeyValuePair<string, string>>()
-                {
-                    new KeyValuePair<string, string>("sid", saisonId),
-                    new KeyValuePair<string, string>("passCode", startausweisNr),
-                });
-
-            //TODO: Response noch unbekannt
-            WrestlerApiModel apiModel = response["wrestler"].ToObject<WrestlerApiModel>();
-            
-            return mapper.Map(apiModel);
-        }
 
         public Einzelkampf GetEinzelkampf(string saisonId, string wettkampfId, int kampfNr)
         {
             EinzelkampfMapper mapper = new EinzelkampfMapper();
 
-            JObject response = _rdbService.Get(
+            JObject response = _rdbService.GetCompetitionSystem(
                 "getCompetition",
                 new List<KeyValuePair<string, string>>()
                 {
@@ -66,7 +49,7 @@ namespace Ringen.Schnittstelle.RDB.Services
             MannschaftskampfMapper wettkampfMapper = new MannschaftskampfMapper();
             EinzelkampfMapper einzelkampfMapper = new EinzelkampfMapper();
             
-            JObject response = _rdbService.Get(
+            JObject response = _rdbService.GetCompetitionSystem(
                 "getCompetition",
                 new List<KeyValuePair<string, string>>()
                 {
@@ -87,7 +70,7 @@ namespace Ringen.Schnittstelle.RDB.Services
         {
             MannschaftskampfMapper mapper = new MannschaftskampfMapper();
 
-            JObject response = _rdbService.Get(
+            JObject response = _rdbService.GetCompetitionSystem(
                 "listCompetition", 
                 new List<KeyValuePair<string, string>>()
                 {
@@ -107,7 +90,7 @@ namespace Ringen.Schnittstelle.RDB.Services
             LigaMapper ligaMapper = new LigaMapper();
             TabellenplatzierungMapper tabellenplatzierungMapper = new TabellenplatzierungMapper();
 
-            JObject response = _rdbService.Get(
+            JObject response = _rdbService.GetCompetitionSystem(
                 "getTable",
                 new List<KeyValuePair<string, string>>()
                 {

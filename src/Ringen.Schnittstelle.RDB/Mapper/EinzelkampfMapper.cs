@@ -44,8 +44,8 @@ namespace Ringen.Schnittstelle.RDB.Mapper
                 KampfNr = int.Parse(apiModel.Order),
                 Gewichtsklasse = apiModel.WeightClass,
                 Stilart = ErmittleStilart(apiModel.Style),
-                HeimRinger = new Ringer(apiModel.HomeWrestlerGivenname, apiModel.HomeWrestlerName, apiModel.HomeWrestlerStatus, apiModel.HomeWrestlerPassCode, apiModel.HomeWrestlerSaisonLicenceId),
-                GastRinger = new Ringer(apiModel.OpponentWrestlerGivenname, apiModel.OpponentWrestlerName, apiModel.OpponentWrestlerStatus, apiModel.OpponentWrestlerPassCode, apiModel.OpponentWrestlerSaisonLicenceId),
+                HeimRinger = GetRinger(HeimGast.Heim, apiModel),
+                GastRinger = GetRinger(HeimGast.Gast, apiModel),
                 HeimMannschaftswertung = int.Parse(apiModel.HomeWrestlerPoints),
                 GastMannschaftswertung = int.Parse(apiModel.OpponentWrestlerPoints),
                 RundenErgebnisse = ErmittleRundenErgebnisse(apiModel),
@@ -56,6 +56,17 @@ namespace Ringen.Schnittstelle.RDB.Mapper
             };
 
             var punkteString = apiModel.Annotations.FirstOrDefault(li => li.Type.Equals("points", StringComparison.OrdinalIgnoreCase)).Value;
+            result.Wertungspunkte = Ermittle_Griffbewertungspunkte(punkteString);
+
+            return result;
+        }
+
+        private List<Griffbewertungspunkt> Ermittle_Griffbewertungspunkte(string punkteString)
+        {
+            if (string.IsNullOrEmpty(punkteString))
+            {
+                return new List<Griffbewertungspunkt>();
+            }
 
             var griffbewertungspunkte = new List<Griffbewertungspunkt>();
             foreach (var punktString in punkteString.Split(','))
@@ -64,13 +75,12 @@ namespace Ringen.Schnittstelle.RDB.Mapper
 
                 var punkt = new Griffbewertungspunkt
                 {
-                    Fuer = temp.Groups["Wrestler"].Value == "R" ? HeimGast.Heim : HeimGast.Gast,
+                    Fuer = temp.Groups["Wrestler"].Value.ToUpper() == "R" ? HeimGast.Heim : HeimGast.Gast,
                     Typ = GriffbewertungsTyp.Punkt,
-                    Zeit = TimeSpan.FromSeconds(int.Parse(temp.Groups["Time"].Value)),
-                    Punktzahl = 0
+                    Zeit = TimeSpan.FromSeconds(int.Parse(temp.Groups["Time"].Value))
                 };
 
-                switch (temp.Groups["value"].Value)
+                switch (temp.Groups["value"].Value.ToUpper())
                 {
                     case "P":
                         punkt.Typ = GriffbewertungsTyp.Passiv;
@@ -91,8 +101,10 @@ namespace Ringen.Schnittstelle.RDB.Mapper
                         int punktzahl = 0;
                         if (!int.TryParse(temp.Groups["value"].Value, out punktzahl))
                         {
-                            throw new ArgumentException($"Griffbewertungs-Typ für {temp?.Groups["value"]?.Value} konnte nicht ermittelt werden");
+                            throw new ArgumentException(
+                                $"Griffbewertungs-Typ für {temp?.Groups["value"]?.Value} konnte nicht ermittelt werden");
                         }
+
                         punkt.Typ = GriffbewertungsTyp.Punkt;
                         punkt.Punktzahl = punktzahl;
                         break;
@@ -100,14 +112,44 @@ namespace Ringen.Schnittstelle.RDB.Mapper
 
                 griffbewertungspunkte.Add(punkt);
             }
-            result.Wertungspunkte = griffbewertungspunkte;
 
-            return result;
+            return griffbewertungspunkte;
+        }
+
+        private Ringer GetRinger(HeimGast heimGast, BoutApiModel apiModel)
+        {
+            switch (heimGast)
+            {
+                case HeimGast.Unbekannt:
+                    break;
+                case HeimGast.Heim:
+                    return new Ringer
+                    {
+                        Vorname = apiModel.HomeWrestlerGivenname,
+                        Nachname = apiModel.HomeWrestlerName,
+                        Status = apiModel.HomeWrestlerStatus,
+                        Startausweisnummer = apiModel.HomeWrestlerPassCode,
+                        Lizenznummer = apiModel.HomeWrestlerSaisonLicenceId
+                    };
+                case HeimGast.Gast:
+                    return new Ringer
+                    {
+                        Vorname = apiModel.OpponentWrestlerGivenname,
+                        Nachname = apiModel.OpponentWrestlerName,
+                        Status = apiModel.OpponentWrestlerStatus,
+                        Startausweisnummer = apiModel.OpponentWrestlerPassCode,
+                        Lizenznummer = apiModel.OpponentWrestlerSaisonLicenceId
+                    };
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(heimGast), heimGast, null);
+            }
+
+            throw new ArgumentException($"Ringer \"{heimGast}\" konnte nicht interpretiert werden");
         }
 
         private Siegart ErmittleSiegart(string apiModelResult)
         {
-            switch (apiModelResult)
+            switch (apiModelResult.ToUpper())
             {
                 case "TÜ":
                     return Siegart.TechnischUeberlegen;
@@ -148,11 +190,11 @@ namespace Ringen.Schnittstelle.RDB.Mapper
 
         private Stilart ErmittleStilart(string apiModelStyle)
         {
-            if (apiModelStyle.Equals("LL", StringComparison.OrdinalIgnoreCase))
+            if (apiModelStyle.ToUpper().Equals("LL", StringComparison.OrdinalIgnoreCase))
             {
                 return Stilart.Freistil;
             } 
-            else if (apiModelStyle.Equals("GR", StringComparison.OrdinalIgnoreCase))
+            else if (apiModelStyle.ToUpper().Equals("GR", StringComparison.OrdinalIgnoreCase))
             {
                 return Stilart.GriechischRoemisch;
             }

@@ -45,6 +45,9 @@
     <Compile Include="Exceptions\ApiNichtGefundenException.cs" />
     <Compile Include="Interfaces\IErgebnisdienst.cs" />
     <Compile Include="Interfaces\ISaisonInformationen.cs" />
+    <Compile Include="Interfaces\IStammdaten.cs" />
+    <Compile Include="Models\Enums\AustragungsmodusEnum.cs" />
+    <Compile Include="Models\Enums\GeschlechtEnum.cs" />
     <Compile Include="Models\Enums\GriffbewertungsTypEnum.cs" />
     <Compile Include="Models\Enums\SiegartEnum.cs" />
     <Compile Include="Models\Enums\StilartEnum.cs" />

@@ -15,7 +15,7 @@ namespace Ringen.Schnittstellen.Contracts.Interfaces
     /// </summary>
     public interface IErgebnisdienst
     {
-        Ringer GetRinger(string startausweisNr, string saisonId);
+        
 
         Einzelkampf GetEinzelkampf(string saisonId, string wettkampfId, int kampfNr);
 

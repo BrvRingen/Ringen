@@ -64,11 +64,11 @@ namespace Ringen.Schnittstelle.RDB.Mapper
             {
                 if (!string.IsNullOrEmpty(apiModel.Decision))
                 {
-                    if (apiModel.Decision.Equals("home", StringComparison.OrdinalIgnoreCase))
+                    if (apiModel.Decision.ToLower().Equals("home", StringComparison.OrdinalIgnoreCase))
                     {
                         result.Sieger = HeimGast.Heim;
                     }
-                    else if (apiModel.Decision.Equals("opponent", StringComparison.OrdinalIgnoreCase))
+                    else if (apiModel.Decision.ToLower().Equals("opponent", StringComparison.OrdinalIgnoreCase))
                     {
                         result.Sieger = HeimGast.Gast;
                     }

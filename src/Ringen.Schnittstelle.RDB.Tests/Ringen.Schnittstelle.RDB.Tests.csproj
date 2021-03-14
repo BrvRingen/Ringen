@@ -49,12 +49,13 @@
     <Compile Include="ServiceTests\ErgebnisdienstTests\GetEinzelkampfTests.cs" />
     <Compile Include="ServiceTests\ErgebnisdienstTests\GetLigaMitPlatzierungTests.cs" />
     <Compile Include="ServiceTests\ErgebnisdienstTests\GetMannschaftskampfTests.cs" />
-    <Compile Include="ServiceTests\ErgebnisdienstTests\GetRingerTests.cs" />
+    <Compile Include="ServiceTests\StammdatenTests\GetRingerTests.cs" />
     <Compile Include="ServiceTests\SaisonInformationenTests\GetKampftageTests.cs" />
     <Compile Include="ServiceTests\SaisonInformationenTests\GetLigenTests.cs" />
     <Compile Include="ServiceTests\SaisonInformationenTests\GetMannschaftenTests.cs" />
     <Compile Include="ServiceTests\SaisonInformationenTests\GetMannschaftskampfSchemaTests.cs" />
     <Compile Include="ServiceTests\SaisonInformationenTests\GetSaisonTests.cs" />
+    <Compile Include="ServiceTests\StammdatenTests\GetMannschaftenTests.cs" />
     <Compile Include="StartUp.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +93,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Konfig\RDBErgebnisdienst.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

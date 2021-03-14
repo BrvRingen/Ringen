@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using Ringen.Shared.ConfigurationElemente;
 
 namespace Ringen.Schnittstelle.RDB.ConfigSections.ConfigurationElemente
 {
@@ -11,7 +12,24 @@ namespace Ringen.Schnittstelle.RDB.ConfigSections.ConfigurationElemente
         public string Host
         {
             get { return (string)this["host"]; }
-            set { this["host"] = value; }
+        }
+
+        [ConfigurationProperty("jsonReaderService", IsRequired = true)]
+        public KeyValueStringConfigurationElement JsonReaderService
+        {
+            get { return (KeyValueStringConfigurationElement)this["jsonReaderService"]; }
+        }
+
+        [ConfigurationProperty("taskCompetitionSystem", IsRequired = true)]
+        public KeyValueStringConfigurationElement TaskCompetitionSystem
+        {
+            get { return (KeyValueStringConfigurationElement)this["taskCompetitionSystem"]; }
+        }
+
+        [ConfigurationProperty("taskOrganisationsmanager", IsRequired = true)]
+        public KeyValueStringConfigurationElement TaskOrganisationsmanager
+        {
+            get { return (KeyValueStringConfigurationElement)this["taskOrganisationsmanager"]; }
         }
     }
 }

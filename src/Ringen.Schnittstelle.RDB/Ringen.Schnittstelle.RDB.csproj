@@ -45,6 +45,7 @@
     <Compile Include="ApiModels\BoutApiModel.cs" />
     <Compile Include="ApiModels\BoutdayApiModel.cs" />
     <Compile Include="ApiModels\BoutSchemaApiModel.cs" />
+    <Compile Include="ApiModels\ClubApiModel.cs" />
     <Compile Include="ApiModels\CompetitionApiModel.cs" />
     <Compile Include="ApiModels\SystemApiModel.cs" />
     <Compile Include="ApiModels\TeamApiModel.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Services\Ergebnisdienst.cs" />
     <Compile Include="Services\RdbService.cs" />
     <Compile Include="Services\SaisonInformationen.cs" />
+    <Compile Include="Services\Stammdaten.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="RDB-Info.md" />

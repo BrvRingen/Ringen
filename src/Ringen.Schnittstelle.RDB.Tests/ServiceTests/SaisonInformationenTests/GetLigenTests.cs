@@ -6,6 +6,7 @@ using Ringen.Schnittstelle.RDB.Factories;
 using Ringen.Schnittstelle.RDB.Services;
 using Ringen.Schnittstellen.Contracts.Interfaces;
 using Ringen.Schnittstellen.Contracts.Models;
+using Ringen.Schnittstellen.Contracts.Models.Enums;
 
 namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.SaisonInformationenTests
 {
@@ -52,10 +53,24 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.SaisonInformationenTests
         public void Offene_Saison_erwarte_korrekte_Ligen()
         {
             List<Liga> ligen = _saisonInformationen.GetLigen("2020");
+            
+            Liga oberliga =
+                ligen.FirstOrDefault(li => li.LigaId.Equals("Oberliga"));
+            oberliga.LigaId.Should().Be("Oberliga");
+            oberliga.Bezeichnung.Should().Be("Oberliga 2020");
+            oberliga.Austragungsmodus.Should().Be(Austragungsmodus.HinRueckRunde);
 
-            ligen.Count.Should().Be(1);
-            ligen[0].LigaId.Should().Be("Oberliga");
-            ligen[0].Bezeichnung.Should().Be("Oberliga 2020");
+            Liga landesliga =
+                ligen.FirstOrDefault(li => li.LigaId.Equals("Landesliga"));
+            landesliga.LigaId.Should().Be("Landesliga");
+            landesliga.Bezeichnung.Should().Be("Landesliga 2020");
+            landesliga.Austragungsmodus.Should().Be(Austragungsmodus.HinRueckRunde);
+
+            Liga bezirksliga =
+                ligen.FirstOrDefault(li => li.LigaId.Equals("Bezirksliga"));
+            bezirksliga.LigaId.Should().Be("Bezirksliga");
+            bezirksliga.Bezeichnung.Should().Be("Bezirksliga 2020");
+            bezirksliga.Austragungsmodus.Should().Be(Austragungsmodus.Doppelrunde);
         }
     }
 }

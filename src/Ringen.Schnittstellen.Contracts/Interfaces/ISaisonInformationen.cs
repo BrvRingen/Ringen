@@ -14,6 +14,7 @@ namespace Ringen.Schnittstellen.Contracts.Interfaces
 
         List<Mannschaft> GetMannschaften(string saisonId, string ligaId, string tableId);
 
+
         List<EinzelkampfSchema> GetMannschaftskampfSchema(string saisonId, string wettkampfId);
 
         List<Kampftag> GetKampftage(string saisonId);

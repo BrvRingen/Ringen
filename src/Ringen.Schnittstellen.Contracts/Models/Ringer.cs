@@ -1,4 +1,7 @@
-﻿namespace Ringen.Schnittstellen.Contracts.Models
+﻿using System;
+using Ringen.Schnittstellen.Contracts.Models.Enums;
+
+namespace Ringen.Schnittstellen.Contracts.Models
 {
     public class Ringer
     {
@@ -12,18 +15,10 @@
 
         public string Lizenznummer { get; set; }
 
-        public Ringer()
-        {
-            
-        }
+        public Geschlecht Geschlecht { get; set; }
 
-        public Ringer(string vorname, string nachname, string status, string startausweisnummer, string lizenznummer)
-        {
-            Vorname = vorname;
-            Nachname = nachname;
-            Status = status;
-            Startausweisnummer = startausweisnummer;
-            Lizenznummer = lizenznummer;
-        }
+        public DateTime Geburtsdatum { get; set; }
+
+        public string Vereinsnummer { get; set; }
     }
 }

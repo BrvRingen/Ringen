@@ -108,6 +108,14 @@
     <None Include="TranslationManager\DictionaryToEnum.ttinclude" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ringen.DependencyInjection\Ringen.DependencyInjection.csproj">
+      <Project>{b7f4860d-f7a8-4aae-ae34-9166ab9e8f7a}</Project>
+      <Name>Ringen.DependencyInjection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ringen.Schnittstellen.Contracts\Ringen.Schnittstellen.Contracts.csproj">
+      <Project>{17d6dade-ebe8-4b4a-9eda-014395cf42a5}</Project>
+      <Name>Ringen.Schnittstellen.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ringen.Shared\Ringen.Shared.csproj">
       <Project>{f4bdd0b5-8268-4e68-be6a-ead3485ad2b1}</Project>
       <Name>Ringen.Shared</Name>

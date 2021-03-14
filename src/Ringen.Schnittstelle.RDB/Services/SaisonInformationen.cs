@@ -22,7 +22,7 @@ namespace Ringen.Schnittstelle.RDB.Services
         {
             KampftagMapper mapper = new KampftagMapper();
 
-            JObject response = _rdbService.Get(
+            JObject response = _rdbService.GetCompetitionSystem(
                 "listOrgBoutday",
                 new List<KeyValuePair<string, string>>()
                 {
@@ -38,7 +38,7 @@ namespace Ringen.Schnittstelle.RDB.Services
         {
             EinzelkampfMapper mapper = new EinzelkampfMapper();
 
-            JObject response = _rdbService.Get(
+            JObject response = _rdbService.GetCompetitionSystem(
                 "getCompetitionScheme",
                 new List<KeyValuePair<string, string>>()
                 {
@@ -55,7 +55,7 @@ namespace Ringen.Schnittstelle.RDB.Services
         {
             LigaMapper mapper = new LigaMapper();
 
-            JObject response = _rdbService.Get(
+            JObject response = _rdbService.GetCompetitionSystem(
                 "listLiga",
                 new List<KeyValuePair<string, string>>()
                 {
@@ -80,7 +80,7 @@ namespace Ringen.Schnittstelle.RDB.Services
             SaisonMapper saisonMapper = new SaisonMapper();
             LeistungsklasseMapper leistungsklasseMapper = new LeistungsklasseMapper();
 
-            JObject response = _rdbService.Get("getSaison",
+            JObject response = _rdbService.GetCompetitionSystem("getSaison",
                 new List<KeyValuePair<string, string>>()
                 {
                     new KeyValuePair<string, string>("sid", saisonId)
@@ -96,7 +96,7 @@ namespace Ringen.Schnittstelle.RDB.Services
         {
             SaisonMapper mapper = new SaisonMapper();
 
-            JObject response = _rdbService.Get("listSaison");
+            JObject response = _rdbService.GetCompetitionSystem("listSaison");
             IEnumerable<SaisonApiModel> apiModelListe = response["saisonList"].Select(elem => elem.FirstOrDefault().ToObject<SaisonApiModel>());
 
             return apiModelListe.Select(apiModel => mapper.Map(apiModel)).ToList();
@@ -106,7 +106,7 @@ namespace Ringen.Schnittstelle.RDB.Services
         {
             MannschaftMapper mapper = new MannschaftMapper();
 
-            JObject response = _rdbService.Get(
+            JObject response = _rdbService.GetCompetitionSystem(
                 "getTable",
                 new List<KeyValuePair<string, string>>()
                 {
