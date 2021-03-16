@@ -10,11 +10,11 @@ using Ringen.Schnittstellen.Contracts.Models;
 
 namespace Ringen.Schnittstelle.RDB.Services
 {
-    public class Ergebnisdienst : IErgebnisdienst
+    public class Mannschaftskaempfe : IMannschaftskaempfe
     {
         private RdbService _rdbService;
 
-        public Ergebnisdienst(RdbService rdbService)
+        public Mannschaftskaempfe(RdbService rdbService)
         {
             _rdbService = rdbService;
         }

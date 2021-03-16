@@ -132,6 +132,9 @@
     <EmbeddedResource Include="Resources\LanguageFiles\DictMainForm.resx" />
     <EmbeddedResource Include="Resources\LanguageFiles\DictMainForm.zh-CN.resx" />
     <None Include="App.config" />
+    <None Include="Konfig\RDBErgebnisdienst.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -144,6 +147,10 @@
     <ProjectReference Include="..\Ringen.Core\Ringen.Core.csproj">
       <Project>{78c12d2b-0701-48e5-937c-b8ea3972a9df}</Project>
       <Name>Ringen.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ringen.DependencyInjection\Ringen.DependencyInjection.csproj">
+      <Project>{b7f4860d-f7a8-4aae-ae34-9166ab9e8f7a}</Project>
+      <Name>Ringen.DependencyInjection</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ringen.Shared\Ringen.Shared.csproj">
       <Project>{f4bdd0b5-8268-4e68-be6a-ead3485ad2b1}</Project>

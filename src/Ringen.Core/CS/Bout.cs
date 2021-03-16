@@ -12,19 +12,20 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Ringen.Core.ViewModels;
 
 namespace Ringen.Core.CS
 {
-    public class Bout : ExtendedNotifyPropertyChanged, IExplorerItem
+    public class Bout : ExtendedNotifyPropertyChanged, IExplorerItemViewModel
     {
         private JObject Data;
-        public IExplorerItem ExplorerParent { get; }
+        public IExplorerItemViewModel ExplorerParent { get; }
 
         public int KampfNr
         {
             get
             {
-                return Array.IndexOf(Competition.GetKampffolge(), Order) + 1;
+                return Array.IndexOf(MannschaftskampfViewModel.GetKampffolge(), Order) + 1;
             }
         }
 
@@ -36,18 +37,19 @@ namespace Ringen.Core.CS
             }
         }
 
-        public Competition Competition
+        public MannschaftskampfViewModel MannschaftskampfViewModel
         {
             get
             {
-                return (Competition)ExplorerParent;
+                return (MannschaftskampfViewModel)ExplorerParent;
             }
         }
-        public Table Table
+        public LigaViewModel LigaViewModel
         {
             get
             {
-                return (Table)ExplorerParent.ExplorerParent;
+                return null;
+                //return (Table)ExplorerParent.ExplorerParent;
             }
         }
 
@@ -78,7 +80,7 @@ namespace Ringen.Core.CS
 
                 Async.RunSync(async () =>
                 {
-                    var AssetResponse = await REST.Client().GetAsync($"/Api/v1/cs/?startausweisNr={value.ToString()}&saisonId={Competition.SaisonId}&competitionId={Competition.CompetitionId}");
+                    var AssetResponse = await REST.Client().GetAsync($"/Api/v1/cs/?startausweisNr={value.ToString()}&saisonId={MannschaftskampfViewModel.SaisonId}&competitionId={MannschaftskampfViewModel.CompetitionId}");
 
                     if (AssetResponse.IsSuccessStatusCode)
                     {
@@ -178,7 +180,7 @@ namespace Ringen.Core.CS
 
                 Async.RunSync(async () =>
                 {
-                    var AssetResponse = await REST.Client().GetAsync($"/Api/v1/cs/?startausweisNr={value.ToString()}&saisonId={Competition.SaisonId}&competitionId={Competition.CompetitionId}");
+                    var AssetResponse = await REST.Client().GetAsync($"/Api/v1/cs/?startausweisNr={value.ToString()}&saisonId={MannschaftskampfViewModel.SaisonId}&competitionId={MannschaftskampfViewModel.CompetitionId}");
 
                     if (AssetResponse.IsSuccessStatusCode)
                     {
@@ -241,13 +243,13 @@ namespace Ringen.Core.CS
 
         public List<bool> Children { get; set; }
 
-        public Bout(JObject Data, IExplorerItem Parent)
+        public Bout(JObject Data, IExplorerItemViewModel Parent)
         {
             this.Data = Data;
             this.ExplorerParent = Parent;
         }
 
-        public Bout(int Order, string WeightClass, string Style, IExplorerItem Parent)
+        public Bout(int Order, string WeightClass, string Style, IExplorerItemViewModel Parent)
         {
             this.Data = (JObject)DefaultBout.DeepClone();
             Data["order"] = Order;
@@ -291,7 +293,7 @@ namespace Ringen.Core.CS
 
             Async.RunSync(async () =>
             {
-                var AssetResponse = await REST.Client().GetAsync($"/Api/v1/cs/?saisonId={Competition.SaisonId}&competitionId={Competition.CompetitionId}&order={Order}");
+                var AssetResponse = await REST.Client().GetAsync($"/Api/v1/cs/?saisonId={MannschaftskampfViewModel.SaisonId}&competitionId={MannschaftskampfViewModel.CompetitionId}&order={Order}");
 
                 if (AssetResponse.IsSuccessStatusCode)
                 {

@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ringen.Core.ViewModels;
 
 namespace Ringen.Plugin.CsEditor
 {
@@ -40,12 +41,12 @@ namespace Ringen.Plugin.CsEditor
         {
             InitializeComponent();
             UpdateUi();
-            Explorer.SelectedItemChanged += ((object sender, Explorer.SelectedItemChangedEventArgs e) => { UpdateUi(); });
+            MannschaftskaempfeExplorer.SelectedItemChanged += ((object sender, MannschaftskaempfeExplorer.SelectedItemChangedEventArgs e) => { UpdateUi(); });
         }
 
         public void UpdateUi()
         {
-            Bout = Explorer.SelectedItem as Core.CS.Bout;
+            Bout = MannschaftskaempfeExplorer.SelectedItem as Core.CS.Bout;
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using Ninject.Modules;
+using Ringen.Schnittstelle.RDB.ConfigSections;
 using Ringen.Schnittstelle.RDB.Factories;
 using Ringen.Schnittstelle.RDB.Models;
 using Ringen.Schnittstelle.RDB.Services;
@@ -14,15 +15,13 @@ namespace Ringen.Schnittstelle.RDB.DependencyInjection
         public override void Load()
         {
             ErgebnisdienstSystem system = GlobaleVariablen.AktivesSystem; //TODO: Aus Konfig auslesen
-
-            //TODO: In Konfig auslagern
-            RdbServiceErsteller.Init(new RdbSystemSettings("http://test.rdb.ringen-nrw.de/index.php", new NetworkCredential("", "")));
+            RdbServiceErsteller.Init(new RdbSystemSettings(RdbConfigSection.Instance));
 
             Bind<RdbService>().ToMethod(x => RdbServiceErsteller.ErstelleService())
                 .When(_ => system.Equals(ErgebnisdienstSystem.RDB))
                 .InSingletonScope();
 
-            Bind<IErgebnisdienst>().To<Ergebnisdienst>()
+            Bind<IMannschaftskaempfe>().To<Mannschaftskaempfe>()
                 .When(_ => system.Equals(ErgebnisdienstSystem.RDB))
                 .InSingletonScope();
 

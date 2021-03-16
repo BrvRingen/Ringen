@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Windows;
 using Ringen.Core.TranslationManager;
 using Ringen.Core.Services;
+using Ringen.DependencyInjection;
 
 namespace Ringen
 {
@@ -35,7 +36,9 @@ namespace Ringen
             {
                 Args = e.Args.ToList();
             }
-            
+
+            DependencyInjectionContainer.CreateKernel();
+
             // Prüfe .Net-Framework (theoretisch mit MSI Installer nicht mehr nötig)
             Version dotNetFrameworkVersion = Version.Parse(System.Diagnostics.FileVersionInfo.GetVersionInfo(typeof(int).Assembly.Location).ProductVersion.ToString().Substring(0, 5));
             if (dotNetFrameworkVersion < Version.Parse("4.7.2"))

@@ -5,6 +5,7 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using Ringen.Core.CS;
+using Ringen.Core.ViewModels;
 using Ringen.Plugin.CsEditor.Reporting;
 using Ringen.Shared.Models;
 
@@ -17,14 +18,14 @@ namespace Ringen.Plugin.CsEditor.Tests
         public void TesteErgebnislisteExport()
         {
             string daten = File.ReadAllText($"{System.AppDomain.CurrentDomain.BaseDirectory}\\TestDaten\\2019_Landesliga_RCA-Bayreuth_vs_ASV-Hof.json");
-            Competition testCompetition = new Ringen.Core.CS.Competition(JObject.Parse(daten), null);
+            MannschaftskampfViewModel testMannschaftskampfViewModel = new MannschaftskampfViewModel(JObject.Parse(daten), null);
             var zusatzInfos = GetDemoZusatzInfos();
 
             Random random = new Random();
             string filename = $"Test_{random.Next()}.pdf";
 
             IReport bericht = new ReportErgebnislisteKampfrichtertischPdf();
-            bericht.Export(filename, testCompetition, zusatzInfos);
+            bericht.Export(filename, testMannschaftskampfViewModel, zusatzInfos);
             Process.Start(filename);//Öffne PDF
         }
 
@@ -32,25 +33,25 @@ namespace Ringen.Plugin.CsEditor.Tests
         public void TestePdfExport()
         {
             string daten = File.ReadAllText($"{System.AppDomain.CurrentDomain.BaseDirectory}\\TestDaten\\2019_Landesliga_RCA-Bayreuth_vs_ASV-Hof.json");
-            Competition testCompetition = new Ringen.Core.CS.Competition(JObject.Parse(daten), null);
+            MannschaftskampfViewModel testMannschaftskampfViewModel = new MannschaftskampfViewModel(JObject.Parse(daten), null);
 
             var zusatzInfos = GetDemoZusatzInfos();
 
             //TODO Löschen, sobald wirklich Punkte hinterlegt sind
             Random rnd = new Random();
             int cnt = 0;
-            foreach (Bout bout in testCompetition.Children)
+            foreach (Bout bout in testMannschaftskampfViewModel.Children)
             {
                 for (int i = 0; i < rnd.Next(1, 10); i++)
                 {
                     var ringer = (rnd.Next(1, 3) == 1 ? Core.CS.BoutPoint.Wrestler.Home : Core.CS.BoutPoint.Wrestler.Opponent);
 
                     var zeit = new DateTime(
-                        testCompetition.BoutDateDateTime.Year,
-                        testCompetition.BoutDateDateTime.Month,
-                        testCompetition.BoutDateDateTime.Day,
-                        testCompetition.ScaleTime.Hours,
-                        testCompetition.ScaleTime.Minutes + cnt + i + 4,
+                        testMannschaftskampfViewModel.BoutDateDateTime.Year,
+                        testMannschaftskampfViewModel.BoutDateDateTime.Month,
+                        testMannschaftskampfViewModel.BoutDateDateTime.Day,
+                        testMannschaftskampfViewModel.ScaleTime.Hours,
+                        testMannschaftskampfViewModel.ScaleTime.Minutes + cnt + i + 4,
                         rnd.Next(1, 59)
                     );
 
@@ -64,7 +65,7 @@ namespace Ringen.Plugin.CsEditor.Tests
             string filename = $"Test_{random.Next()}.pdf";
 
             IReport bericht = new ReportPdf();
-            bericht.Export(filename, testCompetition, zusatzInfos);
+            bericht.Export(filename, testMannschaftskampfViewModel, zusatzInfos);
             Process.Start(filename);//Öffne PDF
 
         }
@@ -89,25 +90,25 @@ namespace Ringen.Plugin.CsEditor.Tests
         public void TestePdfFarbigExport()
         {
             string daten = File.ReadAllText($"{System.AppDomain.CurrentDomain.BaseDirectory}\\TestDaten\\2019_Landesliga_RCA-Bayreuth_vs_ASV-Hof.json");
-            Competition testCompetition = new Ringen.Core.CS.Competition(JObject.Parse(daten), null);
+            MannschaftskampfViewModel testMannschaftskampfViewModel = new MannschaftskampfViewModel(JObject.Parse(daten), null);
 
             var zusatzInfos = GetDemoZusatzInfos();
 
             //TODO Löschen, sobald wirklich Punkte hinterlegt sind
             Random rnd = new Random();
             int cnt = 0;
-            foreach (Bout bout in testCompetition.Children)
+            foreach (Bout bout in testMannschaftskampfViewModel.Children)
             {
                 for (int i = 0; i < rnd.Next(1, 10); i++)
                 {
                     var ringer = (rnd.Next(1, 3) == 1 ? Core.CS.BoutPoint.Wrestler.Home : Core.CS.BoutPoint.Wrestler.Opponent);
 
                     var zeit = new DateTime(
-                        testCompetition.BoutDateDateTime.Year,
-                        testCompetition.BoutDateDateTime.Month, 
-                        testCompetition.BoutDateDateTime.Day,
-                        testCompetition.ScaleTime.Hours,
-                        testCompetition.ScaleTime.Minutes + cnt + i + 4,
+                        testMannschaftskampfViewModel.BoutDateDateTime.Year,
+                        testMannschaftskampfViewModel.BoutDateDateTime.Month, 
+                        testMannschaftskampfViewModel.BoutDateDateTime.Day,
+                        testMannschaftskampfViewModel.ScaleTime.Hours,
+                        testMannschaftskampfViewModel.ScaleTime.Minutes + cnt + i + 4,
                         rnd.Next(1, 59)
                         );
 
@@ -121,7 +122,7 @@ namespace Ringen.Plugin.CsEditor.Tests
             string filename = $"Test_{random.Next()}.pdf";
 
             IReport bericht = new ReportFarbigPdf();
-            bericht.Export(filename, testCompetition, zusatzInfos);
+            bericht.Export(filename, testMannschaftskampfViewModel, zusatzInfos);
             Process.Start(filename);//Öffne PDF
 
         }

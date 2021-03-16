@@ -1,13 +1,14 @@
 ﻿using Ringen.Core.CS;
 using System;
+using Ringen.Core.ViewModels;
 
 namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
 {
     class BerichtTitel
     {
-        public string GetTitle(Competition competition)
+        public string GetTitle(MannschaftskampfViewModel mannschaftskampfViewModel)
         {
-            string title = string.Format(Resources.LanguageFiles.DictPluginMain.PdfProtocolTitle, competition.LigaId, competition.TableId, competition.HomeTeamName, competition.OpponentTeamName, DateTime.Parse(competition.BoutDate).ToShortDateString());
+            string title = string.Format(Resources.LanguageFiles.DictPluginMain.PdfProtocolTitle, mannschaftskampfViewModel.LigaId, mannschaftskampfViewModel.TableId, mannschaftskampfViewModel.HomeTeamName, mannschaftskampfViewModel.OpponentTeamName, DateTime.Parse(mannschaftskampfViewModel.BoutDate).ToShortDateString());
             return title;
         }
     }

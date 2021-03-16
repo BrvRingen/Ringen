@@ -14,20 +14,20 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.ErgebnisdienstTests
     [TestFixture]
     public class GetMannschaftskampfTests
     {
-        private IErgebnisdienst _ergebnisdienst;
+        private IMannschaftskaempfe _mannschaftskaempfe;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
             RdbService rdbService = RdbServiceErsteller.ErstelleService();
-            _ergebnisdienst = new Ergebnisdienst(rdbService);
+            _mannschaftskaempfe = new Mannschaftskaempfe(rdbService);
         }
 
 
         [Test]
         public void GetMannschaftskaempfe_erwarte_Erfolg()
         {
-            List<Mannschaftskampf> wettkampfListe = _ergebnisdienst.GetMannschaftskaempfe("2019", "Oberliga", "Westfalen");
+            List<Mannschaftskampf> wettkampfListe = _mannschaftskaempfe.GetMannschaftskaempfe("2019", "Oberliga", "Westfalen");
 
             wettkampfListe.Should().NotBeNull();
             wettkampfListe.Count.Should().BeGreaterThan(0);
@@ -38,7 +38,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.ErgebnisdienstTests
         [Test]
         public void Abgeschlossene_Saison_erwarte_korrekte_Daten()
         {
-            Tuple<Mannschaftskampf, List<Einzelkampf>> wettkampf = _ergebnisdienst.GetMannschaftskampf("2019", "011008a");
+            Tuple<Mannschaftskampf, List<Einzelkampf>> wettkampf = _mannschaftskaempfe.GetMannschaftskampf("2019", "011008a");
 
             wettkampf.Should().NotBeNull();
             wettkampf.Item1.Should().NotBeNull();
@@ -63,7 +63,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.ErgebnisdienstTests
         [Test]
         public void Offene_Saison_erwarte_korrekte_Daten()
         {
-            Tuple<Mannschaftskampf, List<Einzelkampf>> wettkampf = _ergebnisdienst.GetMannschaftskampf("2020", "047012b");
+            Tuple<Mannschaftskampf, List<Einzelkampf>> wettkampf = _mannschaftskaempfe.GetMannschaftskampf("2020", "047012b");
 
             wettkampf.Should().NotBeNull();
             wettkampf.Item1.Should().NotBeNull();

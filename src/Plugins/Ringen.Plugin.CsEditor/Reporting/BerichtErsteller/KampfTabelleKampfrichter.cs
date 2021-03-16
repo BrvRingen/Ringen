@@ -4,6 +4,7 @@ using MigraDoc.DocumentObjectModel;
 using MigraDoc.DocumentObjectModel.Shapes;
 using MigraDoc.DocumentObjectModel.Tables;
 using Ringen.Core.CS;
+using Ringen.Core.ViewModels;
 using Ringen.Plugin.CsEditor.Helper;
 using Ringen.Plugin.CsEditor.Reporting.BerichtErsteller;
 using Ringen.Plugin.CsEditor.Reporting.Konfig;
@@ -14,12 +15,12 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
 {
     class KampfTabelleKampfrichter
     {
-        public Table generate(Competition competition, double randLinksRechts)
+        public Table generate(MannschaftskampfViewModel mannschaftskampfViewModel, double randLinksRechts)
         {
             Table table = SetUpKampftabelle(randLinksRechts);
             Row kopfzeile = table.AddRow();
             Kopfzeilen(kopfzeile);
-            Kampfzeilen(table, competition.Children);
+            Kampfzeilen(table, mannschaftskampfViewModel.Children);
 
             return table;
         }

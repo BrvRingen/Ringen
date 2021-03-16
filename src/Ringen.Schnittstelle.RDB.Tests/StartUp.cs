@@ -18,8 +18,6 @@ namespace Ringen.Schnittstelle.RDB.Tests
                 Ringen.Tests.Shared.StartUp.Init();
             }
 
-            RdbServiceErsteller.Init(new RdbSystemSettings("http://test.rdb.ringen-nrw.de/index.php", new NetworkCredential("", "")));
-            
             GlobaleVariablen.AktivesSystem = ErgebnisdienstSystem.RDB;
         }
     }

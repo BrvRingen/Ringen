@@ -13,26 +13,26 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.ErgebnisdienstTests
     [TestFixture]
     public class GetLigaMitPlatzierungTests
     {
-        private IErgebnisdienst _ergebnisdienst;
+        private IMannschaftskaempfe _mannschaftskaempfe;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
             RdbService rdbService = RdbServiceErsteller.ErstelleService();
-            _ergebnisdienst = new Ergebnisdienst(rdbService);
+            _mannschaftskaempfe = new Mannschaftskaempfe(rdbService);
         }
         
         [Test]
         public void Call_erwarte_Erfolg()
         {
-            Tuple<Liga, List<Tabellenplatzierung>> ligaTuple = _ergebnisdienst.GetLigaMitPlatzierung("2019", "Oberliga", "Westfalen");
+            Tuple<Liga, List<Tabellenplatzierung>> ligaTuple = _mannschaftskaempfe.GetLigaMitPlatzierung("2019", "Oberliga", "Westfalen");
             ligaTuple.Should().NotBeNull();
         }
 
         [Test]
         public void Abgeschlossene_Saison_erwarte_korrekte_Platzierungen()
         {
-            Tuple<Liga, List<Tabellenplatzierung>> ligaTuple = _ergebnisdienst.GetLigaMitPlatzierung("2019", "Oberliga", "Westfalen");
+            Tuple<Liga, List<Tabellenplatzierung>> ligaTuple = _mannschaftskaempfe.GetLigaMitPlatzierung("2019", "Oberliga", "Westfalen");
 
             ligaTuple.Item1.Bezeichnung.Should().Be("Oberliga Westfalen 2019");
             ligaTuple.Item2.FirstOrDefault(li => li.Tabellenplatz == 1).TeamId.Should().Be("KSV Witten 07 II");
@@ -42,7 +42,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.ErgebnisdienstTests
         [Test]
         public void Offene_Saison_erwarte_leere_Platzierungen()
         {
-            Tuple<Liga, List<Tabellenplatzierung>> ligaTuple = _ergebnisdienst.GetLigaMitPlatzierung("2020", "Oberliga", "");
+            Tuple<Liga, List<Tabellenplatzierung>> ligaTuple = _mannschaftskaempfe.GetLigaMitPlatzierung("2020", "Oberliga", "");
 
             ligaTuple.Item1.Bezeichnung.Should().Be("Oberliga 2020");
             ligaTuple.Item2.ForEach(li => li.Tabellenplatz.Should().Be(0));

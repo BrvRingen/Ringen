@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ringen.Core.ViewModels;
 using Ringen.Shared.Models;
 
 namespace Ringen.Plugin.CsEditor
@@ -26,15 +27,15 @@ namespace Ringen.Plugin.CsEditor
     /// </summary>
     public partial class ViewCompetition : ExtendedNotifyPropertyChangedUserControl
     {
-        private Core.CS.Competition _competition;
+        private MannschaftskampfViewModel _mannschaftskampfViewModel;
 
-        public Core.CS.Competition Competition
+        public MannschaftskampfViewModel MannschaftskampfViewModel
         {
-            get { return _competition; }
+            get { return _mannschaftskampfViewModel; }
             set
             {
-                _competition = value;
-                OnPropertyChanged(nameof(ViewCompetition.Competition));
+                _mannschaftskampfViewModel = value;
+                OnPropertyChanged(nameof(ViewCompetition.MannschaftskampfViewModel));
             }
         }
 
@@ -54,12 +55,12 @@ namespace Ringen.Plugin.CsEditor
         {
             InitializeComponent();
             UpdateUi();
-            Explorer.SelectedItemChanged += ((object sender, Explorer.SelectedItemChangedEventArgs e) => { UpdateUi(); });
+            MannschaftskaempfeExplorer.SelectedItemChanged += ((object sender, MannschaftskaempfeExplorer.SelectedItemChangedEventArgs e) => { UpdateUi(); });
         }
 
         public void UpdateUi()
         {
-            Competition = Explorer.SelectedItem as Core.CS.Competition;
+            MannschaftskampfViewModel = MannschaftskaempfeExplorer.SelectedItem as MannschaftskampfViewModel;
             CompetitionInfos = new CompetitionInfos();
             CompetitionInfos.Ordner.Add("Test Ordner 1");
             CompetitionInfos.Ordner.Add("Test Ordner 2");
@@ -70,7 +71,7 @@ namespace Ringen.Plugin.CsEditor
 
         private async Task OnSendCompetitionToBrvAsync()
         {
-            await Competition.SendAsync();
+            await MannschaftskampfViewModel.SendAsync();
 
             return;
         }
@@ -84,23 +85,23 @@ namespace Ringen.Plugin.CsEditor
             if (Response.IsSuccessStatusCode)
             {
                 var result = (JObject)JsonConvert.DeserializeObject(Response.Content.ReadAsStringAsync().Result);
-                Competition.Audience = int.Parse(result["audience"].ToString());
+                MannschaftskampfViewModel.Audience = int.Parse(result["audience"].ToString());
             }
 
         }));
 
         private RelayCommand m_CreateProtocol;
         public RelayCommand CreateProtocol => m_CreateProtocol ?? (m_CreateProtocol = new RelayCommand(async () => {
-            await Protocol.OnCreateProtocolAsync(this.Competition);}));
+            await Protocol.OnCreateProtocolAsync(this.MannschaftskampfViewModel);}));
 
         private RelayCommand m_CreateAllList;
         public RelayCommand CreateAllList => m_CreateAllList ?? (m_CreateAllList = new RelayCommand(async () => {
-            await Protocol.OnCreateCreateAllListAsync(this.Competition);
+            await Protocol.OnCreateCreateAllListAsync(this.MannschaftskampfViewModel);
         }));
 
         private RelayCommand m_CreateBoutResultList;
         public RelayCommand CreateBoutResultList => m_CreateBoutResultList ?? (m_CreateBoutResultList = new RelayCommand(async () => {
-            await Protocol.OnCreateBoutResultListAsync(this.Competition);
+            await Protocol.OnCreateBoutResultListAsync(this.MannschaftskampfViewModel);
         }));
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)

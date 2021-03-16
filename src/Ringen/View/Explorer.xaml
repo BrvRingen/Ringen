@@ -4,7 +4,7 @@
     xmlns:cmd="http://www.galasoft.ch/mvvmlight"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:core="clr-namespace:Ringen.Core;assembly=Ringen.Core"
-    >
+    xmlns:viewModels="clr-namespace:Ringen.Core.ViewModels;assembly=Ringen.Core">
 
     <HierarchicalDataTemplate x:Key="ExplorerTemplate" ItemsSource="{Binding Children}">
         <StackPanel
@@ -30,7 +30,7 @@
             VerticalAlignment="Stretch"
             AllowDrop="True"
             FontSize="12"
-            ItemsSource="{x:Static core:Explorer.Data}"
+            ItemsSource="{x:Static viewModels:MannschaftskaempfeExplorer.Data}"
             VirtualizingStackPanel.IsVirtualizing="True"
             ItemTemplate="{StaticResource ExplorerTemplate}"
             VirtualizingStackPanel.VirtualizationMode="Standard">

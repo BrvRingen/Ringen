@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Ringen.Core
+namespace Ringen.Core.ViewModels
 {
-    public static class Explorer
+    public static class MannschaftskaempfeExplorer
     {
-        private static IExplorerItem selectedItem;
-        public static IExplorerItem SelectedItem
+        private static IExplorerItemViewModel selectedItem;
+        public static IExplorerItemViewModel SelectedItem
         {
             get
             {
@@ -24,14 +20,14 @@ namespace Ringen.Core
         }
         public static event EventHandler<SelectedItemChangedEventArgs> SelectedItemChanged;
 
-        private static List<IExplorerItem> data;
+        private static List<IExplorerItemViewModel> data;
 
-        public static List<IExplorerItem> Data
+        public static List<IExplorerItemViewModel> Data
         {
             get
             {
                 if (data == null)
-                    data = new List<IExplorerItem>() { new Core.CS.CS() };
+                    data = new List<IExplorerItemViewModel>() { new MannschaftskaempfeViewModel() };
 
 
                 return data;
@@ -40,9 +36,9 @@ namespace Ringen.Core
         }
         public class SelectedItemChangedEventArgs : EventArgs
         {
-            public IExplorerItem SelectedItem { get; }
+            public IExplorerItemViewModel SelectedItem { get; }
 
-            public SelectedItemChangedEventArgs(IExplorerItem SelectedItem)
+            public SelectedItemChangedEventArgs(IExplorerItemViewModel SelectedItem)
             {
                 this.SelectedItem = SelectedItem;
             }

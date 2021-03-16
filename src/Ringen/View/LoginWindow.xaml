@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ringen"
-             xmlns:core="clr-namespace:Ringen.Core;assembly=Ringen.Core"
+             xmlns:helper="clr-namespace:Ringen.Core.Helpers;assembly=Ringen.Core"
              DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -24,7 +24,7 @@
             <Label>User</Label>
             <TextBox Text="{Binding UserName}"></TextBox>
             <Label Margin="0,10,0,0">Password</Label>
-            <PasswordBox core:PasswordBoxHelper.Password="{Binding Password}" />
+            <PasswordBox helper:PasswordBoxHelper.Password="{Binding Password}" />
         </StackPanel>
     </Border>
 </UserControl>

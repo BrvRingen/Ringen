@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ninject;
-using Ringen.Schnittstelle.BRVPrivateREST.DependencyInjection;
 using Ringen.Schnittstelle.RDB.DependencyInjection;
 
 namespace Ringen.DependencyInjection
@@ -23,7 +22,7 @@ namespace Ringen.DependencyInjection
         {
             lock (_lock)
             {
-                _innerKernel = new StandardKernel(new RDBDiModule(), new PrivateRestDiModule());
+                _innerKernel = new StandardKernel(new RDBDiModule());
 
                 try
                 {

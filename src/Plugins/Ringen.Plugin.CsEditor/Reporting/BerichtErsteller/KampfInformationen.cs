@@ -5,13 +5,14 @@ using Ringen.Plugin.CsEditor.Reporting.Konfig;
 using Ringen.Shared.Models;
 using System;
 using System.Linq;
+using Ringen.Core.ViewModels;
 using Table = MigraDoc.DocumentObjectModel.Tables.Table;
 
 namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
 {
     class KampfInformationen
     {
-        public Table generate(Competition competition, CompetitionInfos zusatzInfos, double randLinksRechts)
+        public Table generate(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos, double randLinksRechts)
         {
             var table = new Table();
             table.Style = CustomStyles.TABLEINFO;
@@ -33,7 +34,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             Row zeile = table.AddRow();
 
             var spalte = zeile.Cells[0].AddParagraph();
-            var ft = spalte.AddFormattedText($"{competition.LigaId} {competition.TableId}", TextFormat.Bold);
+            var ft = spalte.AddFormattedText($"{mannschaftskampfViewModel.LigaId} {mannschaftskampfViewModel.TableId}", TextFormat.Bold);
             ft.Font.Size = CustomStyles.fontSizeGross;
             spalte.AddLineBreak();
 
@@ -42,7 +43,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             ft.Bold = true;
 
             spalte.AddLineBreak();
-            ft = spalte.AddFormattedText($"{competition.Location.Split(' ').Last()}");
+            ft = spalte.AddFormattedText($"{mannschaftskampfViewModel.Location.Split(' ').Last()}");
             ft.Font.Size = CustomStyles.fontSizeNormal;
 
             spalte = zeile.Cells[1].AddParagraph();
@@ -55,7 +56,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             ft.Bold = true;
 
             spalte.AddLineBreak();
-            ft = spalte.AddFormattedText($"{competition.Location}");
+            ft = spalte.AddFormattedText($"{mannschaftskampfViewModel.Location}");
             ft.Font.Size = CustomStyles.fontSizeNormal;
 
             spalte = zeile.Cells[2].AddParagraph();
@@ -68,7 +69,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             ft.Bold = true;
 
             spalte.AddLineBreak();
-            ft = spalte.AddFormattedText($"{DateTime.Parse(competition.BoutDate).ToShortDateString()}");
+            ft = spalte.AddFormattedText($"{DateTime.Parse(mannschaftskampfViewModel.BoutDate).ToShortDateString()}");
             ft.Font.Size = CustomStyles.fontSizeNormal;
 
             return table;

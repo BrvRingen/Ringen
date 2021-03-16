@@ -5,6 +5,7 @@ using MigraDoc.DocumentObjectModel;
 using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.Rendering;
 using Ringen.Core.CS;
+using Ringen.Core.ViewModels;
 using Ringen.Plugin.CsEditor.Helper;
 using Ringen.Plugin.CsEditor.Reporting.BerichtErsteller;
 using Ringen.Plugin.CsEditor.Reporting.Konfig;
@@ -21,49 +22,49 @@ namespace Ringen.Plugin.CsEditor.Reporting
         private KampfInformationen kampfInformationen = new KampfInformationen();
 
 
-        public void Export(string pfad, Competition daten, CompetitionInfos zusatzInfos)
+        public void Export(string pfad, MannschaftskampfViewModel daten, CompetitionInfos zusatzInfos)
         {
             Document report = ErstelleBericht(daten, zusatzInfos);
             exportPdf.Export(pfad, report);
         }
 
 
-        public Document ErstelleBericht(Competition competition, CompetitionInfos zusatzInfos)
+        public Document ErstelleBericht(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos)
         {
             string title = "";
             //TODO kläre warum ein Dokument einen Titel hat und diese nicht, was ist der default wert?
             Document document = defaultElemente.GetDocument(title);
             Section hauptSection = defaultElemente.GetHauptSection(_randLinksRechts);
-            ErstelleHauptSektion(hauptSection, competition, zusatzInfos);
+            ErstelleHauptSektion(hauptSection, mannschaftskampfViewModel, zusatzInfos);
             document.Add(hauptSection);
 
             return document;
         }
 
 
-        private Section ErstelleHauptSektion(Section section, Competition competition, CompetitionInfos zusatzInfos)
+        private Section ErstelleHauptSektion(Section section, MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos)
         {
-            ErgaenzeHeader(section, competition, zusatzInfos);
-            ErgaenzeInhalt(section, competition, zusatzInfos);
-            ErgaenzeFooter(section, competition, zusatzInfos.MannschaftsfuehrerHeim, zusatzInfos.MannschaftsfuehrerGast);
+            ErgaenzeHeader(section, mannschaftskampfViewModel, zusatzInfos);
+            ErgaenzeInhalt(section, mannschaftskampfViewModel, zusatzInfos);
+            ErgaenzeFooter(section, mannschaftskampfViewModel, zusatzInfos.MannschaftsfuehrerHeim, zusatzInfos.MannschaftsfuehrerGast);
 
             return section;
         }
 
-        private void ErgaenzeInhalt(Section section, Competition competition, CompetitionInfos zusatzInfos)
+        private void ErgaenzeInhalt(Section section, MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos)
         {
-            section.Add(Kampftabelle(competition));
+            section.Add(Kampftabelle(mannschaftskampfViewModel));
         }
         
-        private void ErgaenzeHeader(Section section, Competition competition, CompetitionInfos zusatzInfos)
+        private void ErgaenzeHeader(Section section, MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos)
         {
             section.Headers.Primary.Add(defaultElemente.GetUeberschrift("Sprecher Informationen"));
-            section.Add(kampfInformationen.generate(competition, zusatzInfos, _randLinksRechts));
+            section.Add(kampfInformationen.generate(mannschaftskampfViewModel, zusatzInfos, _randLinksRechts));
 
             section.Headers.Primary.Add(PdfHelper.AddAbstandNachOben("0.1cm"));
         }
         
-        private Table KampfInfos(Competition competition, CompetitionInfos zusatzInfos)
+        private Table KampfInfos(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos)
         {
             var table = new Table();
             table.Style = CustomStyles.TABLEINFO;
@@ -82,33 +83,33 @@ namespace Ringen.Plugin.CsEditor.Reporting
             Row zeile = table.AddRow();
 
             var spalte = zeile.Cells[0].AddParagraph();
-            var ft = spalte.AddFormattedText($"{competition.LigaId} {competition.TableId}", TextFormat.Bold);
+            var ft = spalte.AddFormattedText($"{mannschaftskampfViewModel.LigaId} {mannschaftskampfViewModel.TableId}", TextFormat.Bold);
             ft.Font.Size = CustomStyles.fontSizeNormal;
             ft.Font.Name = CustomStyles.fontUeberschriften;
             
             spalte = zeile.Cells[1].AddParagraph();
-            ft = spalte.AddFormattedText($"{zusatzInfos.Kampfart} {competition.HomeTeamName} vs. {competition.OpponentTeamName}", TextFormat.Bold);
+            ft = spalte.AddFormattedText($"{zusatzInfos.Kampfart} {mannschaftskampfViewModel.HomeTeamName} vs. {mannschaftskampfViewModel.OpponentTeamName}", TextFormat.Bold);
             ft.Font.Size = CustomStyles.fontSizeNormal;
             ft.Font.Name = CustomStyles.fontUeberschriften;
 
             spalte = zeile.Cells[2].AddParagraph();
-            ft = spalte.AddFormattedText($"{DateTime.Parse(competition.BoutDate).ToShortDateString()}", TextFormat.Bold);
+            ft = spalte.AddFormattedText($"{DateTime.Parse(mannschaftskampfViewModel.BoutDate).ToShortDateString()}", TextFormat.Bold);
             ft.Font.Size = CustomStyles.fontSizeNormal;
             ft.Font.Name = CustomStyles.fontUeberschriften;
 
             return table;
         }
 
-        private void ErgaenzeFooter(Section section, Competition competition, string trainerHeim, string trainerGast)
+        private void ErgaenzeFooter(Section section, MannschaftskampfViewModel mannschaftskampfViewModel, string trainerHeim, string trainerGast)
         {
         }
         
-        private Table Kampftabelle(Competition competition)
+        private Table Kampftabelle(MannschaftskampfViewModel mannschaftskampfViewModel)
         {
             Table table = SetUpKampftabelle();
             Row kopfzeile = table.AddRow();
             Kopfzeilen(kopfzeile);
-            Kampfzeilen(table, competition.Children);
+            Kampfzeilen(table, mannschaftskampfViewModel.Children);
 
             return table;
         }

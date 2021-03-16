@@ -5,6 +5,7 @@ using System.IO;
 using Ringen.Core.Messaging;
 using System.Threading.Tasks;
 using Ringen.Core.CS;
+using Ringen.Core.ViewModels;
 using Ringen.Plugin.CsEditor.Reporting;
 using Ringen.Shared.Models;
 
@@ -12,11 +13,11 @@ namespace Ringen.Plugin.CsEditor
 {
     public class Protocol
     {
-        public static async Task OnCreateProtocolAsync(Core.CS.Competition competition, CompetitionInfos zusatzInfos = null) //TODO: ZusatzInfos von Oberfläche übergeben
+        public static async Task OnCreateProtocolAsync(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos = null) //TODO: ZusatzInfos von Oberfläche übergeben
         {
             var myTask = Task.Run(() =>
             {
-                CreateProtocol(competition, zusatzInfos);
+                CreateProtocol(mannschaftskampfViewModel, zusatzInfos);
 
                 return;
             });
@@ -25,29 +26,29 @@ namespace Ringen.Plugin.CsEditor
             return;
         }
 
-        private static void CreateProtocol(Competition competition, CompetitionInfos zusatzInfos)
+        private static void CreateProtocol(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos)
         {
             //TODO Entfernen sobald in API vorhanden oder über UI
-            zusatzInfos = TempTestdaten(competition);
+            zusatzInfos = TempTestdaten(mannschaftskampfViewModel);
 
             string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string filename =
-                $"{competition.BoutDate}_{competition.HomeTeamName.Replace(' ', '-')}_vs_{competition.OpponentTeamName.Replace(' ', '-')}.pdf";
+                $"{mannschaftskampfViewModel.BoutDate}_{mannschaftskampfViewModel.HomeTeamName.Replace(' ', '-')}_vs_{mannschaftskampfViewModel.OpponentTeamName.Replace(' ', '-')}.pdf";
             string pfad = Path.Combine(desktop, filename);
 
             LoggerMessage.Send(new LogEntry(LogEntryType.Message,
-                $"Erstelle Protokoll für Wettkampf {competition.BoutDateDateTime.ToShortDateString()} {competition.Value}. Bitte warten..."));
+                $"Erstelle Protokoll für Wettkampf {mannschaftskampfViewModel.BoutDateDateTime.ToShortDateString()} {mannschaftskampfViewModel.Value}. Bitte warten..."));
 
             IReport bericht = new ReportFarbigPdf();
-            bericht.Export(pfad, competition, zusatzInfos);
+            bericht.Export(pfad, mannschaftskampfViewModel, zusatzInfos);
 
             LoggerMessage.Send(new LogEntry(LogEntryType.Message,
-                $"Protokoll erfolgreich erstellt für Wettkampf {competition.BoutDateDateTime.ToShortDateString()} {competition.Value}. Öffne nun PDF-Datei."));
+                $"Protokoll erfolgreich erstellt für Wettkampf {mannschaftskampfViewModel.BoutDateDateTime.ToShortDateString()} {mannschaftskampfViewModel.Value}. Öffne nun PDF-Datei."));
             Process.Start(pfad); //Öffne PDF
             
         }
 
-        private static CompetitionInfos TempTestdaten(Competition competition)
+        private static CompetitionInfos TempTestdaten(MannschaftskampfViewModel mannschaftskampfViewModel)
         {
             CompetitionInfos zusatzInfos;
             //TODO: Aktuell nur zu Testzwecken, später von Oberfläche übergeben
@@ -65,13 +66,13 @@ namespace Ringen.Plugin.CsEditor
             return zusatzInfos;
         }
 
-        public static async Task OnCreateCreateAllListAsync(Competition competition, CompetitionInfos zusatzInfos=null)
+        public static async Task OnCreateCreateAllListAsync(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos=null)
         {
             var myTask = Task.Run(() =>
             {
-                CreateBoutResultList(competition, zusatzInfos);
-                CreateProtocol(competition, zusatzInfos);
-                CreateSprecherList(competition, zusatzInfos);
+                CreateBoutResultList(mannschaftskampfViewModel, zusatzInfos);
+                CreateProtocol(mannschaftskampfViewModel, zusatzInfos);
+                CreateSprecherList(mannschaftskampfViewModel, zusatzInfos);
 
                 return;
             });
@@ -80,11 +81,11 @@ namespace Ringen.Plugin.CsEditor
             return;
         }
 
-        public static async Task OnCreateBoutResultListAsync(Core.CS.Competition competition, CompetitionInfos zusatzInfos=null)
+        public static async Task OnCreateBoutResultListAsync(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos=null)
         {
             var myTask = Task.Run(() =>
             {
-                CreateBoutResultList(competition, zusatzInfos);
+                CreateBoutResultList(mannschaftskampfViewModel, zusatzInfos);
 
                 return;
             });
@@ -93,43 +94,43 @@ namespace Ringen.Plugin.CsEditor
             return;
         }
 
-        private static void CreateBoutResultList(Competition competition, CompetitionInfos zusatzInfos)
+        private static void CreateBoutResultList(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos)
         {
             //TODO Entfernen sobald in API vorhanden oder über UI
-            zusatzInfos = TempTestdaten(competition);
+            zusatzInfos = TempTestdaten(mannschaftskampfViewModel);
 
             string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string filename = $"{competition.BoutDate}_{competition.HomeTeamName.Replace(' ', '-')}_vs_{competition.OpponentTeamName.Replace(' ', '-')}_Ergebnisliste.pdf";
+            string filename = $"{mannschaftskampfViewModel.BoutDate}_{mannschaftskampfViewModel.HomeTeamName.Replace(' ', '-')}_vs_{mannschaftskampfViewModel.OpponentTeamName.Replace(' ', '-')}_Ergebnisliste.pdf";
             string pfad = Path.Combine(desktop, filename);
 
             LoggerMessage.Send(new LogEntry(LogEntryType.Message,
-                $"Erstelle Ergebnisliste (Punktzettel) für Wettkampf {competition.BoutDateDateTime.ToShortDateString()} {competition.Value}. Bitte warten..."));
+                $"Erstelle Ergebnisliste (Punktzettel) für Wettkampf {mannschaftskampfViewModel.BoutDateDateTime.ToShortDateString()} {mannschaftskampfViewModel.Value}. Bitte warten..."));
 
             IReport bericht = new ReportErgebnislisteKampfrichtertischPdf();
-            bericht.Export(pfad, competition, zusatzInfos);
+            bericht.Export(pfad, mannschaftskampfViewModel, zusatzInfos);
 
             LoggerMessage.Send(new LogEntry(LogEntryType.Message,
-                $"Ergebnisliste (Punktzettel) erfolgreich erstellt für Wettkampf {competition.BoutDateDateTime.ToShortDateString()} {competition.Value}. Öffne nun PDF-Datei."));
+                $"Ergebnisliste (Punktzettel) erfolgreich erstellt für Wettkampf {mannschaftskampfViewModel.BoutDateDateTime.ToShortDateString()} {mannschaftskampfViewModel.Value}. Öffne nun PDF-Datei."));
             Process.Start(pfad); //Öffne PDF
         }
 
-        private static void CreateSprecherList(Competition competition, CompetitionInfos zusatzInfos)
+        private static void CreateSprecherList(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos)
         {
             //TODO Entfernen sobald in API vorhanden oder über UI
-            zusatzInfos = TempTestdaten(competition);
+            zusatzInfos = TempTestdaten(mannschaftskampfViewModel);
 
             string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string filename = $"{competition.BoutDate}_{competition.HomeTeamName.Replace(' ', '-')}_vs_{competition.OpponentTeamName.Replace(' ', '-')}_Sprecher-Info.pdf";
+            string filename = $"{mannschaftskampfViewModel.BoutDate}_{mannschaftskampfViewModel.HomeTeamName.Replace(' ', '-')}_vs_{mannschaftskampfViewModel.OpponentTeamName.Replace(' ', '-')}_Sprecher-Info.pdf";
             string pfad = Path.Combine(desktop, filename);
 
             LoggerMessage.Send(new LogEntry(LogEntryType.Message,
-                $"Erstelle Sprecher-Info für Wettkampf {competition.BoutDateDateTime.ToShortDateString()} {competition.Value}. Bitte warten..."));
+                $"Erstelle Sprecher-Info für Wettkampf {mannschaftskampfViewModel.BoutDateDateTime.ToShortDateString()} {mannschaftskampfViewModel.Value}. Bitte warten..."));
 
             IReport bericht = new ReportSprecher();
-            bericht.Export(pfad, competition, zusatzInfos);
+            bericht.Export(pfad, mannschaftskampfViewModel, zusatzInfos);
 
             LoggerMessage.Send(new LogEntry(LogEntryType.Message,
-                $"Ergebnisliste Sprecher-Info erfolgreich erstellt für Wettkampf {competition.BoutDateDateTime.ToShortDateString()} {competition.Value}. Öffne nun PDF-Datei."));
+                $"Ergebnisliste Sprecher-Info erfolgreich erstellt für Wettkampf {mannschaftskampfViewModel.BoutDateDateTime.ToShortDateString()} {mannschaftskampfViewModel.Value}. Öffne nun PDF-Datei."));
             Process.Start(pfad); //Öffne PDF
         }
     }

@@ -32,15 +32,15 @@
     <Compile Include="CS\BoutPoint.cs" />
     <Compile Include="CS\BoutSettings.cs" />
     <Compile Include="CS\BoutTime.cs" />
-    <Compile Include="CS\Competition.cs" />
-    <Compile Include="CS\Table.cs" />
-    <Compile Include="CS\CS.cs" />
-    <Compile Include="CS\Season.cs" />
-    <Compile Include="Explorer.cs" />
+    <Compile Include="Mapper\LigaViewModelMapper.cs" />
+    <Compile Include="Mapper\MannschaftskampfViewModelMapper.cs" />
+    <Compile Include="Mapper\SaisonViewModelMapper.cs" />
+    <Compile Include="ViewModels\IExplorerItemViewModel.cs" />
+    <Compile Include="ViewModels\LigaViewModel.cs" />
+    <Compile Include="ViewModels\MannschaftskaempfeExplorer.cs" />
     <Compile Include="Helpers\AsyncHelpers.cs" />
     <Compile Include="Helpers\PasswordBoxHelper.cs" />
     <Compile Include="Helpers\RunInUI.cs" />
-    <Compile Include="IExplorerItem.cs" />
     <Compile Include="Messaging\ExitCode\ExitCodeMessage.cs" />
     <Compile Include="Messaging\Logger\LoggerMessage.cs" />
     <Compile Include="Messaging\Logger\LoggerMessageLogToFile.cs" />
@@ -80,6 +80,9 @@
     <Compile Include="UI\IButton.cs" />
     <Compile Include="UI\IRingenTabItem.cs" />
     <Compile Include="UI\RingenTabItem.cs" />
+    <Compile Include="ViewModels\MannschaftskaempfeViewModel.cs" />
+    <Compile Include="ViewModels\MannschaftskampfViewModel.cs" />
+    <Compile Include="ViewModels\SaisonViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Dirkster.AvalonDock">
@@ -121,4 +124,5 @@
       <Name>Ringen.Shared</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
 </Project>

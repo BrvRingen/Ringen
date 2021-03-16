@@ -35,15 +35,15 @@
             </Grid.ColumnDefinitions>
             <Border Background="Red"   Grid.Column="0">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.Competition.HomePoints}" />
+                    <TextBlock Text="{Binding Bout.MannschaftskampfViewModel.HomePoints}" />
                 </Viewbox>
             </Border>
             <Viewbox StretchDirection="Both"  Grid.Column="1">
-                <TextBlock Text="{Binding Bout.Table.Value}" />
+                <TextBlock Text="{Binding Bout.LigaViewModel.Value}" />
             </Viewbox>
             <Border Background="LightSkyBlue"   Grid.Column="2">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.Competition.OpponentPoints}" />
+                    <TextBlock Text="{Binding Bout.MannschaftskampfViewModel.OpponentPoints}" />
                 </Viewbox>
             </Border>
         </Grid>
@@ -54,12 +54,12 @@
             </Grid.ColumnDefinitions>
             <Border Background="Red"   Grid.Column="0">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.Competition.HomeTeamName}" />
+                    <TextBlock Text="{Binding Bout.MannschaftskampfViewModel.HomeTeamName}" />
                 </Viewbox>
             </Border>
             <Border Background="LightSkyBlue"   Grid.Column="1">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.Competition.OpponentTeamName}" />
+                    <TextBlock Text="{Binding Bout.MannschaftskampfViewModel.OpponentTeamName}" />
                 </Viewbox>
             </Border>
         </Grid>

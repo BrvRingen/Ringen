@@ -11,6 +11,7 @@ namespace Ringen.Schnittstelle.RDB.Mapper
         {
             var result = new Liga
             {
+                SaisonId = apiModel.SaisonId,
                 TabellenId = apiModel.TableId,
                 LigaId = apiModel.LigaId,
                 Bezeichnung = $"{apiModel.LigaId}{(!string.IsNullOrEmpty(apiModel.TableId) ? $" {apiModel.TableId}" : string.Empty)} {apiModel.SaisonId}"

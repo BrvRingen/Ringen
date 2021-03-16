@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ringen.Core.ViewModels;
 
 namespace Ringen.Plugin.CsView
 {
@@ -22,14 +23,14 @@ namespace Ringen.Plugin.CsView
     /// </summary>
     public partial class ViewCompetition : ExtendedNotifyPropertyChangedUserControl
     {
-        private Core.CS.Competition competition;
+        private MannschaftskampfViewModel _mannschaftskampfViewModel;
 
-        public Core.CS.Competition Competition
+        public MannschaftskampfViewModel MannschaftskampfViewModel
         {
-            get { return competition; }
+            get { return _mannschaftskampfViewModel; }
             set
             {
-                competition = value;
+                _mannschaftskampfViewModel = value;
                 OnPropertyChanged("Competition");
             }
         }
@@ -38,12 +39,12 @@ namespace Ringen.Plugin.CsView
         {
             InitializeComponent();
             UpdateUi();
-            Explorer.SelectedItemChanged += ((object sender, Explorer.SelectedItemChangedEventArgs e) => { UpdateUi(); });
+            MannschaftskaempfeExplorer.SelectedItemChanged += ((object sender, MannschaftskaempfeExplorer.SelectedItemChangedEventArgs e) => { UpdateUi(); });
         }
 
         public void UpdateUi()
         {
-            Competition = Explorer.SelectedItem as Core.CS.Competition;
+            MannschaftskampfViewModel = MannschaftskaempfeExplorer.SelectedItem as MannschaftskampfViewModel;
         }
     }
 }

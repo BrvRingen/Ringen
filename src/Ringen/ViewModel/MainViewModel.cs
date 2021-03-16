@@ -22,6 +22,7 @@ using System.Windows.Input;
 using System.Collections.Specialized;
 using AvalonDock;
 using AvalonDock.Layout;
+using Ringen.Core.ViewModels;
 
 namespace Ringen.ViewModel
 {
@@ -260,7 +261,7 @@ namespace Ringen.ViewModel
             {
                 return new RelayCommand<RoutedPropertyChangedEventArgs<object>>(new Action<RoutedPropertyChangedEventArgs<object>>((RoutedPropertyChangedEventArgs<object> e) =>
                 {
-                    Explorer.SelectedItem = (IExplorerItem)e.NewValue;
+                    MannschaftskaempfeExplorer.SelectedItem = (IExplorerItemViewModel)e.NewValue;
                 }));
             }
         }

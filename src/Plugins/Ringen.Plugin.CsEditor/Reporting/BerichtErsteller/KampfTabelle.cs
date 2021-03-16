@@ -8,13 +8,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ringen.Core.ViewModels;
 using Table = MigraDoc.DocumentObjectModel.Tables.Table;
 
 namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
 {
     class KampfTabelle
     {
-        public Table generate(Competition competition, double randLinksRechts, bool useColor)
+        public Table generate(MannschaftskampfViewModel mannschaftskampfViewModel, double randLinksRechts, bool useColor)
         {
 
             Color colorRed = Colors.Black;
@@ -28,15 +29,15 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             Table table = SetUpKampftabelle(randLinksRechts);
 
             Row zeileMannschaften = table.AddRow();
-            MannschaftenUeberschrift(zeileMannschaften, competition);
+            MannschaftenUeberschrift(zeileMannschaften, mannschaftskampfViewModel);
 
             var kopfzeile = table.AddRow();
             Kopfzeilen(kopfzeile, colorRed, colorBlue);
 
-            Kampfzeilen(table, competition.Children, colorRed, colorBlue);
+            Kampfzeilen(table, mannschaftskampfViewModel.Children, colorRed, colorBlue);
 
             Row zeile = table.AddRow();
-            GesamtErgebnis(zeile, Convert.ToInt32(competition.HomePoints), Convert.ToInt32(competition.OpponentPoints), colorRed, colorBlue);
+            GesamtErgebnis(zeile, Convert.ToInt32(mannschaftskampfViewModel.HomePoints), Convert.ToInt32(mannschaftskampfViewModel.OpponentPoints), colorRed, colorBlue);
 
             return table;
         }
@@ -116,12 +117,12 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
 
             return table;
         }
-        private void MannschaftenUeberschrift(Row mannschaften, Competition competition)
+        private void MannschaftenUeberschrift(Row mannschaften, MannschaftskampfViewModel mannschaftskampfViewModel)
         {
             mannschaften.Format.Font.Bold = true;
             mannschaften.Borders.Visible = false;
 
-            mannschaften.Cells[2].AddParagraph(competition.HomeTeamName);
+            mannschaften.Cells[2].AddParagraph(mannschaftskampfViewModel.HomeTeamName);
             mannschaften.Cells[2].Format.Font.Bold = true;
             mannschaften.Cells[2].Format.Font.Size = CustomStyles.fontSizeGross;
             mannschaften.Cells[2].Format.Alignment = ParagraphAlignment.Left;
@@ -129,7 +130,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             mannschaften.Cells[2].MergeRight = 4;
             mannschaften.Cells[2].Borders.Right.Width = 2;
 
-            mannschaften.Cells[7].AddParagraph(competition.OpponentTeamName);
+            mannschaften.Cells[7].AddParagraph(mannschaftskampfViewModel.OpponentTeamName);
             mannschaften.Cells[7].Format.Font.Bold = true;
             mannschaften.Cells[7].Format.Font.Size = CustomStyles.fontSizeGross;
             mannschaften.Cells[7].Format.Alignment = ParagraphAlignment.Left;

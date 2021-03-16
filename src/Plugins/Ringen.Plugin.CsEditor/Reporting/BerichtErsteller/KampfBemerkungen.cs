@@ -7,12 +7,13 @@ using Ringen.Plugin.CsEditor.Reporting.Konfig;
 using Ringen.Shared.Models;
 using System;
 using System.Linq;
+using Ringen.Core.ViewModels;
 
 namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
 {
     class KampfBemerkungen
     {
-        public TextFrame generate(Competition competition, CompetitionInfos zusatzInfos, double randLinksRechts, bool useColor)
+        public TextFrame generate(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos, double randLinksRechts, bool useColor)
         {
             var result = new TextFrame();
             result.Width = "25cm";
@@ -44,13 +45,13 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             zeile.Style = CustomStyles.BEMERKUNG;
 
             zeile.Cells[0].AddParagraph().AddFormattedText($"{Resources.LanguageFiles.DictPluginMain.Winner}:", TextFormat.Bold);
-            zeile.Cells[0].Add(SiegerTeam(competition.HomeTeamName, Convert.ToInt32(competition.HomePoints), competition.OpponentTeamName, Convert.ToInt32(competition.OpponentPoints), useColor));
+            zeile.Cells[0].Add(SiegerTeam(mannschaftskampfViewModel.HomeTeamName, Convert.ToInt32(mannschaftskampfViewModel.HomePoints), mannschaftskampfViewModel.OpponentTeamName, Convert.ToInt32(mannschaftskampfViewModel.OpponentPoints), useColor));
 
-            zeile.Cells[1].Add(Wettkampf(competition));
+            zeile.Cells[1].Add(Wettkampf(mannschaftskampfViewModel));
 
             zeile.Cells[2].Add(Organisation(zusatzInfos));
 
-            zeile.Cells[3].Add(Kommentar(competition.EditorComment));
+            zeile.Cells[3].Add(Kommentar(mannschaftskampfViewModel.EditorComment));
 
             return result;
             
@@ -90,7 +91,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             return siegParagraph;
         }
 
-        private Paragraph Wettkampf(Competition competition)
+        private Paragraph Wettkampf(MannschaftskampfViewModel mannschaftskampfViewModel)
         {
             Paragraph paragraph = new Paragraph();
 
@@ -100,15 +101,15 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             paragraph.AddLineBreak();
             paragraph.AddFormattedText("Geplanter Beginn: ", TextFormat.Bold);
             paragraph.AddTab();
-            paragraph.AddFormattedText($"{competition.ScaleTime:hh':'mm} Uhr");
+            paragraph.AddFormattedText($"{mannschaftskampfViewModel.ScaleTime:hh':'mm} Uhr");
             paragraph.AddLineBreak();
 
             DateTime ersterKampf = DateTime.Now;
             DateTime letzterKampf = DateTime.Now;
             try
             {
-                ersterKampf = competition.Children.Min(li => li.Points.Min(na => na.Zeit.Value));
-                letzterKampf = competition.Children.Max(li => li.Points.Max(na => na.Zeit.Value));
+                ersterKampf = mannschaftskampfViewModel.Children.Min(li => li.Points.Min(na => na.Zeit.Value));
+                letzterKampf = mannschaftskampfViewModel.Children.Max(li => li.Points.Max(na => na.Zeit.Value));
             }
             catch (Exception)
             {
@@ -130,7 +131,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
 
             paragraph.AddFormattedText("Anzahl Zuschauer: ", TextFormat.Bold);
             paragraph.AddTab();
-            paragraph.AddFormattedText($"{competition.Audience}");
+            paragraph.AddFormattedText($"{mannschaftskampfViewModel.Audience}");
             paragraph.AddLineBreak();
 
             return paragraph;

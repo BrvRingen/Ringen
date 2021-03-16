@@ -51,10 +51,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ringen.Schnittstelle.BRVPrivateREST\Ringen.Schnittstelle.BRVPrivateREST.csproj">
-      <Project>{5AED1ECE-5380-40A6-A1B8-42F3C4C0CFD6}</Project>
-      <Name>Ringen.Schnittstelle.BRVPrivateREST</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Ringen.Schnittstelle.RDB\Ringen.Schnittstelle.RDB.csproj">
       <Project>{f0356f4f-572c-4e16-8c75-b3972b1f89b8}</Project>
       <Name>Ringen.Schnittstelle.RDB</Name>
