@@ -9,22 +9,54 @@ using Ringen.Schnittstellen.Contracts.Models.Enums;
 
 namespace Ringen.Schnittstelle.RDB.Konvertierer
 {
-    internal class GriffbewertungspunktKonvertierer
+    public class GriffbewertungspunktKonvertierer
     {
-        public string ToPunkteString(List<Griffbewertungspunkt> griffbewertungspunkte)
+        private HeimGastKonvertierer _heimGastKonvertierer;
+        private GriffbewertungsTypKonvertierer _griffbewertungsTypKonvertierer;
+
+        public GriffbewertungspunktKonvertierer(HeimGastKonvertierer heimGastKonvertierer, GriffbewertungsTypKonvertierer griffbewertungsTypKonvertierer)
+        {
+            _heimGastKonvertierer = heimGastKonvertierer;
+            _griffbewertungsTypKonvertierer = griffbewertungsTypKonvertierer;
+        }
+
+        public string ToApiString(List<Griffbewertungspunkt> griffbewertungspunkte)
         {
             List<string> punkteStrings = new List<string>();
 
             foreach (var griffbewertungspunkt in griffbewertungspunkte)
             {
-                //TODO: Punkte String erstellen
-                //"PR62,AR97,1B128,4B171,2B176,2B226,2B237,2B241,2B255"
-                punkteStrings.Add("");
+                /*
+                 * Grammatik
+                 * <<point-data>> ::= <token> (WS <token>)::* ;
+                    <token> ::= (<score> | <pause>) ; 
+                    <score> ::= <color><grade><timeInSec> ; 
+                    <color> ::= („R“|“B“) ; 
+                    <grade> ::= <points>|<decision> ; 
+                    <poin [0-9]{1,3} ;ts> ::= [1-5] ;
+                    <decision> ::= [APV0O] ; 
+                    <timeInSec> ::=
+                    <pause> ::= „#“ ;;
+                 *
+                 */
+                string grade = _griffbewertungsTypKonvertierer.ToApiString(griffbewertungspunkt.Typ);
+                string point = griffbewertungspunkt.Punktzahl.ToString();
+                if (griffbewertungspunkt.Typ.Equals(GriffbewertungsTyp.Punkt))
+                {
+                    grade = point;
+                }
+
+                string color = _heimGastKonvertierer.ToApiString(griffbewertungspunkt.Fuer);
+                string timeInSec = griffbewertungspunkt.Zeit.TotalSeconds.ToString();
+
+                string token = $"{grade}{color}{timeInSec}";
+
+                punkteStrings.Add(token);
             }
 
             return string.Join(",", punkteStrings);
         }
-
+        
         public List<Griffbewertungspunkt> Ermittle_Griffbewertungspunkte(string punkteString)
         {
             if (string.IsNullOrEmpty(punkteString))
@@ -39,39 +71,20 @@ namespace Ringen.Schnittstelle.RDB.Konvertierer
 
                 var punkt = new Griffbewertungspunkt
                 {
-                    Fuer = temp.Groups["Wrestler"].Value.ToUpper() == "R" ? HeimGast.Heim : HeimGast.Gast,
-                    Typ = GriffbewertungsTyp.Punkt,
-                    Zeit = TimeSpan.FromSeconds(int.Parse(temp.Groups["Time"].Value))
+                    Fuer = _heimGastKonvertierer.ToEnum(temp.Groups["Wrestler"].Value),
+                    Zeit = TimeSpan.FromSeconds(int.Parse(temp.Groups["Time"].Value)),
+                    Typ = _griffbewertungsTypKonvertierer.ToEnum(temp.Groups["value"].Value),
+                    Punktzahl = 0
                 };
 
-                switch (temp.Groups["value"].Value.ToUpper())
+                if (punkt.Typ.Equals(GriffbewertungsTyp.Punkt))
                 {
-                    case "P":
-                        punkt.Typ = GriffbewertungsTyp.Passiv;
-                        punkt.Punktzahl = 0;
-                        break;
-
-                    case "A":
-                        punkt.Typ = GriffbewertungsTyp.Aktivitaetszeit;
-                        punkt.Punktzahl = 0;
-                        break;
-
-                    case "V":
-                        punkt.Typ = GriffbewertungsTyp.Verwarnung;
-                        punkt.Punktzahl = 0;
-                        break;
-
-                    default:
-                        int punktzahl = 0;
-                        if (!int.TryParse(temp.Groups["value"].Value, out punktzahl))
-                        {
-                            throw new ArgumentException(
-                                $"Griffbewertungs-Typ für {temp?.Groups["value"]?.Value} konnte nicht ermittelt werden");
-                        }
-
-                        punkt.Typ = GriffbewertungsTyp.Punkt;
-                        punkt.Punktzahl = punktzahl;
-                        break;
+                    int punktzahl = 0;
+                    if (!int.TryParse(temp.Groups["value"].Value, out punktzahl))
+                    {
+                        throw new ArgumentException($"Griffbewertungs-Typ für {temp?.Groups["value"]?.Value} konnte nicht ermittelt werden");
+                    }
+                    punkt.Punktzahl = punktzahl;
                 }
 
                 griffbewertungspunkte.Add(punkt);

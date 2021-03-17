@@ -10,7 +10,7 @@ namespace Ringen.Schnittstellen.Contracts.Models
     /// </summary>
     public class Griffbewertungspunkt
     {
-        public HeimGast? Fuer { get; set; }
+        public HeimGast Fuer { get; set; }
 
         public GriffbewertungsTyp Typ { get; set; }
 
@@ -24,7 +24,7 @@ namespace Ringen.Schnittstellen.Contracts.Models
             
         }
 
-        public Griffbewertungspunkt(HeimGast? fuer, GriffbewertungsTyp typ, TimeSpan zeit, int punktzahl=0)
+        public Griffbewertungspunkt(HeimGast fuer, GriffbewertungsTyp typ, TimeSpan zeit, int punktzahl=0)
         {
             Fuer = fuer;
             Typ = typ;

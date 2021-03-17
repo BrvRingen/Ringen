@@ -94,6 +94,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="App_Data\POST_2019_011008a.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Konfig\RDBErgebnisdienst.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

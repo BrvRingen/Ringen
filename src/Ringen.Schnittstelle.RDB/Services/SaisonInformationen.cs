@@ -12,10 +12,12 @@ namespace Ringen.Schnittstelle.RDB.Services
     public class SaisonInformationen : ISaisonInformationen
     {
         private RdbService _rdbService;
+        private EinzelkampfMapper _einzelkampfMapper;
 
-        public SaisonInformationen(RdbService rdbService)
+        public SaisonInformationen(RdbService rdbService, EinzelkampfMapper einzelkampfMapper)
         {
             _rdbService = rdbService;
+            _einzelkampfMapper = einzelkampfMapper;
         }
 
         public List<Kampftag> GetKampftage(string saisonId)
@@ -36,8 +38,6 @@ namespace Ringen.Schnittstelle.RDB.Services
 
         public List<EinzelkampfSchema> GetMannschaftskampfSchema(string saisonId, string wettkampfId)
         {
-            EinzelkampfMapper mapper = new EinzelkampfMapper();
-
             JObject response = _rdbService.GetCompetitionSystem(
                 "getCompetitionScheme",
                 new List<KeyValuePair<string, string>>()
@@ -48,7 +48,7 @@ namespace Ringen.Schnittstelle.RDB.Services
 
             IEnumerable<BoutSchemaApiModel> apiModelListe = response["boutList"].ToObject<IEnumerable<BoutSchemaApiModel>>();
 
-            return apiModelListe.Select(apiModel => mapper.Map(apiModel)).ToList();
+            return apiModelListe.Select(apiModel => _einzelkampfMapper.Map(apiModel)).ToList();
         }
 
         public List<Liga> GetLigen(string saisonId)

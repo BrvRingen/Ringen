@@ -12,6 +12,17 @@ namespace Ringen.Schnittstelle.RDB.Mapper
 {
     internal class MannschaftskampfPostMapper
     {
+        private StilartKonvertierer _stilartKonvertierer;
+        private SiegartKonvertierer _siegartKonvertierer;
+        private GriffbewertungspunktKonvertierer _griffbewertungspunktKonvertierer;
+
+        public MannschaftskampfPostMapper(StilartKonvertierer stilartKonvertierer, SiegartKonvertierer siegartKonvertierer, GriffbewertungspunktKonvertierer griffbewertungspunktKonvertierer)
+        {
+            _stilartKonvertierer = stilartKonvertierer;
+            _siegartKonvertierer = siegartKonvertierer;
+            _griffbewertungspunktKonvertierer = griffbewertungspunktKonvertierer;
+        }
+
         public CompetitionPostApiModel Map(Tuple<Mannschaftskampf, List<Einzelkampf>> wettkampf)
         {
             CompetitionPostApiModel apiModel = new CompetitionPostApiModel
@@ -42,21 +53,21 @@ namespace Ringen.Schnittstelle.RDB.Mapper
             BoutPostApiModel apiModel = new BoutPostApiModel
             {
                 WeightClass = einzelkampf.Gewichtsklasse.Trim(),
-                Style = new StilartKonvertierer().ToStilartString(einzelkampf.Stilart),
+                Style = _stilartKonvertierer.ToApiString(einzelkampf.Stilart),
 
                 HomeWrestlerName = einzelkampf.HeimRinger.Nachname,
                 HomeWrestlerGivenname = einzelkampf.HeimRinger.Vorname,
                 HomeWrestlerRating = einzelkampf.HeimRinger.Status,
-                HomeWrestlerPassCode = einzelkampf.HeimRinger.Startausweisnummer,
+                //HomeWrestlerPassCode = einzelkampf.HeimRinger.Startausweisnummer,
                 HomeWrestlerPoints = einzelkampf.HeimMannschaftswertung.ToString(),
 
                 OpponentWrestlerName = einzelkampf.GastRinger.Nachname,
                 OpponentWrestlerGivenname = einzelkampf.GastRinger.Vorname,
                 OpponentWrestlerRating = einzelkampf.GastRinger.Status,
-                OpponentWrestlerPassCode = einzelkampf.GastRinger.Startausweisnummer,
+                //OpponentWrestlerPassCode = einzelkampf.GastRinger.Startausweisnummer,
                 OpponentWrestlerPoints = einzelkampf.GastMannschaftswertung.ToString(),
 
-                Result = new SiegartKonvertierer().ToSiegartString(einzelkampf.Siegart),
+                Result = _siegartKonvertierer.ToApiString(einzelkampf.Siegart),
                 Round1 = einzelkampf.RundenErgebnisse.FirstOrDefault().Value.Trim(),
                 Round2 = string.Empty,
                 Round3 = string.Empty,
@@ -65,7 +76,7 @@ namespace Ringen.Schnittstelle.RDB.Mapper
 
                 Annotations = new AnnotationsPostApiModel
                 {
-                    Points = new RoundValuePostApiModel(new GriffbewertungspunktKonvertierer().ToPunkteString(einzelkampf.Wertungspunkte)),
+                    Points = new RoundValuePostApiModel(_griffbewertungspunktKonvertierer.ToApiString(einzelkampf.Wertungspunkte)),
                     Duration = new RoundValuePostApiModel(einzelkampf.Kampfdauer.TotalSeconds.ToString())
                 }
             };

@@ -13,17 +13,16 @@ namespace Ringen.Schnittstelle.RDB.Services
     public class Mannschaftskaempfe : IMannschaftskaempfe
     {
         private RdbService _rdbService;
+        private EinzelkampfMapper _einzelkampfMapper;
 
-        public Mannschaftskaempfe(RdbService rdbService)
+        public Mannschaftskaempfe(RdbService rdbService, EinzelkampfMapper einzelkampfMapper)
         {
             _rdbService = rdbService;
+            _einzelkampfMapper = einzelkampfMapper;
         }
-
 
         public Einzelkampf GetEinzelkampf(string saisonId, string wettkampfId, int kampfNr)
         {
-            EinzelkampfMapper mapper = new EinzelkampfMapper();
-
             JObject response = _rdbService.GetCompetitionSystem(
                 "getCompetition",
                 new List<KeyValuePair<string, string>>()
@@ -40,14 +39,13 @@ namespace Ringen.Schnittstelle.RDB.Services
 
             JToken kampfJToken = kaempfeJArray.FirstOrDefault(li => li["order"].Value<string>().Equals(kampfNr.ToString()));
 
-            return mapper.Map(kampfJToken);
+            return _einzelkampfMapper.Map(kampfJToken);
         }
 
 
         public Tuple<Mannschaftskampf, List<Einzelkampf>> GetMannschaftskampf(string saisonId, string wettkampfId)
         {
             MannschaftskampfMapper wettkampfMapper = new MannschaftskampfMapper();
-            EinzelkampfMapper einzelkampfMapper = new EinzelkampfMapper();
             
             JObject response = _rdbService.GetCompetitionSystem(
                 "getCompetition",
@@ -61,7 +59,7 @@ namespace Ringen.Schnittstelle.RDB.Services
             JToken[] kaempfeJArray = response["competition"]["_boutList"].ToArray();
 
             Mannschaftskampf mannschaftskampf = wettkampfMapper.Map(apiModel);
-            List<Einzelkampf> einzelKaempfe = einzelkampfMapper.Map(kaempfeJArray);
+            List<Einzelkampf> einzelKaempfe = _einzelkampfMapper.Map(kaempfeJArray);
 
             return new Tuple<Mannschaftskampf, List<Einzelkampf>>(mannschaftskampf, einzelKaempfe);
         }

@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentAssertions;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using Ringen.DependencyInjection;
 using Ringen.Schnittstelle.RDB.Factories;
 using Ringen.Schnittstelle.RDB.Mapper;
 using Ringen.Schnittstelle.RDB.Services;
@@ -22,13 +25,12 @@ namespace Ringen.Schnittstelle.RDB.Tests.Mapper
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            RdbService rdbService = RdbServiceErsteller.ErstelleService();
-            _mannschaftskaempfe = new Mannschaftskaempfe(rdbService);
-            _mapper = new MannschaftskampfPostMapper();
+            _mannschaftskaempfe = DependencyInjectionContainer.GetService<IMannschaftskaempfe>();
+            _mapper = DependencyInjectionContainer.GetService<MannschaftskampfPostMapper>();
         }
 
         [Test]
-        public void Test()
+        public void JsonString_2019_011008a_erwarte_korrektenJsonString()
         {
             Tuple<Mannschaftskampf, List<Einzelkampf>> wettkampf = _mannschaftskaempfe.GetMannschaftskampf("2019", "011008a");
             wettkampf.Item1.EchterKampfbeginn = new TimeSpan(19,30,0);
@@ -36,7 +38,16 @@ namespace Ringen.Schnittstelle.RDB.Tests.Mapper
 
             var postApiModel = _mapper.Map(wettkampf);
 
-            var jsonString = JsonConvert.SerializeObject(postApiModel, Formatting.Indented);
+            var jsonStringGeneriert = JsonConvert.SerializeObject(postApiModel, Formatting.Indented);
+#if DEBUG
+            string istPfad = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data", "POST_2019_011008a_IST.json");
+            File.WriteAllText(istPfad, jsonStringGeneriert);
+#endif
+
+            string erwartetPfad = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data", "POST_2019_011008a.json");
+            string erwartet = File.ReadAllText(erwartetPfad);
+
+            jsonStringGeneriert.Should().Be(erwartet);
         }
     }
 }

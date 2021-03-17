@@ -2,6 +2,8 @@
 using Ninject.Modules;
 using Ringen.Schnittstelle.RDB.ConfigSections;
 using Ringen.Schnittstelle.RDB.Factories;
+using Ringen.Schnittstelle.RDB.Konvertierer;
+using Ringen.Schnittstelle.RDB.Mapper;
 using Ringen.Schnittstelle.RDB.Models;
 using Ringen.Schnittstelle.RDB.Services;
 using Ringen.Schnittstellen.Contracts.Interfaces;
@@ -28,6 +30,15 @@ namespace Ringen.Schnittstelle.RDB.DependencyInjection
             Bind<ISaisonInformationen>().To<SaisonInformationen>()
                 .When(_ => system.Equals(ErgebnisdienstSystem.RDB))
                 .InSingletonScope();
+
+            Bind<GriffbewertungspunktKonvertierer>().ToSelf().InSingletonScope();
+            Bind<GriffbewertungsTypKonvertierer>().ToSelf().InSingletonScope();
+            Bind<HeimGastKonvertierer>().ToSelf().InSingletonScope();
+            Bind<SiegartKonvertierer>().ToSelf().InSingletonScope();
+            Bind<StilartKonvertierer>().ToSelf().InSingletonScope();
+
+            Bind<MannschaftskampfPostMapper>().ToSelf().InSingletonScope();
+            Bind<EinzelkampfMapper>().ToSelf().InSingletonScope();
         }
     }
 }

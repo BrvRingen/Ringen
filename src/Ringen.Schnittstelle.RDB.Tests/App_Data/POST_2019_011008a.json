@@ -1,0 +1,274 @@
+{
+  "saisonId": "2019",
+  "competitionId": "011008a",
+  "homePoints": "25",
+  "opponentPoints": "15",
+  "audience": "50",
+  "editorComment": "Jerome Jan Eskiyapan (TV Dellwig) und Pietro Sabatino (TV Dellwig) haben beide Lizensanträge gestellt.",
+  "refereeName": "Manz",
+  "refereeGivenname": "Uwe",
+  "startTime": "19:30:00",
+  "endTime": "21:23:00",
+  "_boutList": [
+    {
+      "weightClass": "57",
+      "style": "LL",
+      "homeWrestlerName": "Sakhi",
+      "homeWrestlerGivenname": "Matin",
+      "homeWrestlerRating": "",
+      "homeWrestlerPoints": "0",
+      "opponentWrestlerName": "Lakatos",
+      "opponentWrestlerGivenname": "Szabolcz",
+      "opponentWrestlerRating": "",
+      "opponentWrestlerPoints": "4",
+      "result": "TÜ",
+      "round1": "0:15",
+      "round2": "",
+      "round3": "",
+      "round4": "",
+      "round5": "",
+      "annotation": {
+        "points": {
+          "1": "PR62,AR97,1B128,4B171,2B176,2B226,2B237,2B241,2B255"
+        },
+        "duration": {
+          "1": "263"
+        }
+      }
+    },
+    {
+      "weightClass": "61",
+      "style": "GR",
+      "homeWrestlerName": "Eskiyapan",
+      "homeWrestlerGivenname": "Jerome Jan",
+      "homeWrestlerRating": "",
+      "homeWrestlerPoints": "5",
+      "opponentWrestlerName": "Wirth",
+      "opponentWrestlerGivenname": "Jannik",
+      "opponentWrestlerRating": "J",
+      "opponentWrestlerPoints": "0",
+      "result": "SS",
+      "round1": "6:0",
+      "round2": "",
+      "round3": "",
+      "round4": "",
+      "round5": "",
+      "annotation": {
+        "points": {
+          "1": "4R15,2R32"
+        },
+        "duration": {
+          "1": "49"
+        }
+      }
+    },
+    {
+      "weightClass": "66",
+      "style": "LL",
+      "homeWrestlerName": "Abuev",
+      "homeWrestlerGivenname": "Beslan",
+      "homeWrestlerRating": "",
+      "homeWrestlerPoints": "4",
+      "opponentWrestlerName": "Mkrtchyan",
+      "opponentWrestlerGivenname": "David",
+      "opponentWrestlerRating": "J",
+      "opponentWrestlerPoints": "0",
+      "result": "TÜ",
+      "round1": "15:0",
+      "round2": "",
+      "round3": "",
+      "round4": "",
+      "round5": "",
+      "annotation": {
+        "points": {
+          "1": "PB57,2R70,2R82,1R94,2R103,2R104,4R111,2R136"
+        },
+        "duration": {
+          "1": "136"
+        }
+      }
+    },
+    {
+      "weightClass": "71",
+      "style": "GR",
+      "homeWrestlerName": "Sabatino",
+      "homeWrestlerGivenname": "Pietro",
+      "homeWrestlerRating": "",
+      "homeWrestlerPoints": "5",
+      "opponentWrestlerName": "Al-Mafradi",
+      "opponentWrestlerGivenname": "Ali",
+      "opponentWrestlerRating": "",
+      "opponentWrestlerPoints": "0",
+      "result": "SS",
+      "round1": "2:4",
+      "round2": "",
+      "round3": "",
+      "round4": "",
+      "round5": "",
+      "annotation": {
+        "points": {
+          "1": "2B30,2B31,2R61"
+        },
+        "duration": {
+          "1": "63"
+        }
+      }
+    },
+    {
+      "weightClass": "75 A",
+      "style": "LL",
+      "homeWrestlerName": "Gülönü",
+      "homeWrestlerGivenname": "Ekrem",
+      "homeWrestlerRating": "",
+      "homeWrestlerPoints": "1",
+      "opponentWrestlerName": "Sidiqe",
+      "opponentWrestlerGivenname": "Same Ullah",
+      "opponentWrestlerRating": "",
+      "opponentWrestlerPoints": "0",
+      "result": "PS",
+      "round1": "[14]:14",
+      "round2": "",
+      "round3": "",
+      "round4": "",
+      "round5": "",
+      "annotation": {
+        "points": {
+          "1": "2B15,2B25,2R50,2R71,1B79,2B118,2B180,2R183,2B203,2R248,2R251,2B267,1B278,2R316,2R354"
+        },
+        "duration": {
+          "1": "360"
+        }
+      }
+    },
+    {
+      "weightClass": "75 B",
+      "style": "GR",
+      "homeWrestlerName": "Winke",
+      "homeWrestlerGivenname": "Alex",
+      "homeWrestlerRating": "",
+      "homeWrestlerPoints": "5",
+      "opponentWrestlerName": "",
+      "opponentWrestlerGivenname": "",
+      "opponentWrestlerRating": "",
+      "opponentWrestlerPoints": "0",
+      "result": "KL",
+      "round1": "[0]:0",
+      "round2": "",
+      "round3": "",
+      "round4": "",
+      "round5": "",
+      "annotation": {
+        "points": {
+          "1": ""
+        },
+        "duration": {
+          "1": "0"
+        }
+      }
+    },
+    {
+      "weightClass": "80",
+      "style": "LL",
+      "homeWrestlerName": "Dil",
+      "homeWrestlerGivenname": "Alex",
+      "homeWrestlerRating": "",
+      "homeWrestlerPoints": "0",
+      "opponentWrestlerName": "Kamtsioris",
+      "opponentWrestlerGivenname": "Haideftos",
+      "opponentWrestlerRating": "",
+      "opponentWrestlerPoints": "3",
+      "result": "PS",
+      "round1": "0:14",
+      "round2": "",
+      "round3": "",
+      "round4": "",
+      "round5": "",
+      "annotation": {
+        "points": {
+          "1": "PR57,4B71,4B73,2B228,2B310,2B319"
+        },
+        "duration": {
+          "1": "360"
+        }
+      }
+    },
+    {
+      "weightClass": "86",
+      "style": "GR",
+      "homeWrestlerName": "Kuzemin",
+      "homeWrestlerGivenname": "Alexander",
+      "homeWrestlerRating": "J",
+      "homeWrestlerPoints": "0",
+      "opponentWrestlerName": "Lisin",
+      "opponentWrestlerGivenname": "Leo",
+      "opponentWrestlerRating": "",
+      "opponentWrestlerPoints": "3",
+      "result": "PS",
+      "round1": "0:11",
+      "round2": "",
+      "round3": "",
+      "round4": "",
+      "round5": "",
+      "annotation": {
+        "points": {
+          "1": "1B66,PR94,1B94,2B109,2B112,2B118,PR264,1B264,2B276"
+        },
+        "duration": {
+          "1": "360"
+        }
+      }
+    },
+    {
+      "weightClass": "98",
+      "style": "LL",
+      "homeWrestlerName": "Holk",
+      "homeWrestlerGivenname": "Björn",
+      "homeWrestlerRating": "",
+      "homeWrestlerPoints": "5",
+      "opponentWrestlerName": "Suslin",
+      "opponentWrestlerGivenname": "Leon",
+      "opponentWrestlerRating": "J",
+      "opponentWrestlerPoints": "0",
+      "result": "SS",
+      "round1": "4:0",
+      "round2": "",
+      "round3": "",
+      "round4": "",
+      "round5": "",
+      "annotation": {
+        "points": {
+          "1": "4R17"
+        },
+        "duration": {
+          "1": "21"
+        }
+      }
+    },
+    {
+      "weightClass": "130",
+      "style": "GR",
+      "homeWrestlerName": "Petropoulos",
+      "homeWrestlerGivenname": "Petros",
+      "homeWrestlerRating": "",
+      "homeWrestlerPoints": "0",
+      "opponentWrestlerName": "Alubaidi",
+      "opponentWrestlerGivenname": "Mohammad",
+      "opponentWrestlerRating": "",
+      "opponentWrestlerPoints": "5",
+      "result": "SS",
+      "round1": "0:11",
+      "round2": "",
+      "round3": "",
+      "round4": "",
+      "round5": "",
+      "annotation": {
+        "points": {
+          "1": "PR92,1B92,2B108,2B110,2B112,2B115,2B118"
+        },
+        "duration": {
+          "1": "123"
+        }
+      }
+    }
+  ]
+}

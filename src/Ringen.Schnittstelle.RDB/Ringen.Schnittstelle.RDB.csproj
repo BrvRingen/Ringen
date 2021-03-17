@@ -62,6 +62,9 @@
     <Compile Include="DependencyInjection\RDBDiModule.cs" />
     <Compile Include="Factories\RdbServiceErsteller.cs" />
     <Compile Include="Konvertierer\GriffbewertungspunktKonvertierer.cs" />
+    <Compile Include="Konvertierer\GriffbewertungsTypKonvertierer.cs" />
+    <Compile Include="Konvertierer\HeimGastKonvertierer.cs" />
+    <Compile Include="Konvertierer\KonvertiererBase.cs" />
     <Compile Include="Konvertierer\SiegartKonvertierer.cs" />
     <Compile Include="Konvertierer\StilartKonvertierer.cs" />
     <Compile Include="Mapper\EinzelkampfMapper.cs" />

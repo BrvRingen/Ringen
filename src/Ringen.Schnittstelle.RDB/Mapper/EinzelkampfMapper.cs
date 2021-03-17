@@ -10,8 +10,19 @@ using Ringen.Schnittstellen.Contracts.Models.Enums;
 
 namespace Ringen.Schnittstelle.RDB.Mapper
 {
-    internal class EinzelkampfMapper
+    public class EinzelkampfMapper
     {
+        private StilartKonvertierer _stilartKonvertierer;
+        private SiegartKonvertierer _siegartKonvertierer;
+        private GriffbewertungspunktKonvertierer _griffbewertungspunktKonvertierer;
+
+        public EinzelkampfMapper(StilartKonvertierer stilartKonvertierer, SiegartKonvertierer siegartKonvertierer, GriffbewertungspunktKonvertierer griffbewertungspunktKonvertierer)
+        {
+            _stilartKonvertierer = stilartKonvertierer;
+            _siegartKonvertierer = siegartKonvertierer;
+            _griffbewertungspunktKonvertierer = griffbewertungspunktKonvertierer;
+        }
+
         public List<Einzelkampf> Map(JToken[] kaempfeJArray)
         {
             return kaempfeJArray.Select(kampfJToken => Map(kampfJToken)).ToList();
@@ -32,7 +43,7 @@ namespace Ringen.Schnittstelle.RDB.Mapper
             {
                 KampfNr = int.Parse(apiModel.Order),
                 Gewichtsklasse = apiModel.WeightClass,
-                Stilart = new StilartKonvertierer().ToStilartEnum(apiModel.Style)
+                Stilart = _stilartKonvertierer.ToEnum(apiModel.Style)
             };
 
             return result;
@@ -44,20 +55,20 @@ namespace Ringen.Schnittstelle.RDB.Mapper
             {
                 KampfNr = int.Parse(apiModel.Order),
                 Gewichtsklasse = apiModel.WeightClass,
-                Stilart = new StilartKonvertierer().ToStilartEnum(apiModel.Style),
+                Stilart = _stilartKonvertierer.ToEnum(apiModel.Style),
                 HeimRinger = GetRinger(HeimGast.Heim, apiModel),
                 GastRinger = GetRinger(HeimGast.Gast, apiModel),
                 HeimMannschaftswertung = int.Parse(apiModel.HomeWrestlerPoints),
                 GastMannschaftswertung = int.Parse(apiModel.OpponentWrestlerPoints),
                 RundenErgebnisse = ErmittleRundenErgebnisse(apiModel),
-                Siegart = new SiegartKonvertierer().ToSiegartEnum(apiModel.Result),
+                Siegart = _siegartKonvertierer.ToEnum(apiModel.Result),
                 Kampfdauer = TimeSpan.FromSeconds(Convert.ToDouble(apiModel.Annotations.FirstOrDefault(li => li.Type.Equals("duration", StringComparison.OrdinalIgnoreCase)).Value)),
                 Wertungspunkte = null,
                 Kommentar = apiModel.Annotations.FirstOrDefault(li => li.Type.Equals("comment", StringComparison.OrdinalIgnoreCase)).Value
             };
 
             var punkteString = apiModel.Annotations.FirstOrDefault(li => li.Type.Equals("points", StringComparison.OrdinalIgnoreCase)).Value;
-            result.Wertungspunkte = new GriffbewertungspunktKonvertierer().Ermittle_Griffbewertungspunkte(punkteString);
+            result.Wertungspunkte = _griffbewertungspunktKonvertierer.Ermittle_Griffbewertungspunkte(punkteString);
 
             return result;
         }

@@ -2,7 +2,7 @@
 
 namespace Ringen.Schnittstelle.RDB.ApiModels
 {
-    internal class BoutSchemaApiModel
+    public class BoutSchemaApiModel
     {
         [JsonProperty("boutSchemeId")]
         public string BoutSchemeId { get; set; }
