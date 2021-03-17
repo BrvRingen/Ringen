@@ -10,7 +10,7 @@ using Ringen.Schnittstellen.Contracts.Interfaces;
 using Ringen.Schnittstellen.Contracts.Models;
 using Ringen.Schnittstellen.Contracts.Models.Enums;
 
-namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.ErgebnisdienstTests
+namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.MannschaftskaempfeTests
 {
     [TestFixture]
     public class GetEinzelkampfTests

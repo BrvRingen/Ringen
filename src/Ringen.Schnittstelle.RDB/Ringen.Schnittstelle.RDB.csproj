@@ -42,11 +42,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiModels\AnnotationApiModel.cs" />
+    <Compile Include="ApiModels\Post\AnnotationsPostApiModel.cs" />
+    <Compile Include="ApiModels\Post\BoutPostApiModel.cs" />
     <Compile Include="ApiModels\BoutApiModel.cs" />
     <Compile Include="ApiModels\BoutdayApiModel.cs" />
     <Compile Include="ApiModels\BoutSchemaApiModel.cs" />
     <Compile Include="ApiModels\ClubApiModel.cs" />
+    <Compile Include="ApiModels\Post\CompetitionPostApiModel.cs" />
     <Compile Include="ApiModels\CompetitionApiModel.cs" />
+    <Compile Include="ApiModels\Post\RoundValuePostApiModel.cs" />
     <Compile Include="ApiModels\SystemApiModel.cs" />
     <Compile Include="ApiModels\TeamApiModel.cs" />
     <Compile Include="ApiModels\PlaceApiModel.cs" />
@@ -57,10 +61,14 @@
     <Compile Include="ConfigSections\RdbConfigSection.cs" />
     <Compile Include="DependencyInjection\RDBDiModule.cs" />
     <Compile Include="Factories\RdbServiceErsteller.cs" />
+    <Compile Include="Konvertierer\GriffbewertungspunktKonvertierer.cs" />
+    <Compile Include="Konvertierer\SiegartKonvertierer.cs" />
+    <Compile Include="Konvertierer\StilartKonvertierer.cs" />
     <Compile Include="Mapper\EinzelkampfMapper.cs" />
     <Compile Include="Mapper\KampftagMapper.cs" />
     <Compile Include="Mapper\LeistungsklasseMapper.cs" />
     <Compile Include="Mapper\MannschaftMapper.cs" />
+    <Compile Include="Mapper\MannschaftskampfPostMapper.cs" />
     <Compile Include="Mapper\RingerMapper.cs" />
     <Compile Include="Mapper\SaisonMapper.cs" />
     <Compile Include="Mapper\LigaMapper.cs" />

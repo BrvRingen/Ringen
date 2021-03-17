@@ -12,12 +12,14 @@ namespace Ringen.Schnittstelle.RDB.Mapper
         {
             Mannschaftskampf result = new Mannschaftskampf
             {
+                SaisonId = apiModel.SaisonId,
                 CompetitionId = apiModel.CompetitionId,
                 HeimMannschaft = apiModel.HomeTeamName,
                 GastMannschaft = apiModel.OpponentTeamName,
                 Wettkampfstaette = apiModel.Location,
                 Kommentar = apiModel.EditorComment,
-                Schiedsrichter = $"{apiModel.RefereeName}{(!string.IsNullOrEmpty(apiModel.RefereeGivenname) ? $", {apiModel.RefereeGivenname}" : string.Empty)}",
+                Schiedsrichter_Vorname = apiModel.RefereeGivenname,
+                Schiedsrichter_Nachname = apiModel.RefereeName,
                 IstErgebnisGeprueft = !string.IsNullOrEmpty(apiModel.ControlledAt) && !string.IsNullOrEmpty(apiModel.ControlledBy)
             };
             

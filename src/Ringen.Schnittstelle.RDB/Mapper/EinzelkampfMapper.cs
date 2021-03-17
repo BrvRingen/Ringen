@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
 using Ringen.Schnittstelle.RDB.ApiModels;
+using Ringen.Schnittstelle.RDB.Konvertierer;
 using Ringen.Schnittstellen.Contracts.Models;
 using Ringen.Schnittstellen.Contracts.Models.Enums;
 
@@ -31,7 +32,7 @@ namespace Ringen.Schnittstelle.RDB.Mapper
             {
                 KampfNr = int.Parse(apiModel.Order),
                 Gewichtsklasse = apiModel.WeightClass,
-                Stilart = ErmittleStilart(apiModel.Style)
+                Stilart = new StilartKonvertierer().ToStilartEnum(apiModel.Style)
             };
 
             return result;
@@ -43,79 +44,24 @@ namespace Ringen.Schnittstelle.RDB.Mapper
             {
                 KampfNr = int.Parse(apiModel.Order),
                 Gewichtsklasse = apiModel.WeightClass,
-                Stilart = ErmittleStilart(apiModel.Style),
+                Stilart = new StilartKonvertierer().ToStilartEnum(apiModel.Style),
                 HeimRinger = GetRinger(HeimGast.Heim, apiModel),
                 GastRinger = GetRinger(HeimGast.Gast, apiModel),
                 HeimMannschaftswertung = int.Parse(apiModel.HomeWrestlerPoints),
                 GastMannschaftswertung = int.Parse(apiModel.OpponentWrestlerPoints),
                 RundenErgebnisse = ErmittleRundenErgebnisse(apiModel),
-                Siegart = ErmittleSiegart(apiModel.Result),
+                Siegart = new SiegartKonvertierer().ToSiegartEnum(apiModel.Result),
                 Kampfdauer = TimeSpan.FromSeconds(Convert.ToDouble(apiModel.Annotations.FirstOrDefault(li => li.Type.Equals("duration", StringComparison.OrdinalIgnoreCase)).Value)),
                 Wertungspunkte = null,
                 Kommentar = apiModel.Annotations.FirstOrDefault(li => li.Type.Equals("comment", StringComparison.OrdinalIgnoreCase)).Value
             };
 
             var punkteString = apiModel.Annotations.FirstOrDefault(li => li.Type.Equals("points", StringComparison.OrdinalIgnoreCase)).Value;
-            result.Wertungspunkte = Ermittle_Griffbewertungspunkte(punkteString);
+            result.Wertungspunkte = new GriffbewertungspunktKonvertierer().Ermittle_Griffbewertungspunkte(punkteString);
 
             return result;
         }
-
-        private List<Griffbewertungspunkt> Ermittle_Griffbewertungspunkte(string punkteString)
-        {
-            if (string.IsNullOrEmpty(punkteString))
-            {
-                return new List<Griffbewertungspunkt>();
-            }
-
-            var griffbewertungspunkte = new List<Griffbewertungspunkt>();
-            foreach (var punktString in punkteString.Split(','))
-            {
-                var temp = new Regex(@"(?<value>.*)(?<Wrestler>[R|B])(?<Time>\d*)").Match(punktString.ToUpper());
-
-                var punkt = new Griffbewertungspunkt
-                {
-                    Fuer = temp.Groups["Wrestler"].Value.ToUpper() == "R" ? HeimGast.Heim : HeimGast.Gast,
-                    Typ = GriffbewertungsTyp.Punkt,
-                    Zeit = TimeSpan.FromSeconds(int.Parse(temp.Groups["Time"].Value))
-                };
-
-                switch (temp.Groups["value"].Value.ToUpper())
-                {
-                    case "P":
-                        punkt.Typ = GriffbewertungsTyp.Passiv;
-                        punkt.Punktzahl = 0;
-                        break;
-
-                    case "A":
-                        punkt.Typ = GriffbewertungsTyp.Aktivitaetszeit;
-                        punkt.Punktzahl = 0;
-                        break;
-
-                    case "V":
-                        punkt.Typ = GriffbewertungsTyp.Verwarnung;
-                        punkt.Punktzahl = 0;
-                        break;
-
-                    default:
-                        int punktzahl = 0;
-                        if (!int.TryParse(temp.Groups["value"].Value, out punktzahl))
-                        {
-                            throw new ArgumentException(
-                                $"Griffbewertungs-Typ für {temp?.Groups["value"]?.Value} konnte nicht ermittelt werden");
-                        }
-
-                        punkt.Typ = GriffbewertungsTyp.Punkt;
-                        punkt.Punktzahl = punktzahl;
-                        break;
-                }
-
-                griffbewertungspunkte.Add(punkt);
-            }
-
-            return griffbewertungspunkte;
-        }
-
+        
         private Ringer GetRinger(HeimGast heimGast, BoutApiModel apiModel)
         {
             switch (heimGast)
@@ -147,28 +93,6 @@ namespace Ringen.Schnittstelle.RDB.Mapper
             throw new ArgumentException($"Ringer \"{heimGast}\" konnte nicht interpretiert werden");
         }
 
-        private Siegart ErmittleSiegart(string apiModelResult)
-        {
-            switch (apiModelResult.ToUpper())
-            {
-                case "TÜ":
-                    return Siegart.TechnischUeberlegen;
-                case "SS":
-                    return Siegart.Schultersieg;
-                case "PS":
-                    return Siegart.Punktsieg;
-                case "KL":
-                    return Siegart.Kampflos;
-                case "ÜG":
-                    return Siegart.Uebergewicht;
-
-                default:
-                    throw new ArgumentException($"Siegart \"{apiModelResult}\" konnte nicht interpretiert werden");
-                    break;
-            }
-
-            throw new ArgumentException($"Siegart \"{apiModelResult}\" konnte nicht interpretiert werden");
-        }
 
         private List<KeyValuePair<int, string>> ErmittleRundenErgebnisse(BoutApiModel apiModel)
         {
@@ -187,21 +111,7 @@ namespace Ringen.Schnittstelle.RDB.Mapper
 
             return result;
         }
-
-        private Stilart ErmittleStilart(string apiModelStyle)
-        {
-            if (apiModelStyle.ToUpper().Equals("LL", StringComparison.OrdinalIgnoreCase))
-            {
-                return Stilart.Freistil;
-            } 
-            else if (apiModelStyle.ToUpper().Equals("GR", StringComparison.OrdinalIgnoreCase))
-            {
-                return Stilart.GriechischRoemisch;
-            }
-
-            throw new ArgumentException($"Stilart \"{apiModelStyle}\" konnte nicht interpretiert werden");
-        }
-
+        
         public List<Einzelkampf> Map(IEnumerable<BoutApiModel> apiModelListe)
         {
             return apiModelListe.Select(apiModel => Map(apiModel)).ToList();

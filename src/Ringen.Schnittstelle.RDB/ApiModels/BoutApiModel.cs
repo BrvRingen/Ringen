@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Ringen.Schnittstelle.RDB.ApiModels
@@ -47,27 +48,39 @@ namespace Ringen.Schnittstelle.RDB.ApiModels
         [JsonProperty("result")]
         public string Result { get; set; }
 
+        /// <summary>
+        /// Eine Kampfrunde
+        /// 2021: Aktuller Standard
+        /// </summary>
         [JsonProperty("round1")]
         public string Round1 { get; set; }
 
+        /// <summary>
+        /// Zweite Kampfrunde
+        /// Stand 2021: Wird nicht mehr gerungen, war damalige Regel, dass man 3 von 5 Runden gewinnen muss
+        /// </summary>
+        [Obsolete("Stand 2021: Wird nicht mehr gerungen, war damalige Regel, dass man 3 von 5 Runden gewinnen muss")]
         [JsonProperty("round2")]
         public string Round2 { get; set; }
 
+        [Obsolete("Stand 2021: Wird nicht mehr gerungen, war damalige Regel, dass man 3 von 5 Runden gewinnen muss")]
         [JsonProperty("round3")]
         public string Round3 { get; set; }
 
+        [Obsolete("Stand 2021: Wird nicht mehr gerungen, war damalige Regel, dass man 3 von 5 Runden gewinnen muss")]
         [JsonProperty("round4")]
         public string Round4 { get; set; }
 
+        [Obsolete("Stand 2021: Wird nicht mehr gerungen, war damalige Regel, dass man 3 von 5 Runden gewinnen muss")]
         [JsonProperty("round5")]
         public string Round5 { get; set; }
 
-        [JsonProperty("homeWrestlerStatus")]
+        [JsonProperty("homeWrestlerStatus")] //TODO: Ändern sobald verfügbar [JsonProperty("homeWrestlerRating")]
         public string HomeWrestlerStatus { get; set; }
 
-        [JsonProperty("opponentWrestlerStatus")]
+        [JsonProperty("opponentWrestlerStatus")]//TODO: Ändern sobald verfügbar [JsonProperty("opponentWrestlerRating")]
         public string OpponentWrestlerStatus { get; set; }
-        
+
         [JsonProperty("homeWrestlerPassCode")]
         public string HomeWrestlerPassCode { get; set; }
 

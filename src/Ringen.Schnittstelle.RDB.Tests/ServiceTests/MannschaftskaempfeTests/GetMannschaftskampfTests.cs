@@ -9,7 +9,7 @@ using Ringen.Schnittstellen.Contracts.Interfaces;
 using Ringen.Schnittstellen.Contracts.Models;
 using Ringen.Schnittstellen.Contracts.Models.Enums;
 
-namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.ErgebnisdienstTests
+namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.MannschaftskaempfeTests
 {
     [TestFixture]
     public class GetMannschaftskampfTests
@@ -48,7 +48,8 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.ErgebnisdienstTests
             wettkampf.Item1.HeimMannschaft.Should().Be("TV Essen-Dellwig");
             wettkampf.Item1.GastMannschaft.Should().Be("TSG Herdecke");
             wettkampf.Item1.Wettkampfstaette.Should().Be("Gertrud-Bäumer-Realschule, Grünstraße 54, 45326 Essen");
-            wettkampf.Item1.Schiedsrichter.Should().Be("Manz, Uwe");
+            wettkampf.Item1.Schiedsrichter_Nachname.Should().Be("Manz");
+            wettkampf.Item1.Schiedsrichter_Vorname.Should().Be("Uwe");
             wettkampf.Item1.IstErgebnisGeprueft.Should().BeTrue();
             wettkampf.Item1.Kampfdatum.Should().Be(new DateTime(2019, 8, 31));
             wettkampf.Item1.GeplanterKampfbeginn.Should().Be(new TimeSpan(19, 0, 0));
@@ -73,7 +74,8 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.ErgebnisdienstTests
             wettkampf.Item1.HeimMannschaft.Should().Be("AC Mülheim am Rhein II");
             wettkampf.Item1.GastMannschaft.Should().Be("KSK Konkordia Neuss II");
             wettkampf.Item1.Wettkampfstaette.Should().Be("Sporthalle, Bergischer Ring 40, 51063 Köln");
-            wettkampf.Item1.Schiedsrichter.Should().Be("");
+            wettkampf.Item1.Schiedsrichter_Nachname.Should().Be("");
+            wettkampf.Item1.Schiedsrichter_Vorname.Should().Be("");
             wettkampf.Item1.IstErgebnisGeprueft.Should().BeFalse();
             wettkampf.Item1.Kampfdatum.Should().Be(new DateTime(2020, 9, 5));
             wettkampf.Item1.GeplanterKampfbeginn.Should().Be(new TimeSpan(19, 0, 0));

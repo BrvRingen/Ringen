@@ -45,10 +45,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigSectionTests.cs" />
+    <Compile Include="Mapper\MannschaftskampfPostMapperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceTests\ErgebnisdienstTests\GetEinzelkampfTests.cs" />
-    <Compile Include="ServiceTests\ErgebnisdienstTests\GetLigaMitPlatzierungTests.cs" />
-    <Compile Include="ServiceTests\ErgebnisdienstTests\GetMannschaftskampfTests.cs" />
+    <Compile Include="ServiceTests\MannschaftskaempfeTests\GetEinzelkampfTests.cs" />
+    <Compile Include="ServiceTests\MannschaftskaempfeTests\GetLigaMitPlatzierungTests.cs" />
+    <Compile Include="ServiceTests\MannschaftskaempfeTests\GetMannschaftskampfTests.cs" />
     <Compile Include="ServiceTests\StammdatenTests\GetRingerTests.cs" />
     <Compile Include="ServiceTests\SaisonInformationenTests\GetKampftageTests.cs" />
     <Compile Include="ServiceTests\SaisonInformationenTests\GetLigenTests.cs" />

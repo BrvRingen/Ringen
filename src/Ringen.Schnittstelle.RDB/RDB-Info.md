@@ -42,3 +42,10 @@ http://test.rdb.ringen-nrw.de/index.php?sv=json
 | op=gobl<br />"listOrgBoutday"      | Kampftage der Saison (genauer der Organisation)              |
 |                                    |                                                              |
 
+## Ergebnis ünermitteln
+Die Felder habe ich wie folgt kategorisiert: 
+1.	r-equired:  d.h. wenn diese fehlen dann gibt es ärger und der Upload schlägt fehl oder es wird versucht den Fehler zu kompensieren.
+2.	q-euery: Felder die nur konsultiert werden, wenn die r-equired Felder fehlen 
+3.	i-gnored: Felder die keine Bedeutung beim Upload haben und daher ignoriert werden
+4.	s-et: Diese Felder werden beim Upload durch den Upload gefüllt. 
+5.	w-anted: diese Felder werden eigentlich als Nutzdaten in die Datenbank geschrieben.

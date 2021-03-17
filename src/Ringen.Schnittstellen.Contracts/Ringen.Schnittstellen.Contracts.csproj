@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Exceptions\ApiMappingException.cs" />
     <Compile Include="Exceptions\ApiNichtGefundenException.cs" />
+    <Compile Include="Exceptions\ApiValidierungException.cs" />
     <Compile Include="Interfaces\IErgebnisdienst.cs" />
     <Compile Include="Interfaces\IMannschaftskaempfe.cs" />
     <Compile Include="Interfaces\ISaisonInformationen.cs" />

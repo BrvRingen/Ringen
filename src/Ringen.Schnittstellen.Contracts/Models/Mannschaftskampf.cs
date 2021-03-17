@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.AccessControl;
 using Ringen.Schnittstellen.Contracts.Models.Enums;
 
 namespace Ringen.Schnittstellen.Contracts.Models
@@ -8,6 +9,8 @@ namespace Ringen.Schnittstellen.Contracts.Models
     /// </summary>
     public class Mannschaftskampf
     {
+        public string SaisonId { get; set; }
+
         public string CompetitionId { get; set; }
 
         public string HeimMannschaft { get; set; }
@@ -30,7 +33,9 @@ namespace Ringen.Schnittstellen.Contracts.Models
 
         public string Wettkampfstaette { get; set; }
 
-        public string Schiedsrichter { get; set; }
+        public string Schiedsrichter_Vorname { get; set; }
+
+        public string Schiedsrichter_Nachname { get; set; }
 
         public HeimGast Sieger { get; set; }
 
