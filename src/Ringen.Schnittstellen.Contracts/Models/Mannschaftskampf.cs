@@ -11,7 +11,7 @@ namespace Ringen.Schnittstellen.Contracts.Models
     {
         public string SaisonId { get; set; }
 
-        public string CompetitionId { get; set; }
+        public string WettkampfId { get; set; }
 
         public string HeimMannschaft { get; set; }
 

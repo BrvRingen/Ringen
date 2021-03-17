@@ -2,7 +2,7 @@
 
 namespace Ringen.Schnittstelle.RDB.ApiModels
 {
-    internal class CompetitionApiModel
+    public class CompetitionApiModel
     {
         [JsonProperty("saisonId")]
         public string SaisonId { get; set; }

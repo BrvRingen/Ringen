@@ -5,7 +5,7 @@ using Ringen.Schnittstelle.RDB.ApiModels.Post;
 
 namespace Ringen.Schnittstelle.RDB.ApiModels
 {
-    internal class BoutPostApiModel
+    public class BoutPostApiModel
     {
         [JsonProperty("weightClass")]
         public string WeightClass { get; set; }
@@ -23,9 +23,9 @@ namespace Ringen.Schnittstelle.RDB.ApiModels
 
         [JsonProperty("homeWrestlerRating")]
         public string HomeWrestlerRating { get; set; }
-        
-        //[JsonProperty("homeWrestlerPassCode")]
-        //public string HomeWrestlerPassCode { get; set; }
+
+        [JsonProperty("homeWrestlerPassCode")]
+        public string HomeWrestlerPassCode { get; set; }
 
         [JsonProperty("homeWrestlerPoints")]
         public string HomeWrestlerPoints { get; set; }
@@ -41,8 +41,8 @@ namespace Ringen.Schnittstelle.RDB.ApiModels
         [JsonProperty("opponentWrestlerRating")]
         public string OpponentWrestlerRating { get; set; }
 
-        //[JsonProperty("opponentWrestlerPassCode")]
-        //public string OpponentWrestlerPassCode { get; set; }
+        [JsonProperty("opponentWrestlerPassCode")]
+        public string OpponentWrestlerPassCode { get; set; }
 
         [JsonProperty("opponentWrestlerPoints")]
         public string OpponentWrestlerPoints { get; set; }

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using Flurl;
 using Http.Library.Services;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Ringen.Schnittstelle.RDB.ApiModels;
 using Ringen.Schnittstelle.RDB.Models;
 
 namespace Ringen.Schnittstelle.RDB.Services
@@ -18,6 +20,29 @@ namespace Ringen.Schnittstelle.RDB.Services
         {
             _httpService = httpService;
             _settings = settings;
+        }
+
+        public void Sende_Ergebnis(CompetitionPostApiModel apiModel, Action<JObject> onAbgeschlossen)
+        {
+            string jsonString = JsonConvert.SerializeObject(apiModel);
+
+            //TODO: Url angeben, sobald bekannt
+            string url = _settings.BaseUrl;
+                //.SetQueryParam(_settings.JsonReaderService.Key, _settings.JsonReaderService.Value)
+                //.SetQueryParam(_settings.TaskOrganisationsmanager.Key, _settings.TaskOrganisationsmanager.Value) //tk = task | jr:cs = Json-Reader Service | OM = Organisationsmanager 
+                //.SetQueryParam("op", operation); //op ~ operation 
+
+            _logger.Debug($"RdbService: GET {url}");
+            _httpService.Post_Json(
+                uri: new Uri(url), 
+                json: jsonString, 
+                onAbgeschlossen: (statusCode, contentType, httpResult) =>
+            {
+                _logger.Debug($"RdbService: Response = {jsonString}");
+
+                JObject parsedJson = JObject.Parse(httpResult);
+                onAbgeschlossen(parsedJson);
+            });
         }
 
         public JObject GetOrganisationsmanager(string operation,

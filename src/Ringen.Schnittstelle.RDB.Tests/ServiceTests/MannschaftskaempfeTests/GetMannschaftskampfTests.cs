@@ -32,7 +32,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.MannschaftskaempfeTests
             wettkampfListe.Should().NotBeNull();
             wettkampfListe.Count.Should().BeGreaterThan(0);
 
-            wettkampfListe.FirstOrDefault(li => li.CompetitionId.Equals("011008a")).Should().NotBeNull();
+            wettkampfListe.FirstOrDefault(li => li.WettkampfId.Equals("011008a")).Should().NotBeNull();
         }
 
         [Test]
@@ -44,7 +44,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.MannschaftskaempfeTests
             wettkampf.Item1.Should().NotBeNull();
             wettkampf.Item2.Should().NotBeNull();
 
-            wettkampf.Item1.CompetitionId.Should().Be("011008a");
+            wettkampf.Item1.WettkampfId.Should().Be("011008a");
             wettkampf.Item1.HeimMannschaft.Should().Be("TV Essen-Dellwig");
             wettkampf.Item1.GastMannschaft.Should().Be("TSG Herdecke");
             wettkampf.Item1.Wettkampfstaette.Should().Be("Gertrud-Bäumer-Realschule, Grünstraße 54, 45326 Essen");
@@ -70,7 +70,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.MannschaftskaempfeTests
             wettkampf.Item1.Should().NotBeNull();
             wettkampf.Item2.Count.Should().Be(0); //Keine Einzelkämpfe, da Kampf noch nicht stattgefunden
 
-            wettkampf.Item1.CompetitionId.Should().Be("047012b");
+            wettkampf.Item1.WettkampfId.Should().Be("047012b");
             wettkampf.Item1.HeimMannschaft.Should().Be("AC Mülheim am Rhein II");
             wettkampf.Item1.GastMannschaft.Should().Be("KSK Konkordia Neuss II");
             wettkampf.Item1.Wettkampfstaette.Should().Be("Sporthalle, Bergischer Ring 40, 51063 Köln");

@@ -31,6 +31,10 @@ namespace Ringen.Schnittstelle.RDB.DependencyInjection
                 .When(_ => system.Equals(ErgebnisdienstSystem.RDB))
                 .InSingletonScope();
 
+            Bind<IErgebnisdienst>().To<Ergebnisdienst>()
+                .When(_ => system.Equals(ErgebnisdienstSystem.RDB))
+                .InSingletonScope();
+
             Bind<GriffbewertungspunktKonvertierer>().ToSelf().InSingletonScope();
             Bind<GriffbewertungsTypKonvertierer>().ToSelf().InSingletonScope();
             Bind<HeimGastKonvertierer>().ToSelf().InSingletonScope();

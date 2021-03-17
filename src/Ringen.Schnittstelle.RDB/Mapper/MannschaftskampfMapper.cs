@@ -13,7 +13,7 @@ namespace Ringen.Schnittstelle.RDB.Mapper
             Mannschaftskampf result = new Mannschaftskampf
             {
                 SaisonId = apiModel.SaisonId,
-                CompetitionId = apiModel.CompetitionId,
+                WettkampfId = apiModel.CompetitionId,
                 HeimMannschaft = apiModel.HomeTeamName,
                 GastMannschaft = apiModel.OpponentTeamName,
                 Wettkampfstaette = apiModel.Location,

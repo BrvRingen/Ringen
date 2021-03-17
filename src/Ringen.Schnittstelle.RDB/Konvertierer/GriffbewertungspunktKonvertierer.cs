@@ -37,7 +37,6 @@ namespace Ringen.Schnittstelle.RDB.Konvertierer
                     <decision> ::= [APV0O] ; 
                     <timeInSec> ::=
                     <pause> ::= „#“ ;;
-                 *
                  */
                 string grade = _griffbewertungsTypKonvertierer.ToApiString(griffbewertungspunkt.Typ);
                 string point = griffbewertungspunkt.Punktzahl.ToString();

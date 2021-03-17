@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Ringen.Schnittstelle.RDB.ApiModels
 {
-    internal class CompetitionPostApiModel
+    public class CompetitionPostApiModel
     {
         [JsonProperty("saisonId")]
         public string SaisonId { get; set; }
@@ -11,25 +11,16 @@ namespace Ringen.Schnittstelle.RDB.ApiModels
         [JsonProperty("competitionId")]
         public string CompetitionId { get; set; }
 
-
-
-
-
-
-
-
+        
         [JsonProperty("homePoints")]
         public string HomePoints { get; set; }
 
         [JsonProperty("opponentPoints")]
         public string OpponentPoints { get; set; }
-
-    
-
+        
         [JsonProperty("audience")]
         public string Audience { get; set; }
-
-
+        
         /// <summary>
         /// Bemerkung Protokoll
         /// </summary>
@@ -41,8 +32,7 @@ namespace Ringen.Schnittstelle.RDB.ApiModels
 
         [JsonProperty("refereeGivenname")]
         public string RefereeGivenname { get; set; }
-
-
+        
         /// <summary>
         /// Format HH:MM:SS
         /// </summary>
@@ -58,5 +48,4 @@ namespace Ringen.Schnittstelle.RDB.ApiModels
         [JsonProperty("_boutList")]
         public List<BoutPostApiModel> BoutList { get; set; }
     }
-
 }

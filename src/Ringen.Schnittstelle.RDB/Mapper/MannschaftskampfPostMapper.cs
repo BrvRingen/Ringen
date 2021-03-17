@@ -10,7 +10,7 @@ using Ringen.Schnittstellen.Contracts.Models;
 
 namespace Ringen.Schnittstelle.RDB.Mapper
 {
-    internal class MannschaftskampfPostMapper
+    public class MannschaftskampfPostMapper
     {
         private StilartKonvertierer _stilartKonvertierer;
         private SiegartKonvertierer _siegartKonvertierer;
@@ -23,21 +23,21 @@ namespace Ringen.Schnittstelle.RDB.Mapper
             _griffbewertungspunktKonvertierer = griffbewertungspunktKonvertierer;
         }
 
-        public CompetitionPostApiModel Map(Tuple<Mannschaftskampf, List<Einzelkampf>> wettkampf)
+        public CompetitionPostApiModel Map(Mannschaftskampf mannschaftskampf, List<Einzelkampf> einzelkaempfe)
         {
             CompetitionPostApiModel apiModel = new CompetitionPostApiModel
             {
-                SaisonId = wettkampf.Item1.SaisonId,
-                CompetitionId = wettkampf.Item1.CompetitionId,
-                HomePoints = wettkampf.Item1.HeimPunkte.ToString(),
-                OpponentPoints = wettkampf.Item1.GastPunkte.ToString(),
-                Audience = wettkampf.Item1.AnzahlZuschauer.ToString(),
-                EditorComment = wettkampf.Item1.Kommentar,
-                RefereeName = wettkampf.Item1.Schiedsrichter_Nachname,
-                RefereeGivenname = wettkampf.Item1.Schiedsrichter_Vorname,
-                StartTime = wettkampf.Item1.EchterKampfbeginn.ToString(@"hh\:mm\:ss"),
-                EndTime = wettkampf.Item1.EchtesKampfende.ToString(@"hh\:mm\:ss"),
-                BoutList = MapEinzelkaempfe(wettkampf.Item2)
+                SaisonId = mannschaftskampf.SaisonId,
+                CompetitionId = mannschaftskampf.WettkampfId,
+                HomePoints = mannschaftskampf.HeimPunkte.ToString(),
+                OpponentPoints = mannschaftskampf.GastPunkte.ToString(),
+                Audience = mannschaftskampf.AnzahlZuschauer.ToString(),
+                EditorComment = mannschaftskampf.Kommentar,
+                RefereeName = mannschaftskampf.Schiedsrichter_Nachname,
+                RefereeGivenname = mannschaftskampf.Schiedsrichter_Vorname,
+                StartTime = mannschaftskampf.EchterKampfbeginn.ToString(@"hh\:mm\:ss"),
+                EndTime = mannschaftskampf.EchtesKampfende.ToString(@"hh\:mm\:ss"),
+                BoutList = MapEinzelkaempfe(einzelkaempfe)
             };
             
             return apiModel;
@@ -58,13 +58,13 @@ namespace Ringen.Schnittstelle.RDB.Mapper
                 HomeWrestlerName = einzelkampf.HeimRinger.Nachname,
                 HomeWrestlerGivenname = einzelkampf.HeimRinger.Vorname,
                 HomeWrestlerRating = einzelkampf.HeimRinger.Status,
-                //HomeWrestlerPassCode = einzelkampf.HeimRinger.Startausweisnummer,
+                HomeWrestlerPassCode = einzelkampf.HeimRinger.Startausweisnummer,
                 HomeWrestlerPoints = einzelkampf.HeimMannschaftswertung.ToString(),
 
                 OpponentWrestlerName = einzelkampf.GastRinger.Nachname,
                 OpponentWrestlerGivenname = einzelkampf.GastRinger.Vorname,
                 OpponentWrestlerRating = einzelkampf.GastRinger.Status,
-                //OpponentWrestlerPassCode = einzelkampf.GastRinger.Startausweisnummer,
+                OpponentWrestlerPassCode = einzelkampf.GastRinger.Startausweisnummer,
                 OpponentWrestlerPoints = einzelkampf.GastMannschaftswertung.ToString(),
 
                 Result = _siegartKonvertierer.ToApiString(einzelkampf.Siegart),
