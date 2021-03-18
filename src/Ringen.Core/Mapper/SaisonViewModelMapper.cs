@@ -8,7 +8,7 @@ using Ringen.Schnittstellen.Contracts.Models;
 
 namespace Ringen.Core.Mapper
 {
-    internal class SaisonViewModelMapper
+    public class SaisonViewModelMapper
     {
         public SaisonViewModel Map(Saison model)
         {

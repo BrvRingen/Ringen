@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Ringen.Core.Mapper;
+using Ringen.Core.Services;
 using Ringen.Core.UI;
 using Ringen.DependencyInjection;
 using Ringen.Schnittstellen.Contracts.Interfaces;
@@ -9,25 +10,15 @@ namespace Ringen.Core.ViewModels
 {
     public class MannschaftskaempfeViewModel : ExtendedNotifyPropertyChanged, IExplorerItemViewModel
     {
-        public string Value { get; } = "Mannschaftskämpfe";
+        private SaisonInformationenService _service;
 
-        private List<SaisonViewModel> _seasons;
-
-        public List<SaisonViewModel> Children
+        public MannschaftskaempfeViewModel(SaisonInformationenService service)
         {
-            get 
-            {
-                if (_seasons == null)
-                {
-                    Async.RunSync(async () =>
-                    {
-                        List<Saison> saisonListe = await DependencyInjectionContainer.GetService<ISaisonInformationen>().GetSaisonsAsync();
-                        _seasons = new SaisonViewModelMapper().Map(saisonListe);
-                    });
-                }
-                    
-                return _seasons;
-            }
+            _service = service;
         }
+
+        public string Value { get; } = "Mannschaftskämpfe";
+        
+        public List<SaisonViewModel> Children => Async.RunSync( () => _service.GetSaisonsAsync());
     }
 }

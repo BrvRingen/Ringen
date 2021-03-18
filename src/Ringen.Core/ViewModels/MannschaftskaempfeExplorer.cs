@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Ringen.DependencyInjection;
 
 namespace Ringen.Core.ViewModels
 {
@@ -27,7 +28,7 @@ namespace Ringen.Core.ViewModels
             get
             {
                 if (data == null)
-                    data = new List<IExplorerItemViewModel>() { new MannschaftskaempfeViewModel() };
+                    data = new List<IExplorerItemViewModel>() { DependencyInjectionContainer.GetService<MannschaftskaempfeViewModel>() };
 
 
                 return data;
