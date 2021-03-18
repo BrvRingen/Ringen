@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Security" />
@@ -48,6 +49,7 @@
     <Compile Include="ConfigurationElemente\ValueStringConfigurationElement.cs" />
     <Compile Include="GlobaleVariablen.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
+    <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="Models\CompetitionInfos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

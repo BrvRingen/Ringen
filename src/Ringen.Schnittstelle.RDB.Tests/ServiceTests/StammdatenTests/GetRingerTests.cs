@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
 using Ringen.Schnittstelle.RDB.Factories;
@@ -25,14 +26,15 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.StammdatenTests
         [Test]
         public void Call_erwarte_Erfolg()
         {
-            Ringer ringer = _stammdaten.GetRinger("1");
+            Ringer ringer = _stammdaten.GetRingerAsync("1").Result;
             ringer.Should().NotBeNull();
         }
 
         [Test]
+        [Ignore("Daten von Oliver noch nicht in Testumgebung importiert")] //TODO Ignore entfernen sobald Testdaten vorhanden
         public void Pass_113581_erwarte_korrekte_Daten()
         {
-            Ringer ringer = _stammdaten.GetRinger("11358");
+            Ringer ringer = _stammdaten.GetRingerAsync("11358").Result;
             ringer.Vorname.Should().Be("Matin");
             ringer.Nachname.Should().Be("Sakhi");
         }
@@ -40,15 +42,14 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.StammdatenTests
         [Test]
         public void Pass_unbekannt_erwarte_NichtGefundenException()
         {
-            Action act = () => _stammdaten.GetRinger("99999");
-
+            Func<Task> act = async () => { await _stammdaten.GetRingerAsync("99999"); };
             act.Should().Throw<ApiNichtGefundenException>().WithMessage("Ringer mit Startausweisnummer 99999 konnte nicht gefunden werden.");
         }
 
         [Test]
         public void Pass_1_erwarte_korrekte_Daten()
         {
-            Ringer ringer = _stammdaten.GetRinger("1");
+            Ringer ringer = _stammdaten.GetRingerAsync("1").Result;
 
             ringer.Vorname.Should().Be("Oliver");
             ringer.Nachname.Should().Be("Stach");

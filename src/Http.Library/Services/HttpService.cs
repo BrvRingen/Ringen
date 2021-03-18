@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Http.Library.Exceptions;
 using Http.Library.Factories;
 using Http.Library.Models;
@@ -22,58 +23,42 @@ namespace Http.Library.Services
             _schnittstellenName = schnittstellenName;
         }
 
-        public string Get(Uri uri)
+        public Task<HttpResponse> Get_Async(Uri uri)
         {
             _logger.Trace($"{_schnittstellenName}: HTTP-Request (GET): {uri.AbsoluteUri}");
 
             HttpWebRequest request = _requestGenerator.Erstelle_Request(uri, HttpMethod.Get);
-            string httpResult = string.Empty;
-            Send_Request(request, onAbgeschlossen: (statusCode, contentType, content) =>
-            {
-                httpResult = content;
-            }
-            );
 
-            return httpResult;
+            Task<HttpResponse> httpResponse = Send_Request_Async(request);
+
+            return httpResponse;
         }
 
-        public void Put_Json(Uri uri, string json, Action<HttpStatusCode, string, string> onAbgeschlossen)
+        public Task<HttpResponse> Put_Json_Async(Uri uri, string json)
         {
-            Erstelle_und_Sende_StandardRequest(HttpMethod.Post, uri, json, onAbgeschlossen);
+            return Erstelle_und_Sende_StandardRequest(HttpMethod.Post, uri, json);
         }
 
-        public void Post_Json(Uri uri, string json, Action<HttpStatusCode, string, string> onAbgeschlossen)
+        public Task<HttpResponse> Post_Json_Async(Uri uri, string json)
         {
-            Erstelle_und_Sende_StandardRequest(HttpMethod.Post, uri, json, onAbgeschlossen);
+            return Erstelle_und_Sende_StandardRequest(HttpMethod.Post, uri, json);
         }
 
-        public void Delete_Json(Uri uri, string json, Action<HttpStatusCode, string, string> onAbgeschlossen)
+        public Task<HttpResponse> Delete_Json_Async(Uri uri, string json)
         {
-            Erstelle_und_Sende_StandardRequest(HttpMethod.Delete, uri, json, onAbgeschlossen);
+            return Erstelle_und_Sende_StandardRequest(HttpMethod.Delete, uri, json);
         }
-
-        internal void Erstelle_und_Sende_StandardRequest(HttpMethod httpMethod, Uri uri, string json, Action<HttpStatusCode, string, string> onAbgeschlossen)
+        
+        internal Task<HttpResponse> Erstelle_und_Sende_StandardRequest(HttpMethod httpMethod, Uri uri, string json)
         {
             _logger.Trace(
                 $"{_schnittstellenName}: HTTP-Request ({httpMethod.ToString().ToUpper()}) an {Uri.UnescapeDataString(uri.AbsolutePath)} mit Daten: {Uri.UnescapeDataString(json)}");
 
             HttpWebRequest request = _requestGenerator.Erstelle_Request(uri, httpMethod);
             Ergaenze_HttpContent(json, request);
-            Send_Request(request, onAbgeschlossen);
-        }
 
-        internal void Ergaenze_HttpContent(byte[] daten, HttpWebRequest request)
-        {
-            if (daten == null || daten.Length <= 0)
-            {
-                throw new HttpServiceCallException($"{_schnittstellenName}: Angefragte URL: {request.Address.AbsoluteUri}, HTTP-Content ist leer.");
-            }
-
-            request.ContentLength = daten.Length;
-            using (Stream stream = request.GetRequestStream())
-            {
-                stream.Write(daten, 0, daten.Length);
-            }
+            Task<HttpResponse> httpResponse = Send_Request_Async(request);
+            return httpResponse;
         }
 
         internal void Ergaenze_HttpContent(string datenString, HttpWebRequest request)
@@ -89,18 +74,15 @@ namespace Http.Library.Services
             }
         }
 
-        internal void Send_Request(HttpWebRequest request, Action<HttpStatusCode, string, string> onAbgeschlossen)
+        internal async Task<HttpResponse> Send_Request_Async(HttpWebRequest request)
         {
-            HttpWebResponse response = null;
             try
             {
-                response = (HttpWebResponse)request.GetResponse();
-                HttpStatusCode statusCode = response.StatusCode;
-                string contentType = response.ContentType;
-
+                var response =
+                    await Task.Factory.FromAsync<WebResponse>(request.BeginGetResponse, request.EndGetResponse, null);
                 string httpResult = Lese_Response(response);
 
-                onAbgeschlossen(statusCode, contentType, httpResult);
+                return new HttpResponse(((HttpWebResponse) response).StatusCode, response.ContentType, httpResult);
             }
             catch (WebException ex)
             {
@@ -120,10 +102,6 @@ namespace Http.Library.Services
                 }
 
                 throw new HttpServiceCallException(fehlermeldung, ex);
-            }
-            finally
-            {
-                response?.Dispose();
             }
         }
 

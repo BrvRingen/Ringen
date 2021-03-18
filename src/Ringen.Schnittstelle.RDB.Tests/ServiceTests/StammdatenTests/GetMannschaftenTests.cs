@@ -27,7 +27,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.StammdatenTests
         [Test]
         public void Alle_Mannschaften_von_OM_erwarte_Erfolg()
         {
-            List<Mannschaft> mannschaften = _stammdaten.GetMannschaften();
+            List<Mannschaft> mannschaften = _stammdaten.GetMannschaftenAsync().Result;
             mannschaften.Should().NotBeNull();
             mannschaften.Count.Should().BeGreaterThan(0);
 

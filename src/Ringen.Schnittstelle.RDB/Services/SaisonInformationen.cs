@@ -21,11 +21,11 @@ namespace Ringen.Schnittstelle.RDB.Services
             _einzelkampfMapper = einzelkampfMapper;
         }
 
-        public List<Kampftag> GetKampftage(string saisonId)
+        public async Task<List<Kampftag>> GetKampftageAsync(string saisonId)
         {
             KampftagMapper mapper = new KampftagMapper();
 
-            JObject response = _rdbService.GetCompetitionSystem(
+            JObject response = await _rdbService.Get_CompetitionSystem_Async(
                 "listOrgBoutday",
                 new List<KeyValuePair<string, string>>()
                 {
@@ -37,9 +37,9 @@ namespace Ringen.Schnittstelle.RDB.Services
             return apiModelListe.Select(apiModel => mapper.Map(apiModel)).ToList();
         }
 
-        public List<EinzelkampfSchema> GetMannschaftskampfSchema(string saisonId, string wettkampfId)
+        public async Task<List<EinzelkampfSchema>> GetMannschaftskampfSchemaAsync(string saisonId, string wettkampfId)
         {
-            JObject response = _rdbService.GetCompetitionSystem(
+            JObject response = await _rdbService.Get_CompetitionSystem_Async(
                 "getCompetitionScheme",
                 new List<KeyValuePair<string, string>>()
                 {
@@ -52,11 +52,11 @@ namespace Ringen.Schnittstelle.RDB.Services
             return apiModelListe.Select(apiModel => _einzelkampfMapper.Map(apiModel)).ToList();
         }
 
-        public List<Liga> GetLigen(string saisonId)
+        public async Task<List<Liga>> GetLigenAsync(string saisonId)
         {
             LigaMapper mapper = new LigaMapper();
 
-            JObject response = _rdbService.GetCompetitionSystem(
+            JObject response = await _rdbService.Get_CompetitionSystem_Async(
                 "listLiga",
                 new List<KeyValuePair<string, string>>()
                 {
@@ -76,12 +76,12 @@ namespace Ringen.Schnittstelle.RDB.Services
             return apiModelListe.Select(apiModel => mapper.Map(apiModel)).ToList();
         }
 
-        public Tuple<Saison, List<Leistungsklasse>> GetSaison(string saisonId)
+        public async Task<Tuple<Saison, List<Leistungsklasse>>> GetSaisonAsync(string saisonId)
         {
             SaisonMapper saisonMapper = new SaisonMapper();
             LeistungsklasseMapper leistungsklasseMapper = new LeistungsklasseMapper();
 
-            JObject response = _rdbService.GetCompetitionSystem("getSaison",
+            JObject response = await _rdbService.Get_CompetitionSystem_Async("getSaison",
                 new List<KeyValuePair<string, string>>()
                 {
                     new KeyValuePair<string, string>("sid", saisonId)
@@ -95,26 +95,19 @@ namespace Ringen.Schnittstelle.RDB.Services
 
         public async Task<List<Saison>> GetSaisonsAsync()
         {
-            return await Task.Run(() =>
-            {
-                SaisonMapper mapper = new SaisonMapper();
+            SaisonMapper mapper = new SaisonMapper();
 
-                JObject response = _rdbService.GetCompetitionSystem("listSaison");
-                IEnumerable<SaisonApiModel> apiModelListe = response["saisonList"].Select(elem => elem.FirstOrDefault().ToObject<SaisonApiModel>());
+            JObject response = await _rdbService.Get_CompetitionSystem_Async("listSaison");
+            IEnumerable<SaisonApiModel> apiModelListe = response["saisonList"].Select(elem => elem.FirstOrDefault().ToObject<SaisonApiModel>());
 
-                return apiModelListe.Select(apiModel => mapper.Map(apiModel)).ToList();
-            });
+            return apiModelListe.Select(apiModel => mapper.Map(apiModel)).ToList();
         }
 
-
-
-
-
-        public List<Mannschaft> GetMannschaften(string saisonId, string ligaId, string tableId)
+        public async Task<List<Mannschaft>> GetMannschaftenAsync(string saisonId, string ligaId, string tableId)
         {
             MannschaftMapper mapper = new MannschaftMapper();
 
-            JObject response = _rdbService.GetCompetitionSystem(
+            JObject response = await _rdbService.Get_CompetitionSystem_Async(
                 "getTable",
                 new List<KeyValuePair<string, string>>()
                 {

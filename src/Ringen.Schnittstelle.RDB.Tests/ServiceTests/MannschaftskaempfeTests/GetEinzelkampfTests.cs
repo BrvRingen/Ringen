@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
 using Ringen.DependencyInjection;
@@ -29,14 +30,14 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.MannschaftskaempfeTests
         [Test]
         public void Call_erwarte_Erfolg()
         {
-            Einzelkampf einzelkampf = _mannschaftskaempfe.GetEinzelkampf("2019", "011008a", 1);
+            Einzelkampf einzelkampf = _mannschaftskaempfe.GetEinzelkampfAsync("2019", "011008a", 1).Result;
             einzelkampf.Should().NotBeNull();
         }
 
         [Test]
         public void Abgeschlossene_Saison_erwarte_korrekte_Platzierungen()
         {
-            Einzelkampf einzelkampf = _mannschaftskaempfe.GetEinzelkampf("2019", "011008a", 1);
+            Einzelkampf einzelkampf = _mannschaftskaempfe.GetEinzelkampfAsync("2019", "011008a", 1).Result;
 
             einzelkampf.KampfNr.Should().Be(1);
             einzelkampf.Gewichtsklasse.Should().Be("57");
@@ -79,7 +80,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.MannschaftskaempfeTests
         [Test]
         public void Offene_Saison_erwarte_leere_Platzierungen()
         {
-            Action act = () => _mannschaftskaempfe.GetEinzelkampf("2020", "013003b", 1);
+            Func<Task> act = async () => { await _mannschaftskaempfe.GetEinzelkampfAsync("2020", "013003b", 1); };
 
             act.Should().Throw<ApiNichtGefundenException>()
                 .WithMessage("Es sind keine Kämpfe für Saison 2020 und Wettkampf 013003b (AC Ückerath 1961 vs. KSK Konkordia Neuss am 2020-09-05) vorhanden.");

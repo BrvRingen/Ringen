@@ -31,7 +31,7 @@ namespace Ringen.Core.ViewModels
                 {
                     Async.RunSync(async () =>
                     {
-                        List<Liga> ligenListe = DependencyInjectionContainer.GetService<ISaisonInformationen>().GetLigen(this.SaisonId);
+                        List<Liga> ligenListe = DependencyInjectionContainer.GetService<ISaisonInformationen>().GetLigenAsync(this.SaisonId).Result;
                         _ligen = new LigaViewModelMapper().Map(ligenListe);
                     });
                 }

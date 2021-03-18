@@ -1,26 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Ringen.Schnittstellen.Contracts.Models;
 
 namespace Ringen.Schnittstellen.Contracts.Interfaces
 {
-    /// <summary>
-    /// Saison (2020)
-    /// > Klasse (Männer | Schlüler)
-    /// > Liga (Oberliga | Bayernliga)
-    /// > Tabelle (Nord | Süd)
-    /// > Wettkampf (RCA vs Hof)
-    /// > Einzelkampf (Müller vs. Hauser)
-    /// > Ringer
-    /// </summary>
     public interface IMannschaftskaempfe
     {
-        Einzelkampf GetEinzelkampf(string saisonId, string wettkampfId, int kampfNr);
+        /// <summary>
+        /// Ein Kampf innerhalb eines Mannschaftskampfs
+        /// z. B. 1ter Kampf von RCA vs. Hof - Landesliga Nord 2019 - 55 kg
+        /// </summary>
+        /// <param name="saisonId"></param>
+        /// <param name="wettkampfId"></param>
+        /// <param name="kampfNr"></param>
+        /// <returns></returns>
+        Task<Einzelkampf> GetEinzelkampfAsync(string saisonId, string wettkampfId, int kampfNr);
 
-        Tuple<Mannschaftskampf, List<Einzelkampf>> GetMannschaftskampf(string saisonId, string wettkampfId);
+        /// <summary>
+        /// Ein konkreter Mannschaftskampf
+        /// z. B. RCA vs. Hof
+        /// </summary>
+        /// <param name="saisonId"></param>
+        /// <param name="wettkampfId"></param>
+        /// <returns></returns>
+        Task<Tuple<Mannschaftskampf, List<Einzelkampf>>> GetMannschaftskampfAsync(string saisonId, string wettkampfId);
 
-        List<Mannschaftskampf> GetMannschaftskaempfe(string saisonId, string ligaId, string tableId);
+        /// <summary>
+        /// Mehrere Mannschaftskämpfe für eine Saison, Liga und Tabelle
+        /// z. B. alle Mannschaftskämpfe von Landesliga Nord 2019
+        /// </summary>
+        /// <param name="saisonId"></param>
+        /// <param name="ligaId"></param>
+        /// <param name="tableId"></param>
+        /// <returns></returns>
+        Task<List<Mannschaftskampf>> GetMannschaftskaempfeAsync(string saisonId, string ligaId, string tableId);
 
-        Tuple<Liga, List<Tabellenplatzierung>> GetLigaMitPlatzierung(string saisonId, string ligaId, string tableId);
+        /// <summary>
+        /// Platzierungstabelle einer Saison, Liga und Tabelle
+        /// z. B. Platzierungen von Landesliag Nord 2019
+        /// </summary>
+        /// <param name="saisonId"></param>
+        /// <param name="ligaId"></param>
+        /// <param name="tableId"></param>
+        /// <returns></returns>
+        Task<Tuple<Liga, List<Tabellenplatzierung>>> GetLigaMitPlatzierungAsync(string saisonId, string ligaId, string tableId);
     }
 }

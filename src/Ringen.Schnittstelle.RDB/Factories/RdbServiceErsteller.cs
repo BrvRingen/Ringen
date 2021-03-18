@@ -39,7 +39,7 @@ namespace Ringen.Schnittstelle.RDB.Factories
             {
                 Authorization = RequestAuthorization.Basic
             };
-            HttpService httpService = new HttpService($"{Schnittstelle}", httpServiceSettings);
+            IHttpService httpService = new HttpService($"{Schnittstelle}", httpServiceSettings);
 
             RdbService service = new RdbService(httpService, _settings);
 

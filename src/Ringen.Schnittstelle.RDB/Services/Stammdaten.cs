@@ -21,11 +21,11 @@ namespace Ringen.Schnittstelle.RDB.Services
             _rdbService = rdbService;
         }
 
-        public Ringer GetRinger(string startausweisNr)
+        public async Task<Ringer> GetRingerAsync(string startausweisNr)
         {
             RingerMapper mapper = new RingerMapper();
 
-            JObject response = _rdbService.GetCompetitionSystem(
+            JObject response = await _rdbService.Get_CompetitionSystem_Async(
                 "getSaisonWrestler",
                 new List<KeyValuePair<string, string>>()
                 {
@@ -42,11 +42,11 @@ namespace Ringen.Schnittstelle.RDB.Services
             return mapper.Map(apiModel);
         }
 
-        public List<Mannschaft> GetMannschaften()
+        public async Task<List<Mannschaft>> GetMannschaftenAsync()
         {
             MannschaftMapper mapper = new MannschaftMapper();
 
-            JObject response = _rdbService.GetOrganisationsmanager("getAuthClubList");
+            JObject response = await _rdbService.Get_Organisationsmanager_Async("getAuthClubList");
 
             IEnumerable<ClubApiModel> apiModelListe = response["clubMap"].Select(elem => elem.FirstOrDefault().ToObject<ClubApiModel>());
 

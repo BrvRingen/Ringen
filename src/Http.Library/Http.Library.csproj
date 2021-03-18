@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Exceptions\HttpServiceCallException.cs" />
     <Compile Include="Factories\HttpWebRequestGenerator.cs" />
+    <Compile Include="Models\HttpResponse.cs" />
     <Compile Include="Models\HttpServiceSettings.cs" />
     <Compile Include="Models\RequestAuthorizationEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

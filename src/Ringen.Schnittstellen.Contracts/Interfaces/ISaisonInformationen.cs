@@ -7,17 +7,16 @@ namespace Ringen.Schnittstellen.Contracts.Interfaces
 {
     public interface ISaisonInformationen
     {
-        List<Liga> GetLigen(string saisonId);
+        Task<List<Liga>> GetLigenAsync(string saisonId);
 
-        Tuple<Saison, List<Leistungsklasse>> GetSaison(string saisonId);
+        Task<Tuple<Saison, List<Leistungsklasse>>> GetSaisonAsync(string saisonId);
 
         Task<List<Saison>> GetSaisonsAsync();
 
-        List<Mannschaft> GetMannschaften(string saisonId, string ligaId, string tableId);
+        Task<List<Mannschaft>> GetMannschaftenAsync(string saisonId, string ligaId, string tableId);
 
+        Task<List<EinzelkampfSchema>> GetMannschaftskampfSchemaAsync(string saisonId, string wettkampfId);
 
-        List<EinzelkampfSchema> GetMannschaftskampfSchema(string saisonId, string wettkampfId);
-
-        List<Kampftag> GetKampftage(string saisonId);
+        Task<List<Kampftag>> GetKampftageAsync(string saisonId);
     }
 }

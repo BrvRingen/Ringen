@@ -40,7 +40,7 @@ namespace Ringen.Core.ViewModels
                 {
                     Async.RunSync(async () =>
                     {
-                        List<Mannschaftskampf> mannschaftskaempfe = DependencyInjectionContainer.GetService<IMannschaftskaempfe>().GetMannschaftskaempfe(this.SaisonId, this.LigaId, this.TableId);
+                        List<Mannschaftskampf> mannschaftskaempfe = DependencyInjectionContainer.GetService<IMannschaftskaempfe>().GetMannschaftskaempfeAsync(this.SaisonId, this.LigaId, this.TableId).Result;
                         _mannschaftskaempfe = new MannschaftskampfViewModelMapper().Map(mannschaftskaempfe);
                     });
                 }

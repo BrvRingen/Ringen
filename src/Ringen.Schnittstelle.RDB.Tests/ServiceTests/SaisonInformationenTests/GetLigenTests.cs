@@ -25,7 +25,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.SaisonInformationenTests
         [Test]
         public void Call_erwarte_Erfolg()
         {
-            List<Liga> ligen = _saisonInformationen.GetLigen("2019");
+            List<Liga> ligen = _saisonInformationen.GetLigenAsync("2019").Result;
             ligen.Should().NotBeNull();
             ligen.Count.Should().BeGreaterThan(0);
         }
@@ -33,7 +33,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.SaisonInformationenTests
         [Test]
         public void Abgeschlossene_Saison_erwarte_korrekte_Ligen()
         {
-            List<Liga> ligen = _saisonInformationen.GetLigen("2019");
+            List<Liga> ligen = _saisonInformationen.GetLigenAsync("2019").Result;
 
 
             ligen.Count.Should().Be(15);
@@ -52,7 +52,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.SaisonInformationenTests
         [Test]
         public void Offene_Saison_erwarte_korrekte_Ligen()
         {
-            List<Liga> ligen = _saisonInformationen.GetLigen("2020");
+            List<Liga> ligen = _saisonInformationen.GetLigenAsync("2020").Result;
             
             Liga oberliga =
                 ligen.FirstOrDefault(li => li.LigaId.Equals("Oberliga"));

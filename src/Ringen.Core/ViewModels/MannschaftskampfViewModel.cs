@@ -178,7 +178,7 @@ namespace Ringen.Core.ViewModels
                 {
                     Async.RunSync(async () =>
                     {
-                        var mannschaftskampf = DependencyInjectionContainer.GetService<IMannschaftskaempfe>().GetMannschaftskampf(this.SaisonId, this.CompetitionId);
+                        var mannschaftskampf = DependencyInjectionContainer.GetService<IMannschaftskaempfe>().GetMannschaftskampfAsync(this.SaisonId, this.CompetitionId).Result;
                         foreach (var einzelkampf in mannschaftskampf.Item2)
                         {
                             //TODO EinzelkampfViewModelMapper
@@ -187,7 +187,7 @@ namespace Ringen.Core.ViewModels
                     });
 
                     var BoutsForCompetition = new List<(string WeightClass, string Style)>();
-                    var kampfSchema = DependencyInjectionContainer.GetService<ISaisonInformationen>().GetMannschaftskampfSchema(this.SaisonId, this.CompetitionId);
+                    var kampfSchema = DependencyInjectionContainer.GetService<ISaisonInformationen>().GetMannschaftskampfSchemaAsync(this.SaisonId, this.CompetitionId);
 
                     if (bouts.Count() == 0)
                     {

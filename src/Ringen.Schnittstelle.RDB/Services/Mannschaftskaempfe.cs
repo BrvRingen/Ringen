@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Ringen.Schnittstelle.RDB.ApiModels;
 using Ringen.Schnittstelle.RDB.Mapper;
@@ -21,9 +22,9 @@ namespace Ringen.Schnittstelle.RDB.Services
             _einzelkampfMapper = einzelkampfMapper;
         }
 
-        public Einzelkampf GetEinzelkampf(string saisonId, string wettkampfId, int kampfNr)
+        public async Task<Einzelkampf> GetEinzelkampfAsync(string saisonId, string wettkampfId, int kampfNr)
         {
-            JObject response = _rdbService.GetCompetitionSystem(
+            JObject response = await _rdbService.Get_CompetitionSystem_Async(
                 "getCompetition",
                 new List<KeyValuePair<string, string>>()
                 {
@@ -41,13 +42,12 @@ namespace Ringen.Schnittstelle.RDB.Services
 
             return _einzelkampfMapper.Map(kampfJToken);
         }
-
-
-        public Tuple<Mannschaftskampf, List<Einzelkampf>> GetMannschaftskampf(string saisonId, string wettkampfId)
+        
+        public async Task<Tuple<Mannschaftskampf, List<Einzelkampf>>> GetMannschaftskampfAsync(string saisonId, string wettkampfId)
         {
             MannschaftskampfMapper wettkampfMapper = new MannschaftskampfMapper();
             
-            JObject response = _rdbService.GetCompetitionSystem(
+            JObject response = await _rdbService.Get_CompetitionSystem_Async(
                 "getCompetition",
                 new List<KeyValuePair<string, string>>()
                 {
@@ -64,11 +64,11 @@ namespace Ringen.Schnittstelle.RDB.Services
             return new Tuple<Mannschaftskampf, List<Einzelkampf>>(mannschaftskampf, einzelKaempfe);
         }
 
-        public List<Mannschaftskampf> GetMannschaftskaempfe(string saisonId, string ligaId, string tableId)
+        public async Task<List<Mannschaftskampf>> GetMannschaftskaempfeAsync(string saisonId, string ligaId, string tableId)
         {
             MannschaftskampfMapper mapper = new MannschaftskampfMapper();
 
-            JObject response = _rdbService.GetCompetitionSystem(
+            JObject response = await _rdbService.Get_CompetitionSystem_Async(
                 "listCompetition", 
                 new List<KeyValuePair<string, string>>()
                 {
@@ -83,12 +83,12 @@ namespace Ringen.Schnittstelle.RDB.Services
             return apiModelListe.Select(apiModel => mapper.Map(apiModel)).ToList();
         }
 
-        public Tuple<Liga, List<Tabellenplatzierung>> GetLigaMitPlatzierung(string saisonId, string ligaId, string tableId)
+        public async Task<Tuple<Liga, List<Tabellenplatzierung>>> GetLigaMitPlatzierungAsync(string saisonId, string ligaId, string tableId)
         {
             LigaMapper ligaMapper = new LigaMapper();
             TabellenplatzierungMapper tabellenplatzierungMapper = new TabellenplatzierungMapper();
 
-            JObject response = _rdbService.GetCompetitionSystem(
+            JObject response = await _rdbService.Get_CompetitionSystem_Async(
                 "getTable",
                 new List<KeyValuePair<string, string>>()
                 {

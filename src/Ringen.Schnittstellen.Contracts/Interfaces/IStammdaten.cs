@@ -9,8 +9,8 @@ namespace Ringen.Schnittstellen.Contracts.Interfaces
 {
     public interface IStammdaten
     {
-        Ringer GetRinger(string startausweisNr);
+        Task<Ringer> GetRingerAsync(string startausweisNr);
 
-        List<Mannschaft> GetMannschaften();
+        Task<List<Mannschaft>> GetMannschaftenAsync();
     }
 }

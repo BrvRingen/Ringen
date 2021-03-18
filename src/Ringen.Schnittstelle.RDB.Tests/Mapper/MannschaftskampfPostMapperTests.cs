@@ -32,7 +32,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.Mapper
         [Test]
         public void JsonString_2019_011008a_erwarte_korrektenJsonString()
         {
-            Tuple<Mannschaftskampf, List<Einzelkampf>> wettkampf = _mannschaftskaempfe.GetMannschaftskampf("2019", "011008a");
+            Tuple<Mannschaftskampf, List<Einzelkampf>> wettkampf = _mannschaftskaempfe.GetMannschaftskampfAsync("2019", "011008a").Result;
             wettkampf.Item1.EchterKampfbeginn = new TimeSpan(19,30,0);
             wettkampf.Item1.EchtesKampfende = new TimeSpan(21, 23, 0);
 

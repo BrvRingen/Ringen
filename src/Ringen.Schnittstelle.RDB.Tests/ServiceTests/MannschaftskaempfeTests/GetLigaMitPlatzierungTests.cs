@@ -25,14 +25,14 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.MannschaftskaempfeTests
         [Test]
         public void Call_erwarte_Erfolg()
         {
-            Tuple<Liga, List<Tabellenplatzierung>> ligaTuple = _mannschaftskaempfe.GetLigaMitPlatzierung("2019", "Oberliga", "Westfalen");
+            Tuple<Liga, List<Tabellenplatzierung>> ligaTuple = _mannschaftskaempfe.GetLigaMitPlatzierungAsync("2019", "Oberliga", "Westfalen").Result;
             ligaTuple.Should().NotBeNull();
         }
 
         [Test]
         public void Abgeschlossene_Saison_erwarte_korrekte_Platzierungen()
         {
-            Tuple<Liga, List<Tabellenplatzierung>> ligaTuple = _mannschaftskaempfe.GetLigaMitPlatzierung("2019", "Oberliga", "Westfalen");
+            Tuple<Liga, List<Tabellenplatzierung>> ligaTuple = _mannschaftskaempfe.GetLigaMitPlatzierungAsync("2019", "Oberliga", "Westfalen").Result;
 
             ligaTuple.Item1.Bezeichnung.Should().Be("Oberliga Westfalen 2019");
             ligaTuple.Item2.FirstOrDefault(li => li.Tabellenplatz == 1).TeamId.Should().Be("KSV Witten 07 II");
@@ -42,7 +42,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.MannschaftskaempfeTests
         [Test]
         public void Offene_Saison_erwarte_leere_Platzierungen()
         {
-            Tuple<Liga, List<Tabellenplatzierung>> ligaTuple = _mannschaftskaempfe.GetLigaMitPlatzierung("2020", "Oberliga", "");
+            Tuple<Liga, List<Tabellenplatzierung>> ligaTuple = _mannschaftskaempfe.GetLigaMitPlatzierungAsync("2020", "Oberliga", "").Result;
 
             ligaTuple.Item1.Bezeichnung.Should().Be("Oberliga 2020");
             ligaTuple.Item2.ForEach(li => li.Tabellenplatz.Should().Be(0));
