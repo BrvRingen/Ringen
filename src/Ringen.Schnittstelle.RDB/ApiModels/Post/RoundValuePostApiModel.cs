@@ -2,7 +2,7 @@
 
 namespace Ringen.Schnittstelle.RDB.ApiModels.Post
 {
-    internal class RoundValuePostApiModel
+    public class RoundValuePostApiModel
     {
         [JsonProperty("1")]
         public string Round1Value { get; set; }

@@ -212,7 +212,7 @@ namespace Ringen.Core.ViewModels
 
             //TODO: Ergebnis Objekt erstellen
             var ergebnis = new Tuple<Mannschaftskampf, List<Einzelkampf>>(new Mannschaftskampf(), new List<Einzelkampf>());
-            ergebnisdienst.Uebermittle_Ergebnis(this.SaisonId, this.CompetitionId, ergebnis);
+            //ergebnisdienst.Uebermittle_Ergebnis(this.SaisonId, this.CompetitionId, ergebnis);
         }
     }
 }
