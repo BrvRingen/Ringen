@@ -14,9 +14,8 @@ namespace Ringen.Core.DependencyInjection
     {
         public override void Load()
         {
-            Bind<MannschaftskaempfeViewModel>().ToSelf().InSingletonScope();
             Bind<SaisonInformationenService>().ToSelf().InSingletonScope();
-            Bind<SaisonViewModelMapper>().ToSelf().InSingletonScope();
+            Bind<MannschaftskaempfeService>().ToSelf().InSingletonScope();
         }
     }
 }

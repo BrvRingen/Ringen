@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Ringen.Core.CS;
 using Ringen.Core.Mapper;
+using Ringen.Core.Services;
 using Ringen.Core.UI;
 using Ringen.DependencyInjection;
 using Ringen.Schnittstellen.Contracts.Interfaces;
@@ -14,40 +15,18 @@ namespace Ringen.Core.ViewModels
 {
     public class LigaViewModel : ExtendedNotifyPropertyChanged, IExplorerItemViewModel
     {
-        public LigaViewModel(string saisonId, string ligaId, string tableId)
+        private MannschaftskaempfeService _service;
+
+        public LigaViewModel(Liga model)
         {
-            SaisonId = saisonId;
-            LigaId = ligaId;
-            TableId = tableId;
+            _service = DependencyInjectionContainer.GetService<MannschaftskaempfeService>();
+            Model = model;
         }
 
-        public string Value => $"{LigaId} {TableId}".Trim();
+        public string Value => $"{Model.LigaId} {Model.TabellenId}".Trim();
 
-        public string SaisonId { get; }
+        public Liga Model { get; }
 
-        public string LigaId { get; }
-
-        public string TableId { get; }
-
-
-        private List<MannschaftskampfViewModel> _mannschaftskaempfe;
-
-        public List<MannschaftskampfViewModel> Children
-        {
-            get
-            {
-                if (_mannschaftskaempfe == null)
-                {
-                    Async.RunSync(async () =>
-                    {
-                        List<Mannschaftskampf> mannschaftskaempfe = DependencyInjectionContainer.GetService<IMannschaftskaempfe>().GetMannschaftskaempfeAsync(this.SaisonId, this.LigaId, this.TableId).Result;
-                        _mannschaftskaempfe = new MannschaftskampfViewModelMapper().Map(mannschaftskaempfe);
-                    });
-                }
-
-                return _mannschaftskaempfe;
-            }
-        }
-
+        public List<MannschaftskampfViewModel> Children => Async.RunSync(() => _service.GetMannschaftskaempfeAsync(Model.SaisonId, Model.LigaId, Model.TabellenId));
     }
 }

@@ -33,9 +33,9 @@
     <Compile Include="CS\BoutSettings.cs" />
     <Compile Include="CS\BoutTime.cs" />
     <Compile Include="DependencyInjection\RingenCoreDiModule.cs" />
-    <Compile Include="Mapper\LigaViewModelMapper.cs" />
-    <Compile Include="Mapper\MannschaftskampfViewModelMapper.cs" />
-    <Compile Include="Mapper\SaisonViewModelMapper.cs" />
+    <Compile Include="Mapper\MannschaftskaempfeViewModelMapper.cs" />
+    <Compile Include="Mapper\SaisonInformationenViewModelMapper.cs" />
+    <Compile Include="Services\MannschaftskaempfeService.cs" />
     <Compile Include="Services\SaisonInformationenService.cs" />
     <Compile Include="ViewModels\IExplorerItemViewModel.cs" />
     <Compile Include="ViewModels\LigaViewModel.cs" />

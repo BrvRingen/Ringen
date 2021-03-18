@@ -16,23 +16,32 @@ namespace Ringen.Core.ViewModels
 {
     public class MannschaftskampfViewModel : ExtendedNotifyPropertyChanged, IExplorerItemViewModel
     {
-        public MannschaftskampfViewModel(bool istDoppelRunde, string ligaId, string tableId, TimeSpan scaleTime, string saisonId, string competitionId, string homeTeamName, string opponentTeamName, string homePoints, string opponentPoints, DateTime boutDateDateTime, string location, string editorName, string referee)
+        public MannschaftskampfViewModel(Mannschaftskampf model) //bool istDoppelRunde, string ligaId, string tableId, TimeSpan scaleTime, string saisonId, string competitionId, string homeTeamName, string opponentTeamName, string homePoints, string opponentPoints, DateTime boutDateDateTime, string location, string editorName, string referee)
         {
-            IstDoppelRunde = istDoppelRunde;
-            LigaId = ligaId;
-            TableId = tableId;
-            ScaleTime = scaleTime;
-            SaisonId = saisonId;
-            CompetitionId = competitionId;
-            HomeTeamName = homeTeamName;
-            OpponentTeamName = opponentTeamName;
-            HomePoints = homePoints;
-            OpponentPoints = opponentPoints;
-            BoutDateDateTime = boutDateDateTime;
-            Location = location;
-            EditorName = editorName;
-            Referee = referee;
+            Model = model;
+            //IstDoppelRunde = istDoppelRunde;
+            //LigaId = ligaId;
+            //TableId = tableId;
+            //ScaleTime = scaleTime;
+            //SaisonId = saisonId;
+            //CompetitionId = competitionId;
+            //HomeTeamName = homeTeamName;
+            //OpponentTeamName = opponentTeamName;
+            //HomePoints = homePoints;
+            //OpponentPoints = opponentPoints;
+            //BoutDateDateTime = boutDateDateTime;
+            //Location = location;
+            //EditorName = editorName;
+            //Referee = referee;
+
+            Audience = model.AnzahlZuschauer;
+            EditorComment = model.Kommentar;
+            HomeTeamName = model.HeimMannschaft;
+            OpponentTeamName = model.GastMannschaft;
         }
+
+        public Mannschaftskampf Model { get; }
+
         public int[] GetKampffolge()
         {
             List<int> temp = new List<int>();
@@ -67,7 +76,7 @@ namespace Ringen.Core.ViewModels
         /// <summary>
         /// z. B. RCA Bayreuth - ASV Hof II
         /// </summary>
-        public string Value => $"{HomeTeamName} - {OpponentTeamName}";
+        public string Value => $"{Model.HeimMannschaft} - {Model.GastMannschaft}";
 
         public bool IstDoppelRunde { get; }
 
@@ -174,6 +183,8 @@ namespace Ringen.Core.ViewModels
         {
             get
             {
+                return null;
+
                 if (bouts == null)
                 {
                     Async.RunSync(async () =>

@@ -9,16 +9,17 @@ using Ringen.DependencyInjection;
 using Ringen.Schnittstellen.Contracts.Interfaces;
 using Ringen.Schnittstellen.Contracts.Models;
 
-namespace Ringen.Core.Services
+namespace Ringen.Core.Services.CS
 {
     public class SaisonInformationenService 
     {
         private List<SaisonViewModel> _seasons;
         private List<LigaViewModel> _ligen;
+        private List<MannschaftskampfViewModel> _mannschaftskaempfe;
         private ISaisonInformationen _saisonInformationen;
-        private SaisonInformationenViewModelMapper _mapper;
+        private SaisonViewModelMapper _mapper;
 
-        public SaisonInformationenService(ISaisonInformationen saisonInformationen, SaisonInformationenViewModelMapper mapper)
+        public SaisonInformationenService(ISaisonInformationen saisonInformationen, SaisonViewModelMapper mapper)
         {
             _saisonInformationen = saisonInformationen;
             _mapper = mapper;
@@ -29,18 +30,17 @@ namespace Ringen.Core.Services
             if (_seasons == null)
             {
                 List<Saison> saisonListe = await _saisonInformationen.GetSaisonsAsync();
-                _seasons = _mapper.Map(this, saisonListe);
+                _seasons = _mapper.Map(saisonListe);
             }
 
             return _seasons;
         }
 
-
-        public async Task<List<LigaViewModel>> GetLigenAsync(string saisonId)
+        public async Task<List<LigaViewModel>> GetLigenAsync(ISaisonInformationen service, string SaisonId)
         {
             if (_ligen == null)
             {
-                List<Liga> ligenListe = await _saisonInformationen.GetLigenAsync(saisonId);
+                var ligenListe = _saisonInformationen.GetLigen(SaisonId);
                 _ligen = _mapper.Map(ligenListe);
             }
 
@@ -48,5 +48,21 @@ namespace Ringen.Core.Services
         }
 
 
+        public async Task<List<MannschaftskampfViewModel>> GetMannschaftskaempfeAsync(string SaisonId)
+        {
+            if (_mannschaftskaempfe == null)
+            {
+                var mannschaftskampfListe = _saisonInformationen.GetKampftage(SaisonId);
+                _mannschaftskaempfe = _mapper.Map(mannschaftskampfListe);
+            }
+
+            return _mannschaftskaempfe;
+        }
+
+
+
+
+
+        //
     }
 }
