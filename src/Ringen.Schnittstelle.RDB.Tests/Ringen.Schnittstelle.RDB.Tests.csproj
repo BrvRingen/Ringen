@@ -60,6 +60,10 @@
     <Compile Include="StartUp.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ringen.Core\Ringen.Core.csproj">
+      <Project>{78C12D2B-0701-48E5-937C-B8EA3972A9DF}</Project>
+      <Name>Ringen.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ringen.DependencyInjection\Ringen.DependencyInjection.csproj">
       <Project>{b7f4860d-f7a8-4aae-ae34-9166ab9e8f7a}</Project>
       <Name>Ringen.DependencyInjection</Name>

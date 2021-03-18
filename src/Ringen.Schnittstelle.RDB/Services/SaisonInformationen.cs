@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Ringen.Schnittstelle.RDB.ApiModels;
 using Ringen.Schnittstelle.RDB.Mapper;
@@ -61,10 +62,10 @@ namespace Ringen.Schnittstelle.RDB.Services
                 {
                     new KeyValuePair<string, string>("sid", saisonId)
                 });
-            
+
             List<LigaApiModel> apiModelListe = new List<LigaApiModel>();
             foreach (var liga in response["ligaList"].ToArray())
-            {                
+            {
                 foreach (var tabelle in liga.ToArray())
                 {
                     var temp = tabelle.Select(elem => elem.FirstOrDefault().ToObject<LigaApiModel>()).ToList();
@@ -92,15 +93,22 @@ namespace Ringen.Schnittstelle.RDB.Services
             return new Tuple<Saison, List<Leistungsklasse>>(saisonMapper.Map(saisonApiModel), leistungsklasseMapper.Map(systemApiModelListe));
         }
 
-        public List<Saison> GetSaisons()
+        public async Task<List<Saison>> GetSaisonsAsync()
         {
-            SaisonMapper mapper = new SaisonMapper();
+            return await Task.Run(() =>
+            {
+                SaisonMapper mapper = new SaisonMapper();
 
-            JObject response = _rdbService.GetCompetitionSystem("listSaison");
-            IEnumerable<SaisonApiModel> apiModelListe = response["saisonList"].Select(elem => elem.FirstOrDefault().ToObject<SaisonApiModel>());
+                JObject response = _rdbService.GetCompetitionSystem("listSaison");
+                IEnumerable<SaisonApiModel> apiModelListe = response["saisonList"].Select(elem => elem.FirstOrDefault().ToObject<SaisonApiModel>());
 
-            return apiModelListe.Select(apiModel => mapper.Map(apiModel)).ToList();
+                return apiModelListe.Select(apiModel => mapper.Map(apiModel)).ToList();
+            });
         }
+
+
+
+
 
         public List<Mannschaft> GetMannschaften(string saisonId, string ligaId, string tableId)
         {

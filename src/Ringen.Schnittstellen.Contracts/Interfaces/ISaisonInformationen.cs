@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Ringen.Schnittstellen.Contracts.Models;
 
 namespace Ringen.Schnittstellen.Contracts.Interfaces
@@ -10,7 +11,7 @@ namespace Ringen.Schnittstellen.Contracts.Interfaces
 
         Tuple<Saison, List<Leistungsklasse>> GetSaison(string saisonId);
 
-        List<Saison> GetSaisons();
+        Task<List<Saison>> GetSaisonsAsync();
 
         List<Mannschaft> GetMannschaften(string saisonId, string ligaId, string tableId);
 

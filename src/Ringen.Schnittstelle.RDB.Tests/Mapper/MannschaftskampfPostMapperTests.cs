@@ -36,7 +36,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.Mapper
             wettkampf.Item1.EchterKampfbeginn = new TimeSpan(19,30,0);
             wettkampf.Item1.EchtesKampfende = new TimeSpan(21, 23, 0);
 
-            var postApiModel = _mapper.Map(wettkampf);
+            var postApiModel = _mapper.Map(wettkampf.Item1, wettkampf.Item2);
 
             var jsonStringGeneriert = JsonConvert.SerializeObject(postApiModel, Formatting.Indented);
 #if DEBUG

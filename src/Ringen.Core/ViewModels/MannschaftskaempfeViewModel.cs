@@ -21,7 +21,7 @@ namespace Ringen.Core.ViewModels
                 {
                     Async.RunSync(async () =>
                     {
-                        List<Saison> saisonListe = DependencyInjectionContainer.GetService<ISaisonInformationen>().GetSaisons();
+                        List<Saison> saisonListe = await DependencyInjectionContainer.GetService<ISaisonInformationen>().GetSaisonsAsync();
                         _seasons = new SaisonViewModelMapper().Map(saisonListe);
                     });
                 }

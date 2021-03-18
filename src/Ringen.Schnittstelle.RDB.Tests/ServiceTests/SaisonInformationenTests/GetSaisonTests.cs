@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
+using Ringen.Core;
 using Ringen.DependencyInjection;
 using Ringen.Schnittstelle.RDB.Factories;
 using Ringen.Schnittstelle.RDB.Services;
@@ -25,7 +27,10 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.SaisonInformationenTests
         [Test]
         public void GetSaisons_erwarte_Erfolg()
         {
-            List<Saison> saisonListe = _saisonInformationen.GetSaisons();
+            List<Saison> saisonListe = Async.RunSync(async () =>
+            {
+                return await _saisonInformationen.GetSaisonsAsync();
+            });
 
             saisonListe.Should().NotBeNull();
             saisonListe.Count.Should().BeGreaterThan(1);
