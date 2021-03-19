@@ -13,13 +13,13 @@ namespace Ringen.Core.Mapper
 {
     public class SaisonInformationenViewModelMapper
     {
-        public SaisonViewModel Map(SaisonInformationenService service, string saisonId)
+        public SaisonViewModel Map(SaisonService service, string saisonId)
         {
             var viewModel = new SaisonViewModel(service, saisonId);
             return viewModel;
         }
 
-        public List<SaisonViewModel> Map(SaisonInformationenService service, IEnumerable<Saison> modelListe)
+        public List<SaisonViewModel> Map(SaisonService service, IEnumerable<Saison> modelListe)
         {
             return modelListe.Select(model => Map(service, model.SaisonId)).ToList();
         }

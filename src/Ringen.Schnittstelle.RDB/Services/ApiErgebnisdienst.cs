@@ -5,18 +5,18 @@ using System.Threading.Tasks;
 using Ringen.Schnittstelle.RDB.ApiModels;
 using Ringen.Schnittstelle.RDB.Mapper;
 using Ringen.Schnittstellen.Contracts.Exceptions;
-using Ringen.Schnittstellen.Contracts.Interfaces;
 using Ringen.Schnittstellen.Contracts.Models;
+using Ringen.Schnittstellen.Contracts.Services;
 using Ringen.Shared.Helpers;
 
 namespace Ringen.Schnittstelle.RDB.Services
 {
-    internal class Ergebnisdienst : IErgebnisdienst
+    internal class ApiErgebnisdienst : IApiErgebnisdienst
     {
         private RdbService _rdbService;
         private MannschaftskampfPostMapper _mapper;
         
-        public Ergebnisdienst(RdbService rdbService, MannschaftskampfPostMapper mapper)
+        public ApiErgebnisdienst(RdbService rdbService, MannschaftskampfPostMapper mapper)
         {
             _rdbService = rdbService;
             _mapper = mapper;

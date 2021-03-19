@@ -9,7 +9,6 @@ using Ringen.Core.Services;
 using Ringen.Core.Services.Ergebnisdienst;
 using Ringen.Core.ViewModels;
 using Ringen.Schnittstellen.Contracts.Factories;
-using Ringen.Schnittstellen.Contracts.Interfaces;
 
 namespace Ringen.Core.DependencyInjection
 {
@@ -17,7 +16,7 @@ namespace Ringen.Core.DependencyInjection
     {
         public override void Load()
         {
-            Bind<SaisonInformationenService>().ToSelf().InSingletonScope();
+            Bind<SaisonService>().ToSelf().InSingletonScope();
             Bind<MannschaftskaempfeService>().ToSelf().InSingletonScope();
 
 

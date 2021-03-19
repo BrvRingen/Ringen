@@ -6,28 +6,28 @@ using Newtonsoft.Json;
 using NUnit.Framework;
 using Ringen.Schnittstelle.RDB.Factories;
 using Ringen.Schnittstelle.RDB.Mapper;
-using Ringen.Schnittstellen.Contracts.Interfaces;
 using Ringen.Schnittstellen.Contracts.Models;
+using Ringen.Schnittstellen.Contracts.Services;
 
 namespace Ringen.Schnittstelle.RDB.Tests.Mapper
 {
     [TestFixture]
     public class MannschaftskampfPostMapperTests
     {
-        private IMannschaftskaempfe _mannschaftskaempfe;
+        private IApiMannschaftskaempfe _apiMannschaftskaempfe;
         private MannschaftskampfPostMapper _mapper;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _mannschaftskaempfe = new ServiceErsteller().GetService<IMannschaftskaempfe>();
+            _apiMannschaftskaempfe = new ServiceErsteller().GetService<IApiMannschaftskaempfe>();
             _mapper = new ServiceErsteller().GetService<MannschaftskampfPostMapper>();
         }
 
         [Test]
         public void JsonString_2019_011008a_erwarte_korrektenJsonString()
         {
-            Tuple<Mannschaftskampf, List<Einzelkampf>> wettkampf = _mannschaftskaempfe.GetMannschaftskampfAsync("2019", "011008a").Result;
+            Tuple<Mannschaftskampf, List<Einzelkampf>> wettkampf = _apiMannschaftskaempfe.GetMannschaftskampfAsync("2019", "011008a").Result;
             wettkampf.Item1.EchterKampfbeginn = new TimeSpan(19,30,0);
             wettkampf.Item1.EchtesKampfende = new TimeSpan(21, 23, 0);
 

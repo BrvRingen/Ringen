@@ -1,5 +1,4 @@
-﻿using Ringen.Schnittstellen.Contracts.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +7,7 @@ using Ringen.Schnittstelle.RDB.Factories;
 using Ringen.Schnittstelle.RDB.Services;
 using Ringen.Schnittstellen.Contracts.Factories;
 using Ringen.Schnittstellen.Contracts.Models;
+using Ringen.Schnittstellen.Contracts.Services;
 
 namespace Ringen.Schnittstelle.RDB.SichtbarkeitsTest
 {
@@ -16,7 +16,7 @@ namespace Ringen.Schnittstelle.RDB.SichtbarkeitsTest
         static void Main(string[] args)
         {
             IServiceErsteller x = new ServiceErsteller();
-            var _saisonInformationen = x.GetService<ISaisonInformationen>();
+            var _saisonInformationen = x.GetService<IApiSaisonInformationen>();
 
             List<Saison> saisonListe = _saisonInformationen.GetSaisonsAsync().Result;
 

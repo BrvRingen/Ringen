@@ -45,11 +45,11 @@
     <Compile Include="Exceptions\ApiNichtGefundenException.cs" />
     <Compile Include="Exceptions\ApiValidierungException.cs" />
     <Compile Include="Models\IApiSettings.cs" />
-    <Compile Include="Services\IErgebnisdienst.cs" />
-    <Compile Include="Services\IMannschaftskaempfe.cs" />
-    <Compile Include="Services\ISaisonInformationen.cs" />
+    <Compile Include="Services\IApiErgebnisdienst.cs" />
+    <Compile Include="Services\IApiMannschaftskaempfe.cs" />
+    <Compile Include="Services\IApiSaisonInformationen.cs" />
     <Compile Include="Factories\IServiceErsteller.cs" />
-    <Compile Include="Services\IStammdaten.cs" />
+    <Compile Include="Services\IApiStammdaten.cs" />
     <Compile Include="Models\Enums\AustragungsmodusEnum.cs" />
     <Compile Include="Models\Enums\GeschlechtEnum.cs" />
     <Compile Include="Models\Enums\GriffbewertungsTypEnum.cs" />

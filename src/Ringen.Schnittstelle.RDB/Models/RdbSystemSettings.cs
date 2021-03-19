@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 using Ringen.Schnittstelle.RDB.ConfigSections;
-using Ringen.Schnittstellen.Contracts.Interfaces;
 using Ringen.Schnittstellen.Contracts.Models;
 using Ringen.Shared.Helpers;
 

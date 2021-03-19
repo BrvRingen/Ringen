@@ -4,26 +4,26 @@ using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 using Ringen.Schnittstelle.RDB.Factories;
-using Ringen.Schnittstellen.Contracts.Interfaces;
 using Ringen.Schnittstellen.Contracts.Models;
+using Ringen.Schnittstellen.Contracts.Services;
 
 namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.SaisonInformationenTests
 {
     [TestFixture]
     public class GetMannschaftenTests
     {
-        private ISaisonInformationen _saisonInformationen;
+        private IApiSaisonInformationen _apiSaisonInformationen;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _saisonInformationen = new ServiceErsteller().GetService<ISaisonInformationen>();
+            _apiSaisonInformationen = new ServiceErsteller().GetService<IApiSaisonInformationen>();
         }
 
         [Test]
         public void Offene_Saison_Oberliga_erwarte_Mannschaft()
         {
-            List<Mannschaft> mannschaften = _saisonInformationen.GetMannschaftenAsync("2020", "Oberliga", "").Result;
+            List<Mannschaft> mannschaften = _apiSaisonInformationen.GetMannschaftenAsync("2020", "Oberliga", "").Result;
             mannschaften.Should().NotBeNull();
             mannschaften.Count.Should().BeGreaterThan(0);
 
@@ -35,7 +35,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.SaisonInformationenTests
         [Test]
         public void Abgeschlossene_Saison_Oberliga_erwarte_Mannschaft()
         {
-            List<Mannschaft> mannschaften = _saisonInformationen.GetMannschaftenAsync("2019", "Oberliga", "Westfalen").Result;
+            List<Mannschaft> mannschaften = _apiSaisonInformationen.GetMannschaftenAsync("2019", "Oberliga", "Westfalen").Result;
             mannschaften.Should().NotBeNull();
             mannschaften.Count.Should().BeGreaterThan(0);
 
@@ -47,7 +47,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.SaisonInformationenTests
         [Test]
         public void Abgeschlossene_Saison_Bezirksliga_erwarte_Mannschaft()
         {
-            List<Mannschaft> mannschaften = _saisonInformationen.GetMannschaftenAsync("2019", "Bezirksliga", "Westfalen").Result;
+            List<Mannschaft> mannschaften = _apiSaisonInformationen.GetMannschaftenAsync("2019", "Bezirksliga", "Westfalen").Result;
             mannschaften.Should().NotBeNull();
             mannschaften.Count.Should().BeGreaterThan(0);
 

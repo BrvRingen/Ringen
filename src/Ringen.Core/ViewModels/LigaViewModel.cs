@@ -10,7 +10,6 @@ using Ringen.Core.Services;
 using Ringen.Core.Services.Ergebnisdienst;
 using Ringen.Core.UI;
 using Ringen.DependencyInjection;
-using Ringen.Schnittstellen.Contracts.Interfaces;
 using Ringen.Schnittstellen.Contracts.Models;
 
 namespace Ringen.Core.ViewModels

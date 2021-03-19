@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ringen.Schnittstellen.Contracts.Factories;
-using Ringen.Schnittstellen.Contracts.Interfaces;
+using Ringen.Schnittstellen.Contracts.Services;
 
 namespace Ringen.DependencyInjection.NinjectModule
 {
@@ -12,10 +12,10 @@ namespace Ringen.DependencyInjection.NinjectModule
     {
         public override void Load()
         {
-            Bind<IMannschaftskaempfe>().ToMethod(x => DependencyInjectionContainer.GetService<IServiceErsteller>().GetService<IMannschaftskaempfe>()).InSingletonScope();
-            Bind<ISaisonInformationen>().ToMethod(x => DependencyInjectionContainer.GetService<IServiceErsteller>().GetService<ISaisonInformationen>()).InSingletonScope();
-            Bind<IErgebnisdienst>().ToMethod(x => DependencyInjectionContainer.GetService<IServiceErsteller>().GetService<IErgebnisdienst>()).InSingletonScope();
-            Bind<IStammdaten>().ToMethod(x => DependencyInjectionContainer.GetService<IServiceErsteller>().GetService<IStammdaten>()).InSingletonScope();
+            Bind<IApiMannschaftskaempfe>().ToMethod(x => DependencyInjectionContainer.GetService<IServiceErsteller>().GetService<IApiMannschaftskaempfe>()).InSingletonScope();
+            Bind<IApiSaisonInformationen>().ToMethod(x => DependencyInjectionContainer.GetService<IServiceErsteller>().GetService<IApiSaisonInformationen>()).InSingletonScope();
+            Bind<IApiErgebnisdienst>().ToMethod(x => DependencyInjectionContainer.GetService<IServiceErsteller>().GetService<IApiErgebnisdienst>()).InSingletonScope();
+            Bind<IApiStammdaten>().ToMethod(x => DependencyInjectionContainer.GetService<IServiceErsteller>().GetService<IApiStammdaten>()).InSingletonScope();
         }
     }
 }

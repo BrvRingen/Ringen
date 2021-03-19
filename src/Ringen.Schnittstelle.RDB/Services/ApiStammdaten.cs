@@ -5,16 +5,16 @@ using Newtonsoft.Json.Linq;
 using Ringen.Schnittstelle.RDB.ApiModels;
 using Ringen.Schnittstelle.RDB.Mapper;
 using Ringen.Schnittstellen.Contracts.Exceptions;
-using Ringen.Schnittstellen.Contracts.Interfaces;
 using Ringen.Schnittstellen.Contracts.Models;
+using Ringen.Schnittstellen.Contracts.Services;
 
 namespace Ringen.Schnittstelle.RDB.Services
 {
-    internal class Stammdaten : IStammdaten
+    internal class ApiStammdaten : IApiStammdaten
     {
         private RdbService _rdbService;
 
-        public Stammdaten(RdbService rdbService)
+        public ApiStammdaten(RdbService rdbService)
         {
             _rdbService = rdbService;
         }

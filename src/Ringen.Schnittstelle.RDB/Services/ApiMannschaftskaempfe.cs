@@ -6,17 +6,17 @@ using Newtonsoft.Json.Linq;
 using Ringen.Schnittstelle.RDB.ApiModels;
 using Ringen.Schnittstelle.RDB.Mapper;
 using Ringen.Schnittstellen.Contracts.Exceptions;
-using Ringen.Schnittstellen.Contracts.Interfaces;
 using Ringen.Schnittstellen.Contracts.Models;
+using Ringen.Schnittstellen.Contracts.Services;
 
 namespace Ringen.Schnittstelle.RDB.Services
 {
-    internal class Mannschaftskaempfe : IMannschaftskaempfe
+    internal class ApiMannschaftskaempfe : IApiMannschaftskaempfe
     {
         private RdbService _rdbService;
         private EinzelkampfMapper _einzelkampfMapper;
         
-        public Mannschaftskaempfe(RdbService rdbService, EinzelkampfMapper einzelkampfMapper)
+        public ApiMannschaftskaempfe(RdbService rdbService, EinzelkampfMapper einzelkampfMapper)
         {
             _rdbService = rdbService;
             _einzelkampfMapper = einzelkampfMapper;

@@ -4,28 +4,28 @@ using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 using Ringen.Schnittstelle.RDB.Factories;
-using Ringen.Schnittstellen.Contracts.Interfaces;
 using Ringen.Schnittstellen.Contracts.Models;
 using Ringen.Schnittstellen.Contracts.Models.Enums;
+using Ringen.Schnittstellen.Contracts.Services;
 
 namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.MannschaftskaempfeTests
 {
     [TestFixture]
     public class GetMannschaftskampfTests
     {
-        private IMannschaftskaempfe _mannschaftskaempfe;
+        private IApiMannschaftskaempfe _apiMannschaftskaempfe;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _mannschaftskaempfe = new ServiceErsteller().GetService<IMannschaftskaempfe>();
+            _apiMannschaftskaempfe = new ServiceErsteller().GetService<IApiMannschaftskaempfe>();
         }
 
 
         [Test]
         public void GetMannschaftskaempfe_erwarte_Erfolg()
         {
-            List<Mannschaftskampf> wettkampfListe = _mannschaftskaempfe.GetMannschaftskaempfeAsync("2019", "Oberliga", "Westfalen").Result;
+            List<Mannschaftskampf> wettkampfListe = _apiMannschaftskaempfe.GetMannschaftskaempfeAsync("2019", "Oberliga", "Westfalen").Result;
 
             wettkampfListe.Should().NotBeNull();
             wettkampfListe.Count.Should().BeGreaterThan(0);
@@ -36,7 +36,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.MannschaftskaempfeTests
         [Test]
         public void Abgeschlossene_Saison_erwarte_korrekte_Daten()
         {
-            Tuple<Mannschaftskampf, List<Einzelkampf>> wettkampf = _mannschaftskaempfe.GetMannschaftskampfAsync("2019", "011008a").Result;
+            Tuple<Mannschaftskampf, List<Einzelkampf>> wettkampf = _apiMannschaftskaempfe.GetMannschaftskampfAsync("2019", "011008a").Result;
 
             wettkampf.Should().NotBeNull();
             wettkampf.Item1.Should().NotBeNull();
@@ -62,7 +62,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.MannschaftskaempfeTests
         [Test]
         public void Offene_Saison_erwarte_korrekte_Daten()
         {
-            Tuple<Mannschaftskampf, List<Einzelkampf>> wettkampf = _mannschaftskaempfe.GetMannschaftskampfAsync("2020", "047012b").Result;
+            Tuple<Mannschaftskampf, List<Einzelkampf>> wettkampf = _apiMannschaftskaempfe.GetMannschaftskampfAsync("2020", "047012b").Result;
 
             wettkampf.Should().NotBeNull();
             wettkampf.Item1.Should().NotBeNull();

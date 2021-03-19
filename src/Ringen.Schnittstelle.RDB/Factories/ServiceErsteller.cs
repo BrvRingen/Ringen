@@ -3,7 +3,6 @@ using Ringen.Schnittstelle.RDB.ConfigSections;
 using Ringen.Schnittstelle.RDB.DependencyInjection;
 using Ringen.Schnittstelle.RDB.Models;
 using Ringen.Schnittstellen.Contracts.Factories;
-using Ringen.Schnittstellen.Contracts.Interfaces;
 using Ringen.Schnittstellen.Contracts.Models;
 
 namespace Ringen.Schnittstelle.RDB.Factories

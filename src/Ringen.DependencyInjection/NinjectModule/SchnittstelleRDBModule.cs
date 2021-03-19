@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Ringen.Schnittstelle.RDB.Services;
 using Ringen.Schnittstellen.Contracts.Factories;
-using Ringen.Schnittstellen.Contracts.Interfaces;
 using Ringen.Schnittstellen.Contracts.Models.Enums;
 using Ringen.Shared;
 

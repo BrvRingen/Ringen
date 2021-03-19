@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Ringen.Schnittstellen.Contracts.Models;
 
-namespace Ringen.Schnittstellen.Contracts.Interfaces
+namespace Ringen.Schnittstellen.Contracts.Services
 {
-    public interface IStammdaten
+    public interface IApiStammdaten
     {
         Task<Ringer> GetRingerAsync(string startausweisNr);
 

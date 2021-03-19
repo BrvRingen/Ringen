@@ -9,8 +9,8 @@ using Newtonsoft.Json.Linq;
 using Ringen.Core.CS;
 using Ringen.Core.UI;
 using Ringen.DependencyInjection;
-using Ringen.Schnittstellen.Contracts.Interfaces;
 using Ringen.Schnittstellen.Contracts.Models;
+using Ringen.Schnittstellen.Contracts.Services;
 
 namespace Ringen.Core.ViewModels
 {
@@ -189,7 +189,7 @@ namespace Ringen.Core.ViewModels
                 {
                     Async.RunSync(async () =>
                     {
-                        var mannschaftskampf = DependencyInjectionContainer.GetService<IMannschaftskaempfe>().GetMannschaftskampfAsync(this.SaisonId, this.CompetitionId).Result;
+                        var mannschaftskampf = DependencyInjectionContainer.GetService<IApiMannschaftskaempfe>().GetMannschaftskampfAsync(this.SaisonId, this.CompetitionId).Result;
                         foreach (var einzelkampf in mannschaftskampf.Item2)
                         {
                             //TODO EinzelkampfViewModelMapper
@@ -198,7 +198,7 @@ namespace Ringen.Core.ViewModels
                     });
 
                     var BoutsForCompetition = new List<(string WeightClass, string Style)>();
-                    var kampfSchema = DependencyInjectionContainer.GetService<ISaisonInformationen>().GetMannschaftskampfSchemaAsync(this.SaisonId, this.CompetitionId);
+                    var kampfSchema = DependencyInjectionContainer.GetService<IApiSaisonInformationen>().GetMannschaftskampfSchemaAsync(this.SaisonId, this.CompetitionId);
 
                     if (bouts.Count() == 0)
                     {
@@ -220,7 +220,7 @@ namespace Ringen.Core.ViewModels
         public async Task SendAsync()
         {
             throw new NotImplementedException();
-            var ergebnisdienst = DependencyInjectionContainer.GetService<IErgebnisdienst>();
+            var ergebnisdienst = DependencyInjectionContainer.GetService<IApiErgebnisdienst>();
 
             //TODO: Ergebnis Objekt erstellen
             var ergebnis = new Tuple<Mannschaftskampf, List<Einzelkampf>>(new Mannschaftskampf(), new List<Einzelkampf>());

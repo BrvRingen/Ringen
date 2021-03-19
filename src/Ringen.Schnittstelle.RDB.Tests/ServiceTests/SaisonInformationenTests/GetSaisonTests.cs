@@ -4,26 +4,26 @@ using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 using Ringen.Schnittstelle.RDB.Factories;
-using Ringen.Schnittstellen.Contracts.Interfaces;
 using Ringen.Schnittstellen.Contracts.Models;
+using Ringen.Schnittstellen.Contracts.Services;
 
 namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.SaisonInformationenTests
 {
     [TestFixture]
     public class GetSaisonTests
     {
-        private ISaisonInformationen _saisonInformationen;
+        private IApiSaisonInformationen _apiSaisonInformationen;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _saisonInformationen = new ServiceErsteller().GetService<ISaisonInformationen>();
+            _apiSaisonInformationen = new ServiceErsteller().GetService<IApiSaisonInformationen>();
         }
         
         [Test]
         public void GetSaisons_erwarte_Erfolg()
         {
-            List<Saison> saisonListe = _saisonInformationen.GetSaisonsAsync().Result;
+            List<Saison> saisonListe = _apiSaisonInformationen.GetSaisonsAsync().Result;
 
             saisonListe.Should().NotBeNull();
             saisonListe.Count.Should().BeGreaterThan(1);
@@ -37,7 +37,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.SaisonInformationenTests
         [TestCase("2019", "Männer")]
         public void GetSaison_erwarte_Erfolg(string saisonId, string erwarteteLeistungsklasse)
         {
-            Tuple<Saison, List<Leistungsklasse>> saison = _saisonInformationen.GetSaisonAsync(saisonId).Result;
+            Tuple<Saison, List<Leistungsklasse>> saison = _apiSaisonInformationen.GetSaisonAsync(saisonId).Result;
 
             saison.Should().NotBeNull();
             saison.Item1.SaisonId.Should().Be(saisonId);

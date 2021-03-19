@@ -5,17 +5,17 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Ringen.Schnittstelle.RDB.ApiModels;
 using Ringen.Schnittstelle.RDB.Mapper;
-using Ringen.Schnittstellen.Contracts.Interfaces;
 using Ringen.Schnittstellen.Contracts.Models;
+using Ringen.Schnittstellen.Contracts.Services;
 
 namespace Ringen.Schnittstelle.RDB.Services
 {
-    internal class SaisonInformationen : ISaisonInformationen
+    internal class ApiSaisonInformationen : IApiSaisonInformationen
     {
         private RdbService _rdbService;
         private EinzelkampfMapper _einzelkampfMapper;
 
-        public SaisonInformationen(RdbService rdbService, EinzelkampfMapper einzelkampfMapper)
+        public ApiSaisonInformationen(RdbService rdbService, EinzelkampfMapper einzelkampfMapper)
         {
             _rdbService = rdbService;
             _einzelkampfMapper = einzelkampfMapper;
