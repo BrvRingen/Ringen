@@ -20,7 +20,7 @@ namespace Ringen.Schnittstelle.Caching.Services
         {
             _api = api;
             _apiCache = new ApiCache();
-            _classCacheTime=TimeSpan.FromSeconds(1);
+            _classCacheTime=TimeSpan.FromDays(30);
         }
 
         public async Task<List<Liga>> GetLigenAsync(string saisonId)
