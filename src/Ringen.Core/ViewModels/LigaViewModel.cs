@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 using Ringen.Core.CS;
 using Ringen.Core.Mapper;
 using Ringen.Core.Services;
-using Ringen.Core.Services.Ergebnisdienst;
+using Ringen.Core.Services.ErgebnisdienstApi;
 using Ringen.Core.UI;
 using Ringen.DependencyInjection;
 using Ringen.Schnittstellen.Contracts.Models;
@@ -16,11 +16,8 @@ namespace Ringen.Core.ViewModels
 {
     public class LigaViewModel : ExtendedNotifyPropertyChanged, IExplorerItemViewModel
     {
-        private MannschaftskaempfeService _service;
-
-        public LigaViewModel(MannschaftskaempfeService service, string saisonId, string ligaId, string tableId)
+        public LigaViewModel(string saisonId, string ligaId, string tableId)
         {
-            _service = service;
             SaisonId = saisonId;
             LigaId = ligaId;
             TableId = tableId;
@@ -34,6 +31,25 @@ namespace Ringen.Core.ViewModels
 
         public string TableId { get; }
 
-        public List<MannschaftskampfViewModel> Children => Async.RunSync(() => _service.GetMannschaftskaempfeAsync(SaisonId, LigaId, TableId));
+
+        private List<MannschaftskampfViewModel> _mannschaftskaempfList;
+        public List<MannschaftskampfViewModel> Children
+        {
+            get
+            {
+                if (_mannschaftskaempfList == null)
+                {
+                    LadeDaten();
+                }
+
+                return _mannschaftskaempfList;
+            }
+        }
+
+        private async void LadeDaten()
+        {
+            _mannschaftskaempfList = await DependencyInjectionContainer.GetService<MannschaftskaempfeService>().Get_und_Map_Mannschaftskaempfe_Async(SaisonId, LigaId, TableId);
+            OnPropertyChanged(nameof(Children));
+        }
     }
 }

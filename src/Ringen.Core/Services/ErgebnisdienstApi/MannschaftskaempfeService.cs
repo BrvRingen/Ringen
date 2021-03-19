@@ -5,11 +5,10 @@ using Ringen.Core.ViewModels;
 using Ringen.Schnittstellen.Contracts.Models;
 using Ringen.Schnittstellen.Contracts.Services;
 
-namespace Ringen.Core.Services.Ergebnisdienst
+namespace Ringen.Core.Services.ErgebnisdienstApi
 {
     public class MannschaftskaempfeService
     {
-        private List<MannschaftskampfViewModel> _mannschaftskaempfList;
 
         private IApiMannschaftskaempfe _apiMannschaftskaempfe;
         private MannschaftskaempfeViewModelMapper _mapper;
@@ -20,15 +19,12 @@ namespace Ringen.Core.Services.Ergebnisdienst
             _mapper = mapper;
         }
 
-        public async Task<List<MannschaftskampfViewModel>> GetMannschaftskaempfeAsync(string saisonId, string ligaId, string tableId)
+        public async Task<List<MannschaftskampfViewModel>> Get_und_Map_Mannschaftskaempfe_Async(string saisonId, string ligaId, string tableId)
         {
-            if (_mannschaftskaempfList == null)
-            {
-                List<Mannschaftskampf> mannschaftskaempfListe = await _apiMannschaftskaempfe.GetMannschaftskaempfeAsync(saisonId, ligaId, tableId);
-                _mannschaftskaempfList = _mapper.Map(mannschaftskaempfListe);
-            }
+            List<Mannschaftskampf> mannschaftskaempfListe = await _apiMannschaftskaempfe.GetMannschaftskaempfeAsync(saisonId, ligaId, tableId);
+            List<MannschaftskampfViewModel> viewModelListe = _mapper.Map(mannschaftskaempfListe);
 
-            return _mannschaftskaempfList;
+            return viewModelListe;
         }
 
     }

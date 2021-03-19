@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Ninject.Modules;
 using Ringen.Core.Mapper;
 using Ringen.Core.Services;
-using Ringen.Core.Services.Ergebnisdienst;
+using Ringen.Core.Services.ErgebnisdienstApi;
 using Ringen.Core.ViewModels;
 using Ringen.Schnittstellen.Contracts.Factories;
 

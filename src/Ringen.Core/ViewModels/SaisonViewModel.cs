@@ -4,7 +4,7 @@ using Newtonsoft.Json.Linq;
 using Ringen.Core.CS;
 using Ringen.Core.Mapper;
 using Ringen.Core.Services;
-using Ringen.Core.Services.Ergebnisdienst;
+using Ringen.Core.Services.ErgebnisdienstApi;
 using Ringen.Core.UI;
 using Ringen.DependencyInjection;
 using Ringen.Schnittstellen.Contracts.Models;
@@ -13,11 +13,8 @@ namespace Ringen.Core.ViewModels
 {
     public class SaisonViewModel : ExtendedNotifyPropertyChanged, IExplorerItemViewModel
     {
-        private SaisonService _service;
-
-        public SaisonViewModel(SaisonService service, string saisonId)
+        public SaisonViewModel(string saisonId)
         {
-            _service = service;
             SaisonId = saisonId;
         }
 
@@ -25,7 +22,25 @@ namespace Ringen.Core.ViewModels
 
         public string SaisonId { get; }
 
-        public List<LigaViewModel> Children => Async.RunSync(() => _service.Get_und_Map_Ligen_Async(SaisonId));
+        private List<LigaViewModel> _ligen;
 
+        public List<LigaViewModel> Children
+        {
+            get
+            {
+                if (_ligen == null)
+                {
+                    LadeDaten();
+                }
+
+                return _ligen;
+            }
+        }
+
+        private async void LadeDaten()
+        {
+            _ligen = await DependencyInjectionContainer.GetService<SaisonService>().Get_und_Map_Ligen_Async(SaisonId);
+            OnPropertyChanged(nameof(Children));
+        }
     }
 }

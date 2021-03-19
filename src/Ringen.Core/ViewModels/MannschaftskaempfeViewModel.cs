@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Ringen.Core.Mapper;
 using Ringen.Core.Services;
-using Ringen.Core.Services.Ergebnisdienst;
+using Ringen.Core.Services.ErgebnisdienstApi;
 using Ringen.Core.UI;
 using Ringen.DependencyInjection;
 using Ringen.Schnittstellen.Contracts.Models;
@@ -10,15 +10,26 @@ namespace Ringen.Core.ViewModels
 {
     public class MannschaftskaempfeViewModel : ExtendedNotifyPropertyChanged, IExplorerItemViewModel
     {
-        private SaisonService _service;
+        public string Value { get; } = "Mannschaftskämpfe";
 
-        public MannschaftskaempfeViewModel(SaisonService service)
+        private List<SaisonViewModel> _saisonViewModels;
+        public List<SaisonViewModel> Children
         {
-            _service = service;
+            get
+            {
+                if (_saisonViewModels == null)
+                {
+                    LadeDaten();
+                }
+                    
+                return _saisonViewModels;
+            }
         }
 
-        public string Value { get; } = "Mannschaftskämpfe";
-        
-        public List<SaisonViewModel> Children => Async.RunSync( () => _service.Get_und_Map_Saisons_Async());
+        private async void LadeDaten()
+        {
+            _saisonViewModels = await DependencyInjectionContainer.GetService<SaisonService>().Get_und_Map_Saisons_Async();
+            OnPropertyChanged(nameof(Children));
+        }
     }
 }

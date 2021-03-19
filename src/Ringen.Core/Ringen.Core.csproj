@@ -35,8 +35,8 @@
     <Compile Include="DependencyInjection\RingenCoreDiModule.cs" />
     <Compile Include="Mapper\MannschaftskaempfeViewModelMapper.cs" />
     <Compile Include="Mapper\SaisonInformationenViewModelMapper.cs" />
-    <Compile Include="Services\Ergebnisdienst\MannschaftskaempfeService.cs" />
-    <Compile Include="Services\Ergebnisdienst\SaisonService.cs" />
+    <Compile Include="Services\ErgebnisdienstApi\MannschaftskaempfeService.cs" />
+    <Compile Include="Services\ErgebnisdienstApi\SaisonService.cs" />
     <Compile Include="ViewModels\IExplorerItemViewModel.cs" />
     <Compile Include="ViewModels\LigaViewModel.cs" />
     <Compile Include="ViewModels\MannschaftskaempfeExplorer.cs" />
