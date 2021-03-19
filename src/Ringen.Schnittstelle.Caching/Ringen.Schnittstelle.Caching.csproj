@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B7F4860D-F7A8-4AAE-AE34-9166AB9E8F7A}</ProjectGuid>
+    <ProjectGuid>{A2C1462F-F832-4F71-9909-D4A8BEF51986}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ringen.DependencyInjection</RootNamespace>
-    <AssemblyName>Ringen.DependencyInjection</AssemblyName>
+    <RootNamespace>Ringen.Schnittstelle.Caching</RootNamespace>
+    <AssemblyName>Ringen.Schnittstelle.Caching</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,33 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DependencyInjectionContainer.cs" />
-    <Compile Include="NinjectModule\SchittstelleErgebnisdienstModule.cs" />
-    <Compile Include="NinjectModule\SchnittstelleRDBModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceErstellerMitCache.cs" />
+    <Compile Include="Services\ApiSaisonInformationenMitCache.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ringen.Schnittstelle.Caching\Ringen.Schnittstelle.Caching.csproj">
-      <Project>{a2c1462f-f832-4f71-9909-d4a8bef51986}</Project>
-      <Name>Ringen.Schnittstelle.Caching</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ringen.Schnittstelle.RDB\Ringen.Schnittstelle.RDB.csproj">
-      <Project>{f0356f4f-572c-4e16-8c75-b3972b1f89b8}</Project>
-      <Name>Ringen.Schnittstelle.RDB</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Ringen.Schnittstellen.Contracts\Ringen.Schnittstellen.Contracts.csproj">
-      <Project>{17D6DADE-EBE8-4B4A-9EDA-014395CF42A5}</Project>
+      <Project>{17d6dade-ebe8-4b4a-9eda-014395cf42a5}</Project>
       <Name>Ringen.Schnittstellen.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ringen.Shared\Ringen.Shared.csproj">
-      <Project>{f4bdd0b5-8268-4e68-be6a-ead3485ad2b1}</Project>
-      <Name>Ringen.Shared</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Ninject">
-      <Version>3.3.4</Version>
-    </PackageReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

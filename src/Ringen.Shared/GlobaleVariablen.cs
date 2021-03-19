@@ -8,5 +8,8 @@ namespace Ringen.Shared
 
         //TODO: Info Konfigdatei auslagern
         public static ErgebnisdienstSystem AktivesSystem = ErgebnisdienstSystem.RDB;
+
+        //TODO: Info Konfigdatei auslagern
+        public static bool IstApiCaching = true;
     }
 }
