@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Ringen.Schnittstellen.Contracts.Models;
 using Ringen.Schnittstellen.Contracts.Models.Enums;
 
 namespace Ringen.Schnittstelle.RDB.Konvertierer
 {
-    public class GriffbewertungspunktKonvertierer
+    internal class GriffbewertungspunktKonvertierer
     {
         private HeimGastKonvertierer _heimGastKonvertierer;
         private GriffbewertungsTypKonvertierer _griffbewertungsTypKonvertierer;

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
 using Ringen.Schnittstelle.RDB.ApiModels;
 using Ringen.Schnittstelle.RDB.Konvertierer;
@@ -10,7 +9,7 @@ using Ringen.Schnittstellen.Contracts.Models.Enums;
 
 namespace Ringen.Schnittstelle.RDB.Mapper
 {
-    public class EinzelkampfMapper
+    internal class EinzelkampfMapper
     {
         private StilartKonvertierer _stilartKonvertierer;
         private SiegartKonvertierer _siegartKonvertierer;
@@ -62,17 +61,22 @@ namespace Ringen.Schnittstelle.RDB.Mapper
                 GastMannschaftswertung = int.Parse(apiModel.OpponentWrestlerPoints),
                 RundenErgebnisse = ErmittleRundenErgebnisse(apiModel),
                 Siegart = _siegartKonvertierer.ToEnum(apiModel.Result),
-                Kampfdauer = TimeSpan.FromSeconds(Convert.ToDouble(apiModel.Annotations.FirstOrDefault(li => li.Type.Equals("duration", StringComparison.OrdinalIgnoreCase)).Value)),
+                Kampfdauer = TimeSpan.FromSeconds(Convert.ToDouble(GetAnnotationValue(apiModel.Annotations, "duration"))),
                 Wertungspunkte = null,
-                Kommentar = apiModel.Annotations.FirstOrDefault(li => li.Type.Equals("comment", StringComparison.OrdinalIgnoreCase)).Value
+                Kommentar = GetAnnotationValue(apiModel.Annotations, "comment")
             };
 
-            var punkteString = apiModel.Annotations.FirstOrDefault(li => li.Type.Equals("points", StringComparison.OrdinalIgnoreCase)).Value;
+            var punkteString = GetAnnotationValue(apiModel.Annotations, "points");
             result.Wertungspunkte = _griffbewertungspunktKonvertierer.Ermittle_Griffbewertungspunkte(punkteString);
 
             return result;
         }
-        
+
+        private string GetAnnotationValue(List<AnnotationApiModel> annotationApiModelListe, string type)
+        {
+            return annotationApiModelListe.FirstOrDefault(li => li.Type.Equals(type, StringComparison.OrdinalIgnoreCase)).Value;
+        }
+
         private Ringer GetRinger(HeimGast heimGast, BoutApiModel apiModel)
         {
             switch (heimGast)

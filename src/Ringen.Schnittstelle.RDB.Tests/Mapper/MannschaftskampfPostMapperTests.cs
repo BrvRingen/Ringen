@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using Ringen.DependencyInjection;
 using Ringen.Schnittstelle.RDB.Factories;
 using Ringen.Schnittstelle.RDB.Mapper;
-using Ringen.Schnittstelle.RDB.Services;
 using Ringen.Schnittstellen.Contracts.Interfaces;
 using Ringen.Schnittstellen.Contracts.Models;
 
@@ -25,8 +20,8 @@ namespace Ringen.Schnittstelle.RDB.Tests.Mapper
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _mannschaftskaempfe = DependencyInjectionContainer.GetService<IMannschaftskaempfe>();
-            _mapper = DependencyInjectionContainer.GetService<MannschaftskampfPostMapper>();
+            _mannschaftskaempfe = new ServiceErsteller().GetService<IMannschaftskaempfe>();
+            _mapper = new ServiceErsteller().GetService<MannschaftskampfPostMapper>();
         }
 
         [Test]

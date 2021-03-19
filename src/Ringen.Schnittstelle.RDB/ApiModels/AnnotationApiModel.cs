@@ -2,7 +2,7 @@
 
 namespace Ringen.Schnittstelle.RDB.ApiModels
 {
-    public class AnnotationApiModel
+    internal class AnnotationApiModel
     {
         [JsonProperty("saisonId")]
         public string SaisonId { get; set; }
@@ -21,5 +21,6 @@ namespace Ringen.Schnittstelle.RDB.ApiModels
 
         [JsonProperty("value")]
         public string Value { get; set; }
+
     }
 }

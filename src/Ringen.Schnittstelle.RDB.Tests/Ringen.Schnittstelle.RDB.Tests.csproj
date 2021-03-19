@@ -60,14 +60,6 @@
     <Compile Include="StartUp.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ringen.Core\Ringen.Core.csproj">
-      <Project>{78C12D2B-0701-48E5-937C-B8EA3972A9DF}</Project>
-      <Name>Ringen.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ringen.DependencyInjection\Ringen.DependencyInjection.csproj">
-      <Project>{b7f4860d-f7a8-4aae-ae34-9166ab9e8f7a}</Project>
-      <Name>Ringen.DependencyInjection</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Ringen.Schnittstelle.RDB\Ringen.Schnittstelle.RDB.csproj">
       <Project>{f0356f4f-572c-4e16-8c75-b3972b1f89b8}</Project>
       <Name>Ringen.Schnittstelle.RDB</Name>
@@ -75,10 +67,6 @@
     <ProjectReference Include="..\Ringen.Schnittstellen.Contracts\Ringen.Schnittstellen.Contracts.csproj">
       <Project>{17d6dade-ebe8-4b4a-9eda-014395cf42a5}</Project>
       <Name>Ringen.Schnittstellen.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ringen.Shared\Ringen.Shared.csproj">
-      <Project>{f4bdd0b5-8268-4e68-be6a-ead3485ad2b1}</Project>
-      <Name>Ringen.Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ringen.Tests.Shared\Ringen.Tests.Shared.csproj">
       <Project>{01440d20-4c41-4c0c-ad73-fa1c08139693}</Project>

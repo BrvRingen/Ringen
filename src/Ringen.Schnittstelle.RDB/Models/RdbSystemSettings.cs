@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 using Ringen.Schnittstelle.RDB.ConfigSections;
+using Ringen.Schnittstellen.Contracts.Interfaces;
+using Ringen.Schnittstellen.Contracts.Models;
 using Ringen.Shared.Helpers;
 
 namespace Ringen.Schnittstelle.RDB.Models
 {
-    public class RdbSystemSettings
+    internal class RdbSystemSettings : IApiSettings
     {
         public string BaseUrl { get; }
 

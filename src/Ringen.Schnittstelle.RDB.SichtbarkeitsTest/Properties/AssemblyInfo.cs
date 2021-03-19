@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Allgemeine Informationen über eine Assembly werden über die folgenden
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
-[assembly: AssemblyTitle("Ringen.Schnittstelle.BRVPrivateREST")]
+[assembly: AssemblyTitle("Ringen.Schnittstelle.RDB.SichtbarkeitsTest")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Ringen.Schnittstelle.BRVPrivateREST")]
+[assembly: AssemblyProduct("Ringen.Schnittstelle.RDB.SichtbarkeitsTest")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Die folgende GUID bestimmt die ID der Typbibliothek, wenn dieses Projekt für COM verfügbar gemacht wird
-[assembly: Guid("5aed1ece-5380-40a6-a1b8-42f3c4c0cfd6")]
+[assembly: Guid("3a7643f1-83e4-468c-b3c7-a99e2e097a29")]
 
 // Versionsinformationen für eine Assembly bestehen aus den folgenden vier Werten:
 //

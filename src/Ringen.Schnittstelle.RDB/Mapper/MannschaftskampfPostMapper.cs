@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Ringen.Schnittstelle.RDB.ApiModels;
 using Ringen.Schnittstelle.RDB.ApiModels.Post;
 using Ringen.Schnittstelle.RDB.Konvertierer;
@@ -10,7 +7,7 @@ using Ringen.Schnittstellen.Contracts.Models;
 
 namespace Ringen.Schnittstelle.RDB.Mapper
 {
-    public class MannschaftskampfPostMapper
+    internal class MannschaftskampfPostMapper
     {
         private StilartKonvertierer _stilartKonvertierer;
         private SiegartKonvertierer _siegartKonvertierer;

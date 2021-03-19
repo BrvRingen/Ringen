@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Ringen.Core.Mapper;
 using Ringen.Core.Services;
+using Ringen.Core.Services.Ergebnisdienst;
 using Ringen.Core.UI;
 using Ringen.DependencyInjection;
 using Ringen.Schnittstellen.Contracts.Interfaces;

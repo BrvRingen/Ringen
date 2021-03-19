@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
 using Ringen.Schnittstelle.RDB.Factories;
@@ -20,8 +18,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.StammdatenTests
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            RdbService rdbService = RdbServiceErsteller.ErstelleService();
-            _stammdaten = new Stammdaten(rdbService);
+            _stammdaten = new ServiceErsteller().GetService<IStammdaten>();
         }
 
         [Test]

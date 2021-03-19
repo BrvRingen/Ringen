@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 using Ninject.Modules;
 using Ringen.Core.Mapper;
 using Ringen.Core.Services;
+using Ringen.Core.Services.Ergebnisdienst;
 using Ringen.Core.ViewModels;
+using Ringen.Schnittstellen.Contracts.Factories;
+using Ringen.Schnittstellen.Contracts.Interfaces;
 
 namespace Ringen.Core.DependencyInjection
 {
@@ -16,6 +19,9 @@ namespace Ringen.Core.DependencyInjection
         {
             Bind<SaisonInformationenService>().ToSelf().InSingletonScope();
             Bind<MannschaftskaempfeService>().ToSelf().InSingletonScope();
+
+
+            Bind<MannschaftskaempfeViewModel>().ToSelf();
         }
     }
 }

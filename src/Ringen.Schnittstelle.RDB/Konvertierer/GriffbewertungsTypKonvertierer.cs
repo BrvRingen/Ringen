@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Ringen.Schnittstellen.Contracts.Models.Enums;
 
 namespace Ringen.Schnittstelle.RDB.Konvertierer
 {
-    public class GriffbewertungsTypKonvertierer : KonvertiererBase<GriffbewertungsTyp>
+    internal class GriffbewertungsTypKonvertierer : KonvertiererBase<GriffbewertungsTyp>
     {
         protected override Dictionary<string, GriffbewertungsTyp> MappingDictionary { get; } = new Dictionary<string, GriffbewertungsTyp>()
         {

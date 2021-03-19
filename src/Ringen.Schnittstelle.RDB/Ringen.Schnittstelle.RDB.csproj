@@ -61,7 +61,9 @@
     <Compile Include="ConfigSections\ConfigurationElemente\RdbServerConfigurationElement.cs" />
     <Compile Include="ConfigSections\RdbConfigSection.cs" />
     <Compile Include="DependencyInjection\RDBDiModule.cs" />
-    <Compile Include="Factories\RdbServiceErsteller.cs" />
+    <Compile Include="DependencyInjection\RDBNinjectKernel.cs" />
+    <Compile Include="Factories\RdbServiceProvider.cs" />
+    <Compile Include="Factories\ServiceErsteller.cs" />
     <Compile Include="Konvertierer\GriffbewertungspunktKonvertierer.cs" />
     <Compile Include="Konvertierer\GriffbewertungsTypKonvertierer.cs" />
     <Compile Include="Konvertierer\HeimGastKonvertierer.cs" />
@@ -85,6 +87,7 @@
     <Compile Include="Services\RdbService.cs" />
     <Compile Include="Services\SaisonInformationen.cs" />
     <Compile Include="Services\Stammdaten.cs" />
+    <Compile Include="StartUp.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="RDB-Info.md" />

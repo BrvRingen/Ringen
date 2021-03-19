@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
-using Ringen.Core;
-using Ringen.DependencyInjection;
 using Ringen.Schnittstelle.RDB.Factories;
-using Ringen.Schnittstelle.RDB.Services;
 using Ringen.Schnittstellen.Contracts.Interfaces;
 using Ringen.Schnittstellen.Contracts.Models;
 
@@ -21,7 +17,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.SaisonInformationenTests
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _saisonInformationen = DependencyInjectionContainer.GetService<ISaisonInformationen>();
+            _saisonInformationen = new ServiceErsteller().GetService<ISaisonInformationen>();
         }
         
         [Test]

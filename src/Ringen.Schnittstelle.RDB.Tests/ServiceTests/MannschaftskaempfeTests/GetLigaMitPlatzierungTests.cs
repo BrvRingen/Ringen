@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
-using Ringen.DependencyInjection;
 using Ringen.Schnittstelle.RDB.Factories;
-using Ringen.Schnittstelle.RDB.Services;
 using Ringen.Schnittstellen.Contracts.Interfaces;
 using Ringen.Schnittstellen.Contracts.Models;
 
@@ -19,7 +17,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.MannschaftskaempfeTests
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _mannschaftskaempfe = DependencyInjectionContainer.GetService<IMannschaftskaempfe>();
+            _mannschaftskaempfe = new ServiceErsteller().GetService<IMannschaftskaempfe>();
         }
 
         [Test]

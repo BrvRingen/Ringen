@@ -1,5 +1,4 @@
-﻿using System.Net;
-using Ninject.Modules;
+﻿using Ninject.Modules;
 using Ringen.Schnittstelle.RDB.ConfigSections;
 using Ringen.Schnittstelle.RDB.Factories;
 using Ringen.Schnittstelle.RDB.Konvertierer;
@@ -7,33 +6,21 @@ using Ringen.Schnittstelle.RDB.Mapper;
 using Ringen.Schnittstelle.RDB.Models;
 using Ringen.Schnittstelle.RDB.Services;
 using Ringen.Schnittstellen.Contracts.Interfaces;
-using Ringen.Schnittstellen.Contracts.Models.Enums;
-using Ringen.Shared;
 
 namespace Ringen.Schnittstelle.RDB.DependencyInjection
 {
-    public class RDBDiModule : NinjectModule
+    internal class RDBDiModule : NinjectModule
     {
         public override void Load()
         {
-            ErgebnisdienstSystem system = GlobaleVariablen.AktivesSystem; //TODO: Aus Konfig auslesen
-            RdbServiceErsteller.Init(new RdbSystemSettings(RdbConfigSection.Instance));
+            Bind<RdbSystemSettings>().ToMethod(_ => new RdbSystemSettings(RdbConfigSection.Instance)).InSingletonScope();
+            Bind<RdbService>().ToProvider<RdbServiceProvider>();
 
-            Bind<RdbService>().ToMethod(x => RdbServiceErsteller.ErstelleService())
-                .When(_ => system.Equals(ErgebnisdienstSystem.RDB))
-                .InSingletonScope();
 
-            Bind<IMannschaftskaempfe>().To<Mannschaftskaempfe>()
-                .When(_ => system.Equals(ErgebnisdienstSystem.RDB))
-                .InSingletonScope();
-
-            Bind<ISaisonInformationen>().To<SaisonInformationen>()
-                .When(_ => system.Equals(ErgebnisdienstSystem.RDB))
-                .InSingletonScope();
-
-            Bind<IErgebnisdienst>().To<Ergebnisdienst>()
-                .When(_ => system.Equals(ErgebnisdienstSystem.RDB))
-                .InSingletonScope();
+            Bind<IMannschaftskaempfe>().To<Mannschaftskaempfe>().InSingletonScope();
+            Bind<ISaisonInformationen>().To<SaisonInformationen>().InSingletonScope();
+            Bind<IErgebnisdienst>().To<Ergebnisdienst>().InSingletonScope();
+            Bind<IStammdaten>().To<Stammdaten>().InSingletonScope();
 
             Bind<GriffbewertungspunktKonvertierer>().ToSelf().InSingletonScope();
             Bind<GriffbewertungsTypKonvertierer>().ToSelf().InSingletonScope();

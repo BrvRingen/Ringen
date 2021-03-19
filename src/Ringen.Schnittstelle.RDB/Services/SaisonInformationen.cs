@@ -10,7 +10,7 @@ using Ringen.Schnittstellen.Contracts.Models;
 
 namespace Ringen.Schnittstelle.RDB.Services
 {
-    public class SaisonInformationen : ISaisonInformationen
+    internal class SaisonInformationen : ISaisonInformationen
     {
         private RdbService _rdbService;
         private EinzelkampfMapper _einzelkampfMapper;

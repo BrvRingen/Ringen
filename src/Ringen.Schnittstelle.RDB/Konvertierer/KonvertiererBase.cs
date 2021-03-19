@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Ringen.Schnittstelle.RDB.Konvertierer
 {
-    public abstract class KonvertiererBase<T>
+    internal abstract class KonvertiererBase<T>
     {
         protected abstract Dictionary<string, T> MappingDictionary { get; }
 

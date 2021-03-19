@@ -11,7 +11,7 @@ using Ringen.Schnittstelle.RDB.Models;
 
 namespace Ringen.Schnittstelle.RDB.Services
 {
-    public class RdbService
+    internal class RdbService
     {
         private readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 

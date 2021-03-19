@@ -4,27 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ringen.Core.Services;
+using Ringen.Core.Services.Ergebnisdienst;
 using Ringen.Core.ViewModels;
+using Ringen.DependencyInjection;
 using Ringen.Schnittstellen.Contracts.Models;
 
 namespace Ringen.Core.Mapper
 {
     public class SaisonInformationenViewModelMapper
     {
-        public SaisonViewModel Map(SaisonInformationenService service, Saison model)
+        public SaisonViewModel Map(SaisonInformationenService service, string saisonId)
         {
-            var viewModel = new SaisonViewModel(service, model);
+            var viewModel = new SaisonViewModel(service, saisonId);
             return viewModel;
         }
 
         public List<SaisonViewModel> Map(SaisonInformationenService service, IEnumerable<Saison> modelListe)
         {
-            return modelListe.Select(model => Map(service, model)).ToList();
+            return modelListe.Select(model => Map(service, model.SaisonId)).ToList();
         }
 
         public LigaViewModel Map(Liga model)
         {
-            var viewModel = new LigaViewModel(model);
+            var mannschaftskaempfeService = DependencyInjectionContainer.GetService<MannschaftskaempfeService>();
+            var viewModel = new LigaViewModel(mannschaftskaempfeService, model.SaisonId, model.LigaId, model.TabellenId);
             return viewModel;
         }
 

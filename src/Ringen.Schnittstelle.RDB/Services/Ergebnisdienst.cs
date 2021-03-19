@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Ringen.Schnittstelle.RDB.ApiModels;
 using Ringen.Schnittstelle.RDB.Mapper;
@@ -13,11 +11,11 @@ using Ringen.Shared.Helpers;
 
 namespace Ringen.Schnittstelle.RDB.Services
 {
-    public class Ergebnisdienst : IErgebnisdienst
+    internal class Ergebnisdienst : IErgebnisdienst
     {
         private RdbService _rdbService;
         private MannschaftskampfPostMapper _mapper;
-
+        
         public Ergebnisdienst(RdbService rdbService, MannschaftskampfPostMapper mapper)
         {
             _rdbService = rdbService;

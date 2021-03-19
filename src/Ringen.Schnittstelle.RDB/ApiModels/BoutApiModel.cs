@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Ringen.Schnittstelle.RDB.ApiModels
 {
-    public class BoutApiModel
+    internal class BoutApiModel
     {
         [JsonProperty("saisonId")]
         public string SaisonId { get; set; }

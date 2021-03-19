@@ -219,6 +219,7 @@ namespace Ringen.Core.ViewModels
 
         public async Task SendAsync()
         {
+            throw new NotImplementedException();
             var ergebnisdienst = DependencyInjectionContainer.GetService<IErgebnisdienst>();
 
             //TODO: Ergebnis Objekt erstellen

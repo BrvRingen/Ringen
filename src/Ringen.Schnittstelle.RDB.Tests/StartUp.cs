@@ -1,9 +1,7 @@
-﻿using System.Net;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using Ringen.Schnittstelle.RDB.DependencyInjection;
 using Ringen.Schnittstelle.RDB.Factories;
-using Ringen.Schnittstelle.RDB.Models;
 using Ringen.Schnittstellen.Contracts.Models.Enums;
-using Ringen.Shared;
 
 namespace Ringen.Schnittstelle.RDB.Tests
 {
@@ -18,7 +16,7 @@ namespace Ringen.Schnittstelle.RDB.Tests
                 Ringen.Tests.Shared.StartUp.Init();
             }
 
-            GlobaleVariablen.AktivesSystem = ErgebnisdienstSystem.RDB;
+            Ringen.Schnittstelle.RDB.StartUp.Init();
         }
     }
 }

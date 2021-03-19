@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Ringen.Schnittstelle.RDB.ApiModels;
@@ -12,7 +10,7 @@ using Ringen.Schnittstellen.Contracts.Models;
 
 namespace Ringen.Schnittstelle.RDB.Services
 {
-    public class Stammdaten : IStammdaten
+    internal class Stammdaten : IStammdaten
     {
         private RdbService _rdbService;
 

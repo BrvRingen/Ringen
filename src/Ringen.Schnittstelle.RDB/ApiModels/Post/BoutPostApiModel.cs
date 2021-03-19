@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using Newtonsoft.Json;
 using Ringen.Schnittstelle.RDB.ApiModels.Post;
 
 namespace Ringen.Schnittstelle.RDB.ApiModels
 {
-    public class BoutPostApiModel
+    internal class BoutPostApiModel
     {
         [JsonProperty("weightClass")]
         public string WeightClass { get; set; }

@@ -11,11 +11,11 @@ using Ringen.Schnittstellen.Contracts.Models;
 
 namespace Ringen.Schnittstelle.RDB.Services
 {
-    public class Mannschaftskaempfe : IMannschaftskaempfe
+    internal class Mannschaftskaempfe : IMannschaftskaempfe
     {
         private RdbService _rdbService;
         private EinzelkampfMapper _einzelkampfMapper;
-
+        
         public Mannschaftskaempfe(RdbService rdbService, EinzelkampfMapper einzelkampfMapper)
         {
             _rdbService = rdbService;

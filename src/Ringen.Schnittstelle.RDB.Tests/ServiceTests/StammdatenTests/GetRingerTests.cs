@@ -19,8 +19,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.StammdatenTests
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            RdbService rdbService = RdbServiceErsteller.ErstelleService();
-            _stammdaten = new Stammdaten(rdbService);
+            _stammdaten = new ServiceErsteller().GetService<IStammdaten>();
         }
 
         [Test]

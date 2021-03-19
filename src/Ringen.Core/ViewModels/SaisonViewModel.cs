@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using Ringen.Core.CS;
 using Ringen.Core.Mapper;
 using Ringen.Core.Services;
+using Ringen.Core.Services.Ergebnisdienst;
 using Ringen.Core.UI;
 using Ringen.DependencyInjection;
 using Ringen.Schnittstellen.Contracts.Interfaces;
@@ -15,18 +16,17 @@ namespace Ringen.Core.ViewModels
     {
         private SaisonInformationenService _service;
 
-        public SaisonViewModel(SaisonInformationenService service, Saison model)
+        public SaisonViewModel(SaisonInformationenService service, string saisonId)
         {
             _service = service;
-            Model = model;
+            SaisonId = saisonId;
         }
 
-        public string Value => Model.SaisonId;
+        public string Value => SaisonId;
 
-        public Saison Model { get; }
-        
+        public string SaisonId { get; }
 
-        public List<LigaViewModel> Children => Async.RunSync(() => _service.GetLigenAsync(Model.SaisonId));
+        public List<LigaViewModel> Children => Async.RunSync(() => _service.GetLigenAsync(SaisonId));
 
     }
 }

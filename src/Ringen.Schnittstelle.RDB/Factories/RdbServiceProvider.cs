@@ -2,36 +2,25 @@
 using System.Net;
 using Http.Library.Models;
 using Http.Library.Services;
+using Ninject.Activation;
 using Ringen.Schnittstelle.RDB.Models;
 using Ringen.Schnittstelle.RDB.Services;
 
 namespace Ringen.Schnittstelle.RDB.Factories
 {
-    internal class RdbServiceErsteller
+    internal class RdbServiceProvider : Provider<RdbService>
     {
         private const string Schnittstelle = "RDB";
 
-        private static RdbSystemSettings _settings { get; set; } = null;
+        private RdbSystemSettings _settings;
 
-        public static void Init(RdbSystemSettings systemSettings)
+        public RdbServiceProvider(RdbSystemSettings settings)
         {
-            if (systemSettings == null && _settings == null)
-            {
-                throw new ArgumentException($"{Schnittstelle} System-Settings nicht definiert. Bitte übergeben Sie System-Settings.");
-            }
-            else
-            {
-                _settings = systemSettings;
-            }
+            _settings = settings;
         }
 
-        public static RdbService ErstelleService()
+        protected override RdbService CreateInstance(IContext context)
         {
-            if (_settings == null)
-            {
-                throw new ArgumentException($"{Schnittstelle} System-Settings nicht definiert. Bitte rufen Sie zuerst die Init(...)-Methode auf.");
-            }
-
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
             ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, errors) => true;
 
@@ -44,11 +33,6 @@ namespace Ringen.Schnittstelle.RDB.Factories
             RdbService service = new RdbService(httpService, _settings);
 
             return service;
-        }
-
-        public static RdbSystemSettings GetCurrentSystemSettings()
-        {
-            return _settings;
         }
     }
 }

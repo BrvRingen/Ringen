@@ -39,6 +39,7 @@ namespace Ringen.Schnittstelle.RDB.Mapper
 
             try
             {
+
                 if (!string.IsNullOrEmpty(apiModel.HomePoints))
                 {
                     result.HeimPunkte = int.Parse(apiModel.HomePoints);
@@ -66,11 +67,11 @@ namespace Ringen.Schnittstelle.RDB.Mapper
             {
                 if (!string.IsNullOrEmpty(apiModel.Decision))
                 {
-                    if (apiModel.Decision.ToLower().Equals("home", StringComparison.OrdinalIgnoreCase))
+                    if (apiModel.Decision.Equals("home", StringComparison.OrdinalIgnoreCase))
                     {
                         result.Sieger = HeimGast.Heim;
                     }
-                    else if (apiModel.Decision.ToLower().Equals("opponent", StringComparison.OrdinalIgnoreCase))
+                    else if (apiModel.Decision.Equals("opponent", StringComparison.OrdinalIgnoreCase))
                     {
                         result.Sieger = HeimGast.Gast;
                     }
