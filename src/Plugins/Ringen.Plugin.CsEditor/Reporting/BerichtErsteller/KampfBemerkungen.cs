@@ -45,13 +45,13 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             zeile.Style = CustomStyles.BEMERKUNG;
 
             zeile.Cells[0].AddParagraph().AddFormattedText($"{Resources.LanguageFiles.DictPluginMain.Winner}:", TextFormat.Bold);
-            zeile.Cells[0].Add(SiegerTeam(mannschaftskampfViewModel.HomeTeamName, Convert.ToInt32(mannschaftskampfViewModel.HomePoints), mannschaftskampfViewModel.OpponentTeamName, Convert.ToInt32(mannschaftskampfViewModel.OpponentPoints), useColor));
+            zeile.Cells[0].Add(SiegerTeam(mannschaftskampfViewModel.HeimMannschaft, Convert.ToInt32(mannschaftskampfViewModel.HeimPunkte), mannschaftskampfViewModel.GastMannschaft, Convert.ToInt32(mannschaftskampfViewModel.GastPunkte), useColor));
 
             zeile.Cells[1].Add(Wettkampf(mannschaftskampfViewModel));
 
             zeile.Cells[2].Add(Organisation(zusatzInfos));
 
-            zeile.Cells[3].Add(Kommentar(mannschaftskampfViewModel.EditorComment));
+            zeile.Cells[3].Add(Kommentar(mannschaftskampfViewModel.Kommentar));
 
             return result;
             
@@ -101,7 +101,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             paragraph.AddLineBreak();
             paragraph.AddFormattedText("Geplanter Beginn: ", TextFormat.Bold);
             paragraph.AddTab();
-            paragraph.AddFormattedText($"{mannschaftskampfViewModel.ScaleTime:hh':'mm} Uhr");
+            paragraph.AddFormattedText($"{mannschaftskampfViewModel.GeplanterKampfbeginn:hh':'mm} Uhr");
             paragraph.AddLineBreak();
 
             DateTime ersterKampf = DateTime.Now;
@@ -131,7 +131,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
 
             paragraph.AddFormattedText("Anzahl Zuschauer: ", TextFormat.Bold);
             paragraph.AddTab();
-            paragraph.AddFormattedText($"{mannschaftskampfViewModel.Audience}");
+            paragraph.AddFormattedText($"{mannschaftskampfViewModel.AnzahlZuschauer}");
             paragraph.AddLineBreak();
 
             return paragraph;

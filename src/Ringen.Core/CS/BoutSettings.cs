@@ -4,13 +4,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ringen.Core.ViewModels;
 
 namespace Ringen.Core.CS
 {
 
     public class BoutSettings
     {
-        public Bout Bout { get; set; }
+        public EinzelkampfViewModel EinzelkampfViewModel { get; set; }
 
         public enum WrestleStyles
         {
@@ -36,7 +37,7 @@ namespace Ringen.Core.CS
                 var tmp = new List<BoutPoint>();
                 foreach (var posPoint in posPoints)
                 {
-                    tmp.Add(new BoutPoint(posPoint, Bout, BoutPoint.Wrestler.Home));
+                    tmp.Add(new BoutPoint(posPoint, EinzelkampfViewModel, BoutPoint.Wrestler.Home));
                 }
 
                 return tmp;
@@ -49,7 +50,7 @@ namespace Ringen.Core.CS
                 var tmp = new List<BoutPoint>();
                 foreach (var posPoint in posPoints)
                 {
-                    tmp.Add(new BoutPoint(posPoint, Bout, BoutPoint.Wrestler.Opponent));
+                    tmp.Add(new BoutPoint(posPoint, EinzelkampfViewModel, BoutPoint.Wrestler.Opponent));
                 }
 
                 return tmp;
@@ -79,11 +80,11 @@ namespace Ringen.Core.CS
             }
         }
 
-        public BoutSettings(Bout Bout)
+        public BoutSettings(EinzelkampfViewModel einzelkampfViewModel)
         {
-            this.Bout = Bout;
+            this.EinzelkampfViewModel = einzelkampfViewModel;
             //Aktuelle Regeln nach 2017
-            if (Bout.WrestleStyle == WrestleStyles.LL)
+            if (einzelkampfViewModel.WrestleStyle == WrestleStyles.LL)
                 posPoints = new List<string>() { "1", "2", "4", "5", "P", "0", "VZ", "A" };
             else
                 posPoints = new List<string>() { "1", "2", "4", "5", "P", "0", "VZ" };

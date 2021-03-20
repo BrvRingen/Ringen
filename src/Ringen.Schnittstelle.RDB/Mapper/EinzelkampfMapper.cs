@@ -74,7 +74,7 @@ namespace Ringen.Schnittstelle.RDB.Mapper
 
         private string GetAnnotationValue(List<AnnotationApiModel> annotationApiModelListe, string type)
         {
-            return annotationApiModelListe.FirstOrDefault(li => li.Type.Equals(type, StringComparison.OrdinalIgnoreCase)).Value;
+            return annotationApiModelListe.FirstOrDefault(li => li.Type.Equals(type, StringComparison.OrdinalIgnoreCase))?.Value;
         }
 
         private Ringer GetRinger(HeimGast heimGast, BoutApiModel apiModel)

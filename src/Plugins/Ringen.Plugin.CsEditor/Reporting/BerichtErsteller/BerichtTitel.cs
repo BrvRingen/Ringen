@@ -8,7 +8,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
     {
         public string GetTitle(MannschaftskampfViewModel mannschaftskampfViewModel)
         {
-            string title = string.Format(Resources.LanguageFiles.DictPluginMain.PdfProtocolTitle, mannschaftskampfViewModel.LigaId, mannschaftskampfViewModel.TableId, mannschaftskampfViewModel.HomeTeamName, mannschaftskampfViewModel.OpponentTeamName, DateTime.Parse(mannschaftskampfViewModel.BoutDate).ToShortDateString());
+            string title = string.Format(Resources.LanguageFiles.DictPluginMain.PdfProtocolTitle, mannschaftskampfViewModel.LigaId, mannschaftskampfViewModel.TableId, mannschaftskampfViewModel.HeimMannschaft, mannschaftskampfViewModel.GastMannschaft, mannschaftskampfViewModel.Kampfdatum.ToShortDateString());
             return title;
         }
     }

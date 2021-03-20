@@ -33,17 +33,17 @@ namespace Ringen.Plugin.CsEditor
 
             string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string filename =
-                $"{mannschaftskampfViewModel.BoutDate}_{mannschaftskampfViewModel.HomeTeamName.Replace(' ', '-')}_vs_{mannschaftskampfViewModel.OpponentTeamName.Replace(' ', '-')}.pdf";
+                $"{mannschaftskampfViewModel.Kampfdatum.ToShortDateString()}_{mannschaftskampfViewModel.HeimMannschaft.Replace(' ', '-')}_vs_{mannschaftskampfViewModel.GastMannschaft.Replace(' ', '-')}.pdf";
             string pfad = Path.Combine(desktop, filename);
 
             LoggerMessage.Send(new LogEntry(LogEntryType.Message,
-                $"Erstelle Protokoll für Wettkampf {mannschaftskampfViewModel.BoutDateDateTime.ToShortDateString()} {mannschaftskampfViewModel.Value}. Bitte warten..."));
+                $"Erstelle Protokoll für Wettkampf {mannschaftskampfViewModel.Kampfdatum.ToShortDateString()} {mannschaftskampfViewModel.Value}. Bitte warten..."));
 
             IReport bericht = new ReportFarbigPdf();
             bericht.Export(pfad, mannschaftskampfViewModel, zusatzInfos);
 
             LoggerMessage.Send(new LogEntry(LogEntryType.Message,
-                $"Protokoll erfolgreich erstellt für Wettkampf {mannschaftskampfViewModel.BoutDateDateTime.ToShortDateString()} {mannschaftskampfViewModel.Value}. Öffne nun PDF-Datei."));
+                $"Protokoll erfolgreich erstellt für Wettkampf {mannschaftskampfViewModel.Kampfdatum.ToShortDateString()} {mannschaftskampfViewModel.Value}. Öffne nun PDF-Datei."));
             Process.Start(pfad); //Öffne PDF
             
         }
@@ -100,17 +100,17 @@ namespace Ringen.Plugin.CsEditor
             zusatzInfos = TempTestdaten(mannschaftskampfViewModel);
 
             string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string filename = $"{mannschaftskampfViewModel.BoutDate}_{mannschaftskampfViewModel.HomeTeamName.Replace(' ', '-')}_vs_{mannschaftskampfViewModel.OpponentTeamName.Replace(' ', '-')}_Ergebnisliste.pdf";
+            string filename = $"{mannschaftskampfViewModel.Kampfdatum.ToShortDateString()}_{mannschaftskampfViewModel.HeimMannschaft.Replace(' ', '-')}_vs_{mannschaftskampfViewModel.GastMannschaft.Replace(' ', '-')}_Ergebnisliste.pdf";
             string pfad = Path.Combine(desktop, filename);
 
             LoggerMessage.Send(new LogEntry(LogEntryType.Message,
-                $"Erstelle Ergebnisliste (Punktzettel) für Wettkampf {mannschaftskampfViewModel.BoutDateDateTime.ToShortDateString()} {mannschaftskampfViewModel.Value}. Bitte warten..."));
+                $"Erstelle Ergebnisliste (Punktzettel) für Wettkampf {mannschaftskampfViewModel.Kampfdatum.ToShortDateString()} {mannschaftskampfViewModel.Value}. Bitte warten..."));
 
             IReport bericht = new ReportErgebnislisteKampfrichtertischPdf();
             bericht.Export(pfad, mannschaftskampfViewModel, zusatzInfos);
 
             LoggerMessage.Send(new LogEntry(LogEntryType.Message,
-                $"Ergebnisliste (Punktzettel) erfolgreich erstellt für Wettkampf {mannschaftskampfViewModel.BoutDateDateTime.ToShortDateString()} {mannschaftskampfViewModel.Value}. Öffne nun PDF-Datei."));
+                $"Ergebnisliste (Punktzettel) erfolgreich erstellt für Wettkampf {mannschaftskampfViewModel.Kampfdatum.ToShortDateString()} {mannschaftskampfViewModel.Value}. Öffne nun PDF-Datei."));
             Process.Start(pfad); //Öffne PDF
         }
 
@@ -120,17 +120,17 @@ namespace Ringen.Plugin.CsEditor
             zusatzInfos = TempTestdaten(mannschaftskampfViewModel);
 
             string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string filename = $"{mannschaftskampfViewModel.BoutDate}_{mannschaftskampfViewModel.HomeTeamName.Replace(' ', '-')}_vs_{mannschaftskampfViewModel.OpponentTeamName.Replace(' ', '-')}_Sprecher-Info.pdf";
+            string filename = $"{mannschaftskampfViewModel.Kampfdatum.ToShortDateString()}_{mannschaftskampfViewModel.HeimMannschaft.Replace(' ', '-')}_vs_{mannschaftskampfViewModel.GastMannschaft.Replace(' ', '-')}_Sprecher-Info.pdf";
             string pfad = Path.Combine(desktop, filename);
 
             LoggerMessage.Send(new LogEntry(LogEntryType.Message,
-                $"Erstelle Sprecher-Info für Wettkampf {mannschaftskampfViewModel.BoutDateDateTime.ToShortDateString()} {mannschaftskampfViewModel.Value}. Bitte warten..."));
+                $"Erstelle Sprecher-Info für Wettkampf {mannschaftskampfViewModel.Kampfdatum.ToShortDateString()} {mannschaftskampfViewModel.Value}. Bitte warten..."));
 
             IReport bericht = new ReportSprecher();
             bericht.Export(pfad, mannschaftskampfViewModel, zusatzInfos);
 
             LoggerMessage.Send(new LogEntry(LogEntryType.Message,
-                $"Ergebnisliste Sprecher-Info erfolgreich erstellt für Wettkampf {mannschaftskampfViewModel.BoutDateDateTime.ToShortDateString()} {mannschaftskampfViewModel.Value}. Öffne nun PDF-Datei."));
+                $"Ergebnisliste Sprecher-Info erfolgreich erstellt für Wettkampf {mannschaftskampfViewModel.Kampfdatum.ToShortDateString()} {mannschaftskampfViewModel.Value}. Öffne nun PDF-Datei."));
             Process.Start(pfad); //Öffne PDF
         }
     }

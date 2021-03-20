@@ -71,7 +71,7 @@ namespace Ringen.Plugin.CsEditor
 
         private async Task OnSendCompetitionToBrvAsync()
         {
-            await MannschaftskampfViewModel.SendAsync();
+            await MannschaftskampfViewModel.Sende_Ergebnis_Async();
 
             return;
         }
@@ -85,7 +85,7 @@ namespace Ringen.Plugin.CsEditor
             if (Response.IsSuccessStatusCode)
             {
                 var result = (JObject)JsonConvert.DeserializeObject(Response.Content.ReadAsStringAsync().Result);
-                MannschaftskampfViewModel.Audience = int.Parse(result["audience"].ToString());
+                MannschaftskampfViewModel.AnzahlZuschauer = int.Parse(result["audience"].ToString());
             }
 
         }));

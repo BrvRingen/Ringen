@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Nancy.Helpers;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Ringen.Core.CS;
-using Ringen.Core.Mapper;
-using Ringen.Core.Services;
+﻿using System.Collections.Generic;
 using Ringen.Core.Services.ErgebnisdienstApi;
 using Ringen.Core.UI;
 using Ringen.DependencyInjection;
-using Ringen.Schnittstellen.Contracts.Models;
 
 namespace Ringen.Core.ViewModels
 {
@@ -39,14 +30,14 @@ namespace Ringen.Core.ViewModels
             {
                 if (_mannschaftskaempfList == null)
                 {
-                    LadeDaten();
+                    Lade_ApiDaten_Async();
                 }
 
                 return _mannschaftskaempfList;
             }
         }
 
-        private async void LadeDaten()
+        private async void Lade_ApiDaten_Async()
         {
             _mannschaftskaempfList = await DependencyInjectionContainer.GetService<MannschaftskaempfeService>().Get_und_Map_Mannschaftskaempfe_Async(SaisonId, LigaId, TableId);
             OnPropertyChanged(nameof(Children));

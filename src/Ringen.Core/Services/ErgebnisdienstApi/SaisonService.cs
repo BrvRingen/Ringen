@@ -21,7 +21,7 @@ namespace Ringen.Core.Services.ErgebnisdienstApi
         
         public async Task<List<SaisonViewModel>> Get_und_Map_Saisons_Async() 
         {
-            List<Saison> saisonListe = await _apiSaisonInformationen.GetSaisonsAsync();
+            List<Saison> saisonListe = await _apiSaisonInformationen.Get_Saisons_Async();
             var saisonViewModels = _viewModelMapper.Map( saisonListe);
 
             return saisonViewModels;
@@ -30,7 +30,7 @@ namespace Ringen.Core.Services.ErgebnisdienstApi
 
         public async Task<List<LigaViewModel>> Get_und_Map_Ligen_Async(string saisonId)
         {
-            List<Liga> ligenListe = await _apiSaisonInformationen.GetLigenAsync(saisonId);
+            List<Liga> ligenListe = await _apiSaisonInformationen.Get_Ligen_Async(saisonId);
             var ligen = _viewModelMapper.Map(ligenListe);
             
 

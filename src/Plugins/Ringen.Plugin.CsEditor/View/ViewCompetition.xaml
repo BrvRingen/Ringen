@@ -41,36 +41,36 @@
         <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="3" Background="AliceBlue" Text="{local:Translate Competition}"/>
 
         <TextBlock  VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Text="{local:Translate HomeTeamName}" />
-        <TextBlock  VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding MannschaftskampfViewModel.HomeTeamName}"/>
+        <TextBlock  VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding MannschaftskampfViewModel.HeimMannschaft}"/>
 
         <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Text="{local:Translate OpponentTeamName}" />
-        <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Text="{Binding MannschaftskampfViewModel.OpponentTeamName}"/>
+        <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Text="{Binding MannschaftskampfViewModel.GastMannschaft}"/>
 
         <TextBlock VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" Text="{local:Translate HomePoints}" />
-        <TextBlock VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Text="{Binding MannschaftskampfViewModel.HomePoints}"/>
+        <TextBlock VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Text="{Binding MannschaftskampfViewModel.HeimPunkte}"/>
 
         <TextBlock VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" Text="{local:Translate OpponentPoints}" />
-        <TextBlock VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" Text="{Binding MannschaftskampfViewModel.OpponentPoints}"/>
+        <TextBlock VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" Text="{Binding MannschaftskampfViewModel.GastPunkte}"/>
 
         <TextBlock VerticalAlignment="Center" Grid.Row="5" Grid.Column="0" Text="{local:Translate BoutDate}" />
-        <TextBlock VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" Text="{Binding MannschaftskampfViewModel.BoutDate}"/>
+        <TextBlock VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" Text="{Binding MannschaftskampfViewModel.Kampfdatum}"/>
 
         <TextBlock VerticalAlignment="Center" Grid.Row="6" Grid.Column="0" Text="{local:Translate Audience}" />
-        <TextBox VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" Text="{Binding MannschaftskampfViewModel.Audience}"/>
+        <TextBox VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" Text="{Binding MannschaftskampfViewModel.AnzahlZuschauer}"/>
         <Button VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="6" Grid.Column="2"  Width="50"  Command="{Binding GetAudience}" Content="Cnt" />
 
         <TextBlock VerticalAlignment="Center" Grid.Row="7" Grid.Column="0" Text="{local:Translate Location}" />
-        <TextBlock VerticalAlignment="Center" Grid.Row="7" Grid.Column="1" Text="{Binding MannschaftskampfViewModel.Location}"/>
+        <TextBlock VerticalAlignment="Center" Grid.Row="7" Grid.Column="1" Text="{Binding MannschaftskampfViewModel.Wettkampfstaette}"/>
 
         <TextBlock VerticalAlignment="Center" Grid.Row="8" Grid.Column="0" Text="{local:Translate EditorName}" />
         <TextBlock VerticalAlignment="Center" Grid.Row="8" Grid.Column="1" Text="{Binding MannschaftskampfViewModel.EditorName}"/>
 
         <TextBlock VerticalAlignment="Center" Grid.Row="9" Grid.Column="0" Text="{local:Translate EditorComment}" />
-        <TextBox MinHeight="50" VerticalAlignment="Center" Grid.Row="9" Grid.Column="1" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding MannschaftskampfViewModel.EditorComment}"/>
+        <TextBox MinHeight="50" VerticalAlignment="Center" Grid.Row="9" Grid.Column="1" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding MannschaftskampfViewModel.Kommentar}"/>
         <TextBlock VerticalAlignment="Center" Grid.Row="9" Grid.Column="2" Margin="5" Text="{local:Translate EditorCommentHint}" MaxHeight="200" />
 
         <TextBlock VerticalAlignment="Center" Grid.Row="10" Grid.Column="0" Text="{local:Translate Referee}" />
-        <TextBlock VerticalAlignment="Center" Grid.Row="10" Grid.Column="1" Text="{Binding MannschaftskampfViewModel.Referee}"/>
+        <TextBlock VerticalAlignment="Center" Grid.Row="10" Grid.Column="1" Text="{Binding MannschaftskampfViewModel.Schiedsrichter_Vorname}"/>
 
         <TextBlock VerticalAlignment="Center" Grid.Row="11" Grid.Column="0" Text="Kampf" />
         <StackPanel Orientation="Horizontal" Grid.Row="11" Grid.Column="1">

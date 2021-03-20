@@ -28,14 +28,14 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.MannschaftskaempfeTests
         [Test]
         public void Call_erwarte_Erfolg()
         {
-            Einzelkampf einzelkampf = _apiMannschaftskaempfe.GetEinzelkampfAsync("2019", "011008a", 1).Result;
+            Einzelkampf einzelkampf = _apiMannschaftskaempfe.Get_Einzelkampf_Async("2019", "011008a", 1).Result;
             einzelkampf.Should().NotBeNull();
         }
 
         [Test]
         public void Abgeschlossene_Saison_erwarte_korrekte_Platzierungen()
         {
-            Einzelkampf einzelkampf = _apiMannschaftskaempfe.GetEinzelkampfAsync("2019", "011008a", 1).Result;
+            Einzelkampf einzelkampf = _apiMannschaftskaempfe.Get_Einzelkampf_Async("2019", "011008a", 1).Result;
 
             einzelkampf.KampfNr.Should().Be(1);
             einzelkampf.Gewichtsklasse.Should().Be("57");
@@ -78,7 +78,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.MannschaftskaempfeTests
         [Test]
         public void Offene_Saison_erwarte_leere_Platzierungen()
         {
-            Func<Task> act = async () => { await _apiMannschaftskaempfe.GetEinzelkampfAsync("2020", "013003b", 1); };
+            Func<Task> act = async () => { await _apiMannschaftskaempfe.Get_Einzelkampf_Async("2020", "013003b", 1); };
 
             act.Should().Throw<ApiNichtGefundenException>()
                 .WithMessage("Es sind keine Kämpfe für Saison 2020 und Wettkampf 013003b (AC Ückerath 1961 vs. KSK Konkordia Neuss am 2020-09-05) vorhanden.");

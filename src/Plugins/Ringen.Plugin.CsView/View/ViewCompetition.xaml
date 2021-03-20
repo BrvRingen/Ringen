@@ -26,7 +26,7 @@
             </Grid.ColumnDefinitions>
             <Border Background="Red"   Grid.Column="0">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding MannschaftskampfViewModel.HomePoints}" />
+                    <TextBlock Text="{Binding MannschaftskampfViewModel.HeimPunkte}" />
                 </Viewbox>
             </Border>
             <Viewbox StretchDirection="Both"  Grid.Column="1">
@@ -34,7 +34,7 @@
             </Viewbox>
             <Border Background="LightSkyBlue"   Grid.Column="2">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding MannschaftskampfViewModel.OpponentPoints}" />
+                    <TextBlock Text="{Binding MannschaftskampfViewModel.GastPunkte}" />
                 </Viewbox>
             </Border>
         </Grid>
@@ -45,12 +45,12 @@
             </Grid.ColumnDefinitions>
             <Border Background="Red"   Grid.Column="0">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding MannschaftskampfViewModel.HomeTeamName}" />
+                    <TextBlock Text="{Binding MannschaftskampfViewModel.HeimMannschaft}" />
                 </Viewbox>
             </Border>
             <Border Background="LightSkyBlue"   Grid.Column="1">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding MannschaftskampfViewModel.OpponentTeamName}" />
+                    <TextBlock Text="{Binding MannschaftskampfViewModel.GastMannschaft}" />
                 </Viewbox>
             </Border>
         </Grid>

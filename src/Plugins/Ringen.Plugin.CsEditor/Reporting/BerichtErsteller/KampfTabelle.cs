@@ -37,7 +37,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             Kampfzeilen(table, mannschaftskampfViewModel.Children, colorRed, colorBlue);
 
             Row zeile = table.AddRow();
-            GesamtErgebnis(zeile, Convert.ToInt32(mannschaftskampfViewModel.HomePoints), Convert.ToInt32(mannschaftskampfViewModel.OpponentPoints), colorRed, colorBlue);
+            GesamtErgebnis(zeile, Convert.ToInt32(mannschaftskampfViewModel.HeimPunkte), Convert.ToInt32(mannschaftskampfViewModel.GastPunkte), colorRed, colorBlue);
 
             return table;
         }
@@ -122,7 +122,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             mannschaften.Format.Font.Bold = true;
             mannschaften.Borders.Visible = false;
 
-            mannschaften.Cells[2].AddParagraph(mannschaftskampfViewModel.HomeTeamName);
+            mannschaften.Cells[2].AddParagraph(mannschaftskampfViewModel.HeimMannschaft);
             mannschaften.Cells[2].Format.Font.Bold = true;
             mannschaften.Cells[2].Format.Font.Size = CustomStyles.fontSizeGross;
             mannschaften.Cells[2].Format.Alignment = ParagraphAlignment.Left;
@@ -130,7 +130,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             mannschaften.Cells[2].MergeRight = 4;
             mannschaften.Cells[2].Borders.Right.Width = 2;
 
-            mannschaften.Cells[7].AddParagraph(mannschaftskampfViewModel.OpponentTeamName);
+            mannschaften.Cells[7].AddParagraph(mannschaftskampfViewModel.GastMannschaft);
             mannschaften.Cells[7].Format.Font.Bold = true;
             mannschaften.Cells[7].Format.Font.Size = CustomStyles.fontSizeGross;
             mannschaften.Cells[7].Format.Alignment = ParagraphAlignment.Left;
@@ -204,7 +204,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             return spalte;
         }
 
-        private void Kampfzeilen(Table table, List<Bout> kaempfe, Color colorRed, Color colorBlue)
+        private void Kampfzeilen(Table table, List<EinzelkampfViewModel> kaempfe, Color colorRed, Color colorBlue)
         {
             int cnt = 0;
             foreach (var kampf in kaempfe)
@@ -222,7 +222,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
         }
 
 
-        private void InhaltKampfzeile(Row zeile, Bout kampf, Color colorRed, Color colorBlue)
+        private void InhaltKampfzeile(Row zeile, EinzelkampfViewModel kampf, Color colorRed, Color colorBlue)
         {
             AddKampfSpalte(zeile, $"{kampf.KampfNr}");
 

@@ -43,7 +43,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             ft.Bold = true;
 
             spalte.AddLineBreak();
-            ft = spalte.AddFormattedText($"{mannschaftskampfViewModel.Location.Split(' ').Last()}");
+            ft = spalte.AddFormattedText($"{mannschaftskampfViewModel.Wettkampfstaette.Split(' ').Last()}");
             ft.Font.Size = CustomStyles.fontSizeNormal;
 
             spalte = zeile.Cells[1].AddParagraph();
@@ -56,7 +56,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             ft.Bold = true;
 
             spalte.AddLineBreak();
-            ft = spalte.AddFormattedText($"{mannschaftskampfViewModel.Location}");
+            ft = spalte.AddFormattedText($"{mannschaftskampfViewModel.Wettkampfstaette}");
             ft.Font.Size = CustomStyles.fontSizeNormal;
 
             spalte = zeile.Cells[2].AddParagraph();
@@ -69,7 +69,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             ft.Bold = true;
 
             spalte.AddLineBreak();
-            ft = spalte.AddFormattedText($"{DateTime.Parse(mannschaftskampfViewModel.BoutDate).ToShortDateString()}");
+            ft = spalte.AddFormattedText($"{mannschaftskampfViewModel.Kampfdatum.ToShortDateString()}");
             ft.Font.Size = CustomStyles.fontSizeNormal;
 
             return table;

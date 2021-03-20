@@ -22,7 +22,7 @@ namespace Ringen.Schnittstelle.RDB.Services
             _einzelkampfMapper = einzelkampfMapper;
         }
 
-        public async Task<Einzelkampf> GetEinzelkampfAsync(string saisonId, string wettkampfId, int kampfNr)
+        public async Task<Einzelkampf> Get_Einzelkampf_Async(string saisonId, string wettkampfId, int kampfNr)
         {
             JObject response = await _rdbService.Get_CompetitionSystem_Async(
                 "getCompetition",
@@ -43,7 +43,7 @@ namespace Ringen.Schnittstelle.RDB.Services
             return _einzelkampfMapper.Map(kampfJToken);
         }
         
-        public async Task<Tuple<Mannschaftskampf, List<Einzelkampf>>> GetMannschaftskampfAsync(string saisonId, string wettkampfId)
+        public async Task<Tuple<Mannschaftskampf, List<Einzelkampf>>> Get_Mannschaftskampf_Async(string saisonId, string wettkampfId)
         {
             MannschaftskampfMapper wettkampfMapper = new MannschaftskampfMapper();
             
@@ -64,7 +64,7 @@ namespace Ringen.Schnittstelle.RDB.Services
             return new Tuple<Mannschaftskampf, List<Einzelkampf>>(mannschaftskampf, einzelKaempfe);
         }
 
-        public async Task<List<Mannschaftskampf>> GetMannschaftskaempfeAsync(string saisonId, string ligaId, string tableId)
+        public async Task<List<Mannschaftskampf>> Get_Mannschaftskaempfe_Async(string saisonId, string ligaId, string tableId)
         {
             MannschaftskampfMapper mapper = new MannschaftskampfMapper();
 
@@ -83,7 +83,7 @@ namespace Ringen.Schnittstelle.RDB.Services
             return apiModelListe.Select(apiModel => mapper.Map(apiModel)).ToList();
         }
 
-        public async Task<Tuple<Liga, List<Tabellenplatzierung>>> GetLigaMitPlatzierungAsync(string saisonId, string ligaId, string tableId)
+        public async Task<Tuple<Liga, List<Tabellenplatzierung>>> Get_Liga_mit_Tabellenplatzierungen_Async(string saisonId, string ligaId, string tableId)
         {
             LigaMapper ligaMapper = new LigaMapper();
             TabellenplatzierungMapper tabellenplatzierungMapper = new TabellenplatzierungMapper();

@@ -19,7 +19,7 @@ namespace Ringen.Schnittstelle.RDB.Services
             _rdbService = rdbService;
         }
 
-        public async Task<Ringer> GetRingerAsync(string startausweisNr)
+        public async Task<Ringer> Get_Ringer_Async(string startausweisNr)
         {
             RingerMapper mapper = new RingerMapper();
 
@@ -40,7 +40,7 @@ namespace Ringen.Schnittstelle.RDB.Services
             return mapper.Map(apiModel);
         }
 
-        public async Task<List<Mannschaft>> GetMannschaftenAsync()
+        public async Task<List<Mannschaft>> Get_Mannschaften_Async()
         {
             MannschaftMapper mapper = new MannschaftMapper();
 

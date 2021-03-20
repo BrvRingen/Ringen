@@ -25,14 +25,14 @@ namespace Ringen.Plugin.CsEditor
     /// </summary>
     public partial class ViewBout : ExtendedNotifyPropertyChangedUserControl
     {
-        private Core.CS.Bout bout;
+        private EinzelkampfViewModel _einzelkampfViewModel;
 
-        public Core.CS.Bout Bout
+        public EinzelkampfViewModel EinzelkampfViewModel
         {
-            get { return bout; }
+            get { return _einzelkampfViewModel; }
             set
             {
-                bout = value;
+                _einzelkampfViewModel = value;
                 OnPropertyChanged("Bout");
             }
         }
@@ -46,14 +46,14 @@ namespace Ringen.Plugin.CsEditor
 
         public void UpdateUi()
         {
-            Bout = MannschaftskaempfeExplorer.SelectedItem as Core.CS.Bout;
+            EinzelkampfViewModel = MannschaftskaempfeExplorer.SelectedItem as EinzelkampfViewModel;
         }
 
 
         private RelayCommand<string> m_Start;
-        public RelayCommand<string> Start => m_Start ?? (m_Start = new RelayCommand<string>((string TimeType) => { Bout.Settings.Times[TimeType].Start(); }));
+        public RelayCommand<string> Start => m_Start ?? (m_Start = new RelayCommand<string>((string TimeType) => { EinzelkampfViewModel.Settings.Times[TimeType].Start(); }));
 
         private RelayCommand<string> m_Stop;
-        public RelayCommand<string> Stop => m_Stop ?? (m_Stop = new RelayCommand<string>((string TimeType) => { Bout.Settings.Times[TimeType].Stop(); }));
+        public RelayCommand<string> Stop => m_Stop ?? (m_Stop = new RelayCommand<string>((string TimeType) => { EinzelkampfViewModel.Settings.Times[TimeType].Stop(); }));
     }
 }

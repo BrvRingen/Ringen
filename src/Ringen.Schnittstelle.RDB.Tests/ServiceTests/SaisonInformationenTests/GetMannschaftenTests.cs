@@ -23,7 +23,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.SaisonInformationenTests
         [Test]
         public void Offene_Saison_Oberliga_erwarte_Mannschaft()
         {
-            List<Mannschaft> mannschaften = _apiSaisonInformationen.GetMannschaftenAsync("2020", "Oberliga", "").Result;
+            List<Mannschaft> mannschaften = _apiSaisonInformationen.Get_Mannschaften_Async("2020", "Oberliga", "").Result;
             mannschaften.Should().NotBeNull();
             mannschaften.Count.Should().BeGreaterThan(0);
 
@@ -35,7 +35,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.SaisonInformationenTests
         [Test]
         public void Abgeschlossene_Saison_Oberliga_erwarte_Mannschaft()
         {
-            List<Mannschaft> mannschaften = _apiSaisonInformationen.GetMannschaftenAsync("2019", "Oberliga", "Westfalen").Result;
+            List<Mannschaft> mannschaften = _apiSaisonInformationen.Get_Mannschaften_Async("2019", "Oberliga", "Westfalen").Result;
             mannschaften.Should().NotBeNull();
             mannschaften.Count.Should().BeGreaterThan(0);
 
@@ -47,7 +47,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.SaisonInformationenTests
         [Test]
         public void Abgeschlossene_Saison_Bezirksliga_erwarte_Mannschaft()
         {
-            List<Mannschaft> mannschaften = _apiSaisonInformationen.GetMannschaftenAsync("2019", "Bezirksliga", "Westfalen").Result;
+            List<Mannschaft> mannschaften = _apiSaisonInformationen.Get_Mannschaften_Async("2019", "Bezirksliga", "Westfalen").Result;
             mannschaften.Should().NotBeNull();
             mannschaften.Count.Should().BeGreaterThan(0);
 

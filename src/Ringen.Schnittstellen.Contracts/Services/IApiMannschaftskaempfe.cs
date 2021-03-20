@@ -15,7 +15,7 @@ namespace Ringen.Schnittstellen.Contracts.Services
         /// <param name="wettkampfId"></param>
         /// <param name="kampfNr"></param>
         /// <returns></returns>
-        Task<Einzelkampf> GetEinzelkampfAsync(string saisonId, string wettkampfId, int kampfNr);
+        Task<Einzelkampf> Get_Einzelkampf_Async(string saisonId, string wettkampfId, int kampfNr);
 
         /// <summary>
         /// Ein konkreter Mannschaftskampf
@@ -24,7 +24,7 @@ namespace Ringen.Schnittstellen.Contracts.Services
         /// <param name="saisonId"></param>
         /// <param name="wettkampfId"></param>
         /// <returns></returns>
-        Task<Tuple<Mannschaftskampf, List<Einzelkampf>>> GetMannschaftskampfAsync(string saisonId, string wettkampfId);
+        Task<Tuple<Mannschaftskampf, List<Einzelkampf>>> Get_Mannschaftskampf_Async(string saisonId, string wettkampfId);
 
         /// <summary>
         /// Mehrere Mannschaftskämpfe für eine Saison, Liga und Tabelle
@@ -34,7 +34,7 @@ namespace Ringen.Schnittstellen.Contracts.Services
         /// <param name="ligaId"></param>
         /// <param name="tableId"></param>
         /// <returns></returns>
-        Task<List<Mannschaftskampf>> GetMannschaftskaempfeAsync(string saisonId, string ligaId, string tableId);
+        Task<List<Mannschaftskampf>> Get_Mannschaftskaempfe_Async(string saisonId, string ligaId, string tableId);
 
         /// <summary>
         /// Platzierungstabelle einer Saison, Liga und Tabelle
@@ -44,6 +44,6 @@ namespace Ringen.Schnittstellen.Contracts.Services
         /// <param name="ligaId"></param>
         /// <param name="tableId"></param>
         /// <returns></returns>
-        Task<Tuple<Liga, List<Tabellenplatzierung>>> GetLigaMitPlatzierungAsync(string saisonId, string ligaId, string tableId);
+        Task<Tuple<Liga, List<Tabellenplatzierung>>> Get_Liga_mit_Tabellenplatzierungen_Async(string saisonId, string ligaId, string tableId);
     }
 }

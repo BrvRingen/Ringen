@@ -12,7 +12,7 @@
         <local:NullToVisiblityConverter x:Key="NullToVisiblity" />
     </CoreUi:ExtendedNotifyPropertyChangedUserControl.Resources>
 
-    <Grid Visibility="{Binding Bout, Converter={StaticResource NullToVisiblity}}">
+    <Grid Visibility="{Binding EinzelkampfViewModel, Converter={StaticResource NullToVisiblity}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />
             <RowDefinition Height="20" />
@@ -24,7 +24,7 @@
         </Grid.RowDefinitions>
 
         <!-- Headline -->
-        <TextBlock Grid.Row="0" Background="AliceBlue" TextAlignment="Center" Text="{Binding Bout.Value}"/>
+        <TextBlock Grid.Row="0" Background="AliceBlue" TextAlignment="Center" Text="{Binding EinzelkampfViewModel.Value}"/>
 
         <!-- Times-->
         <Grid  Grid.Row="2">
@@ -33,9 +33,9 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <local:BoutTime Data="{Binding Bout.Settings.Times[HomeInjury]}" Title="Verletzungszeit Heim" Grid.Column="0" HorizontalAlignment="Center"/>
-            <local:BoutTime Data="{Binding Bout.Settings.Times[Bout]}" Title="Kampf" Grid.Column="1" HorizontalAlignment="Center"/>
-            <local:BoutTime Data="{Binding Bout.Settings.Times[OpponentInjury]}" Title="Verletzungszeit Gast" Grid.Column="2" HorizontalAlignment="Center"/>
+            <local:BoutTime Data="{Binding EinzelkampfViewModel.Settings.Times[HomeInjury]}" Title="Verletzungszeit Heim" Grid.Column="0" HorizontalAlignment="Center"/>
+            <local:BoutTime Data="{Binding EinzelkampfViewModel.Settings.Times[Bout]}" Title="Kampf" Grid.Column="1" HorizontalAlignment="Center"/>
+            <local:BoutTime Data="{Binding EinzelkampfViewModel.Settings.Times[OpponentInjury]}" Title="Verletzungszeit Gast" Grid.Column="2" HorizontalAlignment="Center"/>
         </Grid>
 
         <!-- PosPoints -->
@@ -45,7 +45,7 @@
                 <ColumnDefinition Width="10" />
                 <ColumnDefinition Width="50*" />
             </Grid.ColumnDefinitions>
-            <ItemsControl ItemsSource="{Binding Bout.Settings.PosPointsHome}" Grid.Column="0">
+            <ItemsControl ItemsSource="{Binding EinzelkampfViewModel.Settings.PosPointsHome}" Grid.Column="0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel />
@@ -58,7 +58,7 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-            <ItemsControl ItemsSource="{Binding Bout.Settings.PosPointsOpponent}" Grid.Column="2">
+            <ItemsControl ItemsSource="{Binding EinzelkampfViewModel.Settings.PosPointsOpponent}" Grid.Column="2">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel />
@@ -73,7 +73,7 @@
         </Grid>
 
         <!-- Points -->
-        <ItemsControl Grid.Row="6" ItemsSource="{Binding Bout.Points}" Grid.Column="0">
+        <ItemsControl Grid.Row="6" ItemsSource="{Binding EinzelkampfViewModel.Points}" Grid.Column="0">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel />

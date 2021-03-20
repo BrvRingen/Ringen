@@ -22,7 +22,7 @@ namespace Ringen.Schnittstelle.RDB.Services
             _mapper = mapper;
         }
 
-        public async Task UebermittleErgebnisAsync(Mannschaftskampf mannschaftskampf, List<Einzelkampf> einzelkaempfe)
+        public async Task Uebermittle_Ergebnis_Async(Mannschaftskampf mannschaftskampf, List<Einzelkampf> einzelkaempfe)
         {
             CompetitionPostApiModel apiModel = _mapper.Map(mannschaftskampf, einzelkaempfe);
 

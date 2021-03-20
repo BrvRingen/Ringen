@@ -28,13 +28,18 @@ namespace Ringen.Core.ViewModels
             get
             {
                 if (data == null)
-                    data = new List<IExplorerItemViewModel>() { DependencyInjectionContainer.GetService<MannschaftskaempfeViewModel>() };
-
+                {
+                    data = new List<IExplorerItemViewModel>()
+                    {
+                        DependencyInjectionContainer.GetService<MannschaftskaempfeViewModel>()
+                    };
+                }
 
                 return data;
             }
             set { data = value; }
         }
+
         public class SelectedItemChangedEventArgs : EventArgs
         {
             public IExplorerItemViewModel SelectedItem { get; }

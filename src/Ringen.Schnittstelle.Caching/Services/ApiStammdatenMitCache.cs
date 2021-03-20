@@ -19,20 +19,20 @@ namespace Ringen.Schnittstelle.Caching.Services
             _cacheZeiten = cacheZeiten;
         }
 
-        public async Task<Ringer> GetRingerAsync(string startausweisNr)
+        public async Task<Ringer> Get_Ringer_Async(string startausweisNr)
         {
-            var cacheKey = $"{this.GetType().Name}_{nameof(GetRingerAsync)}_{startausweisNr}";
+            var cacheKey = $"{this.GetType().Name}_{nameof(Get_Ringer_Async)}_{startausweisNr}";
             var cacheDauerInTagen = TimeSpan.FromDays(_cacheZeiten.RingerInTagen);
 
-            return await _apiCache.Get_und_Cache_Daten(cacheKey, async () => { return await _api.GetRingerAsync(startausweisNr); }, cacheDauerInTagen);
+            return await _apiCache.Get_und_Cache_Daten(cacheKey, async () => { return await _api.Get_Ringer_Async(startausweisNr); }, cacheDauerInTagen);
         }
 
-        public async Task<List<Mannschaft>> GetMannschaftenAsync()
+        public async Task<List<Mannschaft>> Get_Mannschaften_Async()
         {
-            var cacheKey = $"{this.GetType().Name}_{nameof(GetMannschaftenAsync)}";
+            var cacheKey = $"{this.GetType().Name}_{nameof(Get_Mannschaften_Async)}";
             var cacheDauerInTagen = TimeSpan.FromDays(_cacheZeiten.MannschaftenInTagen);
 
-            return await _apiCache.Get_und_Cache_Daten(cacheKey, async () => { return await _api.GetMannschaftenAsync(); }, cacheDauerInTagen);
+            return await _apiCache.Get_und_Cache_Daten(cacheKey, async () => { return await _api.Get_Mannschaften_Async(); }, cacheDauerInTagen);
         }
     }
 }

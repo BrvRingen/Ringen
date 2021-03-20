@@ -23,7 +23,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.SaisonInformationenTests
         [Test]
         public void Call_erwarte_Erfolg()
         {
-            List<Kampftag> kampftage = _apiSaisonInformationen.GetKampftageAsync("2019").Result;
+            List<Kampftag> kampftage = _apiSaisonInformationen.Get_Kampftage_Async("2019").Result;
             kampftage.Should().NotBeNull();
             kampftage.Count.Should().BeGreaterThan(0);
         }
@@ -31,7 +31,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.SaisonInformationenTests
         [Test]
         public void Abgeschlossene_Saison_erwarte_korrekte_Ligen()
         {
-            List<Kampftag> kampftage = _apiSaisonInformationen.GetKampftageAsync("2019").Result;
+            List<Kampftag> kampftage = _apiSaisonInformationen.Get_Kampftage_Async("2019").Result;
 
             DateTime datum = new DateTime(2019, 8, 31);
             for (int i = 1; i <= 17; i++)
@@ -44,7 +44,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.SaisonInformationenTests
         [Test]
         public void Offene_Saison_erwarte_korrekte_Ligen()
         {
-            List<Kampftag> kampftage = _apiSaisonInformationen.GetKampftageAsync("2020").Result;
+            List<Kampftag> kampftage = _apiSaisonInformationen.Get_Kampftage_Async("2020").Result;
 
             DateTime datum = new DateTime(2020, 9, 5);
             for (int i = 1; i <= 18; i++)

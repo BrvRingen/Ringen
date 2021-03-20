@@ -23,14 +23,14 @@ namespace Ringen.Plugin.CsView
     /// </summary>
     public partial class ViewBout : ExtendedNotifyPropertyChangedUserControl
     {
-        private Core.CS.Bout bout;
+        private EinzelkampfViewModel _einzelkampfViewModel;
 
-        public Core.CS.Bout Bout
+        public EinzelkampfViewModel EinzelkampfViewModel
         {
-            get { return bout; }
+            get { return _einzelkampfViewModel; }
             set
             {
-                bout = value;
+                _einzelkampfViewModel = value;
                 OnPropertyChanged("Bout");
             }
         }
@@ -44,7 +44,7 @@ namespace Ringen.Plugin.CsView
 
         public void UpdateUi()
         {
-            Bout = MannschaftskaempfeExplorer.SelectedItem as Core.CS.Bout;
+            EinzelkampfViewModel = MannschaftskaempfeExplorer.SelectedItem as EinzelkampfViewModel;
         }
     }
 }

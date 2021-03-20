@@ -11,6 +11,6 @@ namespace Ringen.Schnittstellen.Contracts.Services
         /// </summary>
         /// <param name="mannschaftskampf"></param>
         /// <param name="einzelkaempfe"></param>
-        Task UebermittleErgebnisAsync(Mannschaftskampf mannschaftskampf, List<Einzelkampf> einzelkaempfe);
+        Task Uebermittle_Ergebnis_Async(Mannschaftskampf mannschaftskampf, List<Einzelkampf> einzelkaempfe);
     }
 }

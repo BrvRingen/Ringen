@@ -26,7 +26,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
         }
 
 
-        private void Kampfzeilen(Table table, List<Bout> kaempfe)
+        private void Kampfzeilen(Table table, List<EinzelkampfViewModel> kaempfe)
         {
             foreach (var kampf in kaempfe.OrderBy(li => li.KampfNr))
             {
@@ -57,7 +57,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             AddKopfSpalte(kopfzeile, "Unterschrift Kampfrichter");
         }
 
-        private void InhaltKampfzeile(Row zeile, Bout kampf)
+        private void InhaltKampfzeile(Row zeile, EinzelkampfViewModel kampf)
         {
             AddKampfSpalte(zeile, kampf.KampfNr.ToString());
             AddKampfSpalte(zeile, kampf.WeightClass);

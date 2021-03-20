@@ -56,7 +56,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BaseReport
 
         private void ErgaenzeFooter(Section section, MannschaftskampfViewModel mannschaftskampfViewModel, string trainerHeim, string trainerGast)
         {
-            section.Footers.Primary.Add(unterschriftKampfrichter.generate(mannschaftskampfViewModel.Referee, trainerHeim, trainerGast, _randLinksRechts));
+            section.Footers.Primary.Add(unterschriftKampfrichter.generate(mannschaftskampfViewModel.Schiedsrichter_Vorname, trainerHeim, trainerGast, _randLinksRechts));
             section.Footers.Primary.Add(hinweißVorläufigesErgebnis.generate());
         }
     }

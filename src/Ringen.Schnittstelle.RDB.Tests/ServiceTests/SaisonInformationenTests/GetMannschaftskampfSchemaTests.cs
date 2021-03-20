@@ -22,7 +22,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.SaisonInformationenTests
         [Test]
         public void Call_erwarte_Erfolg()
         {
-            List<EinzelkampfSchema> kampfSchema = _apiSaisonInformationen.GetMannschaftskampfSchemaAsync("2019", "011008a").Result;
+            List<EinzelkampfSchema> kampfSchema = _apiSaisonInformationen.Get_MannschaftskampfSchema_Async("2019", "011008a").Result;
             kampfSchema.Should().NotBeNull();
             kampfSchema.Count.Should().BeGreaterThan(0);
         }
@@ -30,7 +30,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.SaisonInformationenTests
         [Test]
         public void Abgeschlossene_Saison_erwarte_korrekte_Ergebnisse()
         {
-            List<EinzelkampfSchema> kampfSchema = _apiSaisonInformationen.GetMannschaftskampfSchemaAsync("2019", "011008a").Result;
+            List<EinzelkampfSchema> kampfSchema = _apiSaisonInformationen.Get_MannschaftskampfSchema_Async("2019", "011008a").Result;
             kampfSchema.Should().NotBeNull();
             kampfSchema.Count.Should().BeGreaterThan(0);
 
@@ -78,7 +78,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.SaisonInformationenTests
         [Test]
         public void Abgeschlossene_Saison_Doppelrunde_erwarte_korrekte_Ergebnisse()
         {
-            List<EinzelkampfSchema> kampfSchema = _apiSaisonInformationen.GetMannschaftskampfSchemaAsync("2019", "006028e").Result;
+            List<EinzelkampfSchema> kampfSchema = _apiSaisonInformationen.Get_MannschaftskampfSchema_Async("2019", "006028e").Result;
             kampfSchema.Should().NotBeNull();
             kampfSchema.Count.Should().BeGreaterThan(0);
 
@@ -88,7 +88,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.SaisonInformationenTests
         [Test]
         public void Offene_Saison_erwarte_korrekte_Ergebnisse()
         {
-            List<EinzelkampfSchema> kampfSchema = _apiSaisonInformationen.GetMannschaftskampfSchemaAsync("2020", "013003b").Result;
+            List<EinzelkampfSchema> kampfSchema = _apiSaisonInformationen.Get_MannschaftskampfSchema_Async("2020", "013003b").Result;
             kampfSchema.Should().NotBeNull();
             kampfSchema.Count.Should().BeGreaterThan(0);
 
@@ -99,7 +99,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.SaisonInformationenTests
         [Test]
         public void Offene_Saison_Doppelrunde_erwarte_korrekte_Ergebnisse()
         {
-            List<EinzelkampfSchema> kampfSchema = _apiSaisonInformationen.GetMannschaftskampfSchemaAsync("2020", "").Result; //TODO: cid sobald in Testsystem vorhanden
+            List<EinzelkampfSchema> kampfSchema = _apiSaisonInformationen.Get_MannschaftskampfSchema_Async("2020", "").Result; //TODO: cid sobald in Testsystem vorhanden
             kampfSchema.Should().NotBeNull();
             kampfSchema.Count.Should().BeGreaterThan(0);
 

@@ -6,8 +6,8 @@ namespace Ringen.Schnittstellen.Contracts.Services
 {
     public interface IApiStammdaten
     {
-        Task<Ringer> GetRingerAsync(string startausweisNr);
+        Task<Ringer> Get_Ringer_Async(string startausweisNr);
 
-        Task<List<Mannschaft>> GetMannschaftenAsync();
+        Task<List<Mannschaft>> Get_Mannschaften_Async();
     }
 }

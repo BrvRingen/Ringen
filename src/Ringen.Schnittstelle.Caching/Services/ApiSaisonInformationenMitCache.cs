@@ -20,52 +20,52 @@ namespace Ringen.Schnittstelle.Caching.Services
             _cacheZeiten = cacheZeiten;
         }
 
-        public async Task<List<Liga>> GetLigenAsync(string saisonId)
+        public async Task<List<Liga>> Get_Ligen_Async(string saisonId)
         {
-            var cacheKey = $"{this.GetType().Name}_{nameof(GetLigenAsync)}_{saisonId}";
+            var cacheKey = $"{this.GetType().Name}_{nameof(Get_Ligen_Async)}_{saisonId}";
             var cacheDauerInTagen = TimeSpan.FromDays(_cacheZeiten.LigenInTagen);
             
-            return await _apiCache.Get_und_Cache_Daten(cacheKey, async () => { return await _api.GetLigenAsync(saisonId); }, cacheDauerInTagen);
+            return await _apiCache.Get_und_Cache_Daten(cacheKey, async () => { return await _api.Get_Ligen_Async(saisonId); }, cacheDauerInTagen);
         }
 
-        public async Task<Tuple<Saison, List<Leistungsklasse>>> GetSaisonAsync(string saisonId)
+        public async Task<Tuple<Saison, List<Leistungsklasse>>> Get_Saison_Async(string saisonId)
         {
-            var cacheKey = $"{this.GetType().Name}_{nameof(GetSaisonAsync)}_{saisonId}";
+            var cacheKey = $"{this.GetType().Name}_{nameof(Get_Saison_Async)}_{saisonId}";
             var cacheDauerInTagen = TimeSpan.FromDays(_cacheZeiten.SaisonInTagen);
 
-            return await _apiCache.Get_und_Cache_Daten(cacheKey, async () => { return await _api.GetSaisonAsync(saisonId); }, cacheDauerInTagen);
+            return await _apiCache.Get_und_Cache_Daten(cacheKey, async () => { return await _api.Get_Saison_Async(saisonId); }, cacheDauerInTagen);
         }
 
-        public async Task<List<Saison>> GetSaisonsAsync()
+        public async Task<List<Saison>> Get_Saisons_Async()
         {
-            var cacheKey = $"{this.GetType().Name}_{nameof(GetSaisonsAsync)}";
+            var cacheKey = $"{this.GetType().Name}_{nameof(Get_Saisons_Async)}";
             var cacheDauerInTagen = TimeSpan.FromDays(_cacheZeiten.SaisonsInTagen);
 
-            return await _apiCache.Get_und_Cache_Daten(cacheKey, async () => { return await _api.GetSaisonsAsync(); }, cacheDauerInTagen);
+            return await _apiCache.Get_und_Cache_Daten(cacheKey, async () => { return await _api.Get_Saisons_Async(); }, cacheDauerInTagen);
         }
 
-        public async Task<List<Mannschaft>> GetMannschaftenAsync(string saisonId, string ligaId, string tableId)
+        public async Task<List<Mannschaft>> Get_Mannschaften_Async(string saisonId, string ligaId, string tableId)
         {
-            var cacheKey = $"{this.GetType().Name}_{nameof(GetMannschaftenAsync)}_{saisonId}_{ligaId}_{tableId}";
+            var cacheKey = $"{this.GetType().Name}_{nameof(Get_Mannschaften_Async)}_{saisonId}_{ligaId}_{tableId}";
             var cacheDauerInTagen = TimeSpan.FromDays(_cacheZeiten.MannschaftenInTagen);
 
-            return await _apiCache.Get_und_Cache_Daten(cacheKey, async () => { return await _api.GetMannschaftenAsync(saisonId, ligaId, tableId); }, cacheDauerInTagen);
+            return await _apiCache.Get_und_Cache_Daten(cacheKey, async () => { return await _api.Get_Mannschaften_Async(saisonId, ligaId, tableId); }, cacheDauerInTagen);
         }
 
-        public async Task<List<EinzelkampfSchema>> GetMannschaftskampfSchemaAsync(string saisonId, string wettkampfId)
+        public async Task<List<EinzelkampfSchema>> Get_MannschaftskampfSchema_Async(string saisonId, string wettkampfId)
         {
-            var cacheKey = $"{this.GetType().Name}_{nameof(GetMannschaftskampfSchemaAsync)}_{saisonId}_{wettkampfId}";
+            var cacheKey = $"{this.GetType().Name}_{nameof(Get_MannschaftskampfSchema_Async)}_{saisonId}_{wettkampfId}";
             var cacheDauerInTagen = TimeSpan.FromDays(_cacheZeiten.MannschaftskampfSchemaInTagen);
 
-            return await _apiCache.Get_und_Cache_Daten(cacheKey, async () => { return await _api.GetMannschaftskampfSchemaAsync(saisonId, wettkampfId); }, cacheDauerInTagen);
+            return await _apiCache.Get_und_Cache_Daten(cacheKey, async () => { return await _api.Get_MannschaftskampfSchema_Async(saisonId, wettkampfId); }, cacheDauerInTagen);
         }
 
-        public async Task<List<Kampftag>> GetKampftageAsync(string saisonId)
+        public async Task<List<Kampftag>> Get_Kampftage_Async(string saisonId)
         {
-            var cacheKey = $"{this.GetType().Name}_{nameof(GetKampftageAsync)}_{saisonId}";
+            var cacheKey = $"{this.GetType().Name}_{nameof(Get_Kampftage_Async)}_{saisonId}";
             var cacheDauerInTagen = TimeSpan.FromDays(_cacheZeiten.KampftageInTagen);
 
-            return await _apiCache.Get_und_Cache_Daten(cacheKey, async () => { return await _api.GetKampftageAsync(saisonId); }, cacheDauerInTagen);
+            return await _apiCache.Get_und_Cache_Daten(cacheKey, async () => { return await _api.Get_Kampftage_Async(saisonId); }, cacheDauerInTagen);
         }
     }
 }

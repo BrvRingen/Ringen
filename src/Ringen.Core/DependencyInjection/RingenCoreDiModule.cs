@@ -18,9 +18,6 @@ namespace Ringen.Core.DependencyInjection
         {
             Bind<SaisonService>().ToSelf().InSingletonScope();
             Bind<MannschaftskaempfeService>().ToSelf().InSingletonScope();
-
-
-            Bind<MannschaftskaempfeViewModel>().ToSelf();
         }
     }
 }

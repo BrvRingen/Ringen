@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
-using Ringen.Core.Mapper;
-using Ringen.Core.Services;
 using Ringen.Core.Services.ErgebnisdienstApi;
 using Ringen.Core.UI;
 using Ringen.DependencyInjection;
-using Ringen.Schnittstellen.Contracts.Models;
 
 namespace Ringen.Core.ViewModels
 {
@@ -19,14 +16,14 @@ namespace Ringen.Core.ViewModels
             {
                 if (_saisonViewModels == null)
                 {
-                    LadeDaten();
+                    Lade_ApiDaten_Async();
                 }
                     
                 return _saisonViewModels;
             }
         }
 
-        private async void LadeDaten()
+        private async void Lade_ApiDaten_Async()
         {
             _saisonViewModels = await DependencyInjectionContainer.GetService<SaisonService>().Get_und_Map_Saisons_Async();
             OnPropertyChanged(nameof(Children));

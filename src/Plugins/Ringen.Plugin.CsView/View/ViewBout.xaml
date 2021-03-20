@@ -14,7 +14,7 @@
         <local:TimeRunningToVisiblityConverter x:Key="TimeRunningToVisiblity" />
         <local:PointsSumConverter x:Key="PointsSumConverter" />
     </CoreUi:ExtendedNotifyPropertyChangedUserControl.Resources>
-    <Grid Visibility="{Binding Bout, Converter={StaticResource NullToVisiblity}}" >
+    <Grid Visibility="{Binding EinzelkampfViewModel, Converter={StaticResource NullToVisiblity}}" >
         <Grid.RowDefinitions>
             <RowDefinition Height="10*" />
             <RowDefinition Height="8*" />
@@ -35,15 +35,15 @@
             </Grid.ColumnDefinitions>
             <Border Background="Red"   Grid.Column="0">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.MannschaftskampfViewModel.HomePoints}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.MannschaftskampfViewModel.HeimPunkte}" />
                 </Viewbox>
             </Border>
             <Viewbox StretchDirection="Both"  Grid.Column="1">
-                <TextBlock Text="{Binding Bout.LigaViewModel.Value}" />
+                <TextBlock Text="{Binding EinzelkampfViewModel.LigaViewModel.Value}" />
             </Viewbox>
             <Border Background="LightSkyBlue"   Grid.Column="2">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.MannschaftskampfViewModel.OpponentPoints}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.MannschaftskampfViewModel.GastPunkte}" />
                 </Viewbox>
             </Border>
         </Grid>
@@ -54,12 +54,12 @@
             </Grid.ColumnDefinitions>
             <Border Background="Red"   Grid.Column="0">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.MannschaftskampfViewModel.HomeTeamName}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.MannschaftskampfViewModel.HeimMannschaft}" />
                 </Viewbox>
             </Border>
             <Border Background="LightSkyBlue"   Grid.Column="1">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.MannschaftskampfViewModel.OpponentTeamName}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.MannschaftskampfViewModel.GastMannschaft}" />
                 </Viewbox>
             </Border>
         </Grid>
@@ -76,32 +76,32 @@
             </Grid.ColumnDefinitions>
             <Border Background="Red"   Grid.Column="0">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.HomeWrestlerPoints}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.HomeWrestlerPoints}" />
                 </Viewbox>
             </Border>
             <Border Background="Red"   Grid.Column="2">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.HomeWrestlerWeight}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.HomeWrestlerWeight}" />
                 </Viewbox>
             </Border>
             <Border Grid.Column="3">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.WeightClass}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.WeightClass}" />
                 </Viewbox>
             </Border>
             <Border Grid.Column="4">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.WrestleStyle}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.WrestleStyle}" />
                 </Viewbox>
             </Border>
             <Border Background="LightSkyBlue" Grid.Column="5">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.OpponentWrestlerWeight}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.OpponentWrestlerWeight}" />
                 </Viewbox>
             </Border>
             <Border Background="LightSkyBlue" Grid.Column="7">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.OpponentWrestlerPoints}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.OpponentWrestlerPoints}" />
                 </Viewbox>
             </Border>
         </Grid>
@@ -112,12 +112,12 @@
             </Grid.ColumnDefinitions>
             <Border Background="Red"   Grid.Column="0">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.HomeWrestlerGivenname}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.HomeWrestlerGivenname}" />
                 </Viewbox>
             </Border>
             <Border Background="LightSkyBlue"   Grid.Column="1">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.OpponentWrestlerGivenname}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.OpponentWrestlerGivenname}" />
                 </Viewbox>
             </Border>
         </Grid>
@@ -128,12 +128,12 @@
             </Grid.ColumnDefinitions>
             <Border Background="Red"   Grid.Column="0">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.HomeWrestlerName}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.HomeWrestlerName}" />
                 </Viewbox>
             </Border>
             <Border Background="LightSkyBlue"   Grid.Column="1">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.OpponentWrestlerName}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.OpponentWrestlerName}" />
                 </Viewbox>
             </Border>
         </Grid>
@@ -145,22 +145,22 @@
             </Grid.ColumnDefinitions>
             <Border Background="Red" Grid.Column="0">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.Points, Converter={StaticResource PointsSumConverter}, ConverterParameter='Home'}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.Points, Converter={StaticResource PointsSumConverter}, ConverterParameter='Home'}" />
                 </Viewbox>
             </Border>
             <Border Grid.Column="1">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.Settings.Times[Bout].Time, Converter={StaticResource IntToTimeConverter}}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.Settings.Times[Bout].Time, Converter={StaticResource IntToTimeConverter}}" />
                 </Viewbox>
             </Border>
             <Border Background="LightSkyBlue" Grid.Column="2">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.Points, Converter={StaticResource PointsSumConverter}, ConverterParameter='Opponent'}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.Points, Converter={StaticResource PointsSumConverter}, ConverterParameter='Opponent'}" />
                 </Viewbox>
             </Border>
         </Grid>
         <!-- Points -->
-        <ItemsControl Grid.Row="9" ItemsSource="{Binding Bout.Points}">
+        <ItemsControl Grid.Row="9" ItemsSource="{Binding EinzelkampfViewModel.Points}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel />
@@ -174,7 +174,7 @@
         </ItemsControl>
 
         <!-- Break -->
-        <Grid Grid.Row="7" Visibility="{Binding Bout.Settings.Times[Break].Mode, Converter={StaticResource TimeRunningToVisiblity}}">
+        <Grid Grid.Row="7" Visibility="{Binding EinzelkampfViewModel.Settings.Times[Break].Mode, Converter={StaticResource TimeRunningToVisiblity}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40*"/>
                 <ColumnDefinition Width="60*"/>
@@ -182,7 +182,7 @@
             </Grid.ColumnDefinitions>
             <Border Grid.Column="1" Background="Silver">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.Settings.Times[Break].Time, Converter={StaticResource IntToTimeConverter}}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.Settings.Times[Break].Time, Converter={StaticResource IntToTimeConverter}}" />
                 </Viewbox>
             </Border>
         </Grid>
@@ -193,14 +193,14 @@
                 <ColumnDefinition Width="50*"/>
                 <ColumnDefinition Width="50*"/>
             </Grid.ColumnDefinitions>
-            <Border Background="Red"   Grid.Column="0" Visibility="{Binding Bout.Settings.Times[HomeInjury].Mode, Converter={StaticResource TimeRunningToVisiblity}}">
+            <Border Background="Red"   Grid.Column="0" Visibility="{Binding EinzelkampfViewModel.Settings.Times[HomeInjury].Mode, Converter={StaticResource TimeRunningToVisiblity}}">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.Settings.Times[HomeInjury].Time, Converter={StaticResource IntToTimeConverter}}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.Settings.Times[HomeInjury].Time, Converter={StaticResource IntToTimeConverter}}" />
                 </Viewbox>
             </Border>
-            <Border Background="LightSkyBlue" Grid.Column="1" Visibility="{Binding Bout.Settings.Times[OpponentInjury].Mode, Converter={StaticResource TimeRunningToVisiblity}}">
+            <Border Background="LightSkyBlue" Grid.Column="1" Visibility="{Binding EinzelkampfViewModel.Settings.Times[OpponentInjury].Mode, Converter={StaticResource TimeRunningToVisiblity}}">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding Bout.Settings.Times[OpponentInjury].Time, Converter={StaticResource IntToTimeConverter}}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.Settings.Times[OpponentInjury].Time, Converter={StaticResource IntToTimeConverter}}" />
                 </Viewbox>
             </Border>
         </Grid>

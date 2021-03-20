@@ -40,7 +40,7 @@ namespace Ringen.Plugin.CsEditor
         private RelayCommand m_AddToPoints;
         public RelayCommand AddToPoints => m_AddToPoints ?? (m_AddToPoints = new RelayCommand(() =>
         {
-            Data.Bout.Points.Add(new Core.CS.BoutPoint(Data.Value, Data.Bout, Data.HomeOrOpponent));
+            Data.EinzelkampfViewModel.Points.Add(new Core.CS.BoutPoint(Data.Value, Data.EinzelkampfViewModel, Data.HomeOrOpponent));
             LoggerMessage.Send(new LogEntry(LogEntryType.Message, "Point added to Points"));
         }
         ));

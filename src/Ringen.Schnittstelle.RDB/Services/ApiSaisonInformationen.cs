@@ -21,7 +21,7 @@ namespace Ringen.Schnittstelle.RDB.Services
             _einzelkampfMapper = einzelkampfMapper;
         }
 
-        public async Task<List<Kampftag>> GetKampftageAsync(string saisonId)
+        public async Task<List<Kampftag>> Get_Kampftage_Async(string saisonId)
         {
             KampftagMapper mapper = new KampftagMapper();
 
@@ -37,7 +37,7 @@ namespace Ringen.Schnittstelle.RDB.Services
             return apiModelListe.Select(apiModel => mapper.Map(apiModel)).ToList();
         }
 
-        public async Task<List<EinzelkampfSchema>> GetMannschaftskampfSchemaAsync(string saisonId, string wettkampfId)
+        public async Task<List<EinzelkampfSchema>> Get_MannschaftskampfSchema_Async(string saisonId, string wettkampfId)
         {
             JObject response = await _rdbService.Get_CompetitionSystem_Async(
                 "getCompetitionScheme",
@@ -52,7 +52,7 @@ namespace Ringen.Schnittstelle.RDB.Services
             return apiModelListe.Select(apiModel => _einzelkampfMapper.Map(apiModel)).ToList();
         }
 
-        public async Task<List<Liga>> GetLigenAsync(string saisonId)
+        public async Task<List<Liga>> Get_Ligen_Async(string saisonId)
         {
             LigaMapper mapper = new LigaMapper();
 
@@ -76,7 +76,7 @@ namespace Ringen.Schnittstelle.RDB.Services
             return apiModelListe.Select(apiModel => mapper.Map(apiModel)).ToList();
         }
 
-        public async Task<Tuple<Saison, List<Leistungsklasse>>> GetSaisonAsync(string saisonId)
+        public async Task<Tuple<Saison, List<Leistungsklasse>>> Get_Saison_Async(string saisonId)
         {
             SaisonMapper saisonMapper = new SaisonMapper();
             LeistungsklasseMapper leistungsklasseMapper = new LeistungsklasseMapper();
@@ -93,7 +93,7 @@ namespace Ringen.Schnittstelle.RDB.Services
             return new Tuple<Saison, List<Leistungsklasse>>(saisonMapper.Map(saisonApiModel), leistungsklasseMapper.Map(systemApiModelListe));
         }
 
-        public async Task<List<Saison>> GetSaisonsAsync()
+        public async Task<List<Saison>> Get_Saisons_Async()
         {
             SaisonMapper mapper = new SaisonMapper();
 
@@ -103,7 +103,7 @@ namespace Ringen.Schnittstelle.RDB.Services
             return apiModelListe.Select(apiModel => mapper.Map(apiModel)).ToList();
         }
 
-        public async Task<List<Mannschaft>> GetMannschaftenAsync(string saisonId, string ligaId, string tableId)
+        public async Task<List<Mannschaft>> Get_Mannschaften_Async(string saisonId, string ligaId, string tableId)
         {
             MannschaftMapper mapper = new MannschaftMapper();
 

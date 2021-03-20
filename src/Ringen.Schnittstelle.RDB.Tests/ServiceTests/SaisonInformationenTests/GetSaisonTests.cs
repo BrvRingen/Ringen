@@ -23,7 +23,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.SaisonInformationenTests
         [Test]
         public void GetSaisons_erwarte_Erfolg()
         {
-            List<Saison> saisonListe = _apiSaisonInformationen.GetSaisonsAsync().Result;
+            List<Saison> saisonListe = _apiSaisonInformationen.Get_Saisons_Async().Result;
 
             saisonListe.Should().NotBeNull();
             saisonListe.Count.Should().BeGreaterThan(1);
@@ -37,7 +37,7 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.SaisonInformationenTests
         [TestCase("2019", "Männer")]
         public void GetSaison_erwarte_Erfolg(string saisonId, string erwarteteLeistungsklasse)
         {
-            Tuple<Saison, List<Leistungsklasse>> saison = _apiSaisonInformationen.GetSaisonAsync(saisonId).Result;
+            Tuple<Saison, List<Leistungsklasse>> saison = _apiSaisonInformationen.Get_Saison_Async(saisonId).Result;
 
             saison.Should().NotBeNull();
             saison.Item1.SaisonId.Should().Be(saisonId);
