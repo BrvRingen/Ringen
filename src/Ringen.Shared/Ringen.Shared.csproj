@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="ConfigurationElemente\CredentialConfigurationElement.cs" />
     <Compile Include="ConfigurationElemente\KeyValueStringConfigurationElement.cs" />
+    <Compile Include="ConfigurationElemente\ValueIntConfigurationElement.cs" />
     <Compile Include="ConfigurationElemente\ValueStringConfigurationElement.cs" />
     <Compile Include="GlobaleVariablen.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />

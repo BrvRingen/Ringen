@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("Ringen")]
 [assembly: AssemblyDescription("Die Applikation zur Durchführung von Mannschaftskämpfen in Deutschland")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Bayersicher Ringer Verband e. V.")]
+[assembly: AssemblyCompany("Bayerischer Ringer Verband e. V.")]
 [assembly: AssemblyProduct("Ringen")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyCopyright("Copyright © 2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

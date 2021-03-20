@@ -7,9 +7,6 @@ namespace Ringen.Shared
         public const string KonfigSectionName = "ringen";
 
         //TODO: Info Konfigdatei auslagern
-        public static ErgebnisdienstSystem AktivesSystem = ErgebnisdienstSystem.RDB;
-
-        //TODO: Info Konfigdatei auslagern
-        public static bool IstApiCaching = true;
+        public static ErgebnisdienstSystem AktiveApiSchnittstelle = ErgebnisdienstSystem.RDB;
     }
 }
