@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ringen"
+             xmlns:RingenCoreDataGrid="clr-namespace:Ringen.Core.DataGrid;assembly=Ringen.Core"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
              xmlns:cmd="http://www.galasoft.ch/mvvmlight"
@@ -95,7 +96,7 @@
                                 AutoHideWidth="250"
                                 CanHide="True"
                                 ContentId="main_treeview">
-                            <DataGrid ItemsSource="{Binding LogData}"></DataGrid>
+                            <RingenCoreDataGrid:ExtDataGrid ItemsSource="{Binding LogData}" ScrollToLast="True"></RingenCoreDataGrid:ExtDataGrid>
                             <!--<StaticResource ResourceKey="Main_TreeView" />-->
                         </ad:LayoutAnchorable>
                     </ad:LayoutAnchorablePane>

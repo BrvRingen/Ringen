@@ -11,7 +11,10 @@
     <CoreUi:ExtendedNotifyPropertyChangedUserControl.Resources>
         <local:NullToVisiblityConverter x:Key="NullToVisiblity" />
     </CoreUi:ExtendedNotifyPropertyChangedUserControl.Resources>
-
+    <CoreUi:ExtendedNotifyPropertyChangedUserControl.InputBindings>
+        <!--todo: Muss noch auf Windows gerootet werden.-->
+        <KeyBinding Key="F1" Command="{Binding Start}" CommandParameter="Bout" />
+    </CoreUi:ExtendedNotifyPropertyChangedUserControl.InputBindings>
     <Grid Visibility="{Binding EinzelkampfViewModel, Converter={StaticResource NullToVisiblity}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />

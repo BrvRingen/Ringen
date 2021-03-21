@@ -261,7 +261,7 @@ namespace Ringen.ViewModel
             {
                 return new RelayCommand<RoutedPropertyChangedEventArgs<object>>(new Action<RoutedPropertyChangedEventArgs<object>>((RoutedPropertyChangedEventArgs<object> e) =>
                 {
-                    MannschaftskaempfeExplorer.SelectedItem = (IExplorerItemViewModel)e.NewValue;
+                    MannschaftskaempfeExplorer.SelectedItem = e.NewValue as IExplorerItemViewModel;
                 }));
             }
         }
