@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ringen.Core.ViewModels;
+using Ringen.Core.ViewModels.Enums;
 using Table = MigraDoc.DocumentObjectModel.Tables.Table;
 
 namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
@@ -226,7 +227,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
         {
             AddKampfSpalte(zeile, $"{kampf.KampfNr}");
 
-            AddKampfSpalte(zeile, ((BoutSettings.WrestleStyles)kampf.WrestleStyle).AsString(EnumFormat.Description));
+            AddKampfSpalte(zeile, ((StilartViewModel)kampf.StilartViewModel).AsString(EnumFormat.Description));
             var weightClass = AddKampfSpalte(zeile, kampf.WeightClass);
             weightClass.Borders.Right.Width = 1;
             weightClass.Borders.Right.Color = colorRed;
@@ -240,7 +241,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
                 homeWrestlerSpalte.Format.Font.Color = colorRed;
             }
 
-            AddKampfSpalte(zeile, kampf.HomeWrestlerId > 0 ? kampf.HomeWrestlerId.ToString() : "--").Borders.Color = colorRed;
+            AddKampfSpalte(zeile, string.IsNullOrEmpty(kampf.HomeWrestlerId) ? kampf.HomeWrestlerId.ToString() : "--").Borders.Color = colorRed;
             AddKampfSpalte(zeile, kampf.HomeWrestlerStatus ?? string.Empty).Borders.Color = colorRed;
             var heimPunkte = AddKampfSpalte(zeile, kampf.HomeWrestlerPoints > 0 ? kampf.HomeWrestlerPoints.ToString() : "0", 2);
             heimPunkte.Borders.Color = colorRed;
@@ -258,7 +259,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
                 opponentWrestlerSpalte.Format.Font.Color = colorBlue;
             }
 
-            AddKampfSpalte(zeile, kampf.OpponentWrestlerId > 0 ? kampf.OpponentWrestlerId.ToString() : "--").Borders.Color = colorBlue;
+            AddKampfSpalte(zeile, string.IsNullOrEmpty(kampf.OpponentWrestlerId) ? kampf.OpponentWrestlerId.ToString() : "--").Borders.Color = colorBlue;
             AddKampfSpalte(zeile, kampf.OpponentWrestlerStatus ?? string.Empty).Borders.Color = colorBlue;
 
             var gastPunkte = AddKampfSpalte(zeile, kampf.OpponentWrestlerPoints > 0 ? kampf.OpponentWrestlerPoints.ToString() : "0");
@@ -271,8 +272,8 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
                 gastPunkte.Format.Font.Color = colorBlue;
             }
 
-            var kampfzeit = TimeSpan.FromSeconds(kampf.Settings.Times[Ringen.Core.CS.BoutTime.Types.Bout.ToString()].Time).ToString("m':'ss");
-            AddKampfSpalte(zeile, string.Format(Resources.LanguageFiles.DictPluginMain.PdfProtocolResult, kampf.Result, kampfzeit));
+            var kampfzeit = TimeSpan.FromSeconds(kampf.Settings.Times[GriffbewertungsTypViewModel.Bout.ToString()].Time).ToString("m':'ss");
+            AddKampfSpalte(zeile, string.Format(Resources.LanguageFiles.DictPluginMain.PdfProtocolResult, kampf.SiegartViewModel, kampfzeit));
 
             var spalte = zeile.Cells[_kampfSpaltenCounter];
             _kampfSpaltenCounter++;
@@ -286,11 +287,11 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
                 var font = new Font();
                 var ft = punkteParagraph.AddFormattedText(punkt.Value, font);
 
-                if (punkt.HomeOrOpponent == Core.CS.BoutPoint.Wrestler.Home)
+                if (punkt.HomeOrOpponent == HeimGastViewModel.Home)
                 {
                     ft.Style = CustomStyles.WERTUNG_ROT;
                 }
-                else if (punkt.HomeOrOpponent == Core.CS.BoutPoint.Wrestler.Opponent)
+                else if (punkt.HomeOrOpponent == HeimGastViewModel.Opponent)
                 {
                     ft.Style = CustomStyles.WERTUNG_BLAU;
                 }

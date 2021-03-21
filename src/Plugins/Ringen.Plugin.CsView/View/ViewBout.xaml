@@ -91,7 +91,7 @@
             </Border>
             <Border Grid.Column="4">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding EinzelkampfViewModel.WrestleStyle}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.StilartViewModel}" />
                 </Viewbox>
             </Border>
             <Border Background="LightSkyBlue" Grid.Column="5">

@@ -14,18 +14,20 @@ namespace Ringen.Core.Services.ErgebnisdienstApi
         private IApiErgebnisdienst _apiErgebnisdienst;
         private IApiMannschaftskaempfe _apiMannschaftskaempfe;
         private MannschaftskaempfeViewModelMapper _mapper;
+        private EinzelkampfViewModelMapper _einzelkampfMapper;
 
-        public MannschaftskaempfeService(IApiErgebnisdienst apiErgebnisdienst, IApiMannschaftskaempfe apiMannschaftskaempfe, MannschaftskaempfeViewModelMapper mapper)
+        public MannschaftskaempfeService(IApiErgebnisdienst apiErgebnisdienst, IApiMannschaftskaempfe apiMannschaftskaempfe, MannschaftskaempfeViewModelMapper mapper, EinzelkampfViewModelMapper einzelkampfMapper)
         {
             _apiErgebnisdienst = apiErgebnisdienst;
             _apiMannschaftskaempfe = apiMannschaftskaempfe;
             _mapper = mapper;
+            _einzelkampfMapper = einzelkampfMapper;
         }
 
         public async Task<List<EinzelkampfViewModel>> Get_und_Map_Einzelkaempfe_Async(string saisonId, string wettkampfId)
         {
             Tuple<Mannschaftskampf, List<Einzelkampf>> mannschaftskampf = await _apiMannschaftskaempfe.Get_Mannschaftskampf_Async(saisonId, wettkampfId);
-            List<EinzelkampfViewModel> viewModelListe = _mapper.Map(mannschaftskampf);
+            List<EinzelkampfViewModel> viewModelListe = _einzelkampfMapper.Map(mannschaftskampf);
 
             return viewModelListe;
         }

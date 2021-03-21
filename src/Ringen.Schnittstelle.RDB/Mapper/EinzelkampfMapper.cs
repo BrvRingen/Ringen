@@ -29,9 +29,13 @@ namespace Ringen.Schnittstelle.RDB.Mapper
 
         public Einzelkampf Map(JToken kampfJToken)
         {
-            var apiModel = kampfJToken.ToObject<BoutApiModel>();
-            var annotationApiModelListe = kampfJToken["annotation"]["1"].Select(li => li.FirstOrDefault().ToObject<AnnotationApiModel>()).ToList();
-            apiModel.Annotations = annotationApiModelListe.ToList();
+            BoutApiModel apiModel = kampfJToken.ToObject<BoutApiModel>();
+
+            if (kampfJToken["annotation"] != null)
+            {
+                var annotationApiModelListe = kampfJToken["annotation"]["1"].Select(li => li.FirstOrDefault().ToObject<AnnotationApiModel>()).ToList();
+                apiModel.Annotations = annotationApiModelListe.ToList();
+            }
 
             return Map(apiModel);
         }
@@ -62,7 +66,6 @@ namespace Ringen.Schnittstelle.RDB.Mapper
                 RundenErgebnisse = ErmittleRundenErgebnisse(apiModel),
                 Siegart = _siegartKonvertierer.ToEnum(apiModel.Result),
                 Kampfdauer = TimeSpan.FromSeconds(Convert.ToDouble(GetAnnotationValue(apiModel.Annotations, "duration"))),
-                Wertungspunkte = null,
                 Kommentar = GetAnnotationValue(apiModel.Annotations, "comment")
             };
 
@@ -74,7 +77,8 @@ namespace Ringen.Schnittstelle.RDB.Mapper
 
         private string GetAnnotationValue(List<AnnotationApiModel> annotationApiModelListe, string type)
         {
-            return annotationApiModelListe.FirstOrDefault(li => li.Type.Equals(type, StringComparison.OrdinalIgnoreCase))?.Value;
+            var annotationApiModel = annotationApiModelListe?.FirstOrDefault(li => li.Type.Equals(type, StringComparison.OrdinalIgnoreCase));
+            return annotationApiModel?.Value;
         }
 
         private Ringer GetRinger(HeimGast heimGast, BoutApiModel apiModel)

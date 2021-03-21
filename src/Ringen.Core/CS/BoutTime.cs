@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using System.Timers;
 using Ringen.Core.Messaging;
 using Ringen.Core.UI;
+using Ringen.Core.ViewModels.Enums;
 
 namespace Ringen.Core.CS
 {
-
     public class BoutTime : ExtendedNotifyPropertyChanged
     {
         public enum Modes { Running, Paused, Finished }
@@ -22,14 +22,14 @@ namespace Ringen.Core.CS
             set { Set(ref m_Mode, value); }
         }
 
-        public enum Types { Bout, Break, HomeInjury, OpponentInjury, HomeActivity, OpponentActivity, HomeP, OpponentP }
+        
 
-        private Types m_Type;
+        private GriffbewertungsTypViewModel _mGriffbewertungsTypViewModel;
 
-        public Types Type
+        public GriffbewertungsTypViewModel GriffbewertungsTypViewModel
         {
-            get { return Get(m_Type); }
-            set { Set(ref m_Type, value); }
+            get { return Get(_mGriffbewertungsTypViewModel); }
+            set { Set(ref _mGriffbewertungsTypViewModel, value); }
         }
 
         private BoutSettings BoutSettings;
@@ -37,10 +37,10 @@ namespace Ringen.Core.CS
         public int Max { get; set; }
         public List<int> Pauses { get; set; }
 
-        public BoutTime(BoutSettings BoutSettings, Types Type, int Max, List<int> Pauses = null)
+        public BoutTime(BoutSettings BoutSettings, GriffbewertungsTypViewModel griffbewertungsTypViewModel, int Max, List<int> Pauses = null)
         {
             this.BoutSettings = BoutSettings;
-            this.Type = Type;
+            this.GriffbewertungsTypViewModel = griffbewertungsTypViewModel;
             Mode = Modes.Paused;
             this.Max = Max;
             this.Pauses = Pauses;
@@ -48,15 +48,15 @@ namespace Ringen.Core.CS
 
         public void Start()
         {
-            LoggerMessage.Send(new LogEntry(LogEntryType.Message, $"Timer '{Type.ToString()}' wurde gestartet."));
+            LoggerMessage.Send(new LogEntry(LogEntryType.Message, $"Timer '{GriffbewertungsTypViewModel.ToString()}' wurde gestartet."));
             Timer.Start();
             Mode = Modes.Running;
 
-            if (Type == Types.HomeInjury || Type == Types.OpponentInjury) BoutSettings.Times[Types.Bout.ToString()].Stop();
+            if (GriffbewertungsTypViewModel == GriffbewertungsTypViewModel.HomeInjury || GriffbewertungsTypViewModel == GriffbewertungsTypViewModel.OpponentInjury) BoutSettings.Times[GriffbewertungsTypViewModel.Bout.ToString()].Stop();
         }
         public void Stop()
         {
-            LoggerMessage.Send(new LogEntry(LogEntryType.Message, $"Timer '{Type.ToString()}' wurde gestoppt."));
+            LoggerMessage.Send(new LogEntry(LogEntryType.Message, $"Timer '{GriffbewertungsTypViewModel.ToString()}' wurde gestoppt."));
             Timer.Stop();
             Mode = Modes.Paused;
         }
@@ -98,7 +98,7 @@ namespace Ringen.Core.CS
                     Timer.Stop();
                     Mode = Modes.Paused;
 
-                    if (Type == Types.Bout) BoutSettings.Times[Types.Break.ToString()].Start();
+                    if (GriffbewertungsTypViewModel == GriffbewertungsTypViewModel.Bout) BoutSettings.Times[GriffbewertungsTypViewModel.Break.ToString()].Start();
                 }
                 if (Time == Max)
                 {

@@ -30,11 +30,10 @@ namespace Ringen.Schnittstelle.RDB.Tests.ServiceTests.StammdatenTests
         }
 
         [Test]
-        [Ignore("Daten von Oliver noch nicht in Testumgebung importiert")] //TODO Ignore entfernen sobald Testdaten vorhanden
         public void Pass_113581_erwarte_korrekte_Daten()
         {
             Ringer ringer = _apiStammdaten.Get_Ringer_Async("11358").Result;
-            ringer.Vorname.Should().Be("Matin");
+            ringer.Vorname.Should().Be("M."); //In Testdatenbank anonymisiert (Immer erster Buchstabe des Vornamens mit .)
             ringer.Nachname.Should().Be("Sakhi");
         }
 

@@ -65,7 +65,7 @@ namespace Ringen.Schnittstelle.RDB.Mapper
                 OpponentWrestlerPoints = einzelkampf.GastMannschaftswertung.ToString(),
 
                 Result = _siegartKonvertierer.ToApiString(einzelkampf.Siegart),
-                Round1 = einzelkampf.RundenErgebnisse.FirstOrDefault().Value.Trim(),
+                Round1 = einzelkampf.RundenErgebnisse.FirstOrDefault().Value.Trim(), //TODO: ggf. andere Runden-Mappings mit integrieren
                 Round2 = string.Empty,
                 Round3 = string.Empty,
                 Round4 = string.Empty,

@@ -63,7 +63,7 @@
     <Compile Include="Models\EinzelkampfSchema.cs" />
     <Compile Include="Models\Mannschaftspunktewertung.cs" />
     <Compile Include="Models\Ringer.cs" />
-    <Compile Include="Models\Enums\RingerTypEnum.cs" />
+    <Compile Include="Models\Enums\HeimGastEnum.cs" />
     <Compile Include="Models\Saison.cs" />
     <Compile Include="Models\Liga.cs" />
     <Compile Include="Models\Griffbewertungspunkt.cs" />

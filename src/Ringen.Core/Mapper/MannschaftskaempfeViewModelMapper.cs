@@ -19,54 +19,6 @@ namespace Ringen.Core.Mapper
             //TinyMapper.Bind<Einzelkampf, EinzelkampfViewModel>();
         }
 
-        public List<EinzelkampfViewModel> Map(Tuple<Mannschaftskampf, List<Einzelkampf>> model)
-        {
-            var viewModelListe = Map(model.Item2);
-
-            return viewModelListe;
-        }
-
-        public EinzelkampfViewModel Map(Einzelkampf model)
-        {
-            //var viewModel = TinyMapper.Map<EinzelkampfViewModel>(model);
-
-            //TODO Einzelkampf Mapping machen
-            var viewModel = new EinzelkampfViewModel
-            {
-                KampfNr = 0,
-                Settings = null,
-                Order = 0,
-                WeightClass = null,
-                WrestleStyle = BoutSettings.WrestleStyles.LL,
-                HomeWrestlerId = 0,
-                HomeWrestlerWeight = 0,
-                OpponentWrestlerWeight = 0,
-                HomeWrestlerLicId = 0,
-                HomeWrestlerName = model.HeimRinger?.Nachname,
-                HomeWrestlerGivenname = model.HeimRinger?.Vorname,
-                HomeWrestlerStatus = null,
-                HomeWrestlerPoints = 0,
-                HomeWrestlerFlags = 0,
-                OpponentWrestlerId = 0,
-                OpponentWrestlerLicId = 0,
-                OpponentWrestlerName = model.GastRinger?.Nachname,
-                OpponentWrestlerGivenname = model.GastRinger?.Vorname,
-                OpponentWrestlerStatus = null,
-                OpponentWrestlerPoints = 0,
-                OpponentWrestlerFlags = 0,
-                Result = BoutSettings.Results.TÜ,
-                Round1 = null,
-                Points = null,
-                Children = null
-            };
-
-            return viewModel;
-        }
-        
-        public List<EinzelkampfViewModel> Map(IEnumerable<Einzelkampf> modelListe)
-        {
-            return modelListe.Select(model => Map(model)).ToList();
-        }
         
         public MannschaftskampfViewModel Map(Mannschaftskampf model)
         {

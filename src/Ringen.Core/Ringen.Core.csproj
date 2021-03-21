@@ -28,6 +28,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ViewModels\Enums\SiegartViewModelEnum.cs" />
+    <Compile Include="ViewModels\Enums\GriffbewertungsTypViewModelEnum.cs" />
+    <Compile Include="ViewModels\Enums\HeimGastViewModelEnum.cs" />
+    <Compile Include="ViewModels\Enums\StilartViewModelEnum.cs" />
+    <Compile Include="Mapper\EinzelkampfViewModelMapper.cs" />
     <Compile Include="ViewModels\EinzelkampfViewModel.cs" />
     <Compile Include="CS\BoutPoint.cs" />
     <Compile Include="CS\BoutSettings.cs" />

@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Ringen.Core.CS;
 using Ringen.Core.UI;
+using Ringen.Core.ViewModels.Enums;
 
 namespace Ringen.Core.ViewModels
 {
@@ -48,7 +49,7 @@ namespace Ringen.Core.ViewModels
         {
             get
             {
-                if (settings == null) settings = new BoutSettings(this);
+                if (settings == null) settings = new BoutSettings(StilartViewModel);
                 return settings;
             }
             set { settings = value; }
@@ -56,9 +57,9 @@ namespace Ringen.Core.ViewModels
 
         public int Order { get; internal set; }
         public string WeightClass { get; internal set; }
-        public BoutSettings.WrestleStyles WrestleStyle { get; internal set; }
+        public StilartViewModel StilartViewModel { get; internal set; }
         
-        public int HomeWrestlerId { get; internal set; }
+        public string HomeWrestlerId { get; internal set; }
 
         public double HomeWrestlerWeight { get; internal set; }
 
@@ -74,7 +75,7 @@ namespace Ringen.Core.ViewModels
             return string.IsNullOrEmpty(HomeWrestlerFullname.Trim());
         }
 
-        public int HomeWrestlerLicId { get; internal set; }
+        public string HomeWrestlerLicId { get; internal set; }
         public string HomeWrestlerName { get; internal set; }
         public string HomeWrestlerGivenname { get; internal set; }
         public string HomeWrestlerStatus { get; internal set; }
@@ -88,10 +89,9 @@ namespace Ringen.Core.ViewModels
         }
 
         public int HomeWrestlerPoints { get; internal set; }
-        public int HomeWrestlerFlags { get; internal set; }
 
-        public int OpponentWrestlerId { get; internal set; }
-        public int OpponentWrestlerLicId { get; internal set; }
+        public string OpponentWrestlerId { get; internal set; }
+        public string OpponentWrestlerLicId { get; internal set; }
         public string OpponentWrestlerName { get; internal set; }
         public string OpponentWrestlerGivenname { get; internal set; }
         public string OpponentWrestlerStatus { get; internal set; }
@@ -105,8 +105,7 @@ namespace Ringen.Core.ViewModels
         }
 
         public int OpponentWrestlerPoints { get; internal set; }
-        public int OpponentWrestlerFlags { get; internal set; }
-        public BoutSettings.Results Result { get; internal set; }
+        public SiegartViewModelEnum SiegartViewModel { get; internal set; }
         public string Round1 { get; internal set; }
 
 
@@ -142,7 +141,7 @@ namespace Ringen.Core.ViewModels
 
                     foreach (DictionaryEntry resource in tempReader)
                     {
-                        if (resource.Key.ToString().Contains(@"cs/defaultbout.json"))
+                        if (resource.Key.ToString().Contains(@"CS/DefaultBout.json"))
                         {
                             var tempPath = new Uri("/" + myAssembly.GetName().Name + ";component/" + resource.Key.ToString(), UriKind.Relative);
 
@@ -162,30 +161,30 @@ namespace Ringen.Core.ViewModels
         {
             points = new ObservableCollection<BoutPoint>();
 
-            Async.RunSync(async () =>
-            {
-                var AssetResponse = await REST.Client().GetAsync($"/Api/v1/cs/?saisonId={MannschaftskampfViewModel.SaisonId}&competitionId={MannschaftskampfViewModel.WettkampfId}&order={Order}");
+            //Async.RunSync(async () =>
+            //{
+            //    var AssetResponse = await REST.Client().GetAsync($"/Api/v1/cs/?saisonId={MannschaftskampfViewModel.SaisonId}&competitionId={MannschaftskampfViewModel.WettkampfId}&order={Order}");
 
-                if (AssetResponse.IsSuccessStatusCode)
-                {
-                    var result = AssetResponse.Content.ReadAsStringAsync().Result;
-                    foreach (var BoutAnnotation in (JArray)JsonConvert.DeserializeObject(result))
-                    {
-                        if (BoutAnnotation["type"].ToString() == "points")
-                        {
-                            foreach (var Point in BoutAnnotation["value"].ToString().Split(','))
-                            {
-                                var tmpPoint = new Regex(@"(?<value>.*)(?<Wrestler>[R|B])(?<Time>\d*)").Match(Point.ToUpper());
-                                points.Add(new BoutPoint(tmpPoint.Groups["value"].Value, this, tmpPoint.Groups["Wrestler"].Value == "r" ? BoutPoint.Wrestler.Home : BoutPoint.Wrestler.Opponent, int.Parse(tmpPoint.Groups["Time"].Value)));
-                            }
-                        }
-                        else if (BoutAnnotation["type"].ToString() == "duration")
-                        {
-                            Settings.Times[BoutTime.Types.Bout.ToString()].Time = int.Parse(BoutAnnotation["value"].ToString());
-                        }
-                    }
-                }
-            });
+            //    if (AssetResponse.IsSuccessStatusCode)
+            //    {
+            //        var result = AssetResponse.Content.ReadAsStringAsync().Result;
+            //        foreach (var BoutAnnotation in (JArray)JsonConvert.DeserializeObject(result))
+            //        {
+            //            if (BoutAnnotation["type"].ToString() == "points")
+            //            {
+            //                foreach (var Point in BoutAnnotation["value"].ToString().Split(','))
+            //                {
+            //                    var tmpPoint = new Regex(@"(?<value>.*)(?<Wrestler>[R|B])(?<Time>\d*)").Match(Point.ToUpper());
+            //                    points.Add(new BoutPoint(tmpPoint.Groups["value"].Value, tmpPoint.Groups["Wrestler"].Value == "r" ? Wrestler.Home : Wrestler.Opponent, int.Parse(tmpPoint.Groups["Time"].Value)));
+            //                }
+            //            }
+            //            else if (BoutAnnotation["type"].ToString() == "duration")
+            //            {
+            //                Settings.Times[Types.Bout.ToString()].Time = int.Parse(BoutAnnotation["value"].ToString());
+            //            }
+            //        }
+            //    }
+            //});
         }
     }
 }

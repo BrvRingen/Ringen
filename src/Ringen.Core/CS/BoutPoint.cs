@@ -3,26 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ringen.Core.Properties;
 using Ringen.Core.ViewModels;
+using Ringen.Core.ViewModels.Enums;
 
 namespace Ringen.Core.CS
 {
     public class BoutPoint
     {
-        public EinzelkampfViewModel EinzelkampfViewModel { get; set; }
-        public Wrestler? HomeOrOpponent { get; set; }
+        public HeimGastViewModel? HomeOrOpponent { get; set; }
         public string Value { get; set; }
         public int? Time { get; set; }
         public DateTime? Zeit { get; set; }
 
-        public enum Wrestler { Home, Opponent };
 
-        public BoutPoint(string value, EinzelkampfViewModel einzelkampfViewModel, Wrestler? homeOrOpponent = null, DateTime? zeit = null)
+        public BoutPoint(string value, HeimGastViewModel? homeOrOpponent = null, DateTime? zeit = null)
         {
-            this.EinzelkampfViewModel = einzelkampfViewModel;
             this.HomeOrOpponent = homeOrOpponent;
             this.Value = value;
-            Time = einzelkampfViewModel?.Settings.Times[BoutTime.Types.Bout.ToString()].Time;
+            //Time = Settings.Times[Types.Bout.ToString()].Time;
             Zeit = zeit;
         }
 
@@ -35,16 +34,15 @@ namespace Ringen.Core.CS
         /// <param name="einzelkampfViewModel"></param>
         /// <param name="HomeOrOpponent"></param>
         /// <param name="Time"></param>
-        public BoutPoint(string Value, EinzelkampfViewModel einzelkampfViewModel, Wrestler? HomeOrOpponent, int Time)
+        public BoutPoint(string Value, HeimGastViewModel? HomeOrOpponent, int Time)
         {
-            this.EinzelkampfViewModel = einzelkampfViewModel;
             this.HomeOrOpponent = HomeOrOpponent;
             this.Value = Value;
             this.Time = Time;
             Zeit = null;
         }
 
-        public BoutPoint(string value, EinzelkampfViewModel einzelkampfViewModel, Wrestler? homeOrOpponent = null) : this(value, einzelkampfViewModel, homeOrOpponent, DateTime.Now)
+        public BoutPoint(string value, HeimGastViewModel? homeOrOpponent = null) : this(value, homeOrOpponent, DateTime.Now)
         {
         }
     }

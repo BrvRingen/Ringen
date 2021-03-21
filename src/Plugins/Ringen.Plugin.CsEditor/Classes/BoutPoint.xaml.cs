@@ -40,7 +40,7 @@ namespace Ringen.Plugin.CsEditor
         private RelayCommand m_Delete;
         public RelayCommand Delete => m_Delete ?? (m_Delete = new RelayCommand(() =>
         {
-            Data.EinzelkampfViewModel.Points.Remove(Data);
+            //Data.EinzelkampfViewModel.Points.Remove(Data);
             LoggerMessage.Send(new LogEntry(LogEntryType.Message, "Point deleted to Points"));
         }
         ));

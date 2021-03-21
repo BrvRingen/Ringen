@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
+using Ringen.Core.CS;
+using Ringen.Core.ViewModels.Enums;
 using static Ringen.Core.CS.BoutPoint;
 
 namespace Ringen.Plugin.CsEditor
@@ -37,7 +39,7 @@ namespace Ringen.Plugin.CsEditor
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((Wrestler)value == Wrestler.Home)
+            if ((HeimGastViewModel)value == HeimGastViewModel.Home)
                 return Brushes.Red;
             else
                 return Brushes.LightSkyBlue;
