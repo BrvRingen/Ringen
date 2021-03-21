@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Ringen.Core.Services.ErgebnisdienstApi;
 using Ringen.Core.UI;
 using Ringen.DependencyInjection;
@@ -16,17 +17,15 @@ namespace Ringen.Core.ViewModels
             {
                 if (_saisonViewModels == null)
                 {
-                    Lade_ApiDaten_Async();
+                    Task.Run(async () =>
+                    {
+                        _saisonViewModels = await DependencyInjectionContainer.GetService<SaisonService>().Get_und_Map_Saisons_Async();
+                        OnPropertyChanged(nameof(Children));
+                    });
                 }
                     
                 return _saisonViewModels;
             }
-        }
-
-        private async void Lade_ApiDaten_Async()
-        {
-            _saisonViewModels = await DependencyInjectionContainer.GetService<SaisonService>().Get_und_Map_Saisons_Async();
-            OnPropertyChanged(nameof(Children));
         }
     }
 }

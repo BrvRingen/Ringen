@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Ringen.Core.Services.ErgebnisdienstApi;
 using Ringen.Core.UI;
 using Ringen.DependencyInjection;
@@ -30,17 +31,15 @@ namespace Ringen.Core.ViewModels
             {
                 if (_mannschaftskaempfList == null)
                 {
-                    Lade_ApiDaten_Async();
+                    Task.Run(async () =>
+                    {
+                        _mannschaftskaempfList = await DependencyInjectionContainer.GetService<MannschaftskaempfeService>().Get_und_Map_Mannschaftskaempfe_Async(SaisonId, LigaId, TableId);
+                        OnPropertyChanged(nameof(Children));
+                    });
                 }
 
                 return _mannschaftskaempfList;
             }
-        }
-
-        private async void Lade_ApiDaten_Async()
-        {
-            _mannschaftskaempfList = await DependencyInjectionContainer.GetService<MannschaftskaempfeService>().Get_und_Map_Mannschaftskaempfe_Async(SaisonId, LigaId, TableId);
-            OnPropertyChanged(nameof(Children));
         }
     }
 }

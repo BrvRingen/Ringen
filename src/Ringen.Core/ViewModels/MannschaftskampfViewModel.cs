@@ -160,7 +160,11 @@ namespace Ringen.Core.ViewModels
             {
                 if (_einzelkaempfe == null)
                 {
-                    Lade_ApiDaten_Async();
+                    Task.Run(async () =>
+                    {
+                        _einzelkaempfe = await DependencyInjectionContainer.GetService<MannschaftskaempfeService>().Get_und_Map_Einzelkaempfe_Async(this.SaisonId, this.WettkampfId);
+                        OnPropertyChanged(nameof(Children));
+                    });
                 }
 
                 return _einzelkaempfe;
@@ -168,11 +172,6 @@ namespace Ringen.Core.ViewModels
             set { _einzelkaempfe = value; }
         }
 
-        private async void Lade_ApiDaten_Async()
-        {
-            _einzelkaempfe = await DependencyInjectionContainer.GetService<MannschaftskaempfeService>().Get_und_Map_Einzelkaempfe_Async(this.SaisonId, this.WettkampfId);
-            OnPropertyChanged(nameof(Children));
-        }
 
         public async Task Sende_Ergebnis_Async()
         {
