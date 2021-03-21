@@ -17,9 +17,9 @@
     <ScrollViewer VerticalScrollBarVisibility="Visible">
         <StackPanel Orientation="Vertical">
             <!--Competition-->
-            <local:ViewCompetition/>
+            <local:MannschaftskampfView/>
             <!--Bout-->
-            <local:ViewBout/>
+            <local:EinzelkampfView/>
         </StackPanel>
     </ScrollViewer>
 </TabItem:RingenTabItem>

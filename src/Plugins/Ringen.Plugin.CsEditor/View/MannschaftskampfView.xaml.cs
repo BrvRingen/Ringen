@@ -25,7 +25,7 @@ namespace Ringen.Plugin.CsEditor
     /// <summary>
     /// Interaktionslogik für Competition.xaml
     /// </summary>
-    public partial class ViewCompetition : ExtendedNotifyPropertyChangedUserControl
+    public partial class MannschaftskampfView : ExtendedNotifyPropertyChangedUserControl
     {
         private MannschaftskampfViewModel _mannschaftskampfViewModel;
 
@@ -35,7 +35,7 @@ namespace Ringen.Plugin.CsEditor
             set
             {
                 _mannschaftskampfViewModel = value;
-                OnPropertyChanged(nameof(ViewCompetition.MannschaftskampfViewModel));
+                OnPropertyChanged(nameof(MannschaftskampfViewModel));
             }
         }
 
@@ -47,11 +47,11 @@ namespace Ringen.Plugin.CsEditor
             set
             {
                 _competitionInfos = value;
-                OnPropertyChanged(nameof(ViewCompetition.CompetitionInfos));
+                OnPropertyChanged(nameof(MannschaftskampfView.CompetitionInfos));
             }
         }
 
-        public ViewCompetition()
+        public MannschaftskampfView()
         {
             InitializeComponent();
             UpdateUi();

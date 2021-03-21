@@ -12,8 +12,8 @@
     d:DesignWidth="1600">
     <DockPanel>
         <!--Competition-->
-        <local:ViewCompetition DockPanel.Dock="Bottom"/>
+        <local:MannschaftskampfView DockPanel.Dock="Bottom"/>
         <!--Bout-->
-        <local:ViewBout />
+        <local:EinzelkampfView />
     </DockPanel>
 </TabItem:RingenTabItem>

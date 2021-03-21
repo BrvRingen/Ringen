@@ -59,11 +59,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_DictionaryToEnum.tt</DependentUpon>
     </Compile>
-    <Compile Include="View\ViewBout.xaml.cs">
-      <DependentUpon>ViewBout.xaml</DependentUpon>
+    <Compile Include="View\EinzelkampfView.xaml.cs">
+      <DependentUpon>EinzelkampfView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ViewCompetition.xaml.cs">
-      <DependentUpon>ViewCompetition.xaml</DependentUpon>
+    <Compile Include="View\MannschaftskampfView.xaml.cs">
+      <DependentUpon>MannschaftskampfView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
@@ -83,11 +83,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ViewBout.xaml">
+    <Page Include="View\EinzelkampfView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ViewCompetition.xaml">
+    <Page Include="View\MannschaftskampfView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

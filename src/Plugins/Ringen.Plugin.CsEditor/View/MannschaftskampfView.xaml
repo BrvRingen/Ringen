@@ -1,4 +1,4 @@
-﻿<CoreUi:ExtendedNotifyPropertyChangedUserControl x:Class="Ringen.Plugin.CsEditor.ViewCompetition"
+﻿<CoreUi:ExtendedNotifyPropertyChangedUserControl x:Class="Ringen.Plugin.CsEditor.MannschaftskampfView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:CoreUi="clr-namespace:Ringen.Core.UI;assembly=Ringen.Core"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"

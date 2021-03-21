@@ -23,7 +23,7 @@ namespace Ringen.Plugin.CsEditor
     /// <summary>
     /// Interaktionslogik für Bout.xaml
     /// </summary>
-    public partial class ViewBout : ExtendedNotifyPropertyChangedUserControl
+    public partial class EinzelkampfView : ExtendedNotifyPropertyChangedUserControl
     {
         private EinzelkampfViewModel _einzelkampfViewModel;
 
@@ -33,11 +33,11 @@ namespace Ringen.Plugin.CsEditor
             set
             {
                 _einzelkampfViewModel = value;
-                OnPropertyChanged("Bout");
+                OnPropertyChanged(nameof(EinzelkampfViewModel));
             }
         }
 
-        public ViewBout()
+        public EinzelkampfView()
         {
             InitializeComponent();
             UpdateUi();
