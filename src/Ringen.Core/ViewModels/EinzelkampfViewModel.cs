@@ -118,7 +118,10 @@ namespace Ringen.Core.ViewModels
                 if (points == null) 
                 {
                     UpdateDetails();
-                    points.CollectionChanged += (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) => { base.OnPropertyChanged("Points");  };
+                    points.CollectionChanged += (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) =>
+                    { 
+                        base.OnPropertyChanged();
+                    };
                 }
                 return points;
             }
