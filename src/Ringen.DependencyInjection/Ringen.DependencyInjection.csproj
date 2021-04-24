@@ -1,35 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B7F4860D-F7A8-4AAE-AE34-9166AB9E8F7A}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ringen.DependencyInjection</RootNamespace>
-    <AssemblyName>Ringen.DependencyInjection</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+  <Import Project="$(SolutionDir)ConfigurationLibrary.targets" />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,22 +18,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ringen.Schnittstelle.Caching\Ringen.Schnittstelle.Caching.csproj">
-      <Project>{a2c1462f-f832-4f71-9909-d4a8bef51986}</Project>
-      <Name>Ringen.Schnittstelle.Caching</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ringen.Schnittstelle.RDB\Ringen.Schnittstelle.RDB.csproj">
-      <Project>{f0356f4f-572c-4e16-8c75-b3972b1f89b8}</Project>
-      <Name>Ringen.Schnittstelle.RDB</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ringen.Schnittstellen.Contracts\Ringen.Schnittstellen.Contracts.csproj">
-      <Project>{17D6DADE-EBE8-4B4A-9EDA-014395CF42A5}</Project>
-      <Name>Ringen.Schnittstellen.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ringen.Shared\Ringen.Shared.csproj">
-      <Project>{f4bdd0b5-8268-4e68-be6a-ead3485ad2b1}</Project>
-      <Name>Ringen.Shared</Name>
-    </ProjectReference>
+    <PackageReference Include="Ringen.Schnittstellen">
+      <Version>1.0.0</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Ninject">
@@ -70,5 +28,4 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
