@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+	<IsPackable>true</IsPackable>
+    <OutputPath>$(SolutionDir)obj\$(Configuration)\lib\$(AssemblyName)\</OutputPath>
+  </PropertyGroup>
+</Project>
