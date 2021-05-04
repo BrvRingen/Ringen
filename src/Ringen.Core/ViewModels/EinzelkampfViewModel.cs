@@ -10,6 +10,7 @@ using Newtonsoft.Json.Linq;
 using Ringen.Core.CS;
 using Ringen.Core.UI;
 using Ringen.Core.ViewModels.Enums;
+using Ringen.Schnittstellen.Contracts.Models;
 
 namespace Ringen.Core.ViewModels
 {
@@ -22,7 +23,7 @@ namespace Ringen.Core.ViewModels
         {
             get
             {
-                return $"{HomeWrestlerFullname} - {OpponentWrestlerFullname}"; ;
+                return $"{HeimRinger.Vorname} {HeimRinger.Nachname} - {GastRinger.Vorname} {GastRinger.Nachname}"; ;
             }
         }
 
@@ -56,55 +57,32 @@ namespace Ringen.Core.ViewModels
         }
 
         public int Order { get; internal set; }
-        public string WeightClass { get; internal set; }
+        public string Gewichtsklasse { get; internal set; }
         public StilartViewModel StilartViewModel { get; internal set; }
         
-        public string HomeWrestlerId { get; internal set; }
+        public Ringer HeimRinger { get; internal set; }
+        public double HeimRingerGewicht { get; internal set; }
 
-        public double HomeWrestlerWeight { get; internal set; }
+        public int HeimMannschaftswertung { get; internal set; }
 
-        public double OpponentWrestlerWeight { get; internal set; }
 
         public bool IsNoOpponentWrestler()
         {
-            return string.IsNullOrEmpty(OpponentWrestlerFullname.Trim());
+            return GastRinger == null;
         }
 
         public bool IsNoHomeWrestler()
         {
-            return string.IsNullOrEmpty(HomeWrestlerFullname.Trim());
+            return HeimRinger == null;
         }
 
-        public string HomeWrestlerLicId { get; internal set; }
-        public string HomeWrestlerName { get; internal set; }
-        public string HomeWrestlerGivenname { get; internal set; }
-        public string HomeWrestlerStatus { get; internal set; }
 
-        public string HomeWrestlerFullname
-        {
-            get
-            {
-                return $"{HomeWrestlerName}{(!string.IsNullOrEmpty(HomeWrestlerGivenname) ? $", {HomeWrestlerGivenname}" : string.Empty)}";
-            }
-        }
+        public Ringer GastRinger { get; internal set; }
+        public double GastRingerGewicht { get; internal set; }
 
-        public int HomeWrestlerPoints { get; internal set; }
+        public int GastMannschaftswertung { get; internal set; }
 
-        public string OpponentWrestlerId { get; internal set; }
-        public string OpponentWrestlerLicId { get; internal set; }
-        public string OpponentWrestlerName { get; internal set; }
-        public string OpponentWrestlerGivenname { get; internal set; }
-        public string OpponentWrestlerStatus { get; internal set; }
 
-        public string OpponentWrestlerFullname
-        {
-            get
-            {
-                return $"{OpponentWrestlerName}{(!string.IsNullOrEmpty(OpponentWrestlerGivenname) ? $", {OpponentWrestlerGivenname}" : string.Empty)}";
-            }
-        }
-
-        public int OpponentWrestlerPoints { get; internal set; }
         public SiegartViewModelEnum SiegartViewModel { get; internal set; }
         public string Round1 { get; internal set; }
 

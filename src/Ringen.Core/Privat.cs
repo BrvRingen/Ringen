@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Ringen.Core
 {
-    public static class PrivateREST
+    public static class Privat
     {
         private static HttpClient client;
         private static string tmpUsername;
@@ -16,7 +17,7 @@ namespace Ringen.Core
 
         public static HttpClient Client(string Username = "", string Password = "")
         {
-            if(!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
+            if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
             {
                 if (tmpUsername != Username || tmpPassword != Password)
                 {
@@ -39,5 +40,19 @@ namespace Ringen.Core
             return client;
         }
 
+        public static async Task<PrivateInfos> GetPrivateInfos()
+        {
+            var Response = await Client().GetAsync($"/Api/v1/cs/");
+            if (Response.IsSuccessStatusCode)
+                return JsonConvert.DeserializeObject<PrivateInfos>(Response.Content.ReadAsStringAsync().Result);
+            else
+                return new PrivateInfos();
+
+        }
+    }
+
+    public class PrivateInfos
+    {
+        public int audience { get; set; }
     }
 }

@@ -201,7 +201,7 @@ Delayed start and the break no longer have to be entered. These are taken from t
   <data name="VictoryType" xml:space="preserve">
     <value>Type of victory</value>
   </data>
-  <data name="WeightClass" xml:space="preserve">
+  <data name="Gewichtsklasse" xml:space="preserve">
     <value>Class</value>
   </data>
   <data name="Winner" xml:space="preserve">

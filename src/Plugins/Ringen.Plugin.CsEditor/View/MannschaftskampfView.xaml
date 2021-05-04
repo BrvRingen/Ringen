@@ -123,16 +123,16 @@
         
         <DataGrid Grid.Row="15" Grid.ColumnSpan="3" Margin="0,20,0,0" ItemsSource="{Binding MannschaftskampfViewModel.Children}" AutoGenerateColumns="False" SelectionMode="Single">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Klasse" Binding="{Binding WeightClass, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Klasse" Binding="{Binding Gewichtsklasse, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Stilart" Binding="{Binding StilartViewModel}"  IsReadOnly="True"/>
-                <DataGridTextColumn Header="Pass (Heim)" Binding="{Binding HomeWrestlerId, UpdateSourceTrigger=Explicit}" />
-                <DataGridTextColumn Header="Name (Heim)" Binding="{Binding HomeWrestlerName}" />
-                <DataGridTextColumn Header="Vorname (Heim)" Binding="{Binding HomeWrestlerGivenname}" />
-                <DataGridTextColumn Header="Status (Heim)" Binding="{Binding HomeWrestlerStatus}" />
-                <DataGridTextColumn Header="Pass (Gast)" Binding="{Binding OpponentWrestlerId, UpdateSourceTrigger=Explicit}" />
-                <DataGridTextColumn Header="Name (Gast)" Binding="{Binding OpponentWrestlerName}" />
-                <DataGridTextColumn Header="Vorname (Gast)" Binding="{Binding OpponentWrestlerGivenname}" />
-                <DataGridTextColumn Header="Status (Gast)" Binding="{Binding OpponentWrestlerStatus}" />
+                <DataGridTextColumn Header="Pass (Heim)" Binding="{Binding HeimRinger.Startausweisnummer, UpdateSourceTrigger=Explicit}" />
+                <DataGridTextColumn Header="Name (Heim)" Binding="{Binding HeimRinger.Nachname}" />
+                <DataGridTextColumn Header="Vorname (Heim)" Binding="{Binding HeimRinger.Vorname}" />
+                <DataGridTextColumn Header="Status (Heim)" Binding="{Binding HeimRinger.Status}" />
+                <DataGridTextColumn Header="Pass (Gast)" Binding="{Binding GastRinger.Startausweisnummer, UpdateSourceTrigger=Explicit}" />
+                <DataGridTextColumn Header="Name (Gast)" Binding="{Binding GastRinger.Nachname}" />
+                <DataGridTextColumn Header="Vorname (Gast)" Binding="{Binding GastRinger.Vorname}" />
+                <DataGridTextColumn Header="Status (Gast)" Binding="{Binding GastRinger.Status}" />
             </DataGrid.Columns>
         </DataGrid>
 

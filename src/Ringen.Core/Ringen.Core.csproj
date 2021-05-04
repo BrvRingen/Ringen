@@ -65,9 +65,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="REST\PrivateClient.cs" />
+    <Compile Include="Privat.cs" />
     <Compile Include="RingenResourceManager.cs" />
-    <Compile Include="REST\Client.cs" />
     <Compile Include="Services\ILoginService.cs" />
     <Compile Include="Services\IPluginService.cs" />
     <Compile Include="Services\IRingenService.cs" />
@@ -117,7 +116,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <Resource Include="CS\DefaultBout.json" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -72,22 +72,36 @@
                         </Grid.ColumnDefinitions>
                         <Border Background="Red"   Grid.Column="0">
                             <Viewbox StretchDirection="Both">
-                                <TextBlock Text="{Binding HomeWrestlerFullname}" />
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} {1}">
+                                            <Binding Path="HeimRinger.Vorname" />
+                                            <Binding Path="HeimRinger.Nachname" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
                             </Viewbox>
                         </Border>
                         <Border Background="Red"   Grid.Column="1">
                             <Viewbox StretchDirection="Both">
-                                <TextBlock Text="{Binding HomeWrestlerPoints}" />
+                                <TextBlock Text="{Binding HeimMannschaftswertung}" />
                             </Viewbox>
                         </Border>
                         <Border Background="LightSkyBlue"   Grid.Column="2">
                             <Viewbox StretchDirection="Both">
-                                <TextBlock Text="{Binding OpponentWrestlerPoints}" />
+                                <TextBlock Text="{Binding GastMannschaftswertung}" />
                             </Viewbox>
                         </Border>
                         <Border Background="LightSkyBlue"   Grid.Column="3">
                             <Viewbox StretchDirection="Both">
-                                <TextBlock Text="{Binding OpponentWrestlerFullname}" />
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} {1}">
+                                            <Binding Path="GastRinger.Vorname" />
+                                            <Binding Path="GastRinger.Nachname" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
                             </Viewbox>
                         </Border>
                     </Grid>

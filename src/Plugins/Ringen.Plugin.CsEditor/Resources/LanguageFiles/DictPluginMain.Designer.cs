@@ -135,6 +135,15 @@ namespace Ringen.Plugin.CsEditor.Resources.LanguageFiles {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bis kg ähnelt.
+        /// </summary>
+        public static string Gewichtsklasse {
+            get {
+                return ResourceManager.GetString("Gewichtsklasse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Punkte Heim ähnelt.
         /// </summary>
         public static string HomePoints {
@@ -320,15 +329,6 @@ namespace Ringen.Plugin.CsEditor.Resources.LanguageFiles {
         public static string VictoryType {
             get {
                 return ResourceManager.GetString("VictoryType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Bis kg ähnelt.
-        /// </summary>
-        public static string WeightClass {
-            get {
-                return ResourceManager.GetString("WeightClass", resourceCulture);
             }
         }
         

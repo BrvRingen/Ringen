@@ -60,17 +60,17 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
         private void InhaltKampfzeile(Row zeile, EinzelkampfViewModel kampf)
         {
             AddKampfSpalte(zeile, kampf.KampfNr.ToString());
-            AddKampfSpalte(zeile, kampf.WeightClass);
+            AddKampfSpalte(zeile, kampf.Gewichtsklasse);
 
-            var homeWrestlerSpalte = AddKampfSpalte(zeile, kampf.IsNoHomeWrestler() ? "--" : kampf.HomeWrestlerFullname.Trim());
-            homeWrestlerSpalte.Borders.Color = CustomStyles.ROT;
-            homeWrestlerSpalte.Format.Font.Bold = true;
-            homeWrestlerSpalte.Format.Font.Color = CustomStyles.ROT;
+            var heimRingerSpalte = AddKampfSpalte(zeile, kampf.IsNoHomeWrestler() ? "--" : $"{kampf.HeimRinger.Vorname} {kampf.HeimRinger.Nachname}");
+            heimRingerSpalte.Borders.Color = CustomStyles.ROT;
+            heimRingerSpalte.Format.Font.Bold = true;
+            heimRingerSpalte.Format.Font.Color = CustomStyles.ROT;
 
-            var opponentWrestlerSpalte = AddKampfSpalte(zeile, kampf.IsNoOpponentWrestler() ? "--" : kampf.OpponentWrestlerFullname.Trim());
-            opponentWrestlerSpalte.Borders.Color = CustomStyles.BLAU;
-            opponentWrestlerSpalte.Format.Font.Bold = true;
-            opponentWrestlerSpalte.Format.Font.Color = CustomStyles.BLAU;
+            var gastRingerSpalte = AddKampfSpalte(zeile, kampf.IsNoOpponentWrestler() ? "--" : $"{kampf.GastRinger.Vorname} {kampf.GastRinger.Nachname}");
+            gastRingerSpalte.Borders.Color = CustomStyles.BLAU;
+            gastRingerSpalte.Format.Font.Bold = true;
+            gastRingerSpalte.Format.Font.Color = CustomStyles.BLAU;
 
             var spalte = zeile.Cells[_kampfSpaltenCounter];
             spalte.Add(WertungenRunden());

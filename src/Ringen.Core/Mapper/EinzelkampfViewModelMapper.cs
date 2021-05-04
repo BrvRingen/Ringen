@@ -31,22 +31,15 @@ namespace Ringen.Core.Mapper
                 KampfNr = model.KampfNr,
                 Settings = new BoutSettings(MapWrestleStyle(model.Stilart)),
                 //Order = 0,
-                WeightClass = model.Gewichtsklasse,
+                Gewichtsklasse = model.Gewichtsklasse,
                 StilartViewModel = MapWrestleStyle(model.Stilart),
-                
-                HomeWrestlerId = model.HeimRinger?.Startausweisnummer,
-                HomeWrestlerLicId = model.HeimRinger?.Lizenznummer,
-                HomeWrestlerName = model.HeimRinger?.Nachname,
-                HomeWrestlerGivenname = model.HeimRinger?.Vorname,
-                HomeWrestlerStatus = model.HeimRinger?.Status,
-                HomeWrestlerPoints = model.HeimMannschaftswertung,
-                
-                OpponentWrestlerId = model.GastRinger?.Startausweisnummer,
-                OpponentWrestlerLicId = model.GastRinger?.Lizenznummer,
-                OpponentWrestlerName = model.GastRinger?.Nachname,
-                OpponentWrestlerGivenname = model.GastRinger?.Vorname,
-                OpponentWrestlerStatus = model.GastRinger?.Status,
-                OpponentWrestlerPoints = model.GastMannschaftswertung,
+
+                HeimRinger = model.HeimRinger,
+                HeimMannschaftswertung = model.GastMannschaftswertung,
+
+                GastRinger = model.GastRinger,
+                GastMannschaftswertung = model.GastMannschaftswertung,
+
 
                 SiegartViewModel = MapSiegart(model.Siegart),
                 //Round1 = null,

@@ -79,15 +79,8 @@ namespace Ringen.Plugin.CsEditor
 
         private RelayCommand m_GetAudience;
         public RelayCommand GetAudience => m_GetAudience ?? (m_GetAudience = new RelayCommand(async () => {
-
-            var Response = await PrivateREST.Client().GetAsync($"/Api/v1/cs/");
-
-            if (Response.IsSuccessStatusCode)
-            {
-                var result = (JObject)JsonConvert.DeserializeObject(Response.Content.ReadAsStringAsync().Result);
-                MannschaftskampfViewModel.AnzahlZuschauer = int.Parse(result["audience"].ToString());
-            }
-
+            var PrivateInfos = await Privat.GetPrivateInfos();
+            MannschaftskampfViewModel.AnzahlZuschauer = PrivateInfos.audience;
         }));
 
         private RelayCommand m_CreateProtocol;

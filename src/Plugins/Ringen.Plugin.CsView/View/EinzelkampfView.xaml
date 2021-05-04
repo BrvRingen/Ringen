@@ -76,17 +76,17 @@
             </Grid.ColumnDefinitions>
             <Border Background="Red"   Grid.Column="0">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding EinzelkampfViewModel.HomeWrestlerPoints}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.HeimMannschaftswertung}" />
                 </Viewbox>
             </Border>
             <Border Background="Red"   Grid.Column="2">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding EinzelkampfViewModel.HomeWrestlerWeight}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.HeimRingerGewicht}" />
                 </Viewbox>
             </Border>
             <Border Grid.Column="3">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding EinzelkampfViewModel.WeightClass}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.Gewichtsklasse}" />
                 </Viewbox>
             </Border>
             <Border Grid.Column="4">
@@ -96,12 +96,12 @@
             </Border>
             <Border Background="LightSkyBlue" Grid.Column="5">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding EinzelkampfViewModel.OpponentWrestlerWeight}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.GastRingerGewicht}" />
                 </Viewbox>
             </Border>
             <Border Background="LightSkyBlue" Grid.Column="7">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding EinzelkampfViewModel.OpponentWrestlerPoints}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.GastMannschaftswertung}" />
                 </Viewbox>
             </Border>
         </Grid>
@@ -112,12 +112,12 @@
             </Grid.ColumnDefinitions>
             <Border Background="Red"   Grid.Column="0">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding EinzelkampfViewModel.HomeWrestlerGivenname}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.HeimRinger.Vorname}" />
                 </Viewbox>
             </Border>
             <Border Background="LightSkyBlue"   Grid.Column="1">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding EinzelkampfViewModel.OpponentWrestlerGivenname}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.GastRinger.Vorname}" />
                 </Viewbox>
             </Border>
         </Grid>
@@ -128,12 +128,26 @@
             </Grid.ColumnDefinitions>
             <Border Background="Red"   Grid.Column="0">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding EinzelkampfViewModel.HomeWrestlerName}" />
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path="EinzelkampfViewModel.HeimRinger.Vorname" />
+                                <Binding Path="EinzelkampfViewModel.HeimRinger.Nachname" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
                 </Viewbox>
             </Border>
             <Border Background="LightSkyBlue"   Grid.Column="1">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding EinzelkampfViewModel.OpponentWrestlerName}" />
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path="EinzelkampfViewModel.GastRinger.Vorname" />
+                                <Binding Path="EinzelkampfViewModel.GastRinger.Nachname" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
                 </Viewbox>
             </Border>
         </Grid>

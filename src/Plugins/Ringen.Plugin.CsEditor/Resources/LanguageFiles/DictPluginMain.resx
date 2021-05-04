@@ -201,7 +201,7 @@ Verspäteter Start und die Pause müssen nicht mehr eingetragen werden. Diese we
   <data name="VictoryType" xml:space="preserve">
     <value>Art des Sieges</value>
   </data>
-  <data name="WeightClass" xml:space="preserve">
+  <data name="Gewichtsklasse" xml:space="preserve">
     <value>Bis kg</value>
   </data>
   <data name="Winner" xml:space="preserve">

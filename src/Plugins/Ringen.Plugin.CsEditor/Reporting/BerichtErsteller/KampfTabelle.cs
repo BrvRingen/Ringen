@@ -146,7 +146,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
 
             AddKopfSpalte(kopfzeile, "Nr."); //TODO: In Dict auslagern
             AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.WrestlingStyle);
-            AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.WeightClass, 1);
+            AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.Gewichtsklasse, 1);
 
             var spalteRot = AddKopfSpalte(kopfzeile, Resources.LanguageFiles.DictPluginMain.ActualWeightShort);
             spalteRot.Shading.Color = colorRed;
@@ -228,46 +228,46 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             AddKampfSpalte(zeile, $"{kampf.KampfNr}");
 
             AddKampfSpalte(zeile, ((StilartViewModel)kampf.StilartViewModel).AsString(EnumFormat.Description));
-            var weightClass = AddKampfSpalte(zeile, kampf.WeightClass);
-            weightClass.Borders.Right.Width = 1;
-            weightClass.Borders.Right.Color = colorRed;
+            var Gewichtsklasse = AddKampfSpalte(zeile, kampf.Gewichtsklasse);
+            Gewichtsklasse.Borders.Right.Width = 1;
+            Gewichtsklasse.Borders.Right.Color = colorRed;
 
-            AddKampfSpalte(zeile, kampf.IsNoHomeWrestler() ? "--" : kampf.HomeWrestlerWeight.ToString("0.0")).Borders.Color = colorRed;
-            var homeWrestlerSpalte = AddKampfSpalte(zeile, kampf.IsNoHomeWrestler() ? "--" : kampf.HomeWrestlerFullname.Trim());
+            AddKampfSpalte(zeile, kampf.IsNoHomeWrestler() ? "--" : kampf.HeimRingerGewicht.ToString("0.0")).Borders.Color = colorRed;
+            var homeWrestlerSpalte = AddKampfSpalte(zeile, kampf.IsNoHomeWrestler() ? "--" : $"{kampf.HeimRinger.Vorname} {kampf.HeimRinger.Nachname}");
             homeWrestlerSpalte.Borders.Color = colorRed;
-            if (kampf.HomeWrestlerPoints > kampf.OpponentWrestlerPoints)
+            if (kampf.HeimMannschaftswertung > kampf.GastMannschaftswertung)
             {
                 homeWrestlerSpalte.Format.Font.Bold = true;
                 homeWrestlerSpalte.Format.Font.Color = colorRed;
             }
 
-            AddKampfSpalte(zeile, string.IsNullOrEmpty(kampf.HomeWrestlerId) ? kampf.HomeWrestlerId.ToString() : "--").Borders.Color = colorRed;
-            AddKampfSpalte(zeile, kampf.HomeWrestlerStatus ?? string.Empty).Borders.Color = colorRed;
-            var heimPunkte = AddKampfSpalte(zeile, kampf.HomeWrestlerPoints > 0 ? kampf.HomeWrestlerPoints.ToString() : "0", 2);
+            AddKampfSpalte(zeile, string.IsNullOrEmpty(kampf.HeimRinger.Startausweisnummer) ? kampf.HeimRinger.Startausweisnummer.ToString() : "--").Borders.Color = colorRed;
+            AddKampfSpalte(zeile, kampf.HeimRinger.Status ?? string.Empty).Borders.Color = colorRed;
+            var heimPunkte = AddKampfSpalte(zeile, kampf.HeimMannschaftswertung > 0 ? kampf.HeimMannschaftswertung.ToString() : "0", 2);
             heimPunkte.Borders.Color = colorRed;
-            if (kampf.HomeWrestlerPoints > kampf.OpponentWrestlerPoints)
+            if (kampf.HeimMannschaftswertung > kampf.GastMannschaftswertung)
             {
                 heimPunkte.Format.Font.Color = colorRed;
             }
 
-            AddKampfSpalte(zeile, kampf.IsNoOpponentWrestler() ? "--" : kampf.OpponentWrestlerWeight.ToString("0.0")).Borders.Color = colorBlue;
-            var opponentWrestlerSpalte = AddKampfSpalte(zeile, kampf.IsNoOpponentWrestler() ? "--" : kampf.OpponentWrestlerFullname.Trim());
+            AddKampfSpalte(zeile, kampf.IsNoOpponentWrestler() ? "--" : kampf.GastRingerGewicht.ToString("0.0")).Borders.Color = colorBlue;
+            var opponentWrestlerSpalte = AddKampfSpalte(zeile, kampf.IsNoOpponentWrestler() ? "--" : $"{kampf.GastRinger.Vorname} {kampf.GastRinger.Nachname}");
             opponentWrestlerSpalte.Borders.Color = colorBlue;
-            if (kampf.OpponentWrestlerPoints > kampf.HomeWrestlerPoints)
+            if (kampf.GastMannschaftswertung > kampf.HeimMannschaftswertung)
             {
                 opponentWrestlerSpalte.Format.Font.Bold = true;
                 opponentWrestlerSpalte.Format.Font.Color = colorBlue;
             }
 
-            AddKampfSpalte(zeile, string.IsNullOrEmpty(kampf.OpponentWrestlerId) ? kampf.OpponentWrestlerId.ToString() : "--").Borders.Color = colorBlue;
-            AddKampfSpalte(zeile, kampf.OpponentWrestlerStatus ?? string.Empty).Borders.Color = colorBlue;
+            AddKampfSpalte(zeile, string.IsNullOrEmpty(kampf.GastRinger.Startausweisnummer) ? kampf.GastRinger.Startausweisnummer.ToString() : "--").Borders.Color = colorBlue;
+            AddKampfSpalte(zeile, kampf.GastRinger.Status ?? string.Empty).Borders.Color = colorBlue;
 
-            var gastPunkte = AddKampfSpalte(zeile, kampf.OpponentWrestlerPoints > 0 ? kampf.OpponentWrestlerPoints.ToString() : "0");
+            var gastPunkte = AddKampfSpalte(zeile, kampf.GastMannschaftswertung > 0 ? kampf.GastMannschaftswertung.ToString() : "0");
             gastPunkte.Borders.Color = colorBlue;
             gastPunkte.Borders.Right.Width = 1;
             gastPunkte.Borders.Right.Color = colorBlue;
 
-            if (kampf.OpponentWrestlerPoints > kampf.HomeWrestlerPoints)
+            if (kampf.GastMannschaftswertung > kampf.HeimMannschaftswertung)
             {
                 gastPunkte.Format.Font.Color = colorBlue;
             }
