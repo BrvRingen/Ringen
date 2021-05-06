@@ -1,6 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="$(SolutionDir)ConfigurationLibraryStandard.targets" />
-  <ItemGroup>
-    <ProjectReference Include="..\Ringen.DependencyInjection\Ringen.DependencyInjection.csproj" />
-  </ItemGroup>
-</Project>

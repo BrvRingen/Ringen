@@ -1,8 +1,7 @@
-﻿using Ringen.Shared;
+﻿using Ringen.Configs.ConfigSections.ConfigurationElemente;
 using System.Configuration;
-using Ringen.Schnittstelle.Caching.ConfigSections.ConfigurationElemente;
 
-namespace Ringen.Schnittstelle.Caching.ConfigSections
+namespace Ringen.Configs.ConfigSections
 {
     public sealed class ApiCacheConfigSection : ConfigurationSection
     {

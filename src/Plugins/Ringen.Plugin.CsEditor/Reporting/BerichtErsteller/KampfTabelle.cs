@@ -1,13 +1,9 @@
 ﻿using EnumsNET;
 using MigraDoc.DocumentObjectModel;
 using MigraDoc.DocumentObjectModel.Tables;
-using Ringen.Core.CS;
 using Ringen.Plugin.CsEditor.Reporting.Konfig;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Ringen.Core.ViewModels;
 using Ringen.Core.ViewModels.Enums;
 using Table = MigraDoc.DocumentObjectModel.Tables.Table;

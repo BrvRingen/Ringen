@@ -1,10 +1,5 @@
 ﻿using MigraDoc.DocumentObjectModel;
 using MigraDoc.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ringen.Plugin.CsEditor.Reporting
 {

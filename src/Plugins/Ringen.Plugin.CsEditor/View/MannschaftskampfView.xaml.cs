@@ -1,24 +1,9 @@
 ﻿using GalaSoft.MvvmLight.Command;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Ringen.Core;
 using Ringen.Core.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Ringen.Core.ViewModels;
-using Ringen.Shared.Models;
 
 namespace Ringen.Plugin.CsEditor
 {
@@ -39,9 +24,9 @@ namespace Ringen.Plugin.CsEditor
             }
         }
 
-        private CompetitionInfos _competitionInfos;
+        private CompetitionInfosViewModel _competitionInfos;
 
-        public CompetitionInfos CompetitionInfos
+        public CompetitionInfosViewModel CompetitionInfos
         {
             get { return _competitionInfos; }
             set
@@ -61,7 +46,7 @@ namespace Ringen.Plugin.CsEditor
         public void UpdateUi()
         {
             MannschaftskampfViewModel = MannschaftskaempfeExplorer.SelectedItem as MannschaftskampfViewModel;
-            CompetitionInfos = new CompetitionInfos();
+            CompetitionInfos = new CompetitionInfosViewModel();
             CompetitionInfos.Ordner.Add("Test Ordner 1");
             CompetitionInfos.Ordner.Add("Test Ordner 2");
         }

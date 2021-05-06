@@ -1,10 +1,8 @@
 ﻿using MigraDoc.DocumentObjectModel;
 using MigraDoc.DocumentObjectModel.Shapes;
 using MigraDoc.DocumentObjectModel.Tables;
-using Ringen.Core.CS;
 using Ringen.Core.Messaging;
 using Ringen.Plugin.CsEditor.Reporting.Konfig;
-using Ringen.Shared.Models;
 using System;
 using System.Linq;
 using Ringen.Core.ViewModels;
@@ -13,7 +11,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
 {
     class KampfBemerkungen
     {
-        public TextFrame generate(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos, double randLinksRechts, bool useColor)
+        public TextFrame generate(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfosViewModel zusatzInfos, double randLinksRechts, bool useColor)
         {
             var result = new TextFrame();
             result.Width = "25cm";
@@ -136,7 +134,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
 
             return paragraph;
         }
-        private Paragraph Organisation(CompetitionInfos zusatzInfos)
+        private Paragraph Organisation(CompetitionInfosViewModel zusatzInfos)
         {
             Paragraph paragraph = new Paragraph();
 

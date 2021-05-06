@@ -3,12 +3,8 @@ using System.Linq;
 using MigraDoc.DocumentObjectModel;
 using MigraDoc.DocumentObjectModel.Shapes;
 using MigraDoc.DocumentObjectModel.Tables;
-using Ringen.Core.CS;
 using Ringen.Core.ViewModels;
-using Ringen.Plugin.CsEditor.Helper;
-using Ringen.Plugin.CsEditor.Reporting.BerichtErsteller;
 using Ringen.Plugin.CsEditor.Reporting.Konfig;
-using Ringen.Shared.Models;
 using Table = MigraDoc.DocumentObjectModel.Tables.Table;
 
 namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller

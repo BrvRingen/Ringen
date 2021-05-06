@@ -29,6 +29,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataGrid\ExtDataGrid.cs" />
+    <Compile Include="ViewModels\CompetitionInfosViewModel.cs" />
     <Compile Include="ViewModels\Enums\SiegartViewModelEnum.cs" />
     <Compile Include="ViewModels\Enums\GriffbewertungsTypViewModelEnum.cs" />
     <Compile Include="ViewModels\Enums\HeimGastViewModelEnum.cs" />
@@ -123,6 +124,10 @@
     <None Include="TranslationManager\DictionaryToEnum.ttinclude" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ringen.CrossCutting\Ringen.CrossCutting.csproj">
+      <Project>{4ecd4835-1855-4a1c-8169-cf527b501ae2}</Project>
+      <Name>Ringen.CrossCutting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ringen.DependencyInjection\Ringen.DependencyInjection.csproj">
       <Project>{b7f4860d-f7a8-4aae-ae34-9166ab9e8f7a}</Project>
       <Name>Ringen.DependencyInjection</Name>

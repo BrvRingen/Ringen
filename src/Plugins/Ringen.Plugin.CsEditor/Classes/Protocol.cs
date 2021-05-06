@@ -4,16 +4,14 @@ using System.Diagnostics;
 using System.IO;
 using Ringen.Core.Messaging;
 using System.Threading.Tasks;
-using Ringen.Core.CS;
 using Ringen.Core.ViewModels;
 using Ringen.Plugin.CsEditor.Reporting;
-using Ringen.Shared.Models;
 
 namespace Ringen.Plugin.CsEditor
 {
     public class Protocol
     {
-        public static async Task OnCreateProtocolAsync(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos = null) //TODO: ZusatzInfos von Oberfläche übergeben
+        public static async Task OnCreateProtocolAsync(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfosViewModel zusatzInfos = null) //TODO: ZusatzInfos von Oberfläche übergeben
         {
             var myTask = Task.Run(() =>
             {
@@ -26,7 +24,7 @@ namespace Ringen.Plugin.CsEditor
             return;
         }
 
-        private static void CreateProtocol(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos)
+        private static void CreateProtocol(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfosViewModel zusatzInfos)
         {
             //TODO Entfernen sobald in API vorhanden oder über UI
             zusatzInfos = TempTestdaten(mannschaftskampfViewModel);
@@ -48,11 +46,11 @@ namespace Ringen.Plugin.CsEditor
             
         }
 
-        private static CompetitionInfos TempTestdaten(MannschaftskampfViewModel mannschaftskampfViewModel)
+        private static CompetitionInfosViewModel TempTestdaten(MannschaftskampfViewModel mannschaftskampfViewModel)
         {
-            CompetitionInfos zusatzInfos;
+            CompetitionInfosViewModel zusatzInfos;
             //TODO: Aktuell nur zu Testzwecken, später von Oberfläche übergeben
-            zusatzInfos = new CompetitionInfos()
+            zusatzInfos = new CompetitionInfosViewModel()
             {
                 ErgebnislistenSchreiber = "Tahar Alemann",
                 Kampfart = "Verbandskampf",
@@ -66,7 +64,7 @@ namespace Ringen.Plugin.CsEditor
             return zusatzInfos;
         }
 
-        public static async Task OnCreateCreateAllListAsync(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos=null)
+        public static async Task OnCreateCreateAllListAsync(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfosViewModel zusatzInfos =null)
         {
             var myTask = Task.Run(() =>
             {
@@ -81,7 +79,7 @@ namespace Ringen.Plugin.CsEditor
             return;
         }
 
-        public static async Task OnCreateBoutResultListAsync(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos=null)
+        public static async Task OnCreateBoutResultListAsync(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfosViewModel zusatzInfos =null)
         {
             var myTask = Task.Run(() =>
             {
@@ -94,7 +92,7 @@ namespace Ringen.Plugin.CsEditor
             return;
         }
 
-        private static void CreateBoutResultList(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos)
+        private static void CreateBoutResultList(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfosViewModel zusatzInfos)
         {
             //TODO Entfernen sobald in API vorhanden oder über UI
             zusatzInfos = TempTestdaten(mannschaftskampfViewModel);
@@ -114,7 +112,7 @@ namespace Ringen.Plugin.CsEditor
             Process.Start(pfad); //Öffne PDF
         }
 
-        private static void CreateSprecherList(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos)
+        private static void CreateSprecherList(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfosViewModel zusatzInfos)
         {
             //TODO Entfernen sobald in API vorhanden oder über UI
             zusatzInfos = TempTestdaten(mannschaftskampfViewModel);

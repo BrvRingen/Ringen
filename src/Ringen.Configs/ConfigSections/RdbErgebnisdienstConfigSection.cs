@@ -1,13 +1,11 @@
-﻿using System.Configuration;
-using Ringen.Schnittstelle.RDB.ConfigSections.ConfigurationElemente;
-using Ringen.Shared;
-using Ringen.Shared.ConfigurationElemente;
+﻿using Ringen.Configs.ConfigSections.ConfigurationElemente;
+using System.Configuration;
 
-namespace Ringen.Schnittstelle.RDB.ConfigSections
+namespace Ringen.Configs.ConfigSections
 {
-    public sealed class RdbConfigSection : ConfigurationSection
+    public sealed class RdbErgebnisdienstConfigSection : ConfigurationSection
     {
-        public static RdbConfigSection Instance = (RdbConfigSection)ConfigurationManager.GetSection($"{GlobaleVariablen.KonfigSectionName}/rdbErgebnisdienst");
+        public static RdbErgebnisdienstConfigSection Instance = (RdbErgebnisdienstConfigSection)ConfigurationManager.GetSection($"{GlobaleVariablen.KonfigSectionName}/rdbErgebnisdienst");
         
         [ConfigurationProperty("credentials", IsRequired = false)]
         public CredentialConfigurationElement Credentials

@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 
-namespace Ringen.Shared.ConfigurationElemente
+namespace Ringen.Configs.ConfigSections.ConfigurationElemente
 {
     public sealed class CredentialConfigurationElement : ConfigurationElement
     {

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using MigraDoc.DocumentObjectModel;
 using MigraDoc.DocumentObjectModel.Tables;
-using MigraDoc.Rendering;
-using Ringen.Core.CS;
 using Ringen.Core.ViewModels;
 using Ringen.Plugin.CsEditor.Helper;
 using Ringen.Plugin.CsEditor.Reporting.BerichtErsteller;
 using Ringen.Plugin.CsEditor.Reporting.Konfig;
-using Ringen.Shared.Models;
 using Table = MigraDoc.DocumentObjectModel.Tables.Table;
 
 namespace Ringen.Plugin.CsEditor.Reporting
@@ -22,14 +18,14 @@ namespace Ringen.Plugin.CsEditor.Reporting
         private KampfInformationen kampfInformationen = new KampfInformationen();
 
 
-        public void Export(string pfad, MannschaftskampfViewModel daten, CompetitionInfos zusatzInfos)
+        public void Export(string pfad, MannschaftskampfViewModel daten, CompetitionInfosViewModel zusatzInfos)
         {
             Document report = ErstelleBericht(daten, zusatzInfos);
             exportPdf.Export(pfad, report);
         }
 
 
-        public Document ErstelleBericht(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos)
+        public Document ErstelleBericht(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfosViewModel zusatzInfos)
         {
             string title = "";
             //TODO kläre warum ein Dokument einen Titel hat und diese nicht, was ist der default wert?
@@ -42,7 +38,7 @@ namespace Ringen.Plugin.CsEditor.Reporting
         }
 
 
-        private Section ErstelleHauptSektion(Section section, MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos)
+        private Section ErstelleHauptSektion(Section section, MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfosViewModel zusatzInfos)
         {
             ErgaenzeHeader(section, mannschaftskampfViewModel, zusatzInfos);
             ErgaenzeInhalt(section, mannschaftskampfViewModel, zusatzInfos);
@@ -51,12 +47,12 @@ namespace Ringen.Plugin.CsEditor.Reporting
             return section;
         }
 
-        private void ErgaenzeInhalt(Section section, MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos)
+        private void ErgaenzeInhalt(Section section, MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfosViewModel zusatzInfos)
         {
             section.Add(Kampftabelle(mannschaftskampfViewModel));
         }
         
-        private void ErgaenzeHeader(Section section, MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos)
+        private void ErgaenzeHeader(Section section, MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfosViewModel zusatzInfos)
         {
             section.Headers.Primary.Add(defaultElemente.GetUeberschrift("Sprecher Informationen"));
             section.Add(kampfInformationen.generate(mannschaftskampfViewModel, zusatzInfos, _randLinksRechts));
@@ -64,7 +60,7 @@ namespace Ringen.Plugin.CsEditor.Reporting
             section.Headers.Primary.Add(PdfHelper.AddAbstandNachOben("0.1cm"));
         }
         
-        private Table KampfInfos(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos)
+        private Table KampfInfos(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfosViewModel zusatzInfos)
         {
             var table = new Table();
             table.Style = CustomStyles.TABLEINFO;

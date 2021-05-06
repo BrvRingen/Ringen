@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 
-namespace Ringen.Schnittstelle.Caching.ConfigSections.ConfigurationElemente
+namespace Ringen.Configs.ConfigSections.ConfigurationElemente
 {
     public class CacheConfigurationElement : ConfigurationElement
     {

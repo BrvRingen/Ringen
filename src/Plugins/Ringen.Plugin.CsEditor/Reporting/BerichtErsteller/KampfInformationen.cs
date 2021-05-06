@@ -1,9 +1,6 @@
 ﻿using MigraDoc.DocumentObjectModel;
 using MigraDoc.DocumentObjectModel.Tables;
-using Ringen.Core.CS;
 using Ringen.Plugin.CsEditor.Reporting.Konfig;
-using Ringen.Shared.Models;
-using System;
 using System.Linq;
 using Ringen.Core.ViewModels;
 using Table = MigraDoc.DocumentObjectModel.Tables.Table;
@@ -12,7 +9,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
 {
     class KampfInformationen
     {
-        public Table generate(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos, double randLinksRechts)
+        public Table generate(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfosViewModel zusatzInfos, double randLinksRechts)
         {
             var table = new Table();
             table.Style = CustomStyles.TABLEINFO;

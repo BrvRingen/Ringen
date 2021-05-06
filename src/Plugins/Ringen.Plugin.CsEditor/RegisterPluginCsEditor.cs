@@ -1,10 +1,6 @@
 ﻿using Ringen.Core.PluginSystem;
 using GalaSoft.MvvmLight.Messaging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Ringen.Core.Messaging;
 using Ringen.Core.UI;
 using Ringen.Core.TranslationManager;

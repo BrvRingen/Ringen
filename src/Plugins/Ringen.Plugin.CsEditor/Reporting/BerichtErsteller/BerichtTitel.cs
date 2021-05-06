@@ -1,6 +1,4 @@
-﻿using Ringen.Core.CS;
-using System;
-using Ringen.Core.ViewModels;
+﻿using Ringen.Core.ViewModels;
 
 namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
 {

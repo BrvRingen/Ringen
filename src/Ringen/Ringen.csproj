@@ -165,9 +165,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ringen.Configs\Ringen.Configs.csproj">
+      <Project>{29e1d404-d33b-472c-af4a-e16adfd9169c}</Project>
+      <Name>Ringen.Configs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ringen.Core\Ringen.Core.csproj">
       <Project>{78c12d2b-0701-48e5-937c-b8ea3972a9df}</Project>
       <Name>Ringen.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ringen.CrossCutting\Ringen.CrossCutting.csproj">
+      <Project>{4ecd4835-1855-4a1c-8169-cf527b501ae2}</Project>
+      <Name>Ringen.CrossCutting</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ringen.DependencyInjection\Ringen.DependencyInjection.csproj">
       <Project>{b7f4860d-f7a8-4aae-ae34-9166ab9e8f7a}</Project>

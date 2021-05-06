@@ -1,11 +1,9 @@
-﻿using Ringen.Core.CS;
-using Ringen.Core.ViewModels;
-using Ringen.Shared.Models;
+﻿using Ringen.Core.ViewModels;
 
 namespace Ringen.Plugin.CsEditor.Reporting
 {
     public interface IReport
     {
-        void Export(string pfad, MannschaftskampfViewModel daten, CompetitionInfos zusatzInfos);
+        void Export(string pfad, MannschaftskampfViewModel daten, CompetitionInfosViewModel zusatzInfos);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System.Configuration;
-using Ringen.Shared.ConfigurationElemente;
 
-namespace Ringen.Schnittstelle.RDB.ConfigSections.ConfigurationElemente
+namespace Ringen.Configs.ConfigSections.ConfigurationElemente
 {
     public class RdbServerConfigurationElement : ConfigurationElement
     {

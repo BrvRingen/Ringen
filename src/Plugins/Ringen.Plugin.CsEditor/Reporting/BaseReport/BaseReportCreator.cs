@@ -1,9 +1,7 @@
 ﻿using MigraDoc.DocumentObjectModel;
-using Ringen.Core.CS;
 using Ringen.Core.ViewModels;
 using Ringen.Plugin.CsEditor.Helper;
 using Ringen.Plugin.CsEditor.Reporting.BerichtErsteller;
-using Ringen.Shared.Models;
 
 
 namespace Ringen.Plugin.CsEditor.Reporting.BaseReport
@@ -20,7 +18,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BaseReport
         private UnterschriftKampfrichter unterschriftKampfrichter = new UnterschriftKampfrichter();
         private KampfTabelle kampfTabelle = new KampfTabelle();
 
-        public Document ErstelleBericht(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos, bool useColor)
+        public Document ErstelleBericht(MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfosViewModel zusatzInfos, bool useColor)
         {
             string title = berichtTitel.GetTitle(mannschaftskampfViewModel);
             Document document = defaultElemente.GetDocument(title);
@@ -32,7 +30,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BaseReport
             return document;
         }
 
-        private Section ErstelleHauptSektion(Section section, MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos, bool useColor)
+        private Section ErstelleHauptSektion(Section section, MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfosViewModel zusatzInfos, bool useColor)
         {
             ErgaenzeHeader(section, mannschaftskampfViewModel, zusatzInfos);
             ErgaenzeInhalt(section, mannschaftskampfViewModel, zusatzInfos, useColor);
@@ -41,14 +39,14 @@ namespace Ringen.Plugin.CsEditor.Reporting.BaseReport
             return section;
         }
 
-        private void ErgaenzeInhalt(Section section, MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos, bool useColor)
+        private void ErgaenzeInhalt(Section section, MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfosViewModel zusatzInfos, bool useColor)
         {
             section.Add(PdfHelper.AddAbstandNachOben("0.8cm"));
             section.Add(kampfTabelle.generate(mannschaftskampfViewModel, _randLinksRechts, useColor));
             section.Add(kampfBemerkungen.generate(mannschaftskampfViewModel, zusatzInfos, _randLinksRechts, useColor));
         }
 
-        private void ErgaenzeHeader(Section section, MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfos zusatzInfos)
+        private void ErgaenzeHeader(Section section, MannschaftskampfViewModel mannschaftskampfViewModel, CompetitionInfosViewModel zusatzInfos)
         {
             section.Headers.Primary.Add(defaultElemente.GetUeberschrift(Resources.LanguageFiles.DictPluginMain.PdfProtocolHeadline));
             section.Add(kampfInformationen.generate(mannschaftskampfViewModel, zusatzInfos, _randLinksRechts));
