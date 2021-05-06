@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="$(SolutionDir)Configuration.targets" />
+  <ItemGroup>
+    <PackageReference Include="MonkeyCache.FileStore" Version="1.5.2" />
+    <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ringen.Schnittstellen.Contracts\Ringen.Schnittstellen.Contracts.csproj" />
+    <ProjectReference Include="..\Ringen.Shared\Ringen.Shared.csproj" />
+  </ItemGroup>
+</Project>

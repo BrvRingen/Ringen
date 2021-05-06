@@ -109,35 +109,6 @@ namespace Ringen.Core.ViewModels
         public List<bool> Children { get; set; }
 
 
-        private JObject defaultBout;
-        private JObject DefaultBout
-        {
-            get
-            {
-                if (defaultBout == null)
-                {
-                    var myAssembly = Assembly.GetExecutingAssembly();
-                    System.IO.Stream tempStream = myAssembly.GetManifestResourceStream(myAssembly.GetName().Name + ".g.resources");
-                    System.Resources.ResourceReader tempReader = new System.Resources.ResourceReader(tempStream);
-
-                    foreach (DictionaryEntry resource in tempReader)
-                    {
-                        if (resource.Key.ToString().Contains(@"CS/DefaultBout.json"))
-                        {
-                            var tempPath = new Uri("/" + myAssembly.GetName().Name + ";component/" + resource.Key.ToString(), UriKind.Relative);
-
-                            using (var sr = new StreamReader(System.Windows.Application.GetResourceStream(tempPath).Stream))
-                            {
-                                defaultBout = JObject.Parse(sr.ReadToEnd());
-                            }
-                            break;
-                        }
-                    }
-                }
-                return defaultBout;
-            }
-        }
-
         private void UpdateDetails()
         {
             points = new ObservableCollection<BoutPoint>();
