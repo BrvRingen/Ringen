@@ -1,12 +1,8 @@
 ﻿using Newtonsoft.Json.Linq;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Globalization;
-using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Windows.Controls;
 
 namespace Ringen.Core.UI
 {

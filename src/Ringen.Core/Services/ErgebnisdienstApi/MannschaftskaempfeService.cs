@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Ringen.Core.CS;
 using Ringen.Core.Mapper;
 using Ringen.Core.ViewModels;
 using Ringen.Schnittstellen.Contracts.Models;

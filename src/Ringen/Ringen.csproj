@@ -71,8 +71,9 @@
     </Page>
     <Compile Include="Classes\Helpers\ConsoleManager.cs" />
     <Page Include="Resources\NotificationIcon\NotificationIconResources.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\Colors.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -177,10 +178,6 @@
       <Project>{4ecd4835-1855-4a1c-8169-cf527b501ae2}</Project>
       <Name>Ringen.CrossCutting</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ringen.DependencyInjection\Ringen.DependencyInjection.csproj">
-      <Project>{b7f4860d-f7a8-4aae-ae34-9166ab9e8f7a}</Project>
-      <Name>Ringen.DependencyInjection</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Language_de-DE.png" />
@@ -221,7 +218,7 @@
       <Version>1.50.5147</Version>
     </PackageReference>
     <PackageReference Include="Ringen.Schnittstellen">
-      <Version>1.0.2</Version>
+      <Version>1.1.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

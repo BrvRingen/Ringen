@@ -1,7 +1,7 @@
 ﻿using System.Security;
 using System.Windows;
 using System.Windows.Controls;
-using Ringen.Shared.Helpers;
+using Ringen.CrossCutting.Helpers;
 
 namespace Ringen.Core.Helpers
 {

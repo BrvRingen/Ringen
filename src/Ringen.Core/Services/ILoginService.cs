@@ -1,6 +1,4 @@
-﻿using System;
-using System.Security;
-using System.Threading.Tasks;
+﻿using System.Security;
 
 namespace Ringen.Core.Services
 {

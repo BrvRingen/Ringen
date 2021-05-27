@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ringen.Core.Services;
-using Ringen.Core.Services.ErgebnisdienstApi;
 using Ringen.Core.ViewModels;
-using Ringen.DependencyInjection;
 using Ringen.Schnittstellen.Contracts.Models;
-using Ringen.Schnittstellen.Contracts.Services;
 
 namespace Ringen.Core.Mapper
 {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Ringen.Core.DependencyInjection;
 using Ringen.Core.Services.ErgebnisdienstApi;
 using Ringen.Core.UI;
-using Ringen.DependencyInjection;
 using Ringen.Schnittstellen.Contracts.Models.Enums;
 
 namespace Ringen.Core.ViewModels

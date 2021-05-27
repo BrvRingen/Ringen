@@ -1,13 +1,9 @@
 ﻿using Hardcodet.Wpf.TaskbarNotification;
 using Ringen.Core;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
-using Ringen.Core.TranslationManager;
-using Ringen.Core.Services;
-using Ringen.DependencyInjection;
 
 namespace Ringen
 {
@@ -32,6 +28,9 @@ namespace Ringen
             {
                 Args = e.Args.ToList();
             }
+
+            // Resourcen laden
+            RingenResourceManager.AddResource("Resources/NotificationIcon/NotificationIconResources.xaml", Assembly.GetExecutingAssembly());
 
             var notificationIcon = RingenResourceManager.GetResource<TaskbarIcon>("NotificationIcon");
             notificationIcon.DataContext = ViewModel.ViewModelLocator.GetViewModel<ViewModel.MainViewModel>(nameof(ViewModel.MainViewModel));

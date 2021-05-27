@@ -5,10 +5,9 @@ using System.Threading;
 using System.Windows;
 using System.Reflection;
 using Ringen.Core;
+using Ringen.Core.DependencyInjection;
 using Ringen.Core.Services;
-using Ringen.DependencyInjection;
 using Ringen.Core.TranslationManager;
-using Ringen.Configs.ConfigSections;
 
 namespace Ringen
 {
@@ -27,7 +26,7 @@ namespace Ringen
             Init_Schnittstellen();
 
             Lokale_Woerterbucher_laden();
-            Resourcen_laden();
+            //Resourcen_laden();
 
             (new App()).Run();
 
@@ -66,14 +65,7 @@ namespace Ringen
             ServiceBasic.Register(typeof(IRingenService), typeof(RingenService));
             Service.Plugin.InitializeSystem();
         }
-
-
-        private static void Resourcen_laden()
-        {
-            RingenResourceManager.AddResource("Resources/NotificationIcon/NotificationIconResources.xaml",
-                Assembly.GetExecutingAssembly());
-        }
-
+        
         private static void Pruefe_NetFramework_Version()
         {
             Version dotNetFrameworkVersion = Version.Parse(System.Diagnostics.FileVersionInfo

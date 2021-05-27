@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Ringen.DependencyInjection;
+using Ringen.Core.DependencyInjection;
 
 namespace Ringen.Core.ViewModels
 {

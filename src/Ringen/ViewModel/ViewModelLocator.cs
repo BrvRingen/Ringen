@@ -8,11 +8,8 @@ namespace Ringen.ViewModel
 {
     public class ViewModelLocator : DynamicObject
     {
-        #region fields
         private static readonly Dictionary<string, Type> m_ViewModels = new Dictionary<string, Type>();
-        #endregion fields
 
-        #region constructors
         static ViewModelLocator()
         {
             RegisterViewModel(nameof(MainViewModel), typeof(MainViewModel));
@@ -20,9 +17,7 @@ namespace Ringen.ViewModel
             //RegisterViewModel(nameof(ViewModel.LoggerViewModel), typeof(ViewModel.LoggerViewModel));
             //RegisterViewModel(nameof(ViewModel.ConsoleViewModel), typeof(ViewModel.ConsoleViewModel));
         }
-        #endregion constructors
 
-        #region methods
         public override IEnumerable<string> GetDynamicMemberNames() =>
             m_ViewModels.Keys;
 
@@ -90,6 +85,5 @@ namespace Ringen.ViewModel
             }
             return default(T);
         }
-        #endregion methods
     }
 }

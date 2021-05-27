@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace Ringen.Core.Messaging

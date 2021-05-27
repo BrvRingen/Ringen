@@ -4,10 +4,8 @@ using System.Diagnostics;
 using System.IO;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
-using Ringen.Core.CS;
 using Ringen.Core.ViewModels;
 using Ringen.Plugin.CsEditor.Reporting;
-using Ringen.Shared.Models;
 
 namespace Ringen.Plugin.CsEditor.Tests
 {

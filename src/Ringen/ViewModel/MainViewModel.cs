@@ -28,8 +28,6 @@ namespace Ringen.ViewModel
 {
     public class MainViewModel : ViewModelBase, INotifyPropertyChanged
     {
-
-        #region properties
         LogToFile logToFile;
         public new event PropertyChangedEventHandler PropertyChanged;
 
@@ -147,10 +145,6 @@ namespace Ringen.ViewModel
             }
         }
 
-        #endregion
-
-        #region constructor
-
         /// <summary>
         /// Constructor
         /// </summary>
@@ -195,10 +189,6 @@ namespace Ringen.ViewModel
 
 
         }
-
-        #endregion
-
-        #region commands
 
         private RelayCommand m_CloseNotificationIcon;
         public RelayCommand CloseNotificationIcon => m_CloseNotificationIcon ?? (m_CloseNotificationIcon = new RelayCommand(OnCloseNotificationIcon));
@@ -276,14 +266,6 @@ namespace Ringen.ViewModel
             }
         }
 
-        #endregion
-
-        #region Message Handlers
-
-        #endregion
-
-        #region events
-
         /// <summary>
         /// Language Changed Event auslösen
         /// </summary>
@@ -304,8 +286,5 @@ namespace Ringen.ViewModel
                 }
             }
         }
-
-        #endregion
-
     }
 }

@@ -1,13 +1,4 @@
-﻿using Ringen.Core.UI;
-using Ringen.Core.PluginSystem;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Reflection;
-using System.Linq;
-using Ringen.Core.Messaging;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Security;
 
 namespace Ringen.Core.Services

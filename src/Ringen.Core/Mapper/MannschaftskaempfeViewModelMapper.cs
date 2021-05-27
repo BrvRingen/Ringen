@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Nelibur.ObjectMapper;
-using Ringen.Core.CS;
 using Ringen.Core.ViewModels;
 using Ringen.Schnittstellen.Contracts.Models;
-using Ringen.Schnittstellen.Contracts.Models.Enums;
 
 namespace Ringen.Core.Mapper
 {

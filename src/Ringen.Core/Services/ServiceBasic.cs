@@ -1,13 +1,11 @@
-﻿using GalaSoft.MvvmLight.Ioc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("CommonLibraryNetStandardTests")]
+using GalaSoft.MvvmLight.Ioc;
 
 namespace Ringen.Core.Services
 {
-    public static class ServiceBasic
+    public static class ServiceBasic //TODO: Simple IOC durch Ninject erstezen!
     {
         private static readonly Dictionary<Type, object> m_InstancedServices = new Dictionary<Type, object>();
 

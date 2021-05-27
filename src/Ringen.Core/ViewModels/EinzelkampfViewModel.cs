@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Reflection;
-using System.Text.RegularExpressions;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Ringen.Core.CS;
 using Ringen.Core.UI;
 using Ringen.Core.ViewModels.Enums;

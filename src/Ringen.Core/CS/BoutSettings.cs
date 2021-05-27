@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ringen.Core.ViewModels;
+﻿using System.Collections.Generic;
 using Ringen.Core.ViewModels.Enums;
 
 namespace Ringen.Core.CS

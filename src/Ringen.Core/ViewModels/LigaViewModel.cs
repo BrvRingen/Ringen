@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Ringen.Core.DependencyInjection;
 using Ringen.Core.Services.ErgebnisdienstApi;
 using Ringen.Core.UI;
-using Ringen.DependencyInjection;
 
 namespace Ringen.Core.ViewModels
 {

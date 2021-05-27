@@ -26,7 +26,8 @@ namespace Ringen.Core
         public static void AddResource(string baseName, Assembly assembly)
         {
             ResourceDictionary resourceDictionary = new ResourceDictionary();
-            resourceDictionary.Source = new Uri("/" + assembly.GetName().Name + ";component/" + baseName, UriKind.RelativeOrAbsolute);
+            Uri source = new Uri("/" + assembly.GetName().Name + ";component/" + baseName, UriKind.RelativeOrAbsolute);
+            resourceDictionary.Source = source;
 
             foreach(DictionaryEntry entry in resourceDictionary)
             {

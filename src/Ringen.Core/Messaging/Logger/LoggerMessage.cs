@@ -1,8 +1,5 @@
-﻿using GalaSoft.MvvmLight.Messaging;
-using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows;
+﻿using System;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Ringen.Core.Messaging
 {
