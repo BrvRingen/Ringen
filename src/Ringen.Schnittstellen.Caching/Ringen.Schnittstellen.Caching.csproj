@@ -53,8 +53,8 @@
     <PackageReference Include="MonkeyCache.FileStore">
       <Version>1.5.2</Version>
     </PackageReference>
-    <PackageReference Include="Ringen.Schnittstellen">
-      <Version>1.1.1</Version>
+    <PackageReference Include="Ringen.Schnittstellen.Contracts">
+      <Version>1.1.4</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugin.Connectivity">
       <Version>3.2.0</Version>

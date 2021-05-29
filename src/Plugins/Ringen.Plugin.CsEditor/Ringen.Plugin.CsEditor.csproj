@@ -126,8 +126,8 @@
     <PackageReference Include="PDFsharp-MigraDoc-WPF">
       <Version>1.50.5147</Version>
     </PackageReference>
-    <PackageReference Include="Ringen.Schnittstellen">
-      <Version>1.1.1</Version>
+    <PackageReference Include="Ringen.Schnittstellen.Contracts">
+      <Version>1.1.4</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
