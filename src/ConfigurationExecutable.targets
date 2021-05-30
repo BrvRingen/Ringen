@@ -9,7 +9,7 @@
     <IntermediateOutputPath>$(SolutionDir)obj\$(Configuration)\$(AssemblyName)</IntermediateOutputPath>
     <BaseIntermediateOutputPath>$(SolutionDir)obj\$(Configuration)\$(AssemblyName)\</BaseIntermediateOutputPath>
   </PropertyGroup>
-  <Import Project="$(SolutionDir)ConfigurationBase.targets" />
+  <Import Project="$(SolutionDir)src\ConfigurationBase.targets" />
   <!--Target Name="ClearReferenceCopyLocalPaths" AfterTargets="ResolveAssemblyReferences">
     <ItemGroup>
       <ReferenceCopyLocalPaths Remove="@(ReferenceCopyLocalPaths)" />

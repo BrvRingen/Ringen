@@ -20,7 +20,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
-  <Import Project="$(SolutionDir)ConfigurationExecutable.targets" />
+  <Import Project="$(SolutionDir)src\ConfigurationExecutable.targets" />
   <PropertyGroup>
     <StartupObject>Ringen.Startup</StartupObject>
   </PropertyGroup>
@@ -166,7 +166,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ringen.Configs\Ringen.Configs.csproj">
+    <ProjectReference Include="..\Libraries\Ringen.Configs\Ringen.Configs.csproj">
       <Project>{29e1d404-d33b-472c-af4a-e16adfd9169c}</Project>
       <Name>Ringen.Configs</Name>
     </ProjectReference>
@@ -174,7 +174,7 @@
       <Project>{78c12d2b-0701-48e5-937c-b8ea3972a9df}</Project>
       <Name>Ringen.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ringen.CrossCutting\Ringen.CrossCutting.csproj">
+    <ProjectReference Include="..\Libraries\Ringen.CrossCutting\Ringen.CrossCutting.csproj">
       <Project>{4ecd4835-1855-4a1c-8169-cf527b501ae2}</Project>
       <Name>Ringen.CrossCutting</Name>
     </ProjectReference>

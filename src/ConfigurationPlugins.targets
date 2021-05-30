@@ -13,5 +13,5 @@
       <ReferenceCopyLocalPaths Remove="@(ReferenceCopyLocalPaths)" />
     </ItemGroup>
   </Target-->
-  <Import Project="$(SolutionDir)ConfigurationBase.targets" />
+  <Import Project="$(SolutionDir)src\ConfigurationBase.targets" />
 </Project>

@@ -5,7 +5,7 @@
     <RootNamespace>Ringen.Plugin.CsView</RootNamespace>
     <AssemblyName>Ringen.Plugin.CsView</AssemblyName>
   </PropertyGroup>
-  <Import Project="$(SolutionDir)ConfigurationPlugins.targets" />
+  <Import Project="$(SolutionDir)src\ConfigurationPlugins.targets" />
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
@@ -65,7 +65,7 @@
       <Name>Ringen.Core</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\Ringen.CrossCutting\Ringen.CrossCutting.csproj">
+    <ProjectReference Include="..\..\Libraries\Ringen.CrossCutting\Ringen.CrossCutting.csproj">
       <Project>{4ecd4835-1855-4a1c-8169-cf527b501ae2}</Project>
       <Name>Ringen.CrossCutting</Name>
     </ProjectReference>

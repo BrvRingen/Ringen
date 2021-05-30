@@ -8,5 +8,5 @@
     <IntermediateOutputPath>$(SolutionDir)obj\$(Configuration)\lib\$(AssemblyName)</IntermediateOutputPath>
     <BaseIntermediateOutputPath>$(SolutionDir)obj\$(Configuration)\lib\$(AssemblyName)\</BaseIntermediateOutputPath>
   </PropertyGroup>
-  <Import Project="$(SolutionDir)ConfigurationBase.targets" />
+  <Import Project="$(SolutionDir)src\ConfigurationBase.targets" />
 </Project>

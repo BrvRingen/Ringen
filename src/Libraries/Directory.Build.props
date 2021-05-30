@@ -1,0 +1,36 @@
+<Project ToolsVersion="15.0"
+    xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+        <Nullable>enable</Nullable>
+        <LangVersion>9</LangVersion>
+        <IsPackable>false</IsPackable>
+        <OutputPath>$(SolutionDir)obj\$(Configuration)\lib\$(AssemblyName)\</OutputPath>
+    </PropertyGroup>
+    <PropertyGroup>
+        <Version>1.0.0.0</Version>
+        <FileVersion>1.0.0.0</FileVersion>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageId>$(ProjectName)</PackageId>
+        <Authors>Alexander Badewitz, Christian Hennerfeind</Authors>
+        <Company>BRV Ringen</Company>
+        <Copyright>Copyright © $([System.DateTime]::Now.ToString(yyyy)) BRV Ringen</Copyright>
+        <PackageDescription>Part of the Software BRV Ringen.</PackageDescription>
+        <RepositoryUrl>https://github.com/BrvRingen/Ringen</RepositoryUrl>
+        <PackageProjectUrl>http://www.brv-ringen.de</PackageProjectUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageTags>BRV, Ringen, Mannschaftskämpfe, Interfaces, Schnittstellen</PackageTags>
+		<PackageIcon>Icon.png</PackageIcon>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
+        <None Include="$(SolutionDir)Icon.png" Pack="true" PackagePath="\"/>
+    </ItemGroup>
+</Project>

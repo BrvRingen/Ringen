@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ringen", "Ringen\Ringen.csproj", "{5004970A-D280-4357-B0FF-D4D660DED3EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ringen", "src\Ringen\Ringen.csproj", "{5004970A-D280-4357-B0FF-D4D660DED3EA}"
 	ProjectSection(ProjectDependencies) = postProject
 		{E27D7F4A-2978-4F3C-B499-6D4A43B7AF1F} = {E27D7F4A-2978-4F3C-B499-6D4A43B7AF1F}
 		{DBB0788C-264E-48FB-BDDB-68790FACC863} = {DBB0788C-264E-48FB-BDDB-68790FACC863}
@@ -11,26 +11,26 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ringen", "Ringen\Ringen.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Base", "Base", "{CEA3744D-2A0A-4323-A912-718A79A76CA4}"
 EndProject
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "wix-msi", "wix-msi\wix-msi.wixproj", "{A78FA637-04A9-4094-B931-6F551A8AF2B6}"
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "wix-msi", "src\wix-msi\wix-msi.wixproj", "{A78FA637-04A9-4094-B931-6F551A8AF2B6}"
 	ProjectSection(ProjectDependencies) = postProject
 		{5004970A-D280-4357-B0FF-D4D660DED3EA} = {5004970A-D280-4357-B0FF-D4D660DED3EA}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ringen.Core", "Ringen.Core\Ringen.Core.csproj", "{78C12D2B-0701-48E5-937C-B8EA3972A9DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ringen.Core", "src\Ringen.Core\Ringen.Core.csproj", "{78C12D2B-0701-48E5-937C-B8EA3972A9DF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{BADB2D69-3F45-4189-B692-0641352353E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ringen.Plugin.CsEditor", "Plugins\Ringen.Plugin.CsEditor\Ringen.Plugin.CsEditor.csproj", "{DBB0788C-264E-48FB-BDDB-68790FACC863}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ringen.Plugin.CsEditor", "src\Plugins\Ringen.Plugin.CsEditor\Ringen.Plugin.CsEditor.csproj", "{DBB0788C-264E-48FB-BDDB-68790FACC863}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ringen.Plugin.CsView", "Plugins\Ringen.Plugin.CsView\Ringen.Plugin.CsView.csproj", "{E27D7F4A-2978-4F3C-B499-6D4A43B7AF1F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ringen.Plugin.CsView", "src\Plugins\Ringen.Plugin.CsView\Ringen.Plugin.CsView.csproj", "{E27D7F4A-2978-4F3C-B499-6D4A43B7AF1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ringen.Plugin.CsEditor.Tests", "Ringen.Plugin.CsEditor.Tests\Ringen.Plugin.CsEditor.Tests.csproj", "{9781A993-E950-4C0D-AEE9-FE74F485ABC6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ringen.Plugin.CsEditor.Tests", "src\Ringen.Plugin.CsEditor.Tests\Ringen.Plugin.CsEditor.Tests.csproj", "{9781A993-E950-4C0D-AEE9-FE74F485ABC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ringen.Configs", "Ringen.Configs\Ringen.Configs.csproj", "{29E1D404-D33B-472C-AF4A-E16ADFD9169C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ringen.Configs", "src\Libraries\Ringen.Configs\Ringen.Configs.csproj", "{29E1D404-D33B-472C-AF4A-E16ADFD9169C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ringen.CrossCutting", "Ringen.CrossCutting\Ringen.CrossCutting.csproj", "{4ECD4835-1855-4A1C-8169-CF527B501AE2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ringen.CrossCutting", "src\Libraries\Ringen.CrossCutting\Ringen.CrossCutting.csproj", "{4ECD4835-1855-4A1C-8169-CF527B501AE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ringen.Schnittstellen.Caching", "Ringen.Schnittstellen.Caching\Ringen.Schnittstellen.Caching.csproj", "{3249B259-9930-4C11-8DAD-FBA728DC59A5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ringen.Schnittstellen.Caching", "src\Libraries\Ringen.Schnittstellen.Caching\Ringen.Schnittstellen.Caching.csproj", "{3249B259-9930-4C11-8DAD-FBA728DC59A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
