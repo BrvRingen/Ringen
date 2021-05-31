@@ -16,7 +16,7 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "wix-msi", "src\wix-msi\wix-
 		{5004970A-D280-4357-B0FF-D4D660DED3EA} = {5004970A-D280-4357-B0FF-D4D660DED3EA}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ringen.Core", "src\Ringen.Core\Ringen.Core.csproj", "{78C12D2B-0701-48E5-937C-B8EA3972A9DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ringen.Core", "src\Libraries\Ringen.Core\Ringen.Core.csproj", "{78C12D2B-0701-48E5-937C-B8EA3972A9DF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{BADB2D69-3F45-4189-B692-0641352353E7}"
 EndProject

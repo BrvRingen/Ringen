@@ -80,20 +80,19 @@ namespace Ringen.ViewModel
         {
             get
             {
-                return Properties.Settings.Default.Language;
+                return Ringen.Configs.GlobaleVariablen.Language;
             }
             set
             {
                 if (value == null)
                     return;
 
-                if (Properties.Settings.Default.Language != value)
+                if (Ringen.Configs.GlobaleVariablen.Language != value)
                 {
-                    Properties.Settings.Default.Language = value;
-                    Properties.Settings.Default.Save();
+                    Ringen.Configs.GlobaleVariablen.Language = value;
 
                     OnLanguageChanged();
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedLanguage"));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedLanguage)));
                 }
             }
         }
@@ -111,12 +110,12 @@ namespace Ringen.ViewModel
                 if (!(value is IRingenTabItem tempPlugin))
                 {
                     Set(ref m_TabControlSelectedItem, null);
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TabControlSelectedItem"));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TabControlSelectedItem)));
                 }
                 else
                 {
                     Set(ref m_TabControlSelectedItem, tempPlugin);
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TabControlSelectedItem"));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TabControlSelectedItem)));
                 }
             }
         }
@@ -271,7 +270,7 @@ namespace Ringen.ViewModel
         /// </summary>
         public void OnLanguageChanged()
         {
-            TransManager.Instance.CurrentLanguage = new CultureInfo(Properties.Settings.Default.Language);
+            TransManager.Instance.CurrentLanguage = new CultureInfo(Ringen.Configs.GlobaleVariablen.Language);
         }
 
         private void OnCMAvalonDockDocumentsCollectionChanged(NotifyCollectionChangedEventArgs e)

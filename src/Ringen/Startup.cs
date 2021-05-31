@@ -77,18 +77,16 @@ namespace Ringen
 
         private static void Sprache_festlegen()
         {
-            if (string.IsNullOrEmpty(Properties.Settings.Default.Language))
+            if (string.IsNullOrEmpty(Ringen.Configs.GlobaleVariablen.Language))
             {
                 if (CultureInfo.CurrentUICulture.IetfLanguageTag == "de-DE")
-                    Properties.Settings.Default.Language = "de-DE";
+                    Ringen.Configs.GlobaleVariablen.Language = "de-DE"; //Properties.Settings.Default.Language
                 else
-                    Properties.Settings.Default.Language = "en-US";
-
-                Properties.Settings.Default.Save();
+                    Ringen.Configs.GlobaleVariablen.Language = "en-US";
             }
 
-            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(Properties.Settings.Default.Language);
-            CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(Properties.Settings.Default.Language);
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(Ringen.Configs.GlobaleVariablen.Language);
+            CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(Ringen.Configs.GlobaleVariablen.Language);
         }
 
         private static void Lese_Eingabeparameter(string[] args)
@@ -123,7 +121,7 @@ namespace Ringen
             // Argumente prüfen auf Hilfe
             if (args.Length == 1 && args[0] == "/?")
             {
-                System.IO.StreamReader sr = new System.IO.StreamReader(Application.GetResourceStream(new Uri("/Ringen;component/resources/help/terminal_help." + Properties.Settings.Default.Language.ToLower() + ".txt", UriKind.Relative)).Stream);
+                System.IO.StreamReader sr = new System.IO.StreamReader(Application.GetResourceStream(new Uri("/Ringen;component/resources/help/terminal_help." + Ringen.Configs.GlobaleVariablen.Language.ToLower() + ".txt", UriKind.Relative)).Stream);
                 MessageBox.Show(sr.ReadToEnd());
                 Thread.Sleep(10000);
                 throw new Exception();

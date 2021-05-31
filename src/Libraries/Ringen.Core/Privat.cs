@@ -31,7 +31,7 @@ namespace Ringen.Core
                 Password = "test";
 
                 client = new HttpClient();
-                client.BaseAddress = new Uri(Properties.Settings.Default.PrivateRestServer);
+                client.BaseAddress = new Uri(Configs.GlobaleVariablen.PrivateRestServer);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes(string.Format("{0}:{1}", Username, Password))));
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             }

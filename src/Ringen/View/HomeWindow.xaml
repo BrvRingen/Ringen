@@ -45,13 +45,14 @@
             AllowMixedOrientation="True"
             BorderBrush="Black"
             BorderThickness="1"
+            DocumentClosed="{Binding DataContext.CmTabControlTabClosing, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
             DocumentsSource="{Binding OpenedTabs}">
 
-            <i:Interaction.Triggers>
+            <!--<i:Interaction.Triggers>
                 <i:EventTrigger EventName="DocumentClosed">
                     <cmd:EventToCommand Command="{Binding DataContext.CmTabControlTabClosing, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" PassEventArgsToCommand="True" />
                 </i:EventTrigger>
-            </i:Interaction.Triggers>
+            </i:Interaction.Triggers>-->
 
             <ad:DockingManager.DocumentHeaderTemplate>
                 <StaticResource ResourceKey="HomeWindowDocumentHeaderTemplate" />

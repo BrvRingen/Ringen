@@ -1,151 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <ProjectGuid>{DBB0788C-264E-48FB-BDDB-68790FACC863}</ProjectGuid>
-    <RootNamespace>Ringen.Plugin.CsEditor</RootNamespace>
-    <AssemblyName>Ringen.Plugin.CsEditor</AssemblyName>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
-  <Import Project="$(SolutionDir)src\ConfigurationPlugins.targets" />
   <ItemGroup>
-    <Reference Include="PresentationCore" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
+    <PackageReference Include="Enums.NET" Version="4.0.0" />
+    <PackageReference Include="MahApps.Metro" Version="2.4.5" />
+    <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
+    <PackageReference Include="PDFsharp-MigraDoc-WPF" Version="1.50.5147" />
+    <PackageReference Include="Ringen.Schnittstellen.Contracts" Version="1.1.4" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\BoutPoint.xaml.cs">
-      <DependentUpon>BoutPoint.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Classes\BoutPointButton.xaml.cs">
-      <DependentUpon>BoutPointButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Classes\BoutTime.xaml.cs">
-      <DependentUpon>BoutTime.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Classes\Protocol.cs" />
-    <Compile Include="Classes\WPFConverters.cs" />
-    <Compile Include="Helper\PdfHelper.cs" />
-    <Compile Include="Reporting\BaseReport\BaseReportCreator.cs" />
-    <Compile Include="Reporting\BerichtErsteller\BerichtTitel.cs" />
-    <Compile Include="Reporting\BerichtErsteller\DefaultElemente.cs" />
-    <Compile Include="Reporting\BerichtErsteller\HinweißVorläufigesErgebnis.cs" />
-    <Compile Include="Reporting\BerichtErsteller\KampfBemerkungen.cs" />
-    <Compile Include="Reporting\BerichtErsteller\KampfInformationen.cs" />
-    <Compile Include="Reporting\BerichtErsteller\KampfTabelle.cs" />
-    <Compile Include="Reporting\BerichtErsteller\KampfTabelleKampfrichter.cs" />
-    <Compile Include="Reporting\BerichtErsteller\UnterschriftKampfrichter.cs" />
-    <Compile Include="Reporting\Pdf\ExportPdf.cs" />
-    <Compile Include="Reporting\Konfig\CustomStyles.cs" />
-    <Compile Include="Reporting\ReportSprecher.cs" />
-    <Compile Include="Reporting\ReportErgebnislisteKampfrichtertischPdf.cs" />
-    <Compile Include="Reporting\ReportFarbigPdf.cs" />
-    <Compile Include="Reporting\ReportPdf.cs" />
-    <Compile Include="RegisterPluginCsEditor.cs" />
-    <Compile Include="Reporting\IReport.cs" />
-    <Compile Include="Resources\LanguageFiles\DictPluginMain.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DictPluginMain.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\LanguageFiles\_DictionaryToEnum.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>_DictionaryToEnum.tt</DependentUpon>
-    </Compile>
-    <Compile Include="View\EinzelkampfView.xaml.cs">
-      <DependentUpon>EinzelkampfView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\MannschaftskampfView.xaml.cs">
-      <DependentUpon>MannschaftskampfView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\View.xaml.cs">
-      <DependentUpon>View.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <ProjectReference Include="..\..\Libraries\Ringen.Core\Ringen.Core.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Page Include="Classes\BoutPoint.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Classes\BoutPointButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Classes\BoutTime.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\EinzelkampfView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\MannschaftskampfView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\View.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Ringen.Core\Ringen.Core.csproj">
-      <Project>{78c12d2b-0701-48e5-937c-b8ea3972a9df}</Project>
-      <Name>Ringen.Core</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Libraries\Ringen.CrossCutting\Ringen.CrossCutting.csproj">
-      <Project>{4ecd4835-1855-4a1c-8169-cf527b501ae2}</Project>
-      <Name>Ringen.CrossCutting</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Enums.NET">
-      <Version>4.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="MahApps.Metro">
-      <Version>2.4.5</Version>
-      <IncludeAssets>compile</IncludeAssets>
-      <ExcludeAssets>contentFiles</ExcludeAssets>
-      <PrivateAssets>contentfiles; analyzers</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="MvvmLightLibsStd10">
-      <Version>5.4.1.1</Version>
-      <IncludeAssets>compile</IncludeAssets>
-      <ExcludeAssets>contentFiles</ExcludeAssets>
-      <PrivateAssets>contentfiles; analyzers</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="PDFsharp-MigraDoc-WPF">
-      <Version>1.50.5147</Version>
-    </PackageReference>
-    <PackageReference Include="Ringen.Schnittstellen.Contracts">
-      <Version>1.1.4</Version>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\LanguageFiles\_DictionaryToEnum.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>_DictionaryToEnum.generated.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\LanguageFiles\DictPluginMain.en-US.resx" />
-    <EmbeddedResource Include="Resources\LanguageFiles\DictPluginMain.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>DictPluginMain.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\LanguageFiles\DictPluginMain.zh-CN.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup />
 </Project>

@@ -1,95 +1,13 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <ProjectGuid>{E27D7F4A-2978-4F3C-B499-6D4A43B7AF1F}</ProjectGuid>
-    <RootNamespace>Ringen.Plugin.CsView</RootNamespace>
-    <AssemblyName>Ringen.Plugin.CsView</AssemblyName>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
-  <Import Project="$(SolutionDir)src\ConfigurationPlugins.targets" />
   <ItemGroup>
-    <Reference Include="PresentationCore" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
+    <PackageReference Include="MahApps.Metro" Version="2.4.5" />
+    <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\BoutPoint.xaml.cs">
-      <DependentUpon>BoutPoint.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Classes\WPFConverters.cs" />
-    <Compile Include="RegisterPluginCsView.cs" />
-    <Compile Include="Resources\LanguageFiles\_DictionaryToEnum.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>_DictionaryToEnum.tt</DependentUpon>
-    </Compile>
-    <Compile Include="View\EinzelkampfView.xaml.cs">
-      <DependentUpon>EinzelkampfView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\MannschaftskampfView.xaml.cs">
-      <DependentUpon>MannschaftskampfView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\View.xaml.cs">
-      <DependentUpon>View.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Classes\BoutPoint.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\EinzelkampfView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\MannschaftskampfView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\View.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Ringen.Core\Ringen.Core.csproj">
-      <Project>{78c12d2b-0701-48e5-937c-b8ea3972a9df}</Project>
-      <Name>Ringen.Core</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Libraries\Ringen.CrossCutting\Ringen.CrossCutting.csproj">
-      <Project>{4ecd4835-1855-4a1c-8169-cf527b501ae2}</Project>
-      <Name>Ringen.CrossCutting</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\LanguageFiles\_DictionaryToEnum.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>_DictionaryToEnum.generated.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\LanguageFiles\DictPluginMain.en-US.resx" />
-    <EmbeddedResource Include="Resources\LanguageFiles\DictPluginMain.resx" />
-    <EmbeddedResource Include="Resources\LanguageFiles\DictPluginMain.zh-CN.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="MahApps.Metro">
-      <Version>2.4.5</Version>
-    </PackageReference>
-    <PackageReference Include="MvvmLightLibsStd10">
-      <Version>5.4.1.1</Version>
-    </PackageReference>
+    <ProjectReference Include="..\..\Libraries\Ringen.Core\Ringen.Core.csproj" />
   </ItemGroup>
 </Project>

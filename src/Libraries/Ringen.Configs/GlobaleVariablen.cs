@@ -15,5 +15,7 @@ namespace Ringen.Configs
 
         //TODO: Info Konfigdatei auslagern
         public static ErgebnisdienstSystem AktiveApiSchnittstelle = ErgebnisdienstSystem.RDB;
+        public static string? Language;
+        public static string PrivateRestServer = "http://www.SpVgg-Freising.de";
     }
 }
