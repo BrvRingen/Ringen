@@ -6,6 +6,18 @@
     <StartupObject>Ringen.Startup</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Resources\Images\Context_Menu_Close.png" />
+    <None Remove="Resources\Images\Icon.ico" />
+    <None Remove="Resources\Images\Language_de-DE.png" />
+    <None Remove="Resources\Images\Language_en-US.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Context_Menu_Close.png" />
+    <Resource Include="Resources\Images\Icon.ico" />
+    <Resource Include="Resources\Images\Language_de-DE.png" />
+    <Resource Include="Resources\Images\Language_en-US.png" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="ControlzEx" Version="5.0.0" />
     <PackageReference Include="Dirkster.AvalonDock" Version="4.51.1" />
     <PackageReference Include="Enums.NET" Version="4.0.0" />
@@ -34,13 +46,5 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="Konfig\ApiCache.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Konfig\RDBErgebnisdienst.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 </Project>

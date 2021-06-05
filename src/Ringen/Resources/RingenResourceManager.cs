@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Windows;
 
-namespace Ringen.Core
+namespace Ringen.Resources
 {
     public class RingenResourceManager
     {
