@@ -2,9 +2,7 @@
     x:Class="Ringen.View.ExplorerWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:cmd="http://www.galasoft.ch/mvvmlight"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-    xmlns:core="clr-namespace:Ringen.Core;assembly=Ringen.Core"
     DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
     xmlns:viewModels="clr-namespace:Ringen.Core.ViewModels;assembly=Ringen.Core">
 
@@ -34,27 +32,23 @@
             AllowDrop="True"
             FontSize="12"
             ItemsSource="{x:Static viewModels:MannschaftskaempfeExplorer.Data}"
-            MouseDoubleClick="TreeView_MouseDoubleClick"
             VirtualizingStackPanel.IsVirtualizing="True"
             ItemTemplate="{StaticResource ExplorerTemplate}"
             VirtualizingStackPanel.VirtualizationMode="Standard">
-
-            <!--TODO 5.0 EventToCommand geht nicht oben MouseDoubleClick ist nur ein Workaround-->
-            <!--<i:Interaction.Triggers>
+            <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
-                    <cmd:EventToCommand Command="{Binding CmExplorerDoubleClick}" PassEventArgsToCommand="True" />
+                    <i:InvokeCommandAction Command="{Binding CmExplorerDoubleClick}" PassEventArgsToCommand="True" />
                 </i:EventTrigger>
                 <i:EventTrigger EventName="KeyDown">
-                    <cmd:EventToCommand Command="{Binding CmExplorerKeyDown}" PassEventArgsToCommand="True" />
+                    <i:InvokeCommandAction Command="{Binding CmExplorerKeyDown}" PassEventArgsToCommand="True" />
                 </i:EventTrigger>
                 <i:EventTrigger EventName="SelectedItemChanged">
-                    <cmd:EventToCommand Command="{Binding CmExplorerSelectedItemChanged}" PassEventArgsToCommand="True"/>
+                    <i:InvokeCommandAction Command="{Binding CmExplorerSelectedItemChanged}" PassEventArgsToCommand="True"/>
                 </i:EventTrigger>
                 <i:EventTrigger EventName="SelectionMade">
-                    <cmd:EventToCommand Command="{Binding CmExplorerSelectionMade}"  PassEventArgsToCommand="True"/>
+                    <i:InvokeCommandAction Command="{Binding CmExplorerSelectionMade}"  PassEventArgsToCommand="True"/>
                 </i:EventTrigger>
-            </i:Interaction.Triggers>-->
-            
+            </i:Interaction.Triggers>
         </TreeView>
     </Grid>
 </UserControl>

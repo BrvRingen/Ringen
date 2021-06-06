@@ -26,10 +26,5 @@ namespace Ringen.View
         {
             InitializeComponent();
         }
-
-        private void TreeView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            ((MainViewModel)DataContext).DoubleClick();
-        }
     }
 }

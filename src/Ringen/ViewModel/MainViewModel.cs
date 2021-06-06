@@ -189,7 +189,9 @@ namespace Ringen.ViewModel
 
 
         private RelayCommand m_CloseNotificationIcon;
-        public RelayCommand CloseNotificationIcon => m_CloseNotificationIcon ?? (m_CloseNotificationIcon = new RelayCommand(() => { Application.Current.Shutdown(); }));
+        public RelayCommand CloseNotificationIcon => m_CloseNotificationIcon ?? (m_CloseNotificationIcon = new RelayCommand(() => {
+            Application.Current.Shutdown();
+        }));
 
 
         private RelayCommand m_RcOpenHelp;
