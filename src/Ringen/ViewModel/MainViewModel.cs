@@ -28,8 +28,8 @@ namespace Ringen.ViewModel
         LogToFile logToFile;
         public new event PropertyChangedEventHandler PropertyChanged;
 
-        private readonly HashSet<LogEntry> m_DataHashSet = new HashSet<LogEntry>();
-        private static readonly object m_LockObj = new object();
+        private readonly HashSet<LogEntry> m_DataHashSet = new();
+        private static readonly object m_LockObj = new();
 
         private ObservableCollection<LogEntry> logData;
 
@@ -193,7 +193,16 @@ namespace Ringen.ViewModel
 
 
         private RelayCommand m_RcOpenHelp;
-        public RelayCommand RcOpenHelp => m_RcOpenHelp ?? (m_RcOpenHelp = new RelayCommand(() => { Process.Start(@"Resources\Help\de-DE\RingenHelp.pdf"); }));
+        public RelayCommand RcOpenHelp => m_RcOpenHelp ?? (m_RcOpenHelp = new RelayCommand(() => {
+            Process p = new()
+            {
+                StartInfo = new ProcessStartInfo(@"Resources\Help\de-DE\RingenHelp.pdf")
+                {
+                    UseShellExecute = true
+                }
+            };
+            p.Start();
+        }));
 
 
 

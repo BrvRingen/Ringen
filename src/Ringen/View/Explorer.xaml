@@ -39,10 +39,8 @@
             ItemTemplate="{StaticResource ExplorerTemplate}"
             VirtualizingStackPanel.VirtualizationMode="Standard">
 
-
-
-
-                <!--<i:Interaction.Triggers>
+            <!--TODO 5.0 EventToCommand geht nicht oben MouseDoubleClick ist nur ein Workaround-->
+            <!--<i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <cmd:EventToCommand Command="{Binding CmExplorerDoubleClick}" PassEventArgsToCommand="True" />
                 </i:EventTrigger>

@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-	<OutputPath>$(SolutionDir)src\Ringen\bin\$(Configuration)\net5.0-windows\Plugins\Ringen.Plugin.CsEditor\</OutputPath>
 	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
