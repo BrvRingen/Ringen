@@ -1,13 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net5.0-windows</TargetFramework>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MahApps.Metro" Version="2.4.5" />
     <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Libraries\Ringen.Core\Ringen.Core.csproj" />
   </ItemGroup>
 </Project>

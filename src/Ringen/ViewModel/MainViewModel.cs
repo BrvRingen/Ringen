@@ -186,23 +186,16 @@ namespace Ringen.ViewModel
 
         }
 
+
+
         private RelayCommand m_CloseNotificationIcon;
-        public RelayCommand CloseNotificationIcon => m_CloseNotificationIcon ?? (m_CloseNotificationIcon = new RelayCommand(OnCloseNotificationIcon));
+        public RelayCommand CloseNotificationIcon => m_CloseNotificationIcon ?? (m_CloseNotificationIcon = new RelayCommand(() => { Application.Current.Shutdown(); }));
 
 
         private RelayCommand m_RcOpenHelp;
-        public RelayCommand RcOpenHelp => m_RcOpenHelp ?? (m_RcOpenHelp = new RelayCommand(OnRcOpenHelp));
-
-        private void OnRcOpenHelp()
-        {
-            Process.Start(@"Resources\Help\de-DE\RingenHelp.pdf");
-        }
+        public RelayCommand RcOpenHelp => m_RcOpenHelp ?? (m_RcOpenHelp = new RelayCommand(() => { Process.Start(@"Resources\Help\de-DE\RingenHelp.pdf"); }));
 
 
-        private void OnCloseNotificationIcon()
-        {
-            Application.Current.Shutdown();
-        }
 
         public RelayCommand<MouseEventArgs> CmExplorerDoubleClick
         {
@@ -210,20 +203,26 @@ namespace Ringen.ViewModel
             {
                 return new RelayCommand<MouseEventArgs>(new Action<MouseEventArgs>((MouseEventArgs e) =>
                 {
-                    OpenWithDoubleClickMessage.Send((x) =>
-                    {
-                        if (x.Open && !OpenedTabs.Contains(x.RingenTabItem))
-                        {
-                            OpenedTabs.Add(x.RingenTabItem);
-                            // Tab selektieren
-                            TabControlSelectedItem = x.RingenTabItem;
-                        }
-                    });
+                    DoubleClick();
 
                     e.Handled = true;
                 }));
             }
         }
+
+        public void DoubleClick()
+        {
+            OpenWithDoubleClickMessage.Send((x) =>
+            {
+                if (x.Open && !OpenedTabs.Contains(x.RingenTabItem))
+                {
+                    OpenedTabs.Add(x.RingenTabItem);
+                    // Tab selektieren
+                    TabControlSelectedItem = x.RingenTabItem;
+                }
+            });
+        }
+
 
         public RelayCommand<DocumentClosedEventArgs> CmTabControlTabClosing
         {

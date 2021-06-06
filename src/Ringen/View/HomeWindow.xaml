@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ringen"
+             xmlns:View="clr-namespace:Ringen.View"
              xmlns:RingenCoreDataGrid="clr-namespace:Ringen.Core.DataGrid;assembly=Ringen.Core"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
@@ -20,7 +21,6 @@
                 <ResourceDictionary Source="pack://application:,,,/Ringen;component/View/HomeWindowDocumentHeaderTemplate.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Ringen;component/View/HomeWindowDocumentTitleTemplate.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Ringen;component/Styles/Styles.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Ringen;component/View/Explorer.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <FrameworkElement x:Key="ProxyElement" DataContext="{Binding MainViewModel, Source={StaticResource Locator}}" />
         </ResourceDictionary>
@@ -74,7 +74,7 @@
                                 AutoHideWidth="400"
                                 CanHide="False"
                                 ContentId="main_treeview">
-                                <StaticResource ResourceKey="Explorer" />
+                                <View:ExplorerWindow />
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
 
