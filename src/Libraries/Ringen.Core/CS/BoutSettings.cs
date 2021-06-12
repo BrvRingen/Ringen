@@ -5,7 +5,7 @@ namespace Ringen.Core.CS
 {
     public class BoutSettings
     {
-        
+
 
         private List<string> posPoints;
 
@@ -14,27 +14,37 @@ namespace Ringen.Core.CS
             get { return posPoints; }
             set { posPoints = value; }
         }
-        public List<BoutPoint> PosPointsHome
+        public List<Schnittstellen.Contracts.Models.Griffbewertungspunkt> PosPointsHome
         {
             get
             {
-                var tmp = new List<BoutPoint>();
+                var tmp = new List<Schnittstellen.Contracts.Models.Griffbewertungspunkt>();
                 foreach (var posPoint in posPoints)
                 {
-                    tmp.Add(new BoutPoint(posPoint, HeimGastViewModel.Home));
+                    tmp.Add(new Schnittstellen.Contracts.Models.Griffbewertungspunkt()
+                        {
+                            Fuer = Schnittstellen.Contracts.Models.Enums.HeimGast.Heim,
+                            Punktzahl = int.TryParse(posPoint, out int Point) ? Point : 0,
+                        }
+                    );
                 }
 
                 return tmp;
             }
         }
-        public List<BoutPoint> PosPointsOpponent
+        public List<Schnittstellen.Contracts.Models.Griffbewertungspunkt> PosPointsOpponent
         {
             get
             {
-                var tmp = new List<BoutPoint>();
+                var tmp = new List<Schnittstellen.Contracts.Models.Griffbewertungspunkt>();
                 foreach (var posPoint in posPoints)
                 {
-                    tmp.Add(new BoutPoint(posPoint, HeimGastViewModel.Opponent));
+                    tmp.Add(new Schnittstellen.Contracts.Models.Griffbewertungspunkt()
+                        {
+                            Fuer = Schnittstellen.Contracts.Models.Enums.HeimGast.Gast,
+                            Punktzahl = int.TryParse(posPoint, out int Point) ? Point : 0,
+                        }
+                    );
                 }
 
                 return tmp;

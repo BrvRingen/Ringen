@@ -106,8 +106,8 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             DateTime letzterKampf = DateTime.Now;
             try
             {
-                ersterKampf = mannschaftskampfViewModel.Children.Min(li => li.Points.Min(na => na.Zeit.Value));
-                letzterKampf = mannschaftskampfViewModel.Children.Max(li => li.Points.Max(na => na.Zeit.Value));
+                //ersterKampf = mannschaftskampfViewModel.Children.Min(li => li.Wertungspunkte.Min(na => na.Zeit.Value));
+                //letzterKampf = mannschaftskampfViewModel.Children.Max(li => li.Wertungspunkte.Max(na => na.Zeit.Value));
             }
             catch (Exception)
             {

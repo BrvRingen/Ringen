@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Ringen.Core.CS;
 using Ringen.Core.ViewModels;
@@ -38,6 +39,7 @@ namespace Ringen.Core.Mapper
                 GastRinger = model.GastRinger,
                 GastMannschaftswertung = model.GastMannschaftswertung,
 
+                Wertungspunkte = new ObservableCollection<Griffbewertungspunkt>(model.Wertungspunkte),
 
                 SiegartViewModel = MapSiegart(model.Siegart),
                 //Round1 = null,

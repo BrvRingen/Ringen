@@ -278,16 +278,16 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
 
             Paragraph punkteParagraph = spalte.AddParagraph();
 
-            foreach (Core.CS.BoutPoint punkt in kampf.Points)
+            foreach (var punkt in kampf.Wertungspunkte)
             {
                 var font = new Font();
-                var ft = punkteParagraph.AddFormattedText(punkt.Value, font);
+                var ft = punkteParagraph.AddFormattedText(punkt.Punktzahl.ToString(), font);
 
-                if (punkt.HomeOrOpponent == HeimGastViewModel.Home)
+                if (punkt.Fuer == Schnittstellen.Contracts.Models.Enums.HeimGast.Heim)
                 {
                     ft.Style = CustomStyles.WERTUNG_ROT;
                 }
-                else if (punkt.HomeOrOpponent == HeimGastViewModel.Opponent)
+                else if (punkt.Fuer == Schnittstellen.Contracts.Models.Enums.HeimGast.Gast)
                 {
                     ft.Style = CustomStyles.WERTUNG_BLAU;
                 }

@@ -10,7 +10,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using Ringen.Core.CS;
 using Ringen.Core.ViewModels.Enums;
-using static Ringen.Core.CS.BoutPoint;
+using Ringen.Schnittstellen.Contracts.Models;
 
 namespace Ringen.Plugin.CsView
 {
@@ -78,7 +78,7 @@ namespace Ringen.Plugin.CsView
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((HeimGastViewModel)value == HeimGastViewModel.Home)
+            if (value.ToString() == "Heim")
                 return Brushes.Red;
             else
                 return Brushes.LightSkyBlue;
@@ -92,13 +92,13 @@ namespace Ringen.Plugin.CsView
         #endregion
     }
 
-    public class PointsSumConverter : IValueConverter
+    public class WertungspunkteSumConverter : IValueConverter
     {
         #region public functions
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (value as ObservableCollection<Core.CS.BoutPoint>).Select(x => (x.HomeOrOpponent == (HeimGastViewModel)Enum.Parse(typeof(HeimGastViewModel), parameter.ToString()) && int.TryParse(x.Value, out int Point) ? Point : 0)).Sum();
+            return (value as ObservableCollection<Schnittstellen.Contracts.Models.Griffbewertungspunkt>).Select(x => (x.Fuer.ToString() == parameter.ToString()) ? x.Punktzahl : 0).Sum();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

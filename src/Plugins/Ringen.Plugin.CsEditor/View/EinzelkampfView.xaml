@@ -56,7 +56,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <local:BoutPointButton Data="{Binding}"></local:BoutPointButton>
+                        <local:GriffbewertungspunktButton Data="{Binding}"></local:GriffbewertungspunktButton>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
@@ -69,7 +69,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <local:BoutPointButton Data="{Binding}"></local:BoutPointButton>
+                        <local:GriffbewertungspunktButton Data="{Binding}"></local:GriffbewertungspunktButton>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
@@ -84,7 +84,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <local:BoutPoint Data="{Binding}"></local:BoutPoint>
+                    <local:Griffbewertungspunkt Data="{Binding}"></local:Griffbewertungspunkt>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

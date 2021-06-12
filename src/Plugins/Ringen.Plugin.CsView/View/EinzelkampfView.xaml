@@ -12,7 +12,7 @@
         <local:NullToVisiblityConverter x:Key="NullToVisiblity" />
         <local:IntToTimeConverter x:Key="IntToTimeConverter"/>
         <local:TimeRunningToVisiblityConverter x:Key="TimeRunningToVisiblity" />
-        <local:PointsSumConverter x:Key="PointsSumConverter" />
+        <local:WertungspunkteSumConverter x:Key="WertungspunkteSumConverter" />
     </CoreUi:ExtendedNotifyPropertyChangedUserControl.Resources>
     <Grid Visibility="{Binding EinzelkampfViewModel, Converter={StaticResource NullToVisiblity}}" >
         <Grid.RowDefinitions>
@@ -159,7 +159,7 @@
             </Grid.ColumnDefinitions>
             <Border Background="Red" Grid.Column="0">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding EinzelkampfViewModel.Points, Converter={StaticResource PointsSumConverter}, ConverterParameter='Home'}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.Wertungspunkte, Converter={StaticResource WertungspunkteSumConverter}, ConverterParameter='Heim'}" />
                 </Viewbox>
             </Border>
             <Border Grid.Column="1">
@@ -169,12 +169,12 @@
             </Border>
             <Border Background="LightSkyBlue" Grid.Column="2">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding EinzelkampfViewModel.Points, Converter={StaticResource PointsSumConverter}, ConverterParameter='Opponent'}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.Wertungspunkte, Converter={StaticResource WertungspunkteSumConverter}, ConverterParameter='Gast'}" />
                 </Viewbox>
             </Border>
         </Grid>
-        <!-- Points -->
-        <ItemsControl Grid.Row="9" ItemsSource="{Binding EinzelkampfViewModel.Points}">
+        <!-- Wertungspunkte -->
+        <ItemsControl Grid.Row="9" ItemsSource="{Binding EinzelkampfViewModel.Wertungspunkte}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel />
@@ -182,7 +182,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <local:BoutPoint Data="{Binding}"></local:BoutPoint>
+                    <local:Griffbewertungspunkt Data="{Binding}"></local:Griffbewertungspunkt>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

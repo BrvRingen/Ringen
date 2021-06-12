@@ -33,7 +33,7 @@ namespace Ringen.Plugin.CsEditor
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((HeimGastViewModel)value == HeimGastViewModel.Home)
+            if (value.ToString() == "Heim")
                 return Brushes.Red;
             else
                 return Brushes.LightSkyBlue;

@@ -21,17 +21,17 @@ namespace Ringen.Plugin.CsView
     /// <summary>
     /// Interaktionslogik für Point.xaml
     /// </summary>
-    public partial class BoutPoint : UserControl
+    public partial class Griffbewertungspunkt : UserControl
     {
-        public static DependencyProperty DataProperty = DependencyProperty.Register(nameof(Data), typeof(Core.CS.BoutPoint), typeof(BoutPoint), new PropertyMetadata());
+        public static DependencyProperty DataProperty = DependencyProperty.Register(nameof(Data), typeof(Schnittstellen.Contracts.Models.Griffbewertungspunkt), typeof(Griffbewertungspunkt), new PropertyMetadata());
 
-        public Core.CS.BoutPoint Data
+        public Schnittstellen.Contracts.Models.Griffbewertungspunkt Data
         {
-            get { return (Core.CS.BoutPoint)GetValue(DataProperty); }
+            get { return (Schnittstellen.Contracts.Models.Griffbewertungspunkt)GetValue(DataProperty); }
             set { SetValue(DataProperty, value); }
         }
 
-        public BoutPoint()
+        public Griffbewertungspunkt()
         {
             InitializeComponent();
         }

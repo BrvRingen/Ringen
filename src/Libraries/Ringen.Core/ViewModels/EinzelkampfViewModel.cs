@@ -53,7 +53,9 @@ namespace Ringen.Core.ViewModels
         public string Gewichtsklasse { get; internal set; }
         public StilartViewModel StilartViewModel { get; internal set; }
         
-        public Ringer HeimRinger { get; internal set; }
+        public Ringer HeimRinger {
+            get;
+            internal set; }
         public double HeimRingerGewicht { get; internal set; }
 
         public int HeimMannschaftswertung { get; internal set; }
@@ -80,23 +82,22 @@ namespace Ringen.Core.ViewModels
         public string Round1 { get; internal set; }
 
 
-        private ObservableCollection<BoutPoint> points;
+        private ObservableCollection<Griffbewertungspunkt> wertungspunkte = new ObservableCollection<Griffbewertungspunkt>();
 
-        public ObservableCollection<BoutPoint> Points
+        public ObservableCollection<Griffbewertungspunkt> Wertungspunkte
         {
             get
             {
-                if (points == null) 
-                {
-                    UpdateDetails();
-                    points.CollectionChanged += (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) =>
-                    { 
-                        base.OnPropertyChanged();
-                    };
-                }
-                return points;
+                return wertungspunkte;
             }
-            set { points = value; }
+            set {
+                wertungspunkte = value;
+                base.OnPropertyChanged();
+                wertungspunkte.CollectionChanged += (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) =>
+                {
+                    base.OnPropertyChanged();
+                };
+            }
         }
 
         public List<bool> Children { get; set; }
@@ -104,7 +105,7 @@ namespace Ringen.Core.ViewModels
 
         private void UpdateDetails()
         {
-            points = new ObservableCollection<BoutPoint>();
+            wertungspunkte = new ObservableCollection<Griffbewertungspunkt>();
 
             //Async.RunSync(async () =>
             //{
@@ -130,6 +131,14 @@ namespace Ringen.Core.ViewModels
             //        }
             //    }
             //});
+        }
+
+        public EinzelkampfViewModel()
+        {
+            wertungspunkte.CollectionChanged += (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) =>
+            {
+                base.OnPropertyChanged();
+            };
         }
     }
 }
