@@ -76,7 +76,7 @@
         </Grid>
 
         <!-- Points -->
-        <ItemsControl Grid.Row="6" ItemsSource="{Binding EinzelkampfViewModel.Points}" Grid.Column="0">
+        <ItemsControl Grid.Row="6" ItemsSource="{Binding EinzelkampfViewModel.Wertungspunkte}" Grid.Column="0">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel />

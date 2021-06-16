@@ -12,9 +12,9 @@
     <UserControl.Resources>
         <local:TeamToBrushConverter x:Key="TeamToBrush" />
     </UserControl.Resources>
-    <Border DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Background="{Binding Data.HomeOrOpponent, Converter={StaticResource TeamToBrush}}">
+    <Border DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Background="{Binding Data.Fuer, Converter={StaticResource TeamToBrush}}">
         <Viewbox StretchDirection="Both">
-            <TextBlock Text="{Binding Data.Value}" />
+            <TextBlock Text="{Binding Data.Punktzahl}" />
         </Viewbox>
     </Border>
 </UserControl>

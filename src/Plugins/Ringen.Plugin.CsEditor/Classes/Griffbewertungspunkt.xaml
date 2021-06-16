@@ -13,10 +13,10 @@
         <local:TeamToBrushConverter x:Key="TeamToBrush" />
     </UserControl.Resources>
 
-    <Canvas DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Background="{Binding Data.HomeOrOpponent, Converter={StaticResource TeamToBrush}}">
-        <Label Canvas.Left="15" FontSize="40" Content="{Binding Data.Value}"></Label>
+    <Canvas DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Background="{Binding Data.Fuer, Converter={StaticResource TeamToBrush}}">
+        <Label Canvas.Left="15" FontSize="40" Content="{Binding Data.Punktzahl}"></Label>
         <StackPanel Canvas.Top="45" Canvas.Left="10" Orientation="Horizontal">
-            <Label FontSize="15" Content="{Binding Data.Time}"></Label>
+            <Label FontSize="15" Content="{Binding Data.Zeit}"></Label>
             <Label FontSize="15"> sec.</Label>
         </StackPanel>
         <Button Canvas.Left="55" Width="20" Height="20" Command="{Binding Delete}" Content="X"/>
