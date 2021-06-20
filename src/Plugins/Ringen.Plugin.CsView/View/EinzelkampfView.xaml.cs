@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ringen.Core.DependencyInjection;
 using Ringen.Core.ViewModels;
 
 namespace Ringen.Plugin.CsView
@@ -24,7 +25,7 @@ namespace Ringen.Plugin.CsView
     public partial class EinzelkampfView : ExtendedNotifyPropertyChangedUserControl
     {
         private EinzelkampfViewModel _einzelkampfViewModel;
-
+        
         public EinzelkampfViewModel EinzelkampfViewModel
         {
             get { return _einzelkampfViewModel; }

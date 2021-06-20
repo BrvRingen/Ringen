@@ -3,6 +3,7 @@ using Ringen.Core;
 using Ringen.Core.UI;
 using System.Threading.Tasks;
 using System.Windows;
+using Ringen.Core.DependencyInjection;
 using Ringen.Core.ViewModels;
 
 namespace Ringen.Plugin.CsEditor
@@ -46,6 +47,7 @@ namespace Ringen.Plugin.CsEditor
         public void UpdateUi()
         {
             MannschaftskampfViewModel = MannschaftskaempfeExplorer.SelectedItem as MannschaftskampfViewModel;
+
             CompetitionInfos = new CompetitionInfosViewModel();
             CompetitionInfos.Ordner.Add("Test Ordner 1");
             CompetitionInfos.Ordner.Add("Test Ordner 2");

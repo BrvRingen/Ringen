@@ -35,15 +35,15 @@
             </Grid.ColumnDefinitions>
             <Border Background="Red"   Grid.Column="0">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding EinzelkampfViewModel.MannschaftskampfViewModel.HeimPunkte}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.ExplorerStates.Mannschaftskampf.HeimPunkte}" />
                 </Viewbox>
             </Border>
             <Viewbox StretchDirection="Both"  Grid.Column="1">
-                <TextBlock Text="{Binding EinzelkampfViewModel.LigaViewModel.Value}" />
+                <TextBlock Text="{Binding EinzelkampfViewModel.ExplorerStates.Liga.Value}" />
             </Viewbox>
             <Border Background="LightSkyBlue"   Grid.Column="2">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding EinzelkampfViewModel.MannschaftskampfViewModel.GastPunkte}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.ExplorerStates.Mannschaftskampf.GastPunkte}" />
                 </Viewbox>
             </Border>
         </Grid>
@@ -54,12 +54,12 @@
             </Grid.ColumnDefinitions>
             <Border Background="Red"   Grid.Column="0">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding EinzelkampfViewModel.MannschaftskampfViewModel.HeimMannschaft}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.ExplorerStates.Mannschaftskampf.HeimMannschaft}" />
                 </Viewbox>
             </Border>
             <Border Background="LightSkyBlue"   Grid.Column="1">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding EinzelkampfViewModel.MannschaftskampfViewModel.GastMannschaft}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.ExplorerStates.Mannschaftskampf.GastMannschaft}" />
                 </Viewbox>
             </Border>
         </Grid>
@@ -91,7 +91,7 @@
             </Border>
             <Border Grid.Column="4">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding EinzelkampfViewModel.StilartViewModel}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.Stilart}" />
                 </Viewbox>
             </Border>
             <Border Background="LightSkyBlue" Grid.Column="5">

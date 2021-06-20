@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Ringen.Core.CS;
+using Ringen.Core.DependencyInjection;
 using Ringen.Core.UI;
 using Ringen.Core.ViewModels.Enums;
 using Ringen.Schnittstellen.Contracts.Models;
@@ -9,6 +10,18 @@ namespace Ringen.Core.ViewModels
 {
     public class EinzelkampfViewModel : ExtendedNotifyPropertyChanged, IExplorerItemViewModel
     {
+        public ExplorerStates ExplorerStates { get; internal set; }
+
+        public EinzelkampfViewModel()
+        {
+            ExplorerStates explorerStates = DependencyInjectionContainer.GetService<ExplorerStates>();
+            ExplorerStates = explorerStates;
+
+            wertungspunkte.CollectionChanged += (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) =>
+            {
+                base.OnPropertyChanged();
+            };
+        }
 
         public int KampfNr { get; internal set; }
 
@@ -20,30 +33,13 @@ namespace Ringen.Core.ViewModels
             }
         }
 
-        public MannschaftskampfViewModel MannschaftskampfViewModel //TODO: muss raus
-        {
-            get
-            {
-                return null;
-            }
-        }
-
-        public LigaViewModel LigaViewModel //TODO muss raus
-        {
-            get
-            {
-                return null;
-                //return (Table)ExplorerParent.ExplorerParent;
-            }
-        }
-
         private BoutSettings settings;
 
         public BoutSettings Settings
         {
             get
             {
-                if (settings == null) settings = new BoutSettings(StilartViewModel);
+                if (settings == null) settings = new BoutSettings(Stilart);
                 return settings;
             }
             set { settings = value; }
@@ -51,7 +47,7 @@ namespace Ringen.Core.ViewModels
 
         public int Order { get; internal set; }
         public string Gewichtsklasse { get; internal set; }
-        public StilartViewModel StilartViewModel { get; internal set; }
+        public StilartViewModel Stilart { get; internal set; }
         
         public Ringer HeimRinger {
             get;
@@ -78,9 +74,9 @@ namespace Ringen.Core.ViewModels
         public int GastMannschaftswertung { get; internal set; }
 
 
-        public SiegartViewModelEnum SiegartViewModel { get; internal set; }
-        public string Round1 { get; internal set; }
+        public SiegartViewModelEnum Siegart { get; internal set; }
 
+        public string Round1 { get; internal set; }
 
         private ObservableCollection<Griffbewertungspunkt> wertungspunkte = new ObservableCollection<Griffbewertungspunkt>();
 
@@ -99,9 +95,6 @@ namespace Ringen.Core.ViewModels
                 };
             }
         }
-
-        public List<bool> Children { get; set; }
-
 
         private void UpdateDetails()
         {
@@ -133,12 +126,5 @@ namespace Ringen.Core.ViewModels
             //});
         }
 
-        public EinzelkampfViewModel()
-        {
-            wertungspunkte.CollectionChanged += (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) =>
-            {
-                base.OnPropertyChanged();
-            };
-        }
     }
 }

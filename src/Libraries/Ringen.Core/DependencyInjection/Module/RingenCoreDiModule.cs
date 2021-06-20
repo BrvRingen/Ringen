@@ -1,5 +1,6 @@
 ﻿using Ninject.Modules;
 using Ringen.Core.Services.ErgebnisdienstApi;
+using Ringen.Core.ViewModels;
 
 namespace Ringen.Core.DependencyInjection.Module
 {
@@ -9,6 +10,8 @@ namespace Ringen.Core.DependencyInjection.Module
         {
             Bind<SaisonService>().ToSelf().InSingletonScope();
             Bind<MannschaftskaempfeService>().ToSelf().InSingletonScope();
+
+            Bind<ExplorerStates>().ToSelf().InSingletonScope();
         }
     }
 }

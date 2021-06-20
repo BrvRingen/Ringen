@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ringen.Core.DependencyInjection;
 using Ringen.Core.ViewModels;
 
 namespace Ringen.Plugin.CsView

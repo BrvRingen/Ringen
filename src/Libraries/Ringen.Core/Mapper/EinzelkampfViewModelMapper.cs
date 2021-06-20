@@ -31,7 +31,7 @@ namespace Ringen.Core.Mapper
                 Settings = new BoutSettings(MapWrestleStyle(model.Stilart)),
                 //Order = 0,
                 Gewichtsklasse = model.Gewichtsklasse,
-                StilartViewModel = MapWrestleStyle(model.Stilart),
+                Stilart = MapWrestleStyle(model.Stilart),
 
                 HeimRinger = model.HeimRinger,
                 HeimMannschaftswertung = model.GastMannschaftswertung,
@@ -41,7 +41,7 @@ namespace Ringen.Core.Mapper
 
                 Wertungspunkte = new ObservableCollection<Griffbewertungspunkt>(model.Wertungspunkte),
 
-                SiegartViewModel = MapSiegart(model.Siegart),
+                Siegart = MapSiegart(model.Siegart),
                 //Round1 = null,
                 //Points = null,
             };

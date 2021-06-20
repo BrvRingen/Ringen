@@ -31,9 +31,12 @@
             VerticalAlignment="Stretch"
             AllowDrop="True"
             FontSize="12"
+            SelectedItemChanged="TreeView_OnSelectedItemChanged"
+            TreeViewItem.Expanded="TreeViewItem_OnExpanded"
             ItemsSource="{x:Static viewModels:MannschaftskaempfeExplorer.Data}"
             VirtualizingStackPanel.IsVirtualizing="True"
             ItemTemplate="{StaticResource ExplorerTemplate}"
+            
             VirtualizingStackPanel.VirtualizationMode="Standard">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">

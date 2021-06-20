@@ -124,7 +124,7 @@
         <DataGrid Grid.Row="15" Grid.ColumnSpan="3" Margin="0,20,0,0" ItemsSource="{Binding MannschaftskampfViewModel.Children}" AutoGenerateColumns="False" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Klasse" Binding="{Binding Gewichtsklasse, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Stilart" Binding="{Binding StilartViewModel}"  IsReadOnly="True"/>
+                <DataGridTextColumn Header="Stilart" Binding="{Binding Stilart}"  IsReadOnly="True"/>
                 <DataGridTextColumn Header="Pass (Heim)" Binding="{Binding HeimRinger.Startausweisnummer, UpdateSourceTrigger=Explicit}" />
                 <DataGridTextColumn Header="Name (Heim)" Binding="{Binding HeimRinger.Nachname}" />
                 <DataGridTextColumn Header="Vorname (Heim)" Binding="{Binding HeimRinger.Vorname}" />

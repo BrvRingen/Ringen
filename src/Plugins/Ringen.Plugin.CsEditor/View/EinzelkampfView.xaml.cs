@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using Ringen.Core.DependencyInjection;
 using Ringen.Core.UI;
 using Ringen.Core.ViewModels;
 

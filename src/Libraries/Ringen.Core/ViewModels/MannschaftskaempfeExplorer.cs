@@ -44,9 +44,10 @@ namespace Ringen.Core.ViewModels
         {
             public IExplorerItemViewModel SelectedItem { get; }
 
-            public SelectedItemChangedEventArgs(IExplorerItemViewModel SelectedItem)
+            public SelectedItemChangedEventArgs(IExplorerItemViewModel selectedItem)
             {
-                this.SelectedItem = SelectedItem;
+                this.SelectedItem = selectedItem;
+
             }
         }
     }

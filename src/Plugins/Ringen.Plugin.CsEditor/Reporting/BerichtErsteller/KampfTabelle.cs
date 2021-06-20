@@ -223,7 +223,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
         {
             AddKampfSpalte(zeile, $"{kampf.KampfNr}");
 
-            AddKampfSpalte(zeile, ((StilartViewModel)kampf.StilartViewModel).AsString(EnumFormat.Description));
+            AddKampfSpalte(zeile, ((StilartViewModel)kampf.Stilart).AsString(EnumFormat.Description));
             var Gewichtsklasse = AddKampfSpalte(zeile, kampf.Gewichtsklasse);
             Gewichtsklasse.Borders.Right.Width = 1;
             Gewichtsklasse.Borders.Right.Color = colorRed;
@@ -269,7 +269,7 @@ namespace Ringen.Plugin.CsEditor.Reporting.BerichtErsteller
             }
 
             var kampfzeit = TimeSpan.FromSeconds(kampf.Settings.Times[GriffbewertungsTypViewModel.Bout.ToString()].Time).ToString("m':'ss");
-            AddKampfSpalte(zeile, string.Format(Resources.LanguageFiles.DictPluginMain.PdfProtocolResult, kampf.SiegartViewModel, kampfzeit));
+            AddKampfSpalte(zeile, string.Format(Resources.LanguageFiles.DictPluginMain.PdfProtocolResult, kampf.Siegart, kampfzeit));
 
             var spalte = zeile.Cells[_kampfSpaltenCounter];
             _kampfSpaltenCounter++;
