@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using Ringen.Core.CS;
 using Ringen.Core.DependencyInjection;
 using Ringen.Core.UI;
