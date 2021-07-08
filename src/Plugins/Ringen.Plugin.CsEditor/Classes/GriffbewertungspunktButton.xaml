@@ -1,7 +1,8 @@
-﻿<UserControl x:Class="Ringen.Plugin.CsEditor.GriffbewertungspunktButton"
+﻿<CoreUi:ExtendedNotifyPropertyChangedUserControl x:Class="Ringen.Plugin.CsEditor.GriffbewertungspunktButton"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:CoreUi="clr-namespace:Ringen.Core.UI;assembly=Ringen.Core"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ringen.Plugin.CsEditor"
@@ -26,4 +27,4 @@
 
         </Button>
     </Grid>
-</UserControl>
+</CoreUi:ExtendedNotifyPropertyChangedUserControl>

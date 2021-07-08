@@ -26,7 +26,10 @@ namespace Ringen.Plugin.CsEditor
         {
             InitializeComponent();
             UpdateUi();
-            MannschaftskaempfeExplorer.SelectedItemChanged += ((object sender, MannschaftskaempfeExplorer.SelectedItemChangedEventArgs e) => { UpdateUi(); });
+            MannschaftskaempfeExplorer.SelectedItemChanged += (object sender, MannschaftskaempfeExplorer.SelectedItemChangedEventArgs e) =>
+            {
+                UpdateUi();
+            };
         }
 
         public void UpdateUi()
