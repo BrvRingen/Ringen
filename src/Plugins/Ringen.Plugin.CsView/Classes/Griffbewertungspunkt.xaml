@@ -14,7 +14,7 @@
     </UserControl.Resources>
     <Border DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Background="{Binding Data.Fuer, Converter={StaticResource TeamToBrush}}">
         <Viewbox StretchDirection="Both">
-            <TextBlock Text="{Binding Data.Punktzahl}" />
+            <TextBlock Text="{Binding Data.Value}" />
         </Viewbox>
     </Border>
 </UserControl>

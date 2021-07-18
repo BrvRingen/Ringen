@@ -39,7 +39,12 @@ namespace Ringen.Plugin.CsEditor
 
 
         private RelayCommand<string> m_Start;
-        public RelayCommand<string> Start => m_Start ?? (m_Start = new RelayCommand<string>((string TimeType) => { EinzelkampfViewModel.Settings.Times[TimeType].Start(); }));
+        public RelayCommand<string> Start => m_Start ?? (m_Start = new RelayCommand<string>((string TimeType) => {
+            EinzelkampfViewModel.Settings.Times[TimeType].Start();
+            if(TimeType.Contains("Injury"))
+                EinzelkampfViewModel.Settings.Times["Bout"].Stop();
+
+        }));
 
         private RelayCommand<string> m_Stop;
         public RelayCommand<string> Stop => m_Stop ?? (m_Stop = new RelayCommand<string>((string TimeType) => { EinzelkampfViewModel.Settings.Times[TimeType].Stop(); }));

@@ -48,7 +48,7 @@
                 <ColumnDefinition Width="10" />
                 <ColumnDefinition Width="50*" />
             </Grid.ColumnDefinitions>
-            <ItemsControl ItemsSource="{Binding EinzelkampfViewModel.Settings.PosPointsHome}" Grid.Column="0">
+            <ItemsControl ItemsSource="{Binding EinzelkampfViewModel.Settings.PosPointsHeim}" Grid.Column="0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel />
@@ -61,7 +61,7 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-            <ItemsControl ItemsSource="{Binding EinzelkampfViewModel.Settings.PosPointsOpponent}" Grid.Column="2">
+            <ItemsControl ItemsSource="{Binding EinzelkampfViewModel.Settings.PosPointsGast}" Grid.Column="2">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel />

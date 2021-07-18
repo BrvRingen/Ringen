@@ -4,8 +4,11 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Enums.NET" Version="4.0.0" />
-    <PackageReference Include="MahApps.Metro" Version="2.4.5" />
+    <PackageReference Include="MahApps.Metro" Version="2.4.7" />
     <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
     <PackageReference Include="PDFsharp-MigraDoc-WPF" Version="1.50.5147" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="Ringen.Schnittstellen.Contracts" Version="1.1.7" />
   </ItemGroup>
 </Project>

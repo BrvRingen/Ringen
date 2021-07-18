@@ -49,7 +49,9 @@ namespace Ringen.Plugin.CsEditor
         private RelayCommand m_AddToPoints;
         public RelayCommand AddToPoints => m_AddToPoints ?? (m_AddToPoints = new RelayCommand(() =>
         {
-            EinzelkampfViewModel.ExplorerStates.Einzelkampf.Wertungspunkte.Add(Data);
+            var Punkt = (Schnittstellen.Contracts.Models.Griffbewertungspunkt)Data.Clone();
+            Punkt.Zeit = System.TimeSpan.FromSeconds(EinzelkampfViewModel.ExplorerStates.Einzelkampf.Settings.Times["Bout"].Time);
+            EinzelkampfViewModel.ExplorerStates.Einzelkampf.Wertungspunkte.Add(Punkt);
             LoggerMessage.Send(new LogEntry(LogEntryType.Message, "Point added to Points"));
         }
         ));

@@ -20,7 +20,7 @@
         <Button Background="{Binding Data.Fuer, Converter={StaticResource TeamToBrush}}" Command="{Binding AddToPoints}">
             <Button.Content>
                 <StackPanel HorizontalAlignment="Center">
-                    <Label FontSize="60" Content="{Binding Data.Punktzahl}"></Label>
+                    <Label FontSize="60" Content="{Binding Data.Value}"></Label>
                     <Label FontSize="10" Content="ALT + test"></Label>
                 </StackPanel>
             </Button.Content>

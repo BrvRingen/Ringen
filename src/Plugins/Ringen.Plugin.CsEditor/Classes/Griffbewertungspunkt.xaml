@@ -15,7 +15,7 @@
     </UserControl.Resources>
 
     <Canvas DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Background="{Binding Data.Fuer, Converter={StaticResource TeamToBrush}}">
-        <Label Canvas.Left="15" FontSize="40" Content="{Binding Data.Punktzahl}"></Label>
+        <Label Canvas.Left="15" FontSize="40" Content="{Binding Data.Value}"></Label>
         <StackPanel Canvas.Top="45" Canvas.Left="10" Orientation="Horizontal">
             <Label FontSize="15" Content="{Binding Data.Zeit}"></Label>
             <Label FontSize="15">sec.</Label>

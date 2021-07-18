@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using Ringen.Core.ViewModels.Enums;
+using Ringen.Schnittstellen.Contracts.Models;
+using Ringen.Schnittstellen.Contracts.Models.Enums;
 
 namespace Ringen.Core.CS
 {
@@ -7,46 +9,38 @@ namespace Ringen.Core.CS
     {
 
 
-        private List<string> posPoints;
+        private List<Griffbewertungspunkt> posPoints;
 
-        public List<string> PosPoints
+        public List<Griffbewertungspunkt> PosPoints
         {
             get { return posPoints; }
             set { posPoints = value; }
         }
-        public List<Schnittstellen.Contracts.Models.Griffbewertungspunkt> PosPointsHome
+        public List<Griffbewertungspunkt> PosPointsHeim
         {
             get
             {
-                var tmp = new List<Schnittstellen.Contracts.Models.Griffbewertungspunkt>();
-                foreach (var posPoint in posPoints)
+                var tmp = new List<Griffbewertungspunkt>();
+                PosPoints.ForEach((PosPoint) =>
                 {
-                    tmp.Add(new Schnittstellen.Contracts.Models.Griffbewertungspunkt()
-                        {
-                            Fuer = Schnittstellen.Contracts.Models.Enums.HeimGast.Heim,
-                            Punktzahl = int.TryParse(posPoint, out int Point) ? Point : 0,
-                        }
-                    );
-                }
-
+                    var PosPointHome = (Griffbewertungspunkt)PosPoint.Clone();
+                    PosPointHome.Fuer = HeimGast.Heim;
+                    tmp.Add(PosPointHome);
+                });
                 return tmp;
             }
         }
-        public List<Schnittstellen.Contracts.Models.Griffbewertungspunkt> PosPointsOpponent
+        public List<Griffbewertungspunkt> PosPointsGast
         {
             get
             {
-                var tmp = new List<Schnittstellen.Contracts.Models.Griffbewertungspunkt>();
-                foreach (var posPoint in posPoints)
+                var tmp = new List<Griffbewertungspunkt>();
+                PosPoints.ForEach((PosPoint) =>
                 {
-                    tmp.Add(new Schnittstellen.Contracts.Models.Griffbewertungspunkt()
-                        {
-                            Fuer = Schnittstellen.Contracts.Models.Enums.HeimGast.Gast,
-                            Punktzahl = int.TryParse(posPoint, out int Point) ? Point : 0,
-                        }
-                    );
-                }
-
+                    var PosPointHome = (Griffbewertungspunkt)PosPoint.Clone();
+                    PosPointHome.Fuer = HeimGast.Gast;
+                    tmp.Add(PosPointHome);
+                });
                 return tmp;
             }
         }
@@ -77,12 +71,18 @@ namespace Ringen.Core.CS
         public BoutSettings(StilartViewModel stilartViewModel)
         {
             //Aktuelle Regeln nach 2017
+            PosPoints = new List<Griffbewertungspunkt>() {
+                        new Griffbewertungspunkt() { Punktzahl = 1, Typ = GriffbewertungsTyp.Punkt },
+                        new Griffbewertungspunkt() { Punktzahl = 2, Typ = GriffbewertungsTyp.Punkt },
+                        new Griffbewertungspunkt() { Punktzahl = 4, Typ = GriffbewertungsTyp.Punkt },
+                        new Griffbewertungspunkt() { Punktzahl = 5, Typ = GriffbewertungsTyp.Punkt },
+                        new Griffbewertungspunkt() { Typ = GriffbewertungsTyp.Passiv },
+                        new Griffbewertungspunkt() { Punktzahl = 0, Typ = GriffbewertungsTyp.Punkt },
+                        new Griffbewertungspunkt() { Typ = GriffbewertungsTyp.Verwarnung },
+                     };
+
             if (stilartViewModel == StilartViewModel.LL)
-                posPoints = new List<string>() { "1", "2", "4", "5", "P", "0", "VZ", "A" };
-            else
-                posPoints = new List<string>() { "1", "2", "4", "5", "P", "0", "VZ" };
-
-
+                PosPoints.Add(new Griffbewertungspunkt() { Typ = GriffbewertungsTyp.Aktivitaetszeit });
         }
     }
 }
