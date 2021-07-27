@@ -47,6 +47,8 @@ namespace Ringen.Plugin.CsEditor
         }));
 
         private RelayCommand<string> m_Stop;
-        public RelayCommand<string> Stop => m_Stop ?? (m_Stop = new RelayCommand<string>((string TimeType) => { EinzelkampfViewModel.Settings.Times[TimeType].Stop(); }));
+        public RelayCommand<string> Stop => m_Stop ?? (m_Stop = new RelayCommand<string>((string TimeType) => {
+            EinzelkampfViewModel.Settings.Times[TimeType].Stop();
+        }));
     }
 }

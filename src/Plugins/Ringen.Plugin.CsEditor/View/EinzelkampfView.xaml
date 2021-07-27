@@ -36,9 +36,9 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <local:BoutTime Data="{Binding EinzelkampfViewModel.Settings.Times[HomeInjury]}" Title="Verletzungszeit Heim" Grid.Column="0" HorizontalAlignment="Center"/>
+            <local:BoutTime Data="{Binding EinzelkampfViewModel.Settings.Times[HeimInjury]}" Title="Verletzungszeit Heim" Grid.Column="0" HorizontalAlignment="Center"/>
             <local:BoutTime Data="{Binding EinzelkampfViewModel.Settings.Times[Bout]}" Title="Kampf" Grid.Column="1" HorizontalAlignment="Center"/>
-            <local:BoutTime Data="{Binding EinzelkampfViewModel.Settings.Times[OpponentInjury]}" Title="Verletzungszeit Gast" Grid.Column="2" HorizontalAlignment="Center"/>
+            <local:BoutTime Data="{Binding EinzelkampfViewModel.Settings.Times[GastInjury]}" Title="Verletzungszeit Gast" Grid.Column="2" HorizontalAlignment="Center"/>
         </Grid>
 
         <!-- PosPoints -->

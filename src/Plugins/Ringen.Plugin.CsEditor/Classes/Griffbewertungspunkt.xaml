@@ -18,7 +18,6 @@
         <Label Canvas.Left="15" FontSize="40" Content="{Binding Data.Value}"></Label>
         <StackPanel Canvas.Top="45" Canvas.Left="10" Orientation="Horizontal">
             <Label FontSize="15" Content="{Binding Data.Zeit}"></Label>
-            <Label FontSize="15">sec.</Label>
         </StackPanel>
         <Button Canvas.Left="55" Width="20" Height="20" Command="{Binding Delete}" Content="X"/>
     </Canvas>

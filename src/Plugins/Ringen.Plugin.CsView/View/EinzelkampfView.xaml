@@ -207,14 +207,32 @@
                 <ColumnDefinition Width="50*"/>
                 <ColumnDefinition Width="50*"/>
             </Grid.ColumnDefinitions>
-            <Border Background="Red"   Grid.Column="0" Visibility="{Binding EinzelkampfViewModel.Settings.Times[HomeInjury].Mode, Converter={StaticResource TimeRunningToVisiblity}}">
+            <Border Background="Red"   Grid.Column="0" Visibility="{Binding EinzelkampfViewModel.Settings.Times[HeimInjury].Mode, Converter={StaticResource TimeRunningToVisiblity}}">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding EinzelkampfViewModel.Settings.Times[HomeInjury].Time, Converter={StaticResource IntToTimeConverter}}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.Settings.Times[HeimInjury].Time, Converter={StaticResource IntToTimeConverter}}" />
                 </Viewbox>
             </Border>
-            <Border Background="LightSkyBlue" Grid.Column="1" Visibility="{Binding EinzelkampfViewModel.Settings.Times[OpponentInjury].Mode, Converter={StaticResource TimeRunningToVisiblity}}">
+            <Border Background="LightSkyBlue" Grid.Column="1" Visibility="{Binding EinzelkampfViewModel.Settings.Times[GastInjury].Mode, Converter={StaticResource TimeRunningToVisiblity}}">
                 <Viewbox StretchDirection="Both">
-                    <TextBlock Text="{Binding EinzelkampfViewModel.Settings.Times[OpponentInjury].Time, Converter={StaticResource IntToTimeConverter}}" />
+                    <TextBlock Text="{Binding EinzelkampfViewModel.Settings.Times[GastInjury].Time, Converter={StaticResource IntToTimeConverter}}" />
+                </Viewbox>
+            </Border>
+        </Grid>
+
+        <!-- Activity -->
+        <Grid Grid.Row="6" Grid.RowSpan="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="Red"   Grid.Column="0" Visibility="{Binding EinzelkampfViewModel.Settings.Times[HeimActivity].Mode, Converter={StaticResource TimeRunningToVisiblity}}">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock Text="{Binding EinzelkampfViewModel.Settings.Times[HeimActivity].Time, Converter={StaticResource IntToTimeConverter}}" />
+                </Viewbox>
+            </Border>
+            <Border Background="LightSkyBlue" Grid.Column="1" Visibility="{Binding EinzelkampfViewModel.Settings.Times[GastActivity].Mode, Converter={StaticResource TimeRunningToVisiblity}}">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock Text="{Binding EinzelkampfViewModel.Settings.Times[GastActivity].Time, Converter={StaticResource IntToTimeConverter}}" />
                 </Viewbox>
             </Border>
         </Grid>

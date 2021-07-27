@@ -52,6 +52,13 @@ namespace Ringen.Plugin.CsEditor
             var Punkt = (Schnittstellen.Contracts.Models.Griffbewertungspunkt)Data.Clone();
             Punkt.Zeit = System.TimeSpan.FromSeconds(EinzelkampfViewModel.ExplorerStates.Einzelkampf.Settings.Times["Bout"].Time);
             EinzelkampfViewModel.ExplorerStates.Einzelkampf.Wertungspunkte.Add(Punkt);
+
+            if(Punkt.Typ == Schnittstellen.Contracts.Models.Enums.GriffbewertungsTyp.Aktivitaetszeit)
+            {
+                EinzelkampfViewModel.ExplorerStates.Einzelkampf.Settings.Times[$"{Punkt.Fuer}Activity"].Start();
+            }
+                
+
             LoggerMessage.Send(new LogEntry(LogEntryType.Message, "Point added to Points"));
         }
         ));

@@ -56,12 +56,10 @@ namespace Ringen.Core.CS
                     {
                         { GriffbewertungsTypViewModel.Bout.ToString(), new BoutTime(this, GriffbewertungsTypViewModel.Bout, 360, new List<int>() { 180 }) },
                         { GriffbewertungsTypViewModel.Break.ToString(), new BoutTime(this, GriffbewertungsTypViewModel.Break, 30) },
-                        { GriffbewertungsTypViewModel.HomeInjury.ToString(), new BoutTime(this, GriffbewertungsTypViewModel.HomeInjury, 120) },
-                        { GriffbewertungsTypViewModel.OpponentInjury.ToString(), new BoutTime(this, GriffbewertungsTypViewModel.OpponentInjury, 120) }//,
-                        //{ Types.HomeActivity.ToString(), new BoutTime(30) },
-                        //{ Types.OpponentActivity.ToString(), new BoutTime(30) },
-                        //{ Types.HomeP.ToString(), new BoutTime() },
-                        //{ Types.OpponentP.ToString(), new BoutTime() }
+                        { GriffbewertungsTypViewModel.HeimInjury.ToString(), new BoutTime(this, GriffbewertungsTypViewModel.HeimInjury, 120) },
+                        { GriffbewertungsTypViewModel.GastInjury.ToString(), new BoutTime(this, GriffbewertungsTypViewModel.GastInjury, 120) },
+                        { GriffbewertungsTypViewModel.HeimActivity.ToString(), new BoutTime(this, GriffbewertungsTypViewModel.HeimActivity, 30) },
+                        { GriffbewertungsTypViewModel.GastActivity.ToString(), new BoutTime(this, GriffbewertungsTypViewModel.GastActivity, 30) },
                     };
                 }
                 return times;

@@ -94,36 +94,5 @@ namespace Ringen.Core.ViewModels
                 };
             }
         }
-
-        private void UpdateDetails()
-        {
-            wertungspunkte = new ObservableCollection<Griffbewertungspunkt>();
-
-            //Async.RunSync(async () =>
-            //{
-            //    var AssetResponse = await REST.Client().GetAsync($"/Api/v1/cs/?saisonId={MannschaftskampfViewModel.SaisonId}&competitionId={MannschaftskampfViewModel.WettkampfId}&order={Order}");
-
-            //    if (AssetResponse.IsSuccessStatusCode)
-            //    {
-            //        var result = AssetResponse.Content.ReadAsStringAsync().Result;
-            //        foreach (var BoutAnnotation in (JArray)JsonConvert.DeserializeObject(result))
-            //        {
-            //            if (BoutAnnotation["type"].ToString() == "points")
-            //            {
-            //                foreach (var Point in BoutAnnotation["value"].ToString().Split(','))
-            //                {
-            //                    var tmpPoint = new Regex(@"(?<value>.*)(?<Wrestler>[R|B])(?<Time>\d*)").Match(Point.ToUpper());
-            //                    points.Add(new BoutPoint(tmpPoint.Groups["value"].Value, tmpPoint.Groups["Wrestler"].Value == "r" ? Wrestler.Home : Wrestler.Opponent, int.Parse(tmpPoint.Groups["Time"].Value)));
-            //                }
-            //            }
-            //            else if (BoutAnnotation["type"].ToString() == "duration")
-            //            {
-            //                Settings.Times[Types.Bout.ToString()].Time = int.Parse(BoutAnnotation["value"].ToString());
-            //            }
-            //        }
-            //    }
-            //});
-        }
-
     }
 }
