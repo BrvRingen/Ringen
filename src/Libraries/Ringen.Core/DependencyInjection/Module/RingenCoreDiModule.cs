@@ -10,6 +10,7 @@ namespace Ringen.Core.DependencyInjection.Module
         {
             Bind<SaisonService>().ToSelf().InSingletonScope();
             Bind<MannschaftskaempfeService>().ToSelf().InSingletonScope();
+            Bind<StammdatenService>().ToSelf().InSingletonScope();
 
             Bind<ExplorerStates>().ToSelf().InSingletonScope();
         }

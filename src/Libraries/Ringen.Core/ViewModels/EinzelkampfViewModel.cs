@@ -48,9 +48,7 @@ namespace Ringen.Core.ViewModels
         public string Gewichtsklasse { get; internal set; }
         public StilartViewModel Stilart { get; internal set; }
         
-        public Ringer HeimRinger {
-            get;
-            internal set; }
+        public RingerViewModel HeimRinger { get; internal set; }
         public double HeimRingerGewicht { get; internal set; }
 
         public int HeimMannschaftswertung { get; internal set; }
@@ -67,7 +65,7 @@ namespace Ringen.Core.ViewModels
         }
 
 
-        public Ringer GastRinger { get; internal set; }
+        public RingerViewModel GastRinger { get; internal set; }
         public double GastRingerGewicht { get; internal set; }
 
         public int GastMannschaftswertung { get; internal set; }

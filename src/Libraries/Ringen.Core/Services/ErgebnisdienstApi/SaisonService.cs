@@ -32,11 +32,8 @@ namespace Ringen.Core.Services.ErgebnisdienstApi
         {
             List<Liga> ligenListe = await _apiSaisonInformationen.Get_Ligen_Async(saisonId);
             var ligen = _viewModelMapper.Map(ligenListe);
-            
 
             return ligen;
         }
-
-
     }
 }

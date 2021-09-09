@@ -12,6 +12,7 @@ namespace Ringen.Core.Mapper
 {
     public class EinzelkampfViewModelMapper
     {
+        private RingerViewModelMapper _ringerMapper = new RingerViewModelMapper();
 
         public List<EinzelkampfViewModel> Map(Tuple<Mannschaftskampf, List<Einzelkampf>> model)
         {
@@ -33,10 +34,10 @@ namespace Ringen.Core.Mapper
                 Gewichtsklasse = model.Gewichtsklasse,
                 Stilart = MapWrestleStyle(model.Stilart),
 
-                HeimRinger = model.HeimRinger,
+                HeimRinger = _ringerMapper.Map(model.HeimRinger),
                 HeimMannschaftswertung = model.GastMannschaftswertung,
 
-                GastRinger = model.GastRinger,
+                GastRinger = _ringerMapper.Map(model.GastRinger),
                 GastMannschaftswertung = model.GastMannschaftswertung,
 
                 Wertungspunkte = new ObservableCollection<Griffbewertungspunkt>(model.Wertungspunkte),
@@ -48,6 +49,7 @@ namespace Ringen.Core.Mapper
 
             return viewModel;
         }
+
 
         private SiegartViewModelEnum MapSiegart(Siegart modelSiegart)
         {

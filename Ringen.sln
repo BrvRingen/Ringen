@@ -30,6 +30,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ringen.CrossCutting", "src\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ringen.Schnittstellen.Caching", "src\Libraries\Ringen.Schnittstellen.Caching\Ringen.Schnittstellen.Caching.csproj", "{3249B259-9930-4C11-8DAD-FBA728DC59A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ringen.Tests", "Ringen.Tests\Ringen.Tests.csproj", "{E79E9D86-7A54-484C-AD3A-29894382F0DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -98,6 +100,14 @@ Global
 		{3249B259-9930-4C11-8DAD-FBA728DC59A5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3249B259-9930-4C11-8DAD-FBA728DC59A5}.Release|x64.ActiveCfg = Release|Any CPU
 		{3249B259-9930-4C11-8DAD-FBA728DC59A5}.Release|x64.Build.0 = Release|Any CPU
+		{E79E9D86-7A54-484C-AD3A-29894382F0DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E79E9D86-7A54-484C-AD3A-29894382F0DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E79E9D86-7A54-484C-AD3A-29894382F0DB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E79E9D86-7A54-484C-AD3A-29894382F0DB}.Debug|x64.Build.0 = Debug|Any CPU
+		{E79E9D86-7A54-484C-AD3A-29894382F0DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E79E9D86-7A54-484C-AD3A-29894382F0DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E79E9D86-7A54-484C-AD3A-29894382F0DB}.Release|x64.ActiveCfg = Release|Any CPU
+		{E79E9D86-7A54-484C-AD3A-29894382F0DB}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
