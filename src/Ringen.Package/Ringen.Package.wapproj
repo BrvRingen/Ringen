@@ -24,7 +24,7 @@
     <DefaultLanguage>de-DE</DefaultLanguage>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <NoWarn>$(NoWarn);NU1702</NoWarn>
-    <EntryPointProjectUniqueName>..\src\Ringen\Ringen.csproj</EntryPointProjectUniqueName>
+    <EntryPointProjectUniqueName>..\Ringen\Ringen.csproj</EntryPointProjectUniqueName>
     <PackageCertificateThumbprint>D1CFD40A5DD31CD26B034D6D0B197111102EE5F4</PackageCertificateThumbprint>
   </PropertyGroup>
   <ItemGroup>
