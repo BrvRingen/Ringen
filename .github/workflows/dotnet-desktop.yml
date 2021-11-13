@@ -57,9 +57,9 @@ jobs:
 
     env:
       Solution_Name: Ringen.sln
-      Test_Project_Path: Ringen.Tests\Ringen.Tests.csproj
-      Wap_Project_Directory: Ringen.Package
-      Wap_Project_Path: Ringen.Package\Ringen.Package.wapproj
+      Test_Project_Path: src\Ringen.Tests\Ringen.Tests.csproj
+      Wap_Project_Directory: src\Ringen.Package
+      Wap_Project_Path: src\Ringen.Package\Ringen.Package.wapproj
 
     steps:
     - name: Checkout

@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Libraries\Ringen.CrossCutting\Ringen.CrossCutting.csproj" />
+    <ProjectReference Include="..\Libraries\Ringen.CrossCutting\Ringen.CrossCutting.csproj" />
   </ItemGroup>
 
 </Project>
