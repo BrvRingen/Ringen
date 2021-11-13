@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
-	<RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+	<RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
     <UseWPF>true</UseWPF>
     <StartupObject>Ringen.Startup</StartupObject>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
