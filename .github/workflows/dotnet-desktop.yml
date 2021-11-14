@@ -115,3 +115,14 @@ jobs:
       with:
         name: MSIX Package
         path: ${{ env.Wap_Project_Directory }}\AppPackages
+
+    # Publish the MSIX package
+    - name: Publish to github packages
+      run: |
+        for f in ${{ env.Wap_Project_Directory }}/AppPackages/**/*.msixbundle
+        do
+          echo "Uploading package: $f"
+          curl -vX PUT -u "user:${{secrets.GITHUB_TOKEN}}" -F package=@$f https://nuget.pkg.github.com/BRVRingen/
+        done        
+      shell: bash
+      #if: startsWith(github.ref, 'refs/tags/v')
