@@ -6,7 +6,7 @@
 
     <tb:TaskbarIcon
         x:Key="NotificationIcon"
-        IconSource="pack://application:,,,/Ringen;component\Resources\Images\Icon.ico"
+        IconSource="pack://application:,,,/Ringen;component\Icon.ico"
         ToolTipText="{local:Translate MainFormTitle}">
         <tb:TaskbarIcon.ContextMenu>
             <ContextMenu>

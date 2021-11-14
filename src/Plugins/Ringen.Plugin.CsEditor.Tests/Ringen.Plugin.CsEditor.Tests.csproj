@@ -63,10 +63,6 @@
       <Project>{dbb0788c-264e-48fb-bddb-68790facc863}</Project>
       <Name>Ringen.Plugin.CsEditor</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ringen.Core\Ringen.Core.csproj">
-      <Project>{78c12d2b-0701-48e5-937c-b8ea3972a9df}</Project>
-      <Name>Ringen.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Ringen.Shared\Ringen.Shared.csproj">
       <Project>{f4bdd0b5-8268-4e68-be6a-ead3485ad2b1}</Project>
       <Name>Ringen.Shared</Name>

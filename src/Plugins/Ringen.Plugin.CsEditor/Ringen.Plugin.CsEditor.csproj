@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-  	<OutputPath>$(SolutionDir)src\Ringen\bin\$(Configuration)\net5.0-windows\Plugins\$(AssemblyName)\</OutputPath>
+    <OutputPath>$(PluginOutputPath)$(AssemblyName)\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Enums.NET" Version="4.0.0" />

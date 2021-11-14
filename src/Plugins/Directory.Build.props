@@ -1,26 +1,9 @@
 <Project ToolsVersion="15.0"
     xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <TargetFramework>net5.0-windows</TargetFramework>
-    <UseWPF>true</UseWPF>
-	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-  </PropertyGroup>
-
+	<Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
     <PropertyGroup>
-        <PackageId>$(ProjectName)</PackageId>
-        <Authors>Alexander Badewitz, Christian Hennerfeind</Authors>
-        <Company>BRV Ringen</Company>
-        <Copyright>Copyright © $([System.DateTime]::Now.ToString(yyyy)) BRV Ringen</Copyright>
-        <PackageDescription>Part of the Software BRV Ringen.</PackageDescription>
-        <RepositoryUrl>https://github.com/BrvRingen/Ringen</RepositoryUrl>
-        <PackageProjectUrl>http://www.brv-ringen.de</PackageProjectUrl>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageTags>BRV, Ringen, Mannschaftskämpfe, Interfaces, Schnittstellen</PackageTags>
-		<PackageIcon>Icon.png</PackageIcon>
-        <PublishRepositoryUrl>true</PublishRepositoryUrl>
-        <EmbedUntrackedSources>true</EmbedUntrackedSources>
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<UseWPF>true</UseWPF>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     </PropertyGroup>
 
     <ItemGroup>
@@ -28,7 +11,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Libraries\Ringen.Core\Ringen.Core.csproj" />
-        <None Include="$(SolutionDir)Icon.png" Pack="true" PackagePath="\"/>
+        <ProjectReference Include="..\..\UiLibraries\Ringen.Core\Ringen.Core.csproj" />
     </ItemGroup>
 </Project>

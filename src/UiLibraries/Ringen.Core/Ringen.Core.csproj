@@ -1,7 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>net5.0-windows</TargetFrameworks>
-  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Dirkster.AvalonDock" Version="4.51.1" />
     <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
@@ -14,9 +11,9 @@
     <PackageReference Include="TinyMapper" Version="3.0.3" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ringen.Configs\Ringen.Configs.csproj" />
-    <ProjectReference Include="..\Ringen.CrossCutting\Ringen.CrossCutting.csproj" />
-    <ProjectReference Include="..\Ringen.Schnittstellen.Caching\Ringen.Schnittstellen.Caching.csproj" />
+    <ProjectReference Include="..\..\Libraries\Ringen.Configs\Ringen.Configs.csproj" />
+    <ProjectReference Include="..\..\Libraries\Ringen.CrossCutting\Ringen.CrossCutting.csproj" />
+    <ProjectReference Include="..\..\Libraries\Ringen.Schnittstellen.Caching\Ringen.Schnittstellen.Caching.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">

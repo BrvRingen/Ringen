@@ -1,21 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
-	<RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
+	<!--RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers-->
+	<RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
     <UseWPF>true</UseWPF>
     <StartupObject>Ringen.Startup</StartupObject>
-    <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <ApplicationIcon>$(SolutionDir)Icon.ico</ApplicationIcon>
+	<OutputPath>$(ProgOutputPath)</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Icon.ico" />
     <None Remove="Resources\Images\Context_Menu_Close.png" />
-    <None Remove="Resources\Images\Icon.ico" />
     <None Remove="Resources\Images\Language_de-DE.png" />
     <None Remove="Resources\Images\Language_en-US.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="$(SolutionDir)Icon.ico" />
     <Resource Include="Resources\Images\Context_Menu_Close.png" />
-    <Resource Include="Resources\Images\Icon.ico" />
     <Resource Include="Resources\Images\Language_de-DE.png" />
     <Resource Include="Resources\Images\Language_en-US.png" />
   </ItemGroup>
@@ -33,7 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Libraries\Ringen.Configs\Ringen.Configs.csproj" />
-    <ProjectReference Include="..\Libraries\Ringen.Core\Ringen.Core.csproj" />
+    <ProjectReference Include="..\UiLibraries\Ringen.Core\Ringen.Core.csproj" />
     <ProjectReference Include="..\Libraries\Ringen.CrossCutting\Ringen.CrossCutting.csproj" />
   </ItemGroup>
   <ItemGroup>
