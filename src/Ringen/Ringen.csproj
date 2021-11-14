@@ -1,15 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-	<!--RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers-->
-	<RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
     <UseWPF>true</UseWPF>
     <StartupObject>Ringen.Startup</StartupObject>
     <ApplicationIcon>$(SolutionDir)Icon.ico</ApplicationIcon>
 	<OutputPath>$(ProgOutputPath)</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Icon.ico" />
     <None Remove="Resources\Images\Context_Menu_Close.png" />
     <None Remove="Resources\Images\Language_de-DE.png" />
     <None Remove="Resources\Images\Language_en-US.png" />
