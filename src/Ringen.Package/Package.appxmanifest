@@ -9,10 +9,10 @@
   <Identity
     Name="126dacec-12ec-4dbc-87a1-d05e669497ef"
     Publisher="CN=BRV Ringen"
-    Version="1.0.0.0" />
+    Version="1.0.0.1" />
 
   <Properties>
-    <DisplayName>Ringen.Package</DisplayName>
+    <DisplayName>Ringen</DisplayName>
     <PublisherDisplayName>BRV Ringen</PublisherDisplayName>
     <Logo>Images\StoreLogo.png</Logo>
   </Properties>
