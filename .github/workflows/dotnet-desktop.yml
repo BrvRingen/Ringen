@@ -119,7 +119,7 @@ jobs:
     # Publish the MSIX package
     - name: Publish to github packages
       run: |
-        for f in ${{ env.Wap_Project_Directory }}/AppPackages/**/*.msixbundle
+        for f in src/Ringen.Package/AppPackages/**/*.msixbundle
         do
           echo "Uploading package: $f"
           curl -vX PUT -u "user:${{secrets.GITHUB_TOKEN}}" -F package=@$f https://nuget.pkg.github.com/BRVRingen/
