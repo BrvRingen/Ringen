@@ -7,12 +7,13 @@
 	<OutputPath>$(ProgOutputPath)</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Icon.ico" />
     <None Remove="Resources\Images\Context_Menu_Close.png" />
     <None Remove="Resources\Images\Language_de-DE.png" />
     <None Remove="Resources\Images\Language_en-US.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="$(SolutionDir)Icon.ico" />
+    <Resource Include="Icon.ico" />
     <Resource Include="Resources\Images\Context_Menu_Close.png" />
     <Resource Include="Resources\Images\Language_de-DE.png" />
     <Resource Include="Resources\Images\Language_en-US.png" />
