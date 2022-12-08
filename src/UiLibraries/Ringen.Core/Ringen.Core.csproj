@@ -3,7 +3,7 @@
     <PackageReference Include="Dirkster.AvalonDock" Version="4.51.1" />
     <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
     <PackageReference Include="Nancy" Version="2.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="Ninject" Version="3.3.4" />
     <PackageReference Include="Ringen.Schnittstellen.Contracts" Version="1.1.7" />
     <PackageReference Include="Ringen.Schnittstellen.RDB" Version="1.1.5" />
